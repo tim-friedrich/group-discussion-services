@@ -1,0 +1,17 @@
+require 'test_helper'
+
+class UserTest < ActiveSupport::TestCase
+	test "User parameters" do 
+
+		@user = User.new(firstName: "karl", surname: "Peterson", email: "karl@example.com")
+
+		@user.should_not respond_to(:surname) 
+		@user.should respond_to(:firstName) 
+		@user.should respond_to(:email) 
+		@user.should be_valid 
+
+		@user.name = " " 
+		@user.should_not be_valid
+		end
+	end
+end
