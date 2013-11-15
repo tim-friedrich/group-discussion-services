@@ -6,7 +6,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: dbs
+  database: gds
   pool: 5
   username: postgres
   host: localhost
@@ -18,7 +18,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: dbs_test
+  database: gds_test
   pool: 5
   username: postgres
   host: localhost

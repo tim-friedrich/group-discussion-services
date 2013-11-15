@@ -25,6 +25,8 @@ textarea {
 	margin-bottom: 10px;
 }
 
+
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -63,7 +65,6 @@ p {
 	padding-top: 9px;
 	font-weight: bold;
 	line-height: 1;
-	color: black;
 }
 
 #logo:hover {
@@ -71,13 +72,25 @@ p {
 	text-decoration: none;
 }
 
+.navbar-default .navbar-brand {
+    color: white;
+}
+
 /*navigation*/
 
 .navbar-fixed-top nav {
 	background-color: #7eb01d;
 }
-
-header {
-	color: black;
+navbar-fixed-top.navbar.navbar-default.navbar-brand {
+	color: white;
+}
+.navbar-brand:visited{
+	color:white;
 }
 
+/* forms */
+
+
+.btn.btn-large.btn-primary {
+	color: white;
+}

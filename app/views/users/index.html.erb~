@@ -6,6 +6,7 @@
       <th>Firstname</th>
       <th>Surname</th>
       <th>Email</th>
+      <th>Password diggest</th>
       <th></th>
       <th></th>
       <th></th>

@@ -25,6 +25,11 @@ textarea {
 	margin-bottom: 10px;
 }
 
+.field {
+	text-align: center;
+}
+
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -70,11 +75,25 @@ p {
 	text-decoration: none;
 }
 
+.navbar-default .navbar-brand {
+    color: white;
+}
+
 /*navigation*/
 
 .navbar-fixed-top nav {
 	background-color: #7eb01d;
 }
+navbar-fixed-top.navbar.navbar-default.navbar-brand {
+	color: white;
+}
+.navbar-brand:visited{
+	color:white;
+}
+
+/* forms */
 
 
-
+.btn.btn-large.btn-primary {
+	color: white;
+}
