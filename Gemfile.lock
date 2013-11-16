@@ -124,7 +124,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.1)
-  bootstrap-sass (>= 3.0.0.0.rc)
+  bootstrap-sass (>= 2.1)
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails

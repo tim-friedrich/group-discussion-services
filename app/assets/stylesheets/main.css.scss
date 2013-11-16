@@ -97,3 +97,16 @@ navbar-fixed-top.navbar.navbar-default.navbar-brand {
 .btn.btn-large.btn-primary {
 	color: white;
 }
+
+#error_explanation {
+	color: #f00;
+	ul {
+		list-style: none;
+		margin: 0 0 18px 0;
+	}
+}
+
+.field_with_errors {
+	@extend .control-group;
+	@extend .error;
+}

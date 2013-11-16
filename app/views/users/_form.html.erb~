@@ -1,37 +1,28 @@
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, :html => { :multipart => true }) do |f| %>
+	
+	<%= form_for(@user) do |f| %>
+		<%= render 'shared/error_messages' %>
+ 	<% end %>
 
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-<div class="field">
-			<%= f.label :firstName, "Vorname" %><br>
-			<%= f.text_field :firstName %>
-			</div>
-<div class="field">
-			<%= f.label :surname, "Nachname" %><br>
-			<%= f.text_field :surname %>
-			</div>		
-<div class="field">
-			<%= f.label :email, "Email" %><br>
-			<%= f.text_field :email %>
-			</div>
-<div class="field">
-			<%= f.label :password, "Passwort" %><br>			
-			<%= f.password_field :password %>
-</div>
-<div class="field">
-			<%= f.label :password_confirmation, "Passwort bestätigen" %><br>
-			<%= f.password_field :password_confirmation %>
-			</div>
-			<%= f.submit "Registrieren", class: "btn btn-large btn-primary" %>
-
-</div>
+	<div class="field">
+		<%= f.label :firstName, "Vorname" %><br>
+		<%= f.text_field :firstName %>
+	</div>
+	<div class="field">
+		<%= f.label :surname, "Nachname" %><br>
+		<%= f.text_field :surname %>
+		</div>		
+	<div class="field">
+		<%= f.label :email, "Email" %><br>
+		<%= f.text_field :email %>
+	</div>
+	<div class="field">
+		<%= f.label :password, "Passwort" %><br>			
+		<%= f.password_field :password %>
+	</div>
+	<div class="field">
+		<%= f.label :password_confirmation, "Passwort bestätigen" %><br>
+		<%= f.password_field :password_confirmation %>
+	</div>
+		<%= f.submit "Registrieren", class: "btn btn-large btn-primary" %>
 <% end %>
