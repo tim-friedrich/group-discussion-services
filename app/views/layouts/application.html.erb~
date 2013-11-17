@@ -28,7 +28,7 @@
 		</nav>
 	</header>
 
-	<div class="content">
+	<div class="content center">
 		<%= yield %>
 	</div>	
 	

@@ -29,7 +29,6 @@ textarea {
 	text-align: center;
 }
 
-
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -88,9 +87,23 @@ navbar-fixed-top.navbar.navbar-default.navbar-brand {
 	color: white;
 }
 .navbar-brand:visited{
-	color:white;
+	color: white;
 }
 
+.dropdown-toggle:visited{
+	color: white;
+}
+ .nav > li > a:hover, .nav > li > a:focus {
+    background-color:#7eb01d;
+    
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #7eb01d;;
+    border-color: #428BCA;
+}
+.dropdown-menu{
+	margin-right: 10px;
+}
 /* forms */
 
 

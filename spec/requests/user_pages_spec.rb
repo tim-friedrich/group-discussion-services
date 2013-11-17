@@ -5,20 +5,32 @@ describe "User pages" do
 
 	describe "signup" do
 		before { visit signup_path }
-		let(:submit) { "Create my account" }
+		let(:submit) { "Registrieren" }
 	
 		describe "with valid information" do
 			before do
-				fill_in "FirstName", 		with: "Example"
-				fill_in "Surname", 			with: "User"
+				fill_in "user_firstName", 		with: "Example"
+				fill_in "user_surname", 			with: "User"
 				fill_in "Email",				with:	"user@example.com"
-				fill_in "Password",			with: "foobar"
-				fill_in "Confirmation",	with:	"foobar"
+				fill_in "user_password",			with: "foobar"
+				fill_in "user_password_confirmation",	with:	"foobar"
 			end
 	
 			it "should create a user" do
-				expect { click_button submit }.to change(User, :count).by(1)
+				expect { click_button 'Registrieren' }.to change(User, :count).by(1)
 			end
+
+		
+		 let(:submit) { "Registrieren" }
+		 
+		describe "after saving the user" do
+			before { click_button submit }
+			let(:user) { User.find_by(email: 'user@example.com') }
+
+			it { should have_link('Abmelden') }
 		end
+	end
+
+
 	end
 end

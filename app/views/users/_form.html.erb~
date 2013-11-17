@@ -1,11 +1,9 @@
 <%= form_for(@user, :html => { :multipart => true }) do |f| %>
 	
-	<%= form_for(@user) do |f| %>
-		<%= render 'shared/error_messages' %>
- 	<% end %>
+	<%= render 'shared/error_messages' %>
 
-	<div class="field">
-		<%= f.label :firstName, "Vorname" %><br>
+ 	<div class="field">
+		<%= f.label :firstName, name='FirstName', "Vorname" %><br>
 		<%= f.text_field :firstName %>
 	</div>
 	<div class="field">
