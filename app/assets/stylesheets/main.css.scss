@@ -29,6 +29,13 @@ textarea {
 	text-align: center;
 }
 
+.content {
+	max-width: 1024px;
+}
+
+tbody{
+	text-align: left;
+}
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -103,6 +110,15 @@ navbar-fixed-top.navbar.navbar-default.navbar-brand {
 }
 .dropdown-menu{
 	margin-right: 10px;
+}
+
+.nav.pull-right a {
+    
+    margin-top: 5px;
+}
+.dropdown-menu{
+	color: white;
+	padding-right: 100px;
 }
 /* forms */
 

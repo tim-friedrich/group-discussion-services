@@ -1,10 +1,11 @@
-<h1>Listing users</h1>
+<h1>Alle Benutzer</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Firstname</th>
-      <th>Surname</th>
+      <th>ID</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
       <th>Email</th>
       <th></th>
       <th></th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.id %></td>
         <td><%= user.firstName %></td>
         <td><%= user.surname %></td>
         <td><%= user.email %></td>
@@ -28,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'Neuer Benutzer', new_user_path %>

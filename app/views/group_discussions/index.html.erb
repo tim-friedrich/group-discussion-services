@@ -1,0 +1,33 @@
+<h1>Alle Gruppendiskussionen</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Beschreibung</th>
+      <th>Termin</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group_discussions.each do |group_discussion| %>
+      <tr>
+        <td><%= group_discussion.id %></td>
+        <td><%= group_discussion.name %></td>
+        <td><%= group_discussion.description %></td>
+        <td><%= group_discussion.appointment %></td>
+        <td><%= link_to 'Show', group_discussion %></td>
+        <td><%= link_to 'Edit', edit_group_discussion_path(group_discussion) %></td>
+        <td><%= link_to 'Destroy', group_discussion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Neue Gruppendiskussion', new_group_discussion_path %>

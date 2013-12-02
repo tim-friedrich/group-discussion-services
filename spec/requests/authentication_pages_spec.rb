@@ -9,8 +9,4 @@ describe "AuthenticationPages" do
 
     	it { should have_selector('h1', text: 'Anmelden') }
 	end
-	
-
-
-
 end

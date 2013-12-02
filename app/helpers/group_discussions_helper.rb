@@ -1,0 +1,2 @@
+module GroupDiscussionsHelper
+end

@@ -4,6 +4,7 @@
   <title>Group Discussion Services</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag :defaults, "http://localhost:9292/faye.js"%>
   <%= csrf_meta_tags %>
   <!--[if IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -13,7 +14,8 @@
   <header class="navbar-fixed-top">
 		<nav class="navbar navbar-default" role="navigation">
   		<!-- Brand and toggle get grouped for better mobile display -->
-  	  	<a class="navbar-brand" href="#">GDS - Group Discussion Services</a>
+      <%= link_to "GDS - Group Discussion Services", root_path, class: "navbar-brand" %>
+  	  	
   		</div>
   		<!-- Collect the nav links, forms, and other content for toggling -->
   		<div class="collapse navbar-collapse">
@@ -24,7 +26,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Profil", current_user %></li>
-                <li><%= link_to "Einstellungen", '#' %> </li>
+                <li><%= link_to "Einstellungen", edit_user_path(current_user) %> </li>
                 <li class="divider"></li>
                 <li>
                   <%= link_to "Abmelden", signout_path, method: "delete" %>
@@ -38,11 +40,10 @@
 		</nav>
 	</header>
 
-	<div class="content center">
+	<div class="content center clearfix center-block well well-lg">
 		<%= yield %>
 	</div>	
 
-  <%= debug(params) if Rails.env.development? %>
 	
 </body>
 </html>

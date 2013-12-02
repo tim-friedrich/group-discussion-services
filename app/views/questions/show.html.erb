@@ -1,0 +1,66 @@
+<script>
+ $(function() {
+
+
+ // Create a new client to connect to Faye
+    var client = new Faye.Client('http://localhost:9292/faye');
+ 
+    // Subscribe to the public channel
+    var public_subscription = client.subscribe('/arguments/public', function(data) {
+
+      var discussion = document.getElementById("discussion");
+      var container = document.createElement("div");
+      var argument = document.createElement("div");
+      var time = document.createElement("div");
+
+      container.setAttribute("class", "well well-sm");
+      argument.setAttribute("class", "argument");
+      time.setAttribute("class", "time_stamp");
+      argument.innerHTML = data.username +": "+ data.msg;
+      time.innerHTML = data.time_stamp;
+      container.appendChild(argument);
+      container.appendChild(time);
+
+      discussion.appendChild(container);
+
+    });
+
+    // Clear the message box
+    $("#new_argument").bind('ajax:complete', function() {
+        time = new Date();
+ // Publish the argument to the public channel
+      client.publish('/arguments/public', {
+        username: '<%= @current_user.firstName %>',
+        msg: $('#argument_content').val(),
+        time_stamp: time.getHours()+":"+time.getMinutes()
+      });
+         $('#argument_content').val('');
+
+   });
+      
+    });
+  
+</script>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Frage: <%= @question.topic %></h3>
+  </div>
+  <div class="panel-body" id="discussion">
+
+    <% @arguments.each do |argument| %>
+      <div class="well well-sm">
+        <%= render argument %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= form_for Argument.new , remote: true do |f| %>
+  <%= f.text_area :content, class: "form-control", rows: 3 %>
+  <%= f.hidden_field :question_id, value: @question.id %>
+
+  <%= f.submit "Send" , class: "btn btn-success" %>
+<% end %>
+
+

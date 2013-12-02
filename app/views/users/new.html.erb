@@ -1,5 +1,29 @@
 <h1>Registrieren</h1>
+	
+<%= form_for(@user, :html => { :multipart => true }) do |f| %>
+	
+	<%= render 'shared/error_messages' %>
 
-<%= render 'form'%>
-
-
+ 	<div class="form-group">
+		<%= f.label :firstName, "Vorname" %>
+		<%= f.text_field :firstName, class: "form-control", placeholder: "Vorname" %>
+	</div>
+	<div class="form-group">
+		<%= f.label :surname, "Nachname" %>
+		<%= f.text_field :surname, class: "form-control", placeholder: "Nachname" %>
+		</div>		
+	<div class="form-group">
+		<%= f.label :email, "Email" %>
+		<%= f.text_field :email, class: "form-control", placeholder: "Email-Adresse" %>
+	</div>
+	<div class="form-group">
+		<%= f.label :password, "Passwort" %>			
+		<%= f.password_field :password, class: "form-control", placeholder: "Passwort" %>
+	</div>
+	<div class="form-group">
+		<%= f.label :password_confirmation, "Passwort bestätigen" %>
+		<%= f.password_field :password_confirmation, class: "form-control", placeholder: "Passwort bestätigen" %>
+	</div>
+		<%= f.submit "Registrieren", class: "btn btn-large btn-primary" %>
+<% end %>
+	
