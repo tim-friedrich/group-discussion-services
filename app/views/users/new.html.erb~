@@ -1,5 +1,0 @@
-<h1>Registrieren</h1>
-
-<%= render 'form', class = "center" %>
-
-

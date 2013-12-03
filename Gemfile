@@ -9,6 +9,8 @@ gem 'bcrypt-ruby', '~> 3.0.1'
 
 gem 'faye'
 
+gem 'thin'
+
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 

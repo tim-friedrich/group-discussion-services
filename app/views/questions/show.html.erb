@@ -1,7 +1,12 @@
 <script>
 $(function() {
  // Create a new client to connect to Faye
-  var client = new Faye.Client('https://damp-mesa-3023.herokuapp.com:9292/faye');
+  <% if Rails.env.production? %>
+    var client = new Faye.Client('https://damp-mesa-3023.herokuapp.com:9292/faye');
+  <% end %>
+  <% if Rails.env.development? || Rails.env.test?%>
+    var client = new Faye.Client('http://localhost:9292/faye');
+  <% end %>
  
   // Subscribe to the public channel
   var public_subscription = client.subscribe('/arguments/public', function(data) {
@@ -23,14 +28,16 @@ $(function() {
 
   // Clear the message box
   $("#new_argument").bind('ajax:complete', function() {
-    time = new Date();
-    // Publish the argument to the public channel
-    client.publish('/arguments/public', {
-      username: '<%= @current_user.firstName %>',
-      msg: $('#argument_content').val(),
-      time_stamp: time.getHours()+":"+time.getMinutes()
-    });
-  
+
+      if( $('#argument_content').val() != ""){
+      time = new Date();
+      // Publish the argument to the public channel
+      client.publish('/arguments/public', {
+        username: '<%= @current_user.firstName %>',
+        msg: $('#argument_content').val(),
+        time_stamp: time.getHours()+":"+time.getMinutes()
+      });
+  }
     $('#argument_content').val('');
    });   
 });
