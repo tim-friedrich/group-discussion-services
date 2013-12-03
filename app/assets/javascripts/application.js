@@ -17,7 +17,7 @@
 //= require_tree .
 
 $(function() {
-	var faye = new Faye.Client('http://localhost:9292/faye');
+	var faye = new Faye.Client('https://damp-mesa-3023.herokuapp.com:9292/faye');
 	faye.subscribe("/arguments/new", function(data) {
 		alert(data);
 	});

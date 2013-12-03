@@ -1,7 +1,7 @@
 <script>
 $(function() {
  // Create a new client to connect to Faye
-  var client = new Faye.Client('http://localhost:9292/faye');
+  var client = new Faye.Client('https://damp-mesa-3023.herokuapp.com:9292/faye');
  
   // Subscribe to the public channel
   var public_subscription = client.subscribe('/arguments/public', function(data) {
