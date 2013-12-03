@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
@@ -11,6 +11,8 @@ gem 'faye'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
+
+gem  'rails_12factor'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -39,11 +41,11 @@ group :doc do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.0'
+  	gem 'rspec-rails', '~> 2.0'
 	gem 'cucumber-rails', '1.2.1', :require => false
-  gem 'rake'
+ 	gem 'rake'
 	gem 'capybara', '1.1.2'
-  #gem 'codeclimate-test-reporter', :require => nil
+  	#gem 'codeclimate-test-reporter', :require => nil
 end
 
 # Use unicorn as the app server
