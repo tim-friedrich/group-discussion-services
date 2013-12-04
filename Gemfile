@@ -7,13 +7,19 @@ gem 'bootstrap-sass', '>= 3.0'
 
 gem 'bcrypt-ruby', '~> 3.0.1'
 
+#real time support for chat
 gem 'faye'
 
+#thin server which is used by faye
 gem 'thin'
+
+#gem for private channels for faye (security measure)
+gem 'private_pub', :git => 'git://github.com/ryanb/private_pub.git'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 
+#gem for heroku
 gem  'rails_12factor'
 
 # Use SCSS for stylesheets

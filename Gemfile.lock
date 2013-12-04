@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/ryanb/private_pub.git
+  revision: 7ad77617b1f48980d6f114bc96018f2964a07bdc
+  specs:
+    private_pub (1.0.3)
+      faye
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -201,6 +208,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   pg
+  private_pub!
   rails (= 4.0.0)
   rails_12factor
   rake

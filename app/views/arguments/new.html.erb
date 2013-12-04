@@ -1,6 +1,0 @@
-<% argument = Argument.new %>
-<%= form_for argument, remote: true do |f| %>
-	<%= f.text_area :content, class: "form-control",  rows: 3 %>
-  <% argument.user = current_user %>
-	<%= f.submit "Send" %>
-<% end %>

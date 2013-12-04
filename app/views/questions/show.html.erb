@@ -1,48 +1,3 @@
-<script>
-$(function() {
- // Create a new client to connect to Faye
-  <% if Rails.env.production? %>
-    var client = new Faye.Client('https://damp-mesa-3023.herokuapp.com:9292/faye');
-  <% end %>
-  <% if Rails.env.development? || Rails.env.test?%>
-    var client = new Faye.Client('http://localhost:9292/faye');
-  <% end %>
- 
-  // Subscribe to the public channel
-  var public_subscription = client.subscribe('/arguments/public', function(data) {
-
-    var discussion = document.getElementById("discussion")
-    var container = document.createElement("div");
-    var argument = document.createElement("div");
-    var time = document.createElement("div");
-
-    container.setAttribute("class", "well well-sm");
-    argument.setAttribute("class", "argument");
-    time.setAttribute("class", "time_stamp");
-    argument.innerHTML = data.username +": "+ data.msg;
-    time.innerHTML = data.time_stamp;
-    container.appendChild(argument);
-    container.appendChild(time);
-    discussion.appendChild(container);
-  });
-
-  // Clear the message box
-  $("#new_argument").bind('ajax:complete', function() {
-
-      if( $('#argument_content').val() != ""){
-      time = new Date();
-      // Publish the argument to the public channel
-      client.publish('/arguments/public', {
-        username: '<%= @current_user.firstName %>',
-        msg: $('#argument_content').val(),
-        time_stamp: time.getHours()+":"+time.getMinutes()
-      });
-  }
-    $('#argument_content').val('');
-   });   
-});
-  
-</script>
 
 
 <div class="panel panel-primary">
@@ -59,11 +14,14 @@ $(function() {
   </div>
 </div>
 
+
 <%= form_for Argument.new , remote: true do |f| %>
   <%= f.text_area :content, class: "form-control", rows: 3 %>
   <%= f.hidden_field :question_id, value: @question.id %>
 
   <%= f.submit "Send" , class: "btn btn-success" %>
 <% end %>
+
+<%= subscribe_to '/question/'+@question.id.to_s %>
 
 
