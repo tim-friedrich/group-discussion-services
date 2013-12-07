@@ -1,8 +1,9 @@
 GDS::Application.configure do
   require 'pusher'
-  Pusher.app_id = '61015'
-  Pusher.key    = 'dd606a24939e6ea435fb'
-  Pusher.secret = 'e19d26bc93c5d294ef60'
+  Pusher.app_id = '61004'
+  Pusher.key    = 'af0bfe99e5160c3bb7ff'
+  Pusher.secret = '7d751c1999278ac9559d'
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

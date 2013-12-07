@@ -5,7 +5,6 @@
     <tr>
       <th>ID</th>
       <th>Frage</th>
-      <th>Gruppen Diskussion</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,7 +17,6 @@
         <td><%= question.id %></td>
         <td><%= question.topic %></td>
         <td><%= question.discription %></td>
-        <td><%= question.group_discussion_id %></td>
         <td><%= link_to 'Show', question %></td>
         <td><%= link_to 'Edit', edit_question_path(question) %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>

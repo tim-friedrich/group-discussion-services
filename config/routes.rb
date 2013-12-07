@@ -1,4 +1,6 @@
 GDS::Application.routes.draw do
+  resources :discussions
+
   resources :questions
   resources :arguments
   resources :group_discussions
