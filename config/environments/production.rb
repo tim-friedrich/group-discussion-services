@@ -1,6 +1,9 @@
 GDS::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  require pusher
+  Pusher.app_id = '61015'
+  Pusher.key    = 'dd606a24939e6ea435fb'
+  Pusher.secret = 'e19d26bc93c5d294ef60'
   # Code is not reloaded between requests.
   config.cache_classes = true
 
