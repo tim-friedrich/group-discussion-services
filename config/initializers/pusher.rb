@@ -1,4 +1,5 @@
 require 'pusher'
 
-Pusher.url = "http://dd606a24939e6ea435fb:e19d26bc93c5d294ef60@api.pusherapp.com/apps/61015"
+
+Pusher.url = "http://77d609e946e412d4a24f:0fcbc0e8d0df2e48ce24@api.pusherapp.com/apps/61016"
 Pusher.logger = Rails.logger
