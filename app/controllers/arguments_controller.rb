@@ -4,20 +4,25 @@ class ArgumentsController < ApplicationController
 	end
 
 	def create 
+
 		@argument = Argument.new(argument_params)
 		@argument.user = current_user
 		@argument.save
+		Pusher['discussion'+@argument.question.discussion.id.to_s].trigger('new_argument', {
+  			firstname: @argument.user.firstName.to_s,
+  			argument: @argument.content.to_s,
+  			created_at: @argument.created_at.strftime("%H:%M").to_s
+})
 		render action: 'new'
 	end
 
 	def new
-			
+
 		@argument = Argument.new(argument_params)
 		@argument.user = current_user
 		@argument.save
-		 	respond_to do |f|
-	    	f.js
-	    end
+
+
 		render action: 'new'
 	end
 
