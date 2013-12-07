@@ -12,6 +12,7 @@ class ArgumentsController < ApplicationController
   			firstname: @argument.user.firstName.to_s,
   			argument: @argument.content.to_s,
   			created_at: @argument.created_at.strftime("%H:%M").to_s
+  			})
 		end
 		render action: 'new'
 	end
