@@ -1,0 +1,62 @@
+ <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
+<script type='text/javascript'>
+
+  	var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+  	var channel = pusher.subscribe('discussion<%= @discussion.id.to_s %>');
+  	channel.bind('new_argument', function(data) {
+    if( $('#argument_content').val() != ""){
+	
+    	var discussion = document.getElementById("discussion");
+    	var container = document.createElement("div");
+    	var argument = document.createElement("div");
+    	var time = document.createElement("div");
+
+	    container.setAttribute("class", "well well-sm");
+	    argument.setAttribute("class", "argument");
+	    time.setAttribute("class", "time_stamp");
+	    argument.innerHTML = data.firstname + ": " + data.argument;
+	    time.innerHTML = data.created_at;
+	    container.appendChild(argument);
+	    container.appendChild(time);
+	    discussion.appendChild(container);
+	    
+	    $('#argument_content').val('');
+    
+   }
+  });
+</script>
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Frage: <%= @questions.last.topic %></h3>
+  </div>
+  <div class="panel-body" id="discussion">
+  	<% @questions.each do |question| %> 
+	    <% question.arguments.each do |argument| %>
+	      <div class="well well-sm">
+	        <%= render argument %>
+	      </div>
+	    <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+<%= form_for Argument.new , remote: true do |f| %>
+  	<%= f.text_area :content, class: "form-control", rows: 3 %>
+	<%= f.hidden_field :question_id, value: @questions.last.id %>
+  	<%= f.submit "Send" , class: "btn btn-success" %>
+<% end %>
+
+<%= form_for Question.new , remote: true do |f| %>
+  	<%= f.text_area :topic, class: "form-control", rows: 3 %>
+	<%= f.hidden_field :discussion_id, value: @discussion.id %>
+  	<%= f.submit "Send" , class: "btn btn-success" %>
+<% end %>
+
+
+
+
+
