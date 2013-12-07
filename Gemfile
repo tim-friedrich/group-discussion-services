@@ -7,6 +7,8 @@ gem 'bootstrap-sass', '>= 3.0'
 
 gem 'bcrypt-ruby', '~> 3.0.1'
 
+#push service for the chat
+gem 'pusher'
 #real time support for chat
 gem 'faye'
 

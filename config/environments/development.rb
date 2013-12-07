@@ -1,4 +1,8 @@
 GDS::Application.configure do
+  require 'pusher'
+  Pusher.app_id = '61015'
+  Pusher.key    = 'dd606a24939e6ea435fb'
+  Pusher.secret = 'e19d26bc93c5d294ef60'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -26,4 +30,7 @@ GDS::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+
+
 end
