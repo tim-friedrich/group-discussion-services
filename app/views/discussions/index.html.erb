@@ -16,7 +16,8 @@
     <% @discussions.each do |discussion| %>
       <tr>
         <td><%= discussion.topic %></td>
-        <td><%= discussion.moderator.id %></td>
+        
+        
         <td><%= discussion.due_date %></td>
         <td><%= link_to 'Show', discussion %></td>
         <td><%= link_to 'Edit', edit_discussion_path(discussion) %></td>
