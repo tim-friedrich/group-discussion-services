@@ -2,7 +2,18 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script>
 alert("alive1");
- 	
+ 	      pusher.connection.bind('connecting', function() {
+      $('div#status').text('Connecting to Pusher...');
+    });
+    pusher.connection.bind('connected', function() {
+      $('div#status').text('Connected to Pusher!');
+    });
+    pusher.connection.bind('failed', function() {
+      $('div#status').text('Connection to Pusher failed :(');
+    });
+    channel.bind('subscription_error', function(status) {
+      $('div#status').text('Pusher subscription_error');
+    });
     Pusher.log = function(message) {
       if (window.console && window.console.log) {
         window.console.log(message);
@@ -35,18 +46,7 @@ alert("alive1");
     
    }
   });
-        pusher.connection.bind('connecting', function() {
-      $('div#status').text('Connecting to Pusher...');
-    });
-    pusher.connection.bind('connected', function() {
-      $('div#status').text('Connected to Pusher!');
-    });
-    pusher.connection.bind('failed', function() {
-      $('div#status').text('Connection to Pusher failed :(');
-    });
-    channel.bind('subscription_error', function(status) {
-      $('div#status').text('Pusher subscription_error');
-    });
+  
     alert("alive2");
 </script>
 
