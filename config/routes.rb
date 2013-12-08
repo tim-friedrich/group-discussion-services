@@ -11,7 +11,6 @@ GDS::Application.routes.draw do
 	get '/signup' => 'users#new'
 	get '/signin' => 'sessions#new'
 	delete '/signout' => 'sessions#destroy'
- 
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
