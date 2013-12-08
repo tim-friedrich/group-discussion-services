@@ -1,6 +1,7 @@
 GDS::Application.configure do
   require 'pusher'
-Pusher.app_id = '61016'
+  Pusher.logger = Rails.logger
+  Pusher.app_id = '61016'
   Pusher.key    = '77d609e946e412d4a24f'
   Pusher.secret = '0fcbc0e8d0df2e48ce24'
 
