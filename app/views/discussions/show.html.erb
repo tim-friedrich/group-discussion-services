@@ -8,7 +8,11 @@
         window.console.log(message);
       }
     };
-  	var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+    Pusher.host = 'ws-eu.pusher.com';
+    Pusher.sockjs_host = 'sockjs-eu.pusher.com';
+alert("alive1");
+      	var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+
   	var channel = pusher.subscribe('discussion<%= @discussion.id.to_s %>');
   	channel.bind('new_argument', function(data) {
     if( $('#argument_content').val() != ""){
@@ -31,6 +35,7 @@
     
    }
   });
+    alert("alive2");
 </script>
 
 
