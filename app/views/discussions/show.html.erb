@@ -1,6 +1,9 @@
  <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type='text/javascript'>
+
+ 	Pusher.host = 'ws-eu.pusher.com';
+ 	Pusher.sockjs_host = 'sockjs-eu.pusher.com';
   	var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
   	var channel = pusher.subscribe('discussion<%= @discussion.id.to_s %>');
   	channel.bind('new_argument', function(data) {
