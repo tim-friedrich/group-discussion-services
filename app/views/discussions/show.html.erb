@@ -14,16 +14,20 @@ alert("alive1");
     channel.bind('subscription_error', function(status) {
       $('div#status').text('Pusher subscription_error');
     });
+    alert("alive2");
     Pusher.log = function(message) {
-      if (window.console && window.console.log) {
-        window.console.log(message);
-      }
-    };
+  if (window.console && window.console.log) {
+    window.console.log(message);
+  }
+};
+    alert("alive3");
     Pusher.host = 'ws-eu.pusher.com';
+    alert("alive4");
     Pusher.sockjs_host = 'sockjs-eu.pusher.com';
+alert("alive5");
 
       	var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
-
+alert("alive6");
   	var channel = pusher.subscribe('discussion<%= @discussion.id.to_s %>');
   	channel.bind('new_argument', function(data) {
     if( $('#argument_content').val() != ""){
@@ -46,8 +50,8 @@ alert("alive1");
     
    }
   });
-  
-    alert("alive2");
+
+    
 </script>
 
 
