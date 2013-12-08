@@ -41,12 +41,14 @@ var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
 	    container.appendChild(time);
 	    discussion.appendChild(container);
 	    
-	    $('#argument_content').val('');
+	    
     
    }
   });
-
-    
+      $( "#target" ).submit(function( event ) {
+        $('#argument_content').val('');
+        event.preventDefault();
+      });
 </script>
 
 
