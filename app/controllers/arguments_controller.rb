@@ -14,7 +14,6 @@ class ArgumentsController < ApplicationController
   			created_at: @argument.created_at.strftime("%H:%M").to_s
   			})
 		end
-		render action: 'new'
 	end
 
 	def new
@@ -22,9 +21,6 @@ class ArgumentsController < ApplicationController
 		@argument = Argument.new(argument_params)
 		@argument.user = current_user
 		@argument.save
-
-
-		render action: 'new'
 	end
 
 	def argument_params
