@@ -1,5 +1,5 @@
 
-    <script src="/pusher2.1.min.js"></script>
+    <script src="https://js.pusher.com/2.1/pusher.min.js"></script>
 <script>
 var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
  	      pusher.connection.bind('connecting', function() {
@@ -44,8 +44,12 @@ var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
 	    $('#argument_content').val('');
     
    }
-  });  
+  });
+
+    
 </script>
+
+
 
 <div class="panel panel-primary">
   <div class="panel-heading">
