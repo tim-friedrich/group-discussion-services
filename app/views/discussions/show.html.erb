@@ -1,6 +1,7 @@
 
+    <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
 <script>
-alert("alive1");
+var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
  	      pusher.connection.bind('connecting', function() {
       $('div#status').text('Connecting to Pusher...');
     });
@@ -10,9 +11,7 @@ alert("alive1");
     pusher.connection.bind('failed', function() {
       $('div#status').text('Connection to Pusher failed :(');
     });
-    channel.bind('subscription_error', function(status) {
-      $('div#status').text('Pusher subscription_error');
-    });
+
     alert("alive2");
     Pusher.log = function(message) {
   if (window.console && window.console.log) {
@@ -25,7 +24,7 @@ alert("alive1");
     Pusher.sockjs_host = 'sockjs-eu.pusher.com';
 alert("alive5");
 
-      	var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+      	
 alert("alive6");
   	var channel = pusher.subscribe('discussion<%= @discussion.id.to_s %>');
   	channel.bind('new_argument', function(data) {
