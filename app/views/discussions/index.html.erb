@@ -3,9 +3,9 @@
 <table>
   <thead>
     <tr>
-      <th>Topic</th>
+      <th>Thema</th>
       <th>Moderator</th>
-      <th>Due date</th>
+      <th>Datum</th>
       <th></th>
       <th></th>
       <th></th>
@@ -19,9 +19,9 @@
         
         
         <td><%= discussion.due_date %></td>
-        <td><%= link_to 'Show', discussion %></td>
-        <td><%= link_to 'Edit', edit_discussion_path(discussion) %></td>
-        <td><%= link_to 'Destroy', discussion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Diskussion beitreten', discussion %></td>
+        <td><%= link_to 'Bearbeiten', edit_discussion_path(discussion) %></td>
+        <td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Discussion', new_discussion_path %>
+<%= link_to 'neue Diskussion erstellen', new_discussion_path %>

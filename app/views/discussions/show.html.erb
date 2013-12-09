@@ -1,6 +1,29 @@
 
 <script src=" https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js"></script>
 <script>
+
+var callback = function(data){
+      if( $('#argument_content').val() != ""){
+  
+      var discussion = document.getElementById("discussion");
+      var container = document.createElement("div");
+      var argument = document.createElement("div");
+      var time = document.createElement("div");
+
+      container.setAttribute("class", "well well-sm");
+      argument.setAttribute("class", "argument");
+      time.setAttribute("class", "time_stamp");
+      argument.innerHTML = data.firstname + ": " + data.argument;
+      time.innerHTML = data.created_at;
+      container.appendChild(argument);
+      container.appendChild(time);
+      discussion.appendChild(container);
+      
+      $('#argument_content').val('');
+   }
+}
+window.onload = function() {
+
 var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
  	      pusher.connection.bind('connecting', function() {
       $('div#status').text('Connecting to Pusher...');
@@ -24,27 +47,8 @@ var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
 
       
   	var channel = pusher.subscribe('discussion<%= @discussion.id.to_s %>');
-  	channel.bind('new_argument', function(data) {
-    if( $('#argument_content').val() != ""){
-	
-    	var discussion = document.getElementById("discussion");
-    	var container = document.createElement("div");
-    	var argument = document.createElement("div");
-    	var time = document.createElement("div");
-
-	    container.setAttribute("class", "well well-sm");
-	    argument.setAttribute("class", "argument");
-	    time.setAttribute("class", "time_stamp");
-	    argument.innerHTML = data.firstname + ": " + data.argument;
-	    time.innerHTML = data.created_at;
-	    container.appendChild(argument);
-	    container.appendChild(time);
-	    discussion.appendChild(container);
-	    
-	    $('#argument_content').val('');
-    
-   }
-  });
+  	channel.bind('new_argument', callback);
+  }
 </script>
 
 
