@@ -26,9 +26,10 @@
       container.appendChild(argument);
       container.appendChild(time);
       discussion.appendChild(container);
-      
-      $('#argument_content').val('');
 });
+    $( "#argument_content" ).submit(function( event ) {
+      $('#argument_content').val('');
+    });
 </script>
 
 
