@@ -10,7 +10,7 @@ class ArgumentsController < ApplicationController
 		@argument = Argument.new(argument_params)
 		@argument.user = current_user
 		if @argument.save
-			Pusher['discussion'+@argument.question.discussion.id.to_s].trigger('new_argument', {
+			Pusher['discussion'+@argument.question.discussion.id.to_s].trigger('newargument', {
 	  			firstname: @argument.user.firstName.to_s,
 	  			argument: @argument.content.to_s,
 	  			created_at: @argument.created_at.strftime("%H:%M").to_s

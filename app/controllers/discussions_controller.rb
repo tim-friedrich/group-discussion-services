@@ -10,9 +10,7 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1
   # GET /discussions/1.json
   def show
-    
       @questions = Question.where(discussion_id: params[:id])
-      
   end
 
   # GET /discussions/new
