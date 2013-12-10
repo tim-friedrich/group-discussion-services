@@ -1,6 +1,6 @@
 class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_rights
   # GET /discussions
   # GET /discussions.json
   def index
@@ -10,8 +10,9 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1
   # GET /discussions/1.json
   def show
-    @questions = Question.where(discussion_id: params[:id])
-
+    
+      @questions = Question.where(discussion_id: params[:id])
+      
   end
 
   # GET /discussions/new
@@ -75,5 +76,9 @@ class DiscussionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def discussion_params
       params.require(:discussion).permit(:topic, :moderator, :due_date)
+    end
+
+    def check_rights
+      redirect_to signin_url, notice: "Bitte melden Sie sich an." unless signed_in?
     end
 end

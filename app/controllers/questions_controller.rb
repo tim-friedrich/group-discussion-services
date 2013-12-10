@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_rights
   # GET /questions
   # GET /questions.json
   def index
@@ -73,6 +73,9 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:topic, :description)
-
+    end
+    
+    def check_rights
+      redirect_to signin_url, notice: "Bitte melden Sie sich an." unless signed_in?
     end
 end
