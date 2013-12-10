@@ -4,7 +4,7 @@ GDS::Application.configure do
   Pusher.app_id = '61016'
   Pusher.key    = '77d609e946e412d4a24f'
   Pusher.secret = '0fcbc0e8d0df2e48ce24'
-  Pusher.encrypted = true
+ 
 
   # Settings specified here will take precedence over those in config/application.rb.
 

@@ -1,19 +1,8 @@
 
 <script src=" https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js"></script>
 <script>
-
-window.onload = function() {
-
-var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
- 	      pusher.connection.bind('connecting', function() {
-      $('div#status').text('Connecting to Pusher...');
-    });
-    pusher.connection.bind('connected', function() {
-      $('div#status').text('Connected to Pusher!');
-    });
-    pusher.connection.bind('failed', function() {
-      $('div#status').text('Connection to Pusher failed :(');
-    });
+  var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+ 	   
 
     Pusher.log = function(message) {
   if (window.console && window.console.log) {
@@ -21,9 +10,7 @@ var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
   }
 };
     
-    Pusher.host = 'ws-eu.pusher.com';
-    
-    Pusher.sockjs_host = 'sockjs-eu.pusher.com';
+
 
       
   	var channel = pusher.subscribe('discussion<%= @discussion.id.to_s %>');
@@ -47,7 +34,6 @@ var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
       $('#argument_content').val('');
    }
 });
-  }
 </script>
 
 
