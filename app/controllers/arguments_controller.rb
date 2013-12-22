@@ -5,8 +5,7 @@ class ArgumentsController < ApplicationController
 		@argument = Argument.new(argument_params)
 		@argument.user = current_user
 		set_argument_type(@argument)
-    	
-
+    	puts @argument.valid
 		if @argument.save
 			Pusher['discussion'+@argument.question.discussion.id.to_s].trigger('newargument', {
 	  			firstname: @argument.user.firstName.to_s,
