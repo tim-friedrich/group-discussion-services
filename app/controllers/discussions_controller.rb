@@ -10,7 +10,9 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1
   # GET /discussions/1.json
   def show
-      @questions = Question.where(discussion_id: params[:id])
+    @questions = Question.where(discussion_id: params[:id])
+    @type_proband = ArgumentType.where(name:'proband').first
+    @type_moderator = ArgumentType.where(name:'moderator').first 
   end
 
   # GET /discussions/new
@@ -73,7 +75,7 @@ class DiscussionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discussion_params
-      params.require(:discussion).permit(:topic, :moderator, :due_date)
+      params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id)
     end
 
     def check_rights

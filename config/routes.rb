@@ -1,8 +1,8 @@
 GDS::Application.routes.draw do
   resources :discussions
 
-  resources :questions
-  resources :arguments
+  resources :questions, only: [:create, :show, :new]
+  resources :arguments, only: [:create, :show]
   resources :group_discussions
 
   resources :users	

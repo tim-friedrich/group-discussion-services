@@ -11,16 +11,34 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :topic %><br>
-    <%= f.text_field :topic %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <%= f.label :topic %><br>
+        <%= f.text_field :topic %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <%= f.label "Moderator" %>
+        <%= f.collection_select(:moderator_id, User.all, :id, :surname) %>
+      </div>
+    </div>
   </div>
   
-  <div class="field">
-    <%= f.label :due_date %><br>
-    <%= f.text_field :due_date %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <%= f.label :due_date %><br>
+        <%= f.text_field :due_date, :class => 'datepicker form-control', :value => (@discussion.due_date.blank? ? '' : @discussion.due_date.strftime('%d-%m-%Y'))%>
+      </div>
+      <div class="actions">
+        <%= f.submit class: "btn btn-large btn-primary"%>
+      </div>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  
 <% end %>

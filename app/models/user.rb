@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
 	has_many :arguments
-
+	belongs_to :role
 	before_save { self.email = email.downcase }
 	before_create :create_remember_token
 	
@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 	
 	has_secure_password
 	validates :password, length: { minimum: 6 }
+	validates :password, presence:true
 	
 	def User.new_remember_token
 		SecureRandom.urlsafe_base64

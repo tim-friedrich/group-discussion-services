@@ -5,9 +5,19 @@
 .panel.panel-primary {
 	text-align: left;
 }
-.panel-body {
+#moderator_chat {
+	height: 150px;
+}
+#discussion {
 	height: 300px;
 }
-.panel-body{
+.panel-body {
 	overflow-y: scroll;
+}
+.moderator_show {
+	float: left;
+	overflow: hidden;
+}
+.panel#discussion {
+	overflow: clear;
 }

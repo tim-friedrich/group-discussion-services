@@ -1,3 +1,23 @@
 // Place all the styles related to the Discussions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.panel.panel-primary {
+	text-align: left;
+
+}
+#moderator_chat {
+	height: 150px;
+	overflow-y: scroll;
+}
+#discussion {
+	height: 300px;
+
+}
+#discussion {
+	overflow-y: scroll;
+}
+.moderator_show {
+	overflow-y: hidden;
+	margin: 10px;
+}

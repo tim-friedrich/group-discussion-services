@@ -47,7 +47,8 @@ group :development, :test do
 	gem 'cucumber-rails', '1.2.1', :require => false
  	gem 'rake'
 	gem 'capybara', '1.1.2'
-  	#gem 'codeclimate-test-reporter', :require => nil
+	gem 'factory_girl_rails', :require => false
+  	gem 'codeclimate-test-reporter', :require => nil
 end
 
 # Use unicorn as the app server

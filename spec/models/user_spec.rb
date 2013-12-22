@@ -1,10 +1,14 @@
 require 'spec_helper'
 
 describe User do 
-	before do 
-		@user = User.new(firstName: "karl", surname: "Peterson", email: "karl@example.com", password: "foobar", password_confirmation: "foobar")
+	before(:each) do 
+		@user = FactoryGirl.build(:user)
 	end
 	
+	after(:each) do
+		User.delete_all
+	end
+
 	subject { @user }
 
 	it { should respond_to(:surname) }
@@ -15,6 +19,7 @@ describe User do
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:authenticate) }
 	it { should respond_to(:remember_token) }
+	it { should respond_to(:role) }
 
 	it { should be_valid }
 

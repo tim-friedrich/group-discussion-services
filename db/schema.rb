@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210172926) do
+ActiveRecord::Schema.define(version: 20131213175547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "argument_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "arguments", force: true do |t|
     t.string   "content"
@@ -24,6 +30,7 @@ ActiveRecord::Schema.define(version: 20131210172926) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "question_id"
+    t.integer  "argument_type_id"
   end
 
   create_table "discussions", force: true do |t|
@@ -38,7 +45,6 @@ ActiveRecord::Schema.define(version: 20131210172926) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "topic"
-    t.string   "discription"
     t.integer  "discussion_id"
   end
 

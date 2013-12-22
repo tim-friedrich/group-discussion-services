@@ -1,64 +1,82 @@
-
-
-
-
-<div class="panel panel-primary">
+<div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Frage: <%= @questions.last.topic %></h3>
-  </div>
-  <div class="panel-body" id="discussion">
-  	<% @questions.each do |question| %> 
-	    <% question.arguments.each do |argument| %>
-	      <div class="well well-sm">
-	        <%= render argument %>
-	      </div>
-	    <% end %>
-    <% end %>
-  </div>
+      <h3 class="panel-title">Frage: <%= @questions.last.topic %></h3>
+    </div>
+  
+     <div class="moderator_show">
+        <h5><%= @discussion.moderator.firstName+" "+@discussion.moderator.surname %></h5>
+        <%= image_tag('Unknown-person.gif', size: "80x80", alt: "Bild des Moderators") %>
+      </div>
+  
+    <ul class="list-group" id="moderator_chat">
+      <% @questions.each do |question| %> 
+        <% question.arguments.each do |argument| %>
+        <% if argument.argument_type == @type_moderator%>
+            <div class="list-group-item">
+              <%= render argument %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
 </div>
 
-<%= form_for Argument.new , remote: true do |f| %>
-  	<%= f.text_area :content, class: "form-control", rows: 3 %>
-	<%= f.hidden_field :question_id, value: @questions.last.id %>
+<div class="panel panel-default" id="discussion_panel">
+  <ul class="list-group" id="discussion">
+  	<% @questions.each do |question| %> 
+	    <% question.arguments.each do |argument| %>
+       <% if argument.argument_type == @type_proband %>
+	       <div class="list-group-item">
+	         <%= render argument %>
+	       </div>
+        <% end %>
+	    <% end %>
+    <% end %>
+    </ul>
+</div>
 
-  	<%= f.submit "Send" , class: "btn btn-success", id: "new_argument_div" %>
+<%= render 'arguments/new' %>
 
-<% end %>
 
 
 <script src=" https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js"></script>
 <script>
   
-    $( "#new_argument" ).click(function( event ) {
-      $( "#new_argument" ).submit();
-      $('#argument_content').val('');
-    });
+  $( "#new_argument" ).click(function( event ) {
+    $( "#new_argument" ).submit();
+    $('#argument_content').val('');
+  });
+  
   var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
      
-
-    Pusher.log = function(message) {
-  if (window.console && window.console.log) {
-    window.console.log(message);
-  }
-};
-    var channel = pusher.subscribe('discussion<%= @discussion.id.to_s %>');
-    channel.bind('newargument', function(data){
-
-  
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+      }
+    };
+  var channel = pusher.subscribe('discussion<%= @discussion.id.to_s %>');
+  channel.bind('newargument', function(data){
+    if(data.argument_type == 'proband'){
       var discussion = document.getElementById("discussion");
-      var container = document.createElement("div");
-      var argument = document.createElement("div");
-      var time = document.createElement("div");
+    }
+    if(data.argument_type == 'moderator'){
+      var discussion = document.getElementById("moderator_chat");
+    }
+    var container = document.createElement("div");
+    var argument = document.createElement("div");
+    var time = document.createElement("div");
 
-      container.setAttribute("class", "well well-sm");
-      argument.setAttribute("class", "argument");
-      time.setAttribute("class", "time_stamp");
-      argument.innerHTML = data.firstname + ": " + data.argument;
-      time.innerHTML = data.created_at;
-      container.appendChild(argument);
-      container.appendChild(time);
-      discussion.appendChild(container);
-});
+    container.setAttribute("class", "list-group-item");
+    argument.setAttribute("class", "argument");
+    time.setAttribute("class", "time_stamp");
+    argument.innerHTML = data.firstname + ": " + data.argument;
+    time.innerHTML = data.created_at;
+    container.appendChild(argument);
+    container.appendChild(time);
+    discussion.appendChild(container);
+    
+    discussion.scrollTop = discussion.scrollHeight;
+  });
 
 </script>
 
