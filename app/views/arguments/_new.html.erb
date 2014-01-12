@@ -1,8 +1,1 @@
 
-<%= form_for Argument.new , class: "form-inline", role: "form", remote: true do |f| %>
-<div class="form-group">
-    <%= f.text_field :content, class: "form-control", rows: 3 %>
- </div>
-    <%= f.hidden_field :question_id, value: @questions.last.id %> <!-- Still a workaround -->
-    <%= f.submit "Send" , class: "btn btn-success", id: "new_argument_div" %>
-<% end %>

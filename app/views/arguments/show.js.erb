@@ -1,0 +1,10 @@
+var discussion; 
+<% if @argument.argument_type == @moderator_type %>
+	discussion = $("#moderator_chat");
+<% else %>
+	discussion = $("#discussion");
+<% end %>
+discussion.append("<%= j render @argument %>");
+discussion.stop().animate({
+  scrollTop: discussion[0].scrollHeight
+}, 800);

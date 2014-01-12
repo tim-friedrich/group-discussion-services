@@ -1,4 +1,5 @@
-<%= form_for(@discussion) do |f| %>
+<%= form_for(@discussion, html: { multipart: true, class: "form-horizontal", role: "form"  }) do |f| %>
+
   <% if @discussion.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@discussion.errors.count, "error") %> prohibited this discussion from being saved:</h2>
@@ -11,33 +12,24 @@
     </div>
   <% end %>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="field">
-        <%= f.label :topic %><br>
-        <%= f.text_field :topic %>
-      </div>
-    </div>
+  <div class="form-group">
+    <%= f.label :topic, class: "col-sm-2 control-label" %>
+    <%= f.text_field :topic, class: "form-control" %>
   </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="field">
-        <%= f.label "Moderator" %>
-        <%= f.collection_select(:moderator_id, User.all, :id, :surname) %>
-      </div>
-    </div>
+  <div class="form-group">
+    <%= f.label "Moderator", class: "col-sm-2 control-label" %>
+    <%= f.collection_select(:moderator_id, User.all, :id, :lastname, class: "form-control") %>
   </div>
   
-  <div class="row">
-    <div class="col-md-6">
-      <div class="field">
-        <%= f.label :due_date %><br>
-        <%= f.text_field :due_date, :class => 'datepicker form-control', :value => (@discussion.due_date.blank? ? '' : @discussion.due_date.strftime('%d-%m-%Y'))%>
-      </div>
-      <div class="actions">
-        <%= f.submit class: "btn btn-large btn-primary"%>
-      </div>
+  <div class="form-group">
+    <%= f.label :due_date, class: "col-sm-2 control-label" %>
+    <%= f.date_select :due_date, :class => 'datepicker', :value => (@discussion.due_date.blank? ? '' : @discussion.due_date.strftime('%d-%m-%Y'))%>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-large btn-primary"%>
     </div>
   </div>
   

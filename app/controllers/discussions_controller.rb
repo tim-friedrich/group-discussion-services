@@ -31,10 +31,10 @@ class DiscussionsController < ApplicationController
     @discussion.moderator = current_user
 
     @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
-
+    @discussion.current_question = @question
     respond_to do |format|
       if @discussion.save
-        format.html { redirect_to @discussion, notice: 'Discussion was successfully created.' }
+        format.html { redirect_to @discussion, notice: 'Eine neue Diskussion wurde erfolgreich erstellt.' }
         format.json { render action: 'show', status: :created, location: @discussion }
       else
         format.html { render action: 'new' }
@@ -48,7 +48,7 @@ class DiscussionsController < ApplicationController
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
-        format.html { redirect_to @discussion, notice: 'Discussion was successfully updated.' }
+        format.html { redirect_to @discussion, notice: 'Die Diskussion wurde erfolgreich aktualiesiert.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

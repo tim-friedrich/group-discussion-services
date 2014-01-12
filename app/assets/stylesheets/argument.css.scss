@@ -2,10 +2,37 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.time_stamp {
-	text-align: right;
-}
 
-.argument {
+.new_like {
 	float: left;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+.new_dislike {
+	float: left;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+.vote_count {
+		float: left;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+.time_stamp {
+	float: left;
+	margin-left: 3px;
+}
+.left_argument {
+	text-align: left;
+	float: left;
+}
+.right_argument {
+	text-align: right;
+	float: right;
+}
+.like_badge {
+	background-color: #5CB85C !important;
+}
+.dislike_badge {
+	background-color: #D9534F !important;
 }

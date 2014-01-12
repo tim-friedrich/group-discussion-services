@@ -9,14 +9,13 @@
 #moderator_chat {
 	height: 150px;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 #discussion {
 	height: 300px;
-
-}
-#discussion {
 	overflow-y: scroll;
 }
+
 .moderator_show {
 	overflow-y: hidden;
 	margin: 10px;

@@ -1,16 +1,16 @@
 <h1>Einstellungen</h1>
 
-<%= form_for(@user, :html => { :multipart => true }) do |f| %>
+<%= form_for(@user, :html => { :multipart => true, class: "form-horizontal", role: "form" }) do |f| %>
 	
 	<%= render 'shared/error_messages' %>
 
  	<div class="form-group">
-		<%= f.label :firstName, "Vorname" %>
-		<%= f.text_field :firstName, class: "form-control", placeholder: "Vorname" %>
+		<%= f.label :firstname, "Vorname" %>
+		<%= f.text_field :firstname, class: "form-control", placeholder: "Vorname" %>
 	</div>
 	<div class="form-group">
-		<%= f.label :surname, "Nachname" %>
-		<%= f.text_field :surname, class: "form-control", placeholder: "Nachname" %>
+		<%= f.label :lastname, "Nachname" %>
+		<%= f.text_field :lastname, class: "form-control", placeholder: "Nachname" %>
 		</div>		
 	<div class="form-group">
 		<%= f.label :email, "Email" %>

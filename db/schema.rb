@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213175547) do
+ActiveRecord::Schema.define(version: 20140109172059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,18 +25,32 @@ ActiveRecord::Schema.define(version: 20131213175547) do
   create_table "arguments", force: true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.integer  "likes"
-    t.integer  "dislikes"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "question_id"
     t.integer  "argument_type_id"
+    t.integer  "discussion_id"
   end
 
   create_table "discussions", force: true do |t|
     t.string   "topic"
     t.integer  "moderator_id"
     t.datetime "due_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "current_question_id"
+  end
+
+  create_table "dislikes", force: true do |t|
+    t.integer  "argument_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "likes", force: true do |t|
+    t.integer  "argument_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,8 +70,8 @@ ActiveRecord::Schema.define(version: 20131213175547) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "firstName"
-    t.string   "surname"
+    t.string   "firstname"
+    t.string   "lastname"
     t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at"

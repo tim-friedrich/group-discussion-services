@@ -19,9 +19,9 @@
         
         
         <td><%= discussion.due_date %></td>
-        <td><%= link_to 'Diskussion beitreten', discussion, class: "btn btn-large btn-primary" %></td>
-        <td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-large btn-primary" %></td>
-        <td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-large btn-primary" %></td>
+        <td><%= link_to 'Diskussion beitreten', discussion, class: "btn btn-xs btn-primary" %></td>
+        <td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-xs btn-primary" %></td>
+        <td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>

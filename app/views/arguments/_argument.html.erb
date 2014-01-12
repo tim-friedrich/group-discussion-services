@@ -1,8 +1,54 @@
-  
-<div class= "argument">
-	<%= argument.user.firstName %>: <%= argument.content %>
+<div class="list-group-item argument-panel clearfix">
+	<div class= "left_argument">
+		<%= argument.user.firstname %>: <%= argument.content %>
+	</div>
+	
+	<div class="right_argument">
+		
+		<% if argument.argument_type != ArgumentType.where(name:'moderator').first  %>
+
+			<% if argument.discussion.moderator == current_user %>
+
+				<span class="vote_count badge like_badge" id = "like_badge_<%= argument.id %>"><%= Like.where(argument: argument).count() %></span>
+				<span class="vote_count badge dislike_badge" id = "dislike_badge_<%= argument.id %>"><%= Dislike.where(argument: argument).count() %></span>
+			<% else %>
+
+				<%= form_for Like.new , class: "form-inline", role: "form", remote: true do |f| %>
+				  	<%= f.hidden_field :argument_id, value: argument.id %>
+				  	<% if !Like.exists?(argument: argument, user: current_user) %>
+				  		<%= f.button :submit, class: "btn btn-success btn-xs vote_button" do %>
+				  			<i class='glyphicon glyphicon-thumbs-up' ></i> 
+						<% end %>
+					<% else %>
+						<%= f.button :submit, class: "btn btn-success btn-xs disabled vote_button" do %>
+				  			<i class='glyphicon glyphicon-thumbs-up'></i> 
+						<% end %>
+					<% end %>
+				<% end %>
+				
+				<%= form_for Dislike.new , class: "form-inline", role: "form", remote: true do |f| %>
+				  	<%= f.hidden_field :argument_id, value: argument.id %>
+
+				  	<% if !Dislike.exists?(argument: argument, user: current_user) %>
+					  	<%= f.button :submit, class: "btn btn-danger btn-xs vote_button" do %>
+					  		<i class='glyphicon glyphicon-thumbs-down'></i> 
+						<% end %>
+					<% else %>
+				  		<%= f.button :submit, class: "btn btn-danger btn-xs disabled vote_button" do %>
+					  		<i class='glyphicon glyphicon-thumbs-down'></i> 
+					  	<% end %>
+					<% end %>
+				<% end %>
+			<% end %>
+		<% end %>
+
+	
+		<div class = "time_stamp">
+		  <span><%= argument.created_at.strftime("%H:%M") %></span>
+		</div>
+	</div>
 </div>
 
-<div class = "time_stamp">
-  <span><%= argument.created_at.strftime("%H:%M") %></span>
-</div>
+<script>
+	$()
+</script>

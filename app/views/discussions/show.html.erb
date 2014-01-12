@@ -1,10 +1,10 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-      <h3 class="panel-title">Frage: <%= @questions.last.topic %></h3>
+      <h3 class="panel-title" id="question">Frage: <%= @discussion.current_question.topic %></h3>
     </div>
   
      <div class="moderator_show">
-        <h5><%= @discussion.moderator.firstName+" "+@discussion.moderator.surname %></h5>
+        <h5><%= @discussion.moderator.firstname+" "+@discussion.moderator.lastname %></h5>
         <%= image_tag('Unknown-person.gif', size: "80x80", alt: "Bild des Moderators") %>
       </div>
   
@@ -12,9 +12,7 @@
       <% @questions.each do |question| %> 
         <% question.arguments.each do |argument| %>
         <% if argument.argument_type == @type_moderator%>
-            <div class="list-group-item">
               <%= render argument %>
-            </div>
           <% end %>
         <% end %>
       <% end %>
@@ -26,58 +24,97 @@
   	<% @questions.each do |question| %> 
 	    <% question.arguments.each do |argument| %>
        <% if argument.argument_type == @type_proband %>
-	       <div class="list-group-item">
 	         <%= render argument %>
-	       </div>
         <% end %>
 	    <% end %>
     <% end %>
     </ul>
 </div>
 
-<%= render 'arguments/new' %>
+<%= form_for Argument.new , class: "form-inline", role: "form", remote: true do |f| %>
+  <div class="form-group">
+      <%= f.text_area :content, class: "form-control", rows: 3 %>
+   </div>
+  <%= f.hidden_field :discussion_id, value: @discussion.id %>
+  <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
+  <% if @discussion.moderator == current_user %>
+    <%= f.submit "Neue Frage", class: "btn btn-success", id: "new_question_button" %>
+  <% end %>
+<% end %>
+
 
 
 
 <script src=" https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js"></script>
 <script>
   
-  $( "#new_argument" ).click(function( event ) {
-    $( "#new_argument" ).submit();
+  //Handling the two submit buttons and clearing the form
+  var is_question = false;
+  $(".vote_button").click(function( event ){ 
+    $(this).addClass("disabled");
+  });
+
+  $("#new_question_button").click(function( event ){ 
+    is_question = true;
+    $.ajax({
+      type: 'POST',
+      url: '/questions/',
+      data: { question: { topic: $('#argument_content').val() , discussion_id: <%= @discussion.id %> } },
+    });
     $('#argument_content').val('');
   });
   
+  $("#new_argument").submit(function( event ){
+    if (is_question){
+      is_question = false;
+      return false;
+    }
+    is_question = false;
+    return true;
+  });
+  
+  $("#new_argument_button").click(function( event ){
+    submit_argument();
+  });
+
+  $('#argument_content').keydown(function( event ){
+    if(event.keyCode == 13){
+      submit_argument();
+    }
+  });
+
+  function submit_argument(){
+    $("#new_argument_button").submit();
+    $('#argument_content').val('');
+  }
+  // Pusher subscribtions
   var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
-     
+
   Pusher.log = function(message) {
     if (window.console && window.console.log) {
       window.console.log(message);
       }
     };
   var channel = pusher.subscribe('discussion<%= @discussion.id.to_s %>');
-  channel.bind('newargument', function(data){
-    if(data.argument_type == 'proband'){
-      var discussion = document.getElementById("discussion");
-    }
-    if(data.argument_type == 'moderator'){
-      var discussion = document.getElementById("moderator_chat");
-    }
-    var container = document.createElement("div");
-    var argument = document.createElement("div");
-    var time = document.createElement("div");
-
-    container.setAttribute("class", "list-group-item");
-    argument.setAttribute("class", "argument");
-    time.setAttribute("class", "time_stamp");
-    argument.innerHTML = data.firstname + ": " + data.argument;
-    time.innerHTML = data.created_at;
-    container.appendChild(argument);
-    container.appendChild(time);
-    discussion.appendChild(container);
-    
-    discussion.scrollTop = discussion.scrollHeight;
+  channel.bind('newArgument', function(data){
+    $.ajax({
+      type: 'GET',
+      url: '/arguments/'+data.id,
+    });
   });
+  
+  <% if current_user == @discussion.moderator %>
+    channel.bind('newLike', function(data){
+      $("#like_badge_"+data.id).text((parseInt($("#like_badge_"+data.id).text())+1));
+    });
+    channel.bind('newDislike', function(data){
+      $("#dislike_badge_"+data.id).text((parseInt($("#dislike_badge_"+data.id).text())+1));
+    });
 
+  <% end %>
+    channel.bind('newQuestion', function(data){
+      $("#question").text("Frage: "+data.topic);
+    });
 </script>
 
 

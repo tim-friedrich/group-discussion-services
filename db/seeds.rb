@@ -17,8 +17,8 @@ ArgumentType.create(name: 'observer')
 
 User.delete_all
 User.create([{
-		firstName: "Tim",
-		surname: "Friedrich",
+		firstname: "Tim",
+		lastname: "Friedrich",
 		email: "friedrich.tim@googlemail.com",
 	   	role_id: Role.where(name: 'admin').first.id
 

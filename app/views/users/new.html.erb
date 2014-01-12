@@ -1,29 +1,43 @@
 <h1>Registrieren</h1>
 	
-<%= form_for(@user, :html => { :multipart => true }) do |f| %>
+<%= form_for @user, :html => { multipart: true, class: "form-horizontal", role: "form" } do |f| %>
 	
 	<%= render 'shared/error_messages' %>
 
  	<div class="form-group">
-		<%= f.label :firstName, "Vorname" %>
-		<%= f.text_field :firstName, class: "form-control", placeholder: "Vorname" %>
+		<%= f.label :firstname, "Vorname", class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<%= f.text_field :firstname, class: "form-control", placeholder: "Vorname" %>
+		</div>
 	</div>
 	<div class="form-group">
-		<%= f.label :surname, "Nachname" %>
-		<%= f.text_field :surname, class: "form-control", placeholder: "Nachname" %>
+		<%= f.label :lastname, "Nachname", class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<%= f.text_field :lastname, class: "form-control", placeholder: "Nachname" %>
+		</div>
 		</div>		
 	<div class="form-group">
-		<%= f.label :email, "Email" %>
-		<%= f.text_field :email, class: "form-control", placeholder: "Email-Adresse" %>
+		<%= f.label :email, "Email", class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<%= f.text_field :email, class: "form-control", placeholder: "Email-Adresse" %>
+		</div>
 	</div>
 	<div class="form-group">
-		<%= f.label :password, "Passwort" %>			
-		<%= f.password_field :password, class: "form-control", placeholder: "Passwort" %>
+		<%= f.label :password, "Passwort", class: "col-sm-2 control-label" %>			
+		<div class="col-sm-10">
+			<%= f.password_field :password, class: "form-control", placeholder: "Passwort" %>
+		</div>
 	</div>
 	<div class="form-group">
-		<%= f.label :password_confirmation, "Passwort bestätigen" %>
-		<%= f.password_field :password_confirmation, class: "form-control", placeholder: "Passwort bestätigen" %>
+		<%= f.label :password_confirmation, "Passwort bestätigen", class: "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<%= f.password_field :password_confirmation, class: "form-control", placeholder: "Passwort bestätigen" %>
+		</div>
 	</div>
-		<%= f.submit "Registrieren", class: "btn btn-large btn-primary" %>
+	<div class="form-group">
+    	<div class="col-sm-offset-2 col-sm-10">
+			<%= f.submit "Registrieren", class: "btn btn-large btn-primary" %>
+		</div>
+	</div>
 <% end %>
-	
+		

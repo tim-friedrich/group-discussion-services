@@ -1,9 +1,13 @@
 GDS::Application.routes.draw do
+  resources :dislikes
+
+  resources :likes
+
   resources :discussions
 
   resources :questions, only: [:create, :show, :new]
   resources :arguments, only: [:create, :show, :new]
-  resources :group_discussions
+
 
   resources :users	
 	root 'static_pages#home'
