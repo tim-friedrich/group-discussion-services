@@ -2,5 +2,49 @@
 
 <%= render 'form' %>
 
+
+<%= form_for(@proband, html: { multipart: true, class: "form-horizontal", role: "form", remote: true  }) do |f| %>
+
+<div class="row">
+    <div class="col-lg-6">
+      <div class="input-group">
+          <%= f.collection_select(:user_id, @users, :id, :email, class: "form-control") %>
+   
+          <span class="input-group-btn">
+            <%= f.submit "hinzufügen", class: "btn btn-default"%>
+        </span>
+        <%= f.hidden_field :discussion_id, value: @discussion.id %>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
+<% end %>
+
+<h2>Teilnehmer</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Vorname</th>
+      <th>Nachname</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @discussion.users do |proband| %>
+      <tr>
+        <td><%= proband.firstname %></td>
+        
+        
+        <td><%= proband.lastname %></td>
+        <td>proband.lastname</td>
+        <td>proband.email</td>
+        <td><%= link_to 'Löschen', proband, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Show', @discussion %> |
 <%= link_to 'Back', discussions_path %>

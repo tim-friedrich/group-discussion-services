@@ -18,10 +18,13 @@ class DiscussionsController < ApplicationController
   # GET /discussions/new
   def new
     @discussion = Discussion.new
+    @users = User.all
   end
 
   # GET /discussions/1/edit
   def edit
+    @proband = DiscussionUser.new
+    @users = User.all
   end
 
   # POST /discussions
@@ -48,7 +51,7 @@ class DiscussionsController < ApplicationController
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
-        format.html { redirect_to @discussion, notice: 'Die Diskussion wurde erfolgreich aktualiesiert.' }
+        format.html { redirect_to @discussion, notice: 'Die Diskussion wurde erfolgreich aktualisiert.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -75,7 +78,7 @@ class DiscussionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discussion_params
-      params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id)
+      params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users)
     end
 
     def check_rights

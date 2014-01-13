@@ -24,7 +24,7 @@
   
   <div class="form-group">
     <%= f.label :due_date, class: "col-sm-2 control-label" %>
-    <%= f.date_select :due_date, :class => 'datepicker', :value => (@discussion.due_date.blank? ? '' : @discussion.due_date.strftime('%d-%m-%Y'))%>
+    <%= f.date_select :due_date, type:"text", :class => 'form-control datepicker', :value => (@discussion.due_date.blank? ? '' : @discussion.due_date.strftime('%d-%m-%Y'))%>
   </div>
   
   <div class="form-group">
@@ -34,3 +34,4 @@
   </div>
   
 <% end %>
+

@@ -7,7 +7,7 @@ GDS::Application.routes.draw do
 
   resources :questions, only: [:create, :show, :new]
   resources :arguments, only: [:create, :show, :new]
-
+  resources :discussion_users
 
   resources :users	
 	root 'static_pages#home'
