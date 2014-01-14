@@ -12,11 +12,14 @@
 	overflow-x: hidden;
 }
 #discussion {
-	height: 300px;
+
 	overflow-y: scroll;
 }
 
 .moderator_show {
 	overflow-y: hidden;
 	margin: 10px;
+}
+#discussion {
+	height: 300px;
 }

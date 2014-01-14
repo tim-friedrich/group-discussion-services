@@ -13,7 +13,7 @@ class ArgumentsController < ApplicationController
 	end
 	
 	def create 
-		puts params[:name]
+		
 		if params[:commit]!="Neue Frage" 
 			@argument = Argument.new(argument_params)
 			@argument.user = current_user

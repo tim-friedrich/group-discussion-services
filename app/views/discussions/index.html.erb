@@ -16,8 +16,7 @@
     <% @discussions.each do |discussion| %>
       <tr>
         <td><%= discussion.topic %></td>
-        
-        
+        <td><%= discussion.moderator.firstname %> <%= discussion.moderator.lastname %></td>
         <td><%= discussion.due_date %></td>
         <td><%= link_to 'Diskussion beitreten', discussion, class: "btn btn-xs btn-primary" %></td>
         <td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-xs btn-primary" %></td>
