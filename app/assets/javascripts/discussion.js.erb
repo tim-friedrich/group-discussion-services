@@ -1,0 +1,72 @@
+function init_discussion(moderator){
+ //Handling the two submit buttons and clearing the form
+  var is_question = false;
+  
+  $(".vote_button").click(function( event ){
+    $(this).addClass("disabled");
+  });
+
+  $("#new_question_button").click(function( event ){
+    is_question = true;
+    $.ajax({
+      type: 'POST',
+      url: '/questions/',
+      data: { question: { topic: $('#argument_content').val() , discussion_id: $('#argument_discussion_id').val() } },
+    });
+    $('#argument_content').val('');
+  });
+  
+  $("#new_argument").submit(function( event ){
+    if (is_question){
+      is_question = false;
+      return false;
+    }
+    is_question = false;
+    return true;
+  });
+  
+  $("#new_argument_button").click(function( event ){
+    submit_argument();
+  });
+
+  $('#argument_content').keydown(function( event ){
+    if(event.keyCode == 13){
+      submit_argument();
+      return false;
+    }
+    
+  });
+
+  function submit_argument(){
+    $("#new_argument_button").submit();
+    $('#argument_content').val('');
+  }
+  // Pusher subscribtions
+  var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+      }
+    };
+  var channel = pusher.subscribe('discussion'+$('#argument_discussion_id').val());
+  channel.bind('newArgument', function(data){
+    $.ajax({
+      type: 'GET',
+      url: '/arguments/'+data.id,
+    });
+  });
+  
+  if(moderator){
+    channel.bind('newLike', function(data){
+      $("#like_badge_"+data.id).text((parseInt($("#like_badge_"+data.id).text())+1));
+    });
+    channel.bind('newDislike', function(data){
+      $("#dislike_badge_"+data.id).text((parseInt($("#dislike_badge_"+data.id).text())+1));
+    });
+  }
+
+  channel.bind('newQuestion', function(data){
+    $("#question").text("Frage: "+data.topic);
+  });
+}

@@ -56,6 +56,7 @@ class ArgumentsController < ApplicationController
 	def argument_params
       	params.require(:argument).permit(:content, :user, :question, :discussion_id, :user_id, :created_at, :likes, :dislikes, :question_id)
     end
+    
     def check_rights
       	redirect_to signin_url, notice: "Bitte melden Sie sich an." unless signed_in?
     end

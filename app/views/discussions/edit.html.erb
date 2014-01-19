@@ -25,7 +25,7 @@
       <th>Vorname</th>
       <th>Nachname</th>
       <th>Email</th>
-
+      <th></th>
     </tr>
   </thead>
 
@@ -36,6 +36,7 @@
         <td><%= proband.firstname %></td>
         <td><%= proband.lastname %></td>
         <td><%= proband.email %></td>
+        <td><%= link_to 'Löschen', DiscussionUser.where(user: proband, discussion: @discussion).first, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,0 +1,14 @@
+<div class="panel panel-default probands">
+	<div class="panel-heading"><h3 class="panel-title">Teilnehmer</h3></div>
+
+		<ul class="list-group">
+			<% @discussion.users.each do | user | %>
+	  			<li class="list-group-item">
+	  				<%= user.firstname %> <%= user.lastname %>
+	  			</li>
+	  		<% end %>
+		</ul>
+  
+</div>
+
+

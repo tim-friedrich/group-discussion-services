@@ -13,6 +13,7 @@ class DiscussionsController < ApplicationController
     @questions = Question.where(discussion_id: params[:id])
     @type_proband = ArgumentType.where(name:'proband').first
     @type_moderator = ArgumentType.where(name:'moderator').first 
+
   end
 
   # GET /discussions/new

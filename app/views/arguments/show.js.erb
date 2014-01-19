@@ -2,7 +2,7 @@ var discussion;
 <% if @argument.argument_type == @moderator_type %>
 	discussion = $("#moderator_chat");
 <% else %>
-	discussion = $("#discussion");
+	discussion = $("#discussion_chat");
 <% end %>
 discussion.append("<%= j render @argument %>");
 discussion.stop().animate({
