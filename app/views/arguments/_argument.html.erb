@@ -1,6 +1,6 @@
-<div class="list-group-item argument-panel clearfix">
+<div class="list-group-item argument-panel clearfix" >
 	<div class= "left_argument">
-		<%= argument.user.firstname %>: <%= argument.content %>
+		<span class="name"><%= argument.user.firstname %>: </span><%= argument.content %>
 	</div>
 	
 	<div class="right_argument">
@@ -8,7 +8,6 @@
 		<% if argument.argument_type != ArgumentType.where(name:'moderator').first  %>
 
 			<% if argument.discussion.moderator == current_user %>
-
 				<span class="vote_count badge like_badge" id = "like_badge_<%= argument.id %>"><%= Like.where(argument: argument).count() %></span>
 				<span class="vote_count badge dislike_badge" id = "dislike_badge_<%= argument.id %>"><%= Dislike.where(argument: argument).count() %></span>
 			<% else %>
@@ -43,9 +42,9 @@
 		<% end %>
 
 	
-		<div class = "time_stamp">
-		  <span><%= argument.created_at.strftime("%H:%M") %></span>
-		</div>
+		
+		  <span class = "time_stamp"><%= argument.created_at.strftime("%H:%M") %></span>
+		
 	</div>
 </div>
 

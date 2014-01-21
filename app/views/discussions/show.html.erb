@@ -1,6 +1,6 @@
 <script src=" https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js"></script>
 
-
+<div id="discussion" data-isModerator="<%= current_user == @discussion.moderator %>" data-discussionId="<%= @discussion.id%>";>
 <%= render 'present' %>
 <div class="left">
   <div class="clearfix top">
@@ -50,8 +50,9 @@
   <% end %>
 </div>
 
-<script type="text/javascript">init_discussion(<%= current_user == @discussion.moderator %>);</script>
-
+<script type="text/javascript">
+  init_discussion();
+</script>
 
 
 
