@@ -1,5 +1,5 @@
 class DiscussionsController < ApplicationController
-  before_action :set_discussion, only: [:show, :edit, :update, :destroy]
+  before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy]
   before_action :check_rights
   # GET /discussions
   # GET /discussions.json
@@ -10,12 +10,41 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1
   # GET /discussions/1.json
   def show
-    @questions = Question.where(discussion_id: params[:id])
-    @type_proband = ArgumentType.where(name:'proband').first
-    @type_moderator = ArgumentType.where(name:'moderator').first 
-
+    if !current_user.is_part_of_discussion?(@discussion)
+      redirect_to discussions_url, notice: "Du bist nicht für diese Discussion eingetragen"
+    else
+      @questions = Question.where(discussion_id: params[:id])
+      @type_proband = ArgumentType.where(name:'proband').first
+      @type_moderator = ArgumentType.where(name:'moderator').first 
+      current_user.enter_discussion(@discussion)
+      Pusher['discussion'+@discussion.id.to_s].trigger('userEntered', {
+        user_id: current_user.id
+      })
+    end
   end
 
+  def leave
+    current_user.leave_discussion(@discussion)
+
+    Pusher['discussion'+@discussion.id.to_s].trigger('userLeaved', {
+      user_id: current_user.id
+    })
+    render nothing: true
+  end
+
+  def user_leaved
+    @user = User.find_by_id(params[:id])
+    respond_to do | format |
+      format.js
+    end
+  end
+
+  def user_entered
+    @user = User.find_by_id(params[:id])
+    respond_to do | format |
+      format.js
+    end
+  end
   # GET /discussions/new
   def new
     @discussion = Discussion.new

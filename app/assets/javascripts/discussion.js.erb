@@ -1,19 +1,23 @@
 var pusher;
 var is_question = false;
 var channel;
+var discussion_id;
 
-$(document).bind('beforeunload', function(){ disconnect_from_pusher(); });
 function init_discussion(){
   //Handling the two submit buttons and clearing the form
   // Pusher subscribtions
-
+  discussion_id = $('#discussion').attr('data-discussionId');
   $('body').attr("data-no-turbolink", "true");
-
+  scroll_down($('#moderator_chat'));
+  scroll_down($('#discussion_chat'));
   register_events();
-  connect_to_pusher($('#discussion').attr('data-discussionId'));
-  bind_new_argument()
+  connect_to_pusher(discussion_id);
+  bind_new_argument();
   bind_vote($('#discussion').attr('data-isModerator'));
   bind_new_question();
+  bind_user_leaved();
+  bind_user_entered();
+  //  $(document).bind('beforeunload', function(){ alert("A"); });
 }
 
 function submit_argument(){
@@ -23,11 +27,13 @@ function submit_argument(){
 
 function bind_vote(is_moderator){
   if(is_moderator){
-    channel.bind('newLike', function(data){
+    channel.bind('newVote', function(data){
+      if(data.is_like){
         $("#like_badge_"+data.id).text((parseInt($("#like_badge_"+data.id).text())+1));
-    });
-    channel.bind('newDislike', function(data){
-      $("#dislike_badge_"+data.id).text((parseInt($("#dislike_badge_"+data.id).text())+1));
+      }
+      else{
+        $("#dislike_badge_"+data.id).text((parseInt($("#dislike_badge_"+data.id).text())+1));
+      }
     });
   }
 }
@@ -37,10 +43,10 @@ function bind_new_question(){
     $("#question").text("Frage: "+data.topic);
   });
 }
-
 function register_events(discussionId){
   $(".vote_button").click(function( event ){
-    $(this).addClass("disabled");
+
+    $.each($($(this).attr('data-argument')), function(){}).addClass("disabled");
   });
 
   $("#new_question_button").click(function( event ){
@@ -72,6 +78,8 @@ function register_events(discussionId){
       return false;
     }
   });
+  window.onbeforeunload = function() { leave_discussion(); };
+
 }
 
 function connect_to_pusher(discussionId){
@@ -90,8 +98,15 @@ function connect_to_pusher(discussionId){
 
 }
 
-function disconnect_from_pusher(){
+function leave_discussion(){
+  
   pusher.disconnect();
+  $.ajax({
+    type: 'POST',
+    url: '/discussions/'+$('#discussion').attr('data-discussionId')+'/leave',
+  });
+  
+  alert($('#discussion').attr('data-discussionId'));
 }
 
 function bind_new_argument(){
@@ -101,4 +116,28 @@ function bind_new_argument(){
       url: '/arguments/'+data.id,
     });
   });
+}
+
+function bind_user_leaved(){
+  channel.bind('userLeaved', function(data){
+    $.ajax({
+      type: 'GET',
+      url: '/user_leaved/'+data.user_id,
+    });
+  });
+}
+
+function bind_user_entered(){
+  channel.bind('userEntered', function(data){
+    $.ajax({
+      type: 'GET',
+      url: '/user_entered/'+data.user_id,
+    });
+  });
+}
+
+function scroll_down(div){
+  div.stop().animate({
+  scrollTop: div[0].scrollHeight
+}, 800);
 }

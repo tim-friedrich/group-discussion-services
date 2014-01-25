@@ -36,6 +36,24 @@ class User < ActiveRecord::Base
 	def full_name
 		"#{firstname} #{lastname}"
 	end
+
+	def enter_discussion(discussion)
+		DiscussionUser.where(discussion_id: discussion.id, user_id: self.id).first.enter_discussion
+	end
+
+	def leave_discussion(discussion)
+		DiscussionUser.where(discussion_id: discussion.id, user_id: self.id).first.leave_discussion
+	end
+
+	def is_present_in(discussion)
+		
+		DiscussionUser.where(discussion_id: discussion.id, user_id: self.id).first.is_present?
+	end
+
+	def is_part_of_discussion?(discussion)
+		!discussion.users.find_by_id(self.id).nil?
+	end
+
 	private
 		def create_remember_token
 			self.remember_token = User.encrypt(User.new_remember_token)

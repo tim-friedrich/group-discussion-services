@@ -1,4 +1,6 @@
 GDS::Application.routes.draw do
+  resources :votes
+
   resources :dislikes
 
   resources :likes
@@ -15,7 +17,9 @@ GDS::Application.routes.draw do
 	get '/signup' => 'users#new'
 	get '/signin' => 'sessions#new'
 	delete '/signout' => 'sessions#destroy'
-  
+  post '/discussions/:id/leave' => 'discussions#leave'
+  get '/user_leaved/:id' => 'discussions#user_leaved'
+  get '/user_entered/:id' => 'discussions#user_entered'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

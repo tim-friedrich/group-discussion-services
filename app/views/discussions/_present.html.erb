@@ -1,11 +1,11 @@
 <div class="panel panel-default probands">
 	<div class="panel-heading"><h3 class="panel-title">Teilnehmer</h3></div>
 
-		<ul class="list-group">
-			<% @discussion.users.each do | user | %>
-	  			<li class="list-group-item">
-	  				<%= user.firstname %> <%= user.lastname %>
-	  			</li>
+		<ul class="list-group probands_list">
+			<% @discussion.users.each do | proband | %>
+				<% if proband.is_present_in(@discussion) %>
+					<%= render partial: 'proband', locals: { user: proband } %>
+				<% end %>
 	  		<% end %>
 		</ul>
   

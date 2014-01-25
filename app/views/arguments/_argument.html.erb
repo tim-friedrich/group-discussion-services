@@ -1,21 +1,29 @@
-<div class="list-group-item argument-panel clearfix" >
-	<div class= "left_argument">
-		<span class="name"><%= argument.user.firstname %>: </span><%= argument.content %>
-	</div>
-	
-	<div class="right_argument">
-		
+<div class="list-group-item argument-panel clearfix row" >
+
+	<% if argument.argument_type != ArgumentType.where(name:'moderator').first  %>
+		<div class= "left_argument col-md-10">
+			<div class="row"><div class="col-md-1"><%= argument.user.firstname %>:</div> <div class="col-md-11"></span><%= argument.content %></div></div>
+		</div>
+	<% else %>
+		<div class= "left_argument col-md-10">
+			<div class="row"><div class="col-md"><%= argument.user.firstname %>:</div> <div class="col-md"></span><%= argument.content %></div></div>
+		</div>
+	<% end %>
+
+		<div class="right_argument col-md-2">
+
 		<% if argument.argument_type != ArgumentType.where(name:'moderator').first  %>
 
 			<% if argument.discussion.moderator == current_user %>
-				<span class="vote_count badge like_badge" id = "like_badge_<%= argument.id %>"><%= Like.where(argument: argument).count() %></span>
-				<span class="vote_count badge dislike_badge" id = "dislike_badge_<%= argument.id %>"><%= Dislike.where(argument: argument).count() %></span>
+				<span class="vote_count badge like_badge" id = "like_badge_<%= argument.id %>"><%= Vote.where(argument: argument, is_like: true).count() %></span>
+				<span class="vote_count badge dislike_badge" id = "dislike_badge_<%= argument.id %>"><%= Vote.where(argument: argument, is_like: false).count() %></span>
 			<% else %>
 
-				<%= form_for Like.new , class: "form-inline", role: "form", remote: true do |f| %>
+				<%= form_for Vote.new , class: "form-inline", role: "form", remote: true do |f| %>
 				  	<%= f.hidden_field :argument_id, value: argument.id %>
-				  	<% if !Like.exists?(argument: argument, user: current_user) %>
-				  		<%= f.button :submit, class: "btn btn-success btn-xs vote_button" do %>
+				  	<%= f.hidden_field :is_like, value: true %>
+				  	<% if !Vote.exists?(argument: argument, user: current_user) %>
+				  		<%= f.button :submit, class: "btn btn-success btn-xs vote_button argument_"+argument.id.to_s, data:{ argument: ".argument_"+argument.id.to_s } do %>
 				  			<i class='glyphicon glyphicon-thumbs-up' ></i> 
 						<% end %>
 					<% else %>
@@ -25,26 +33,23 @@
 					<% end %>
 				<% end %>
 				
-				<%= form_for Dislike.new , class: "form-inline", role: "form", remote: true do |f| %>
+				<%= form_for Vote.new , class: "form-inline", role: "form", remote: true do |f| %>
 				  	<%= f.hidden_field :argument_id, value: argument.id %>
-
-				  	<% if !Dislike.exists?(argument: argument, user: current_user) %>
-					  	<%= f.button :submit, class: "btn btn-danger btn-xs vote_button" do %>
-					  		<i class='glyphicon glyphicon-thumbs-down'></i> 
-						<% end %>
-					<% else %>
-				  		<%= f.button :submit, class: "btn btn-danger btn-xs disabled vote_button" do %>
+				  	<%= f.hidden_field :is_like, value: false %>
+				  	<% if !Vote.exists?(argument: argument, user: current_user) %>
+					  	<%= f.button :submit, class: "btn btn-danger btn-xs vote_button argument_"+argument.id.to_s, data:{ argument: ".argument_"+argument.id.to_s } do %>
 					  		<i class='glyphicon glyphicon-thumbs-down'></i> 
 					  	<% end %>
+					<% else %>
+					  	<%= f.button :submit, class: "btn btn-danger disabled btn-xs vote_button" do %>
+					  		<i class='glyphicon glyphicon-thumbs-down'></i> 
+						<% end %>
 					<% end %>
 				<% end %>
 			<% end %>
 		<% end %>
 
-	
-		
-		  <span class = "time_stamp"><%= argument.created_at.strftime("%H:%M") %></span>
-		
+		<span class = "time_stamp"><%= argument.created_at.strftime("%H:%M") %></span>
 	</div>
 </div>
 
