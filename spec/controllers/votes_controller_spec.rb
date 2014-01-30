@@ -20,10 +20,18 @@ require 'spec_helper'
 
 describe VotesController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Vote. As you add validations to Vote, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) { { "argument_id" => "1" } }
+
+  before do
+      @user = FactoryGirl.create(:user)
+      sign_in @user
+      @discussion = FactoryGirl.create(:discussion)
+  end
+  
+  let(:question) { FactoryGirl.create(:question, discussion_id: @discussion.id) }
+  let(:argument) { FactoryGirl.build(:argument, question: question) }
+
+  let(:valid_attributes) { FactoryGirl.attributes_for(:argument, question: question, user_id: @user.id, discussion_id: @discussion.id) }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:vote, user_id: @user.id, argument_id: argument.id) }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in

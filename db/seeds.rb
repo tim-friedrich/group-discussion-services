@@ -6,20 +6,21 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Role.delete_all
-Role.create(name: 'user', level: 1)
-Role.create(name: 'staff', level: 2)
-Role.create(name: 'admin', level: 3)
+Role.create!(name: 'user', level: 1)
+Role.create!(name: 'staff', level: 2)
+Role.create!(name: 'admin', level: 3)
 
 ArgumentType.delete_all
-ArgumentType.create(name: 'proband')
-ArgumentType.create(name: 'moderator')
-ArgumentType.create(name: 'observer')
+ArgumentType.create!(name: 'proband')
+ArgumentType.create!(name: 'moderator')
+ArgumentType.create!(name: 'observer')
 
 User.delete_all
-User.create([{
+User.create!([{
 		firstname: "Tim",
 		lastname: "Friedrich",
 		email: "friedrich.tim@googlemail.com",
-	   	role_id: Role.where(name: 'admin').first.id
-
+	   	role_id: Role.where(name: 'admin').first.id,
+	   	password: "123456",
+	   	password_confirmation: "123456"
 	}])

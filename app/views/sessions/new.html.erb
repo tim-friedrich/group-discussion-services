@@ -1,4 +1,7 @@
 <h1>Anmelden</h1>
+<p id="notice"><%= notice %></p>
+<p id="error"><%= flash[:error] %></p>
+
 
 <%= form_for(:session, url: sessions_path, html: { multipart: true, class: "form-horizontal", role: "form"  }) do |f| %>
 

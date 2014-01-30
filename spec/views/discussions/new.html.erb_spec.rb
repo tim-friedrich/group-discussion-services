@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe "discussions/new" do
   before(:each) do
-     @user = User.new(firstName: "karl", surname: "Peterson", email: "karl@example.com", role: Role.where(name:"user").first, password: "foobar", password_confirmation: "foobar")
-    
+     @user = FactoryGirl.create(:user)
     assign(:discussion, stub_model(Discussion,
       :topic => "",
       :moderator => @user,

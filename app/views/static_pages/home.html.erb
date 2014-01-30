@@ -1,10 +1,12 @@
 <div class="center hero-unit well">
 	<h1>Welcome to GDS - The number one group discussion online platform!</h1>
 
-
-	<a href = "<%= signup_path %>" class= "btn btn-large btn-primary">
-		Registrieren
-	</a>
-<br><br>
-	<a href = "<%= discussions_path %>" class= "btn btn-large btn-primary">Diskussionen</a>
-</div>
+	<% if !signed_in? %>
+		<a href = "<%= signup_path %>" class= "btn btn-large btn-primary">
+			Registrieren
+		</a>
+	<% else %>
+		<br><br>
+			<a href = "<%= discussions_path %>" class= "btn btn-large btn-primary">Diskussionen</a>
+		</div>
+	<% end %>

@@ -17,7 +17,9 @@ describe "discussions/index" do
       )
     ])
   end
-
+  let(:user) { FactoryGirl.create(:user)}
+  let(:discussions) { [FactoryGirl.create(:discussion, moderator: :user), FactoryGirl.create(:discussion, moderator: FactoryGirl.create(:user))]}
+  
   it "renders a list of discussions" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers

@@ -1,16 +1,8 @@
-<div class="list-group-item argument-panel clearfix row" >
+<div class="list-group-item argument-panel clearfix" >
 
-	<% if argument.argument_type != ArgumentType.where(name:'moderator').first  %>
-		<div class= "left_argument col-md-10">
-			<div class="row"><div class="col-md-1"><%= argument.user.firstname %>:</div> <div class="col-md-11"></span><%= argument.content %></div></div>
-		</div>
-	<% else %>
-		<div class= "left_argument col-md-10">
-			<div class="row"><div class="col-md"><%= argument.user.firstname %>:</div> <div class="col-md"></span><%= argument.content %></div></div>
-		</div>
-	<% end %>
-
-		<div class="right_argument col-md-2">
+		
+		<div class="left_argument<% if argument.discussion.moderator == argument.user %> moderator_argument<% end %>"><div class="name"><%= argument.user.firstname %>:</div>  <div class="argument"></span><%= argument.content %></div></div>
+		<div class="right_argument pull-right">
 
 		<% if argument.argument_type != ArgumentType.where(name:'moderator').first  %>
 

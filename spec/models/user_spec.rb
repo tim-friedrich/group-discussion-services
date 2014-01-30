@@ -11,8 +11,8 @@ describe User do
 
 	subject { @user }
 
-	it { should respond_to(:surname) }
-	it { should respond_to(:firstName) }
+	it { should respond_to(:lastname) }
+	it { should respond_to(:firstname) }
 	it { should respond_to(:email) }
 	it { should respond_to(:password_digest) }
 	it { should respond_to(:password) }
@@ -24,12 +24,12 @@ describe User do
 	it { should be_valid }
 
 	#Test not optional parameters of Users 
-	describe "when first name is not present" do
-		before { @user.firstName = " " }
+	describe "when firstname is not present" do
+		before { @user.firstname = " " }
 		it { should_not be_valid }
 	end	
-	describe "surname is not present" do
-		before { @user.surname = " " }
+	describe "lastname is not present" do
+		before { @user.lastname = " " }
 		it { should_not be_valid }
 	end	
 	describe "email is not present" do
@@ -39,11 +39,11 @@ describe User do
 
 	#Tests max length of parameters
 	describe "the firstName is to long" do
-		before { @user.firstName = "a"*51 }
+		before { @user.firstname = "a"*51 }
 		it { should_not be_valid }
 	end
 	describe "the surname is to long" do
-		before { @user.surname = "a"*51 }
+		before { @user.lastname = "a"*51 }
 		it { should_not be_valid }
 	end
 	describe "the email is to long" do

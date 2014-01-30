@@ -17,7 +17,6 @@ function init_discussion(){
   bind_new_question();
   bind_user_leaved();
   bind_user_entered();
-  //  $(document).bind('beforeunload', function(){ alert("A"); });
 }
 
 function submit_argument(){
@@ -105,8 +104,6 @@ function leave_discussion(){
     type: 'POST',
     url: '/discussions/'+$('#discussion').attr('data-discussionId')+'/leave',
   });
-  
-  alert($('#discussion').attr('data-discussionId'));
 }
 
 function bind_new_argument(){

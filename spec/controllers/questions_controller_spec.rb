@@ -6,10 +6,11 @@ describe QuestionsController do
   before do
       @user = FactoryGirl.create(:user)
       sign_in @user
+      @discussion = FactoryGirl.create(:discussion, moderator: @user)
     end
 
   describe "POST create" do
-    let(:valid_attributes) { FactoryGirl.attributes_for(:question) }
+    let(:valid_attributes) { FactoryGirl.attributes_for(:question, user_id: @user.id, discussion_id: @discussion.id) }
 
     let(:valid_session) { {} }
   
