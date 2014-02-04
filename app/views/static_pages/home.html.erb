@@ -1,12 +1,69 @@
-<div class="center hero-unit well">
-	<h1>Welcome to GDS - The number one group discussion online platform!</h1>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
 
-	<% if !signed_in? %>
-		<a href = "<%= signup_path %>" class= "btn btn-large btn-primary">
-			Registrieren
-		</a>
-	<% else %>
-		<br><br>
-			<a href = "<%= discussions_path %>" class= "btn btn-large btn-primary">Diskussionen</a>
-		</div>
-	<% end %>
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+     <!-- <%= image_tag("Discussion-image.jpg") %> http://marynoor.co.uk/?page_id=74 (gestohlen)-->
+      <div class="carousel-caption">
+      </div>
+    </div>
+    ...
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+
+<div class="row research_institute_thumb">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <%= image_tag("300x200.svg") %>
+      <div class="caption">
+        <h3>Marktforschungs Institute</h3>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <p>
+			<%= link_to("Anmelden", new_research_institute_path, class: "btn btn-primary") %>
+			<a href="#" class="btn btn-default" role="button">Informationen</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row proband_thumb">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <%= image_tag("300x200.svg") %>
+      <div class="caption">
+        <h3>Probanden</h3>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <p><%= link_to("Registrieren", signup_path, class: "btn btn-primary") %>
+       	<a href="#" class="btn btn-default" role="button">Informationen</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row proband_thumb">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <%= image_tag("300x200.svg") %>
+      <div class="caption">
+        <h3>Probanden</h3>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <p><%= link_to("Registrieren", signup_path, class: "btn btn-primary") %>
+        <a href="#" class="btn btn-default" role="button">Informationen</a></p>
+      </div>
+    </div>
+  </div>
+</div>

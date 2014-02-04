@@ -1,7 +1,9 @@
 <script src=" https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js"></script>
 
 <div id="discussion" data-isModerator="<%= current_user == @discussion.moderator %>" data-discussionId="<%= @discussion.id%>";>
+
 <%= render 'present' %>
+
 <div class="left">
   <div class="clearfix top">
         <div id="moderator_show">
@@ -14,27 +16,14 @@
         </div>
         
         <ul class="list-group" id="moderator_chat">
-          <% @questions.each do |question| %> 
-            <% question.arguments.each do |argument| %>
-              <% if argument.argument_type == @type_moderator%>
-                <%= render argument %>
-              <% end %>
-            <% end %>
-          <% end %>
-        </ul>
-        
+          <%= render @moderator_arguments %>
+        </ul> 
       </div>
   </div>
 
   <div class="panel panel-default" id="discussion_panel">
     <ul class="list-group" id="discussion_chat">
-      <% @questions.each do |question| %> 
-        <% question.arguments.each do |argument| %>
-          <% if argument.argument_type == @type_proband %>
-            <%= render argument %>
-          <% end %>
-        <% end %>
-      <% end %>
+      <%= render @proband_arguments %>
     </ul>
   </div>
   
@@ -53,6 +42,3 @@
 <script type="text/javascript">
   init_discussion();
 </script>
-
-
-

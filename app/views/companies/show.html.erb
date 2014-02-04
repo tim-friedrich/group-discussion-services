@@ -1,0 +1,8 @@
+<p>
+  <strong>Name:</strong>
+  <%= @company.name %>
+</p>
+
+<%= render partial: 'contacts/show', locals: { contact: @company.contact }  %>
+
+<%= link_to 'Edit', edit_company_path(@company) %> 

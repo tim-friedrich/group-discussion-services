@@ -15,17 +15,11 @@
 	margin-right: 3px;
 }
 .time_stamp {
-	
 	margin-left: 3px;
 }
 .left_argument {
 	text-align: left;
 	float: left;
-}
-.right_argument.col-md-2 {
-	text-align: right;
-	float: right;
-	padding: 0px 5px 0px 5px;
 }
 .like_badge {
 	background-color: #5CB85C !important;
@@ -33,6 +27,17 @@
 .dislike_badge {
 	background-color: #D9534F !important;
 }
-.left_argument .row .col-md{
+.argument{
+	word-wrap: break-word;
+	padding-right: 0px;
+	float: left;
+}
+.name{
 	float:left;
+}
+ul#moderator_chat.list-group div.list-group-item div.left_argument{
+	width: 580px;
+}
+ul#discussion_chat.list-group div.list-group-item div.left_argument{
+	width: 670px;
 }

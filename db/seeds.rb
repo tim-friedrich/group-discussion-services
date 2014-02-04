@@ -8,12 +8,14 @@
 Role.delete_all
 Role.create!(name: 'user', level: 1)
 Role.create!(name: 'staff', level: 2)
-Role.create!(name: 'admin', level: 3)
+Role.create!(name: 'deputy', level: 3)
+Role.create!(name: 'admin', level: 4)
 
 ArgumentType.delete_all
 ArgumentType.create!(name: 'proband')
 ArgumentType.create!(name: 'moderator')
 ArgumentType.create!(name: 'observer')
+
 
 User.delete_all
 User.create!([{

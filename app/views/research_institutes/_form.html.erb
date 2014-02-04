@@ -1,0 +1,36 @@
+<%= nested_form_for(@research_institute) do |f| %>
+  <% if @research_institute.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@research_institute.errors.count, "error") %> prohibited this research_institute from being saved:</h2>
+
+      <ul>
+      <% @research_institute.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <div class="field">
+      <%= f.label :name, class: "col-sm-2 control-label"  %>
+      <div class="col-sm-10">
+        <%= f.text_field :name, class: "form-control", placeholder: "Name Ihres Instituts"  %>
+      </div>
+    </div>
+  </div>
+  
+  <%= f.fields_for :contact, @research_institute.contact  do |task_form| %>
+    <%= render partial: 'contacts/fields', locals: { f: task_form } %>
+  <% end %>
+
+  
+  <h3>Moderator</h3>
+  <%= f.fields_for :deputy, @research_institute.deputy do | deputy | %>
+    <%= render partial: 'users/fields', locals: { user: deputy } %>
+  <% end %>
+
+  <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit "Anmelden", class: "btn btn-large btn-primary" %>
+    </div>
+<% end %>

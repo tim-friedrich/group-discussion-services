@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe DiscussionUsersController do
+describe DiscussionsUsersController do
 
 end

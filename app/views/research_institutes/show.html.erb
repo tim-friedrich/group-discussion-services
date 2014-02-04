@@ -1,0 +1,15 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @research_institute.name %>
+</p>
+
+<p>
+  <strong>Kontakt:</strong>
+  <%= @research_institute.contact_id %>
+</p>
+
+<%= render partial: 'contacts/show', locals: { contact: @research_institute.contact } %>
+
+<%= link_to 'Edit', edit_research_institute_path(@research_institute) %> |
+<%= link_to 'Back', research_institutes_path %>

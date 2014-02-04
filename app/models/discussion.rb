@@ -3,13 +3,14 @@ class Discussion < ActiveRecord::Base
 	belongs_to :current_question, :class_name => "Question", :foreign_key => "current_question_id"
 	has_many :questions
 	has_many :arguments
-	has_many :discussion_users
-	has_many :users, through: :discussion_users
+	has_and_belongs_to_many :users
 
-	accepts_nested_attributes_for :discussion_users,
-           :reject_if => :all_blank,
-           :allow_destroy => true
-  	accepts_nested_attributes_for :users
+	validates :company_id, presence: true
+	validates :moderator_id, presence: true
+	validates :due_date, presence: true
+	validates :current_question_id, presence: true
 
-
+  	def research_institute
+  		self.moderator.research_institutes.first
+  	end
 end

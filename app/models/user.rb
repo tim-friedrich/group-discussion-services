@@ -3,8 +3,11 @@ class User < ActiveRecord::Base
 	has_many :arguments
 	has_many :likes
 	has_many :dislikes
-	has_many :discussion_users
-	has_many :discussions, through: :discussion_users
+	has_and_belongs_to_many :discussions
+	has_and_belongs_to_many :research_institutes	
+
+	has_one :research_institute
+	
 
 	belongs_to :role
 
@@ -20,9 +23,6 @@ class User < ActiveRecord::Base
 	validates :password, length: { minimum: 6 }
 	validates :password, presence:true
 	
-	accepts_nested_attributes_for :discussion_users,
-           :reject_if => :all_blank,
-           :allow_destroy => true
   	accepts_nested_attributes_for :discussions
 
 	def User.new_remember_token
@@ -38,20 +38,24 @@ class User < ActiveRecord::Base
 	end
 
 	def enter_discussion(discussion)
-		DiscussionUser.where(discussion_id: discussion.id, user_id: self.id).first.enter_discussion
+		DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.enter_discussion
 	end
 
 	def leave_discussion(discussion)
-		DiscussionUser.where(discussion_id: discussion.id, user_id: self.id).first.leave_discussion
+		DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.leave_discussion
 	end
 
 	def is_present_in(discussion)
 		
-		DiscussionUser.where(discussion_id: discussion.id, user_id: self.id).first.is_present?
+		DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.is_present?
 	end
 
 	def is_part_of_discussion?(discussion)
 		!discussion.users.find_by_id(self.id).nil?
+	end
+
+	def is_staff()
+		self.role = Role.where(name: 'moderator').first || self.role = Role.where(name: 'deputy').first
 	end
 
 	private

@@ -10,6 +10,7 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1
   # GET /discussions/1.json
   def show
+
     if !current_user.is_part_of_discussion?(@discussion)
       redirect_to discussions_url, notice: "Du bist nicht für diese Discussion eingetragen"
     else
@@ -17,6 +18,8 @@ class DiscussionsController < ApplicationController
       @type_proband = ArgumentType.where(name:'proband').first
       @type_moderator = ArgumentType.where(name:'moderator').first 
       current_user.enter_discussion(@discussion)
+      @moderator_arguments = Argument.where(discussion_id: @discussion.id, argument_type: @type_moderator)
+      @proband_arguments = Argument.where(discussion_id: @discussion.id, argument_type: @type_proband)
       Pusher['discussion'+@discussion.id.to_s].trigger('userEntered', {
         user_id: current_user.id
       })
@@ -49,11 +52,16 @@ class DiscussionsController < ApplicationController
   def new
     @discussion = Discussion.new
     @users = User.all
+    @companies = current_user.research_institutes.first.companies
+    if @companies.empty?
+      redirect_to new_company_path, notice: 'Bitte erstellen sie zuerst einen Kunden.'
+    end
   end
 
   # GET /discussions/1/edit
   def edit
-    @proband = DiscussionUser.new
+    @companies = current_user.research_institutes.first.companies
+    @proband = DiscussionsUser.new
     @users = User.all
   end
 
@@ -62,12 +70,13 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = Discussion.new(discussion_params)
     @discussion.moderator = current_user
-
+    @discussion.users << current_user
     @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
     @discussion.current_question = @question
+
     respond_to do |format|
       if @discussion.save
-        format.html { redirect_to @discussion, notice: 'Eine neue Diskussion wurde erfolgreich erstellt.' }
+        format.html { redirect_to current_user, notice: 'Eine neue Diskussion wurde erfolgreich erstellt.' }
         format.json { render action: 'show', status: :created, location: @discussion }
       else
         format.html { render action: 'new' }
@@ -81,7 +90,7 @@ class DiscussionsController < ApplicationController
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
-        format.html { redirect_to @discussion, notice: 'Die Diskussion wurde erfolgreich aktualisiert.' }
+        format.html { redirect_to current_user, notice: 'Die Diskussion wurde erfolgreich aktualisiert.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -108,7 +117,7 @@ class DiscussionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discussion_params
-      params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users)
+      params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id)
     end
 
     def check_rights

@@ -1,4 +1,4 @@
-class DiscussionUser < ActiveRecord::Base
+class DiscussionsUser < ActiveRecord::Base
 	belongs_to :discussion
 	belongs_to :user
 	has_many :presences, :class_name => "DiscussionPresence"
@@ -6,11 +6,11 @@ class DiscussionUser < ActiveRecord::Base
 	validates :user, uniqueness: { scope: :discussion }
 
 	def enter_discussion
-		DiscussionPresence.create(discussion_user_id: self.id, present: true)
+		DiscussionPresence.create(discussions_user_id: self.id, present: true)
 	end
 
 	def leave_discussion
-		DiscussionPresence.create(discussion_user_id: self.id, present: false)
+		DiscussionPresence.create(discussions_user_id: self.id, present: false)
 	end
 
 	def is_present?

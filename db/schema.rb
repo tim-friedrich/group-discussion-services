@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140125075120) do
+ActiveRecord::Schema.define(version: 20140201134525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,16 +32,27 @@ ActiveRecord::Schema.define(version: 20140125075120) do
     t.integer  "discussion_id"
   end
 
-  create_table "discussion_presences", force: true do |t|
-    t.integer  "discussion_user_id"
-    t.boolean  "present"
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.integer  "contact_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "research_institute_id"
+  end
+
+  create_table "contacts", force: true do |t|
+    t.string   "street"
+    t.string   "postalcode"
+    t.string   "town"
+    t.string   "email"
+    t.string   "telephone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "discussion_users", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "discussion_id"
+  create_table "discussion_presences", force: true do |t|
+    t.integer  "discussions_user_id"
+    t.boolean  "present"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -53,6 +64,14 @@ ActiveRecord::Schema.define(version: 20140125075120) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "current_question_id"
+    t.integer  "company_id"
+  end
+
+  create_table "discussions_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "discussion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "questions", force: true do |t|
@@ -60,6 +79,19 @@ ActiveRecord::Schema.define(version: 20140125075120) do
     t.datetime "updated_at"
     t.string   "topic"
     t.integer  "discussion_id"
+  end
+
+  create_table "research_institutes", force: true do |t|
+    t.string   "name"
+    t.integer  "contact_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "deputy_id"
+  end
+
+  create_table "research_institutes_users", force: true do |t|
+    t.integer "research_institute_id"
+    t.integer "user_id"
   end
 
   create_table "roles", force: true do |t|

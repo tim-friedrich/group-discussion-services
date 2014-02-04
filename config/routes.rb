@@ -1,4 +1,10 @@
 GDS::Application.routes.draw do
+  resources :companies
+
+  resources :research_institutes
+
+  resources :contacts
+
   resources :votes
 
   resources :dislikes
@@ -9,7 +15,7 @@ GDS::Application.routes.draw do
 
   resources :questions, only: [:create, :show, :new]
   resources :arguments, only: [:create, :show, :new]
-  resources :discussion_users
+  resources :discussions_users
 
   resources :users	
 	root 'static_pages#home'
