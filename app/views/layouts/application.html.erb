@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Group Discussion Services</title>
+  <meta charset="UTF-8">
   
 <script src=" https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js"></script>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
@@ -18,8 +19,7 @@
 		<nav class="navbar navbar-default" role="navigation">
   		<!-- Brand and toggle get grouped for better mobile display -->
       <%= link_to "GDS - Group Discussion Services", root_path, class: "navbar-brand" %>
-  	  	
-  		</div>
+      
   		<!-- Collect the nav links, forms, and other content for toggling -->
   		<div class="collapse navbar-collapse">
         <ul class="nav pull-right">
@@ -34,7 +34,7 @@
                 <li>
                   <%= link_to "Abmelden", signout_path, method: "delete" %>
                 </li>
-              </li>  
+              </ul>  
             <% else %>
               <li><%= link_to "Anmelden", signin_path %></li>
           <% end %>
