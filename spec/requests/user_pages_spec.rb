@@ -5,7 +5,7 @@ describe "User pages" do
 
 	describe "signup" do
 		before { visit signup_path }
-		let(:submit) { "Registrieren" }
+		let(:submit) { "Create User" }
 	
 		describe "with valid information" do
 			before do
@@ -17,11 +17,11 @@ describe "User pages" do
 			end
 	
 			it "should create a user" do
-				expect { click_button 'Registrieren' }.to change(User, :count).by(1)
+				expect { click_button 'Create User' }.to change(User, :count).by(1)
 			end
 
 		
-		 let(:submit) { "Registrieren" }
+		 let(:submit) { "Create User" }
 		 
 		describe "after saving the user" do
 			before { click_button submit }

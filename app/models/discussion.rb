@@ -4,11 +4,14 @@ class Discussion < ActiveRecord::Base
 	has_many :questions
 	has_many :arguments
 	has_and_belongs_to_many :users
+	belongs_to :company
 
 	validates :company_id, presence: true
 	validates :moderator_id, presence: true
 	validates :due_date, presence: true
 	validates :current_question_id, presence: true
+
+
 
   	def research_institute
   		self.moderator.research_institutes.first

@@ -3,14 +3,14 @@ require 'spec_helper'
 describe "contacts/index" do
   before(:each) do
     assign(:contacts, [
-      stub_model(contact,
+      stub_model(Contact,
         :street => "",
         :postalcode => "",
         :town => "",
         :email => "",
         :telephone => ""
       ),
-      stub_model(contact,
+      stub_model(Contact,
         :street => "",
         :postalcode => "",
         :town => "",

@@ -52,6 +52,7 @@ class DiscussionsController < ApplicationController
   def new
     @discussion = Discussion.new
     @users = User.all
+    @proband = DiscussionsUser.new
     @companies = current_user.research_institutes.first.companies
     if @companies.empty?
       redirect_to new_company_path, notice: 'Bitte erstellen sie zuerst einen Kunden.'
@@ -117,7 +118,7 @@ class DiscussionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discussion_params
-      params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id)
+      params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id, :company)
     end
 
     def check_rights

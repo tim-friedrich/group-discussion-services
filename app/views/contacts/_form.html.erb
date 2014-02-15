@@ -1,10 +1,10 @@
-<%= form_for(@kontakt) do |f| %>
-  <% if @kontakt.errors.any? %>
+<%= form_for(@contact) do |f| %>
+  <% if @contact.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@kontakt.errors.count, "error") %> prohibited this kontakt from being saved:</h2>
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
 
       <ul>
-      <% @kontakt.errors.full_messages.each do |msg| %>
+      <% @contact.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

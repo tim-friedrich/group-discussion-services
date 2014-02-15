@@ -14,7 +14,7 @@ class DiscussionsUser < ActiveRecord::Base
 	end
 
 	def is_present?
-		if !self.presences.last.nil?
+		if !self.presences.last.nil? && self.presences.last.present
 			return self.presences.last.present == true
 		else
 			return false

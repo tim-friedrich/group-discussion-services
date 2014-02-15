@@ -1,20 +1,20 @@
-class DiscussionUsersController < ApplicationController
+class DiscussionsUsersController < ApplicationController
  	def new
- 		@discussion_user = DiscussionUser.new
+ 		@discussion_user = DiscussionsUser.new
  	end
 
  	def create
-	    @discussion_user = DiscussionUser.new(discussion_user_params)
+	    @discussions_user = DiscussionsUser.new(discussion_user_params)
 	    respond_to do |format|
-	      if @discussion_user.save
+	      if @discussions_user.save
 	        format.js {}
 	      end
 	    end
 	end
 
 	def destroy
-		@discussion_user = DiscussionUser.find(params[:id])
-	 	@discussion_user.destroy
+		@discussions_user = DiscussionsUser.find(params[:id])
+	 	@discussions_user.destroy
 	    respond_to do |format|
 	      format.html {  }
 	      format.json {  }
@@ -23,6 +23,6 @@ class DiscussionUsersController < ApplicationController
 
 	private
 		def discussion_user_params
-	      	params.require(:discussion_user).permit(:discussion_id, :user_id, :discussion, :user)
+	      	params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user)
 	    end
 end

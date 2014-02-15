@@ -54,6 +54,9 @@ group :development, :test do
   	gem 'codeclimate-test-reporter', :require => nil
 end
 
+#gem for test coverage report
+gem 'simplecov', :require => false, :group => :test
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

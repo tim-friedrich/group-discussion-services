@@ -14,22 +14,5 @@ describe ArgumentsController do
 	let(:valid_session) {}
 
 	describe "signed in" do
-
-
-
-	    describe "create" do
-	    	it "with valid parameters should create a new argument" do
-
-	          expect {
-	            post :create, {argument: valid_attributes}, valid_session
-	          }.to change(Argument, :count).by(1)
-		    end
-
-		    it "with invalid parameters should not create a new argument" do
-          expect {
-            post :create, {:argument => valid_attributes}, valid_session
-          }.to change(Argument, :count).by(0)
-		    end
-	    end
 	end
 end

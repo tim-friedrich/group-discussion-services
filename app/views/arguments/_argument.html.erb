@@ -9,7 +9,7 @@
 			<% if argument.discussion.moderator == current_user %>
 				<span class="vote_count badge like_badge" id = "like_badge_<%= argument.id %>"><%= Vote.where(argument: argument, is_like: true).count() %></span>
 				<span class="vote_count badge dislike_badge" id = "dislike_badge_<%= argument.id %>"><%= Vote.where(argument: argument, is_like: false).count() %></span>
-			<% else %>
+			<% elsif current_user != argument.user %>
 
 				<%= form_for Vote.new , class: "form-inline", role: "form", remote: true do |f| %>
 				  	<%= f.hidden_field :argument_id, value: argument.id %>

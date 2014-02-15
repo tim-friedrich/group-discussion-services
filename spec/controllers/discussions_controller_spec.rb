@@ -3,11 +3,14 @@ require 'spec_helper'
 describe DiscussionsController do
 
   let(:valid_session) {  }
-  let(:valid_attributes) { FactoryGirl.attributes_for(:discussion) }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:discussion, company_id: FactoryGirl.create(:company).id, current_question_id: FactoryGirl.create(:question).id, moderator_id: FactoryGirl.create(:user).id) }
 
   describe "signed in" do
     before do
-      @user = FactoryGirl.create(:user)
+      @research_institute = FactoryGirl.create(:research_institute, deputy: FactoryGirl.create(:user), contact: FactoryGirl.create(:contact))
+      @user = @research_institute.deputy
+      @company = FactoryGirl.create(:company, research_institute: @research_institute, contact: FactoryGirl.create(:contact))
+      @user.research_institutes << @research_institute
       sign_in @user
     end
     
@@ -23,7 +26,6 @@ describe DiscussionsController do
 
       describe "show" do
         it "assigns the requested discussion as @discussion" do
-          
           discussion = Discussion.create! valid_attributes
           get :show, {:id => discussion.to_param}, valid_session
           assigns(:discussion).should eq(discussion)
@@ -60,9 +62,9 @@ describe DiscussionsController do
           assigns(:discussion).should be_persisted
         end
 
-        it "redirects to the created discussion" do
+        it "redirects to the users show page" do
           post :create, {:discussion => valid_attributes}, valid_session
-          response.should redirect_to(Discussion.last)
+          response.should redirect_to(@user)
         end
       end
 
@@ -104,7 +106,7 @@ describe DiscussionsController do
         it "redirects to the discussion" do
           discussion = Discussion.create! valid_attributes
           put :update, {:id => discussion.to_param, :discussion => valid_attributes}, valid_session
-          response.should redirect_to(discussion)
+          response.should redirect_to(@user)
         end
       end
 

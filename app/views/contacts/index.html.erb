@@ -1,4 +1,4 @@
-<h1>Listing kontakts</h1>
+<h1>Listing contacts</h1>
 
 <table>
   <thead>
@@ -15,16 +15,16 @@
   </thead>
 
   <tbody>
-    <% @kontakts.each do |kontakt| %>
+    <% @contacts.each do |contact| %>
       <tr>
-        <td><%= kontakt.street %></td>
-        <td><%= kontakt.postalcode %></td>
-        <td><%= kontakt.town %></td>
-        <td><%= kontakt.email %></td>
-        <td><%= kontakt.telephone %></td>
-        <td><%= link_to 'Show', kontakt %></td>
-        <td><%= link_to 'Edit', edit_kontakt_path(kontakt) %></td>
-        <td><%= link_to 'Destroy', kontakt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= contact.street %></td>
+        <td><%= contact.postalcode %></td>
+        <td><%= contact.town %></td>
+        <td><%= contact.email %></td>
+        <td><%= contact.telephone %></td>
+        <td><%= link_to 'Show', contact %></td>
+        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Kontakt', new_kontakt_path %>
+<%= link_to 'New Contact', new_contact_path %>

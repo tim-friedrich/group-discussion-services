@@ -23,7 +23,12 @@ describe ResearchInstitutesController do
   # This should return the minimal set of attributes required to create a valid
   # ResearchInstitute. As you add validations to ResearchInstitute, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "" } }
+  before(:each) do
+
+  end
+  let(:valid_attributes) { FactoryGirl.attributes_for(:research_institute).merge(contact_attributes: FactoryGirl.attributes_for(:contact)).merge(
+    deputy_attributes: FactoryGirl.attributes_for(:user)) }
+  let(:invalid_attributes) {  }  
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -74,25 +79,20 @@ describe ResearchInstitutesController do
         assigns(:research_institute).should be_a(ResearchInstitute)
         assigns(:research_institute).should be_persisted
       end
-
-      it "redirects to the created research_institute" do
-        post :create, {:research_institute => valid_attributes}, valid_session
-        response.should redirect_to(ResearchInstitute.last)
-      end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved research_institute as @research_institute" do
         # Trigger the behavior that occurs when invalid params are submitted
         ResearchInstitute.any_instance.stub(:save).and_return(false)
-        post :create, {:research_institute => { "name" => "invalid value" }}, valid_session
+        post :create, {:research_institute => { "name" => "invalid value", contact_attributes: { }, deputy_attributes: {  } }}, valid_session
         assigns(:research_institute).should be_a_new(ResearchInstitute)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         ResearchInstitute.any_instance.stub(:save).and_return(false)
-        post :create, {:research_institute => { "name" => "invalid value" }}, valid_session
+        post :create, {:research_institute => { "name" => "invalid value", contact_attributes: { }, deputy_attributes: {  } } }, valid_session
         response.should render_template("new")
       end
     end
@@ -114,12 +114,6 @@ describe ResearchInstitutesController do
         research_institute = ResearchInstitute.create! valid_attributes
         put :update, {:id => research_institute.to_param, :research_institute => valid_attributes}, valid_session
         assigns(:research_institute).should eq(research_institute)
-      end
-
-      it "redirects to the research_institute" do
-        research_institute = ResearchInstitute.create! valid_attributes
-        put :update, {:id => research_institute.to_param, :research_institute => valid_attributes}, valid_session
-        response.should redirect_to(research_institute)
       end
     end
 
@@ -148,12 +142,6 @@ describe ResearchInstitutesController do
       expect {
         delete :destroy, {:id => research_institute.to_param}, valid_session
       }.to change(ResearchInstitute, :count).by(-1)
-    end
-
-    it "redirects to the research_institutes list" do
-      research_institute = ResearchInstitute.create! valid_attributes
-      delete :destroy, {:id => research_institute.to_param}, valid_session
-      response.should redirect_to(research_institutes_url)
     end
   end
 

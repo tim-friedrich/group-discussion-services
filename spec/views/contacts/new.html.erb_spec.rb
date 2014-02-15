@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "contacts/new" do
   before(:each) do
-    assign(:contact, stub_model(contact,
+    assign(:contact, stub_model(Contact,
       :street => "",
       :postalcode => "",
       :town => "",

@@ -20,10 +20,14 @@ require 'spec_helper'
 
 describe CompaniesController do
 
+  before do
+    @research_institute = FactoryGirl.create(:research_institute, deputy: FactoryGirl.create(:user), contact: FactoryGirl.create(:contact))
+    sign_in @research_institute.deputy
+  end
   # This should return the minimal set of attributes required to create a valid
   # Company. As you add validations to Company, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "" } }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:company).merge( contact_attributes: FactoryGirl.attributes_for(:contact) ) }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -85,14 +89,14 @@ describe CompaniesController do
       it "assigns a newly created but unsaved company as @company" do
         # Trigger the behavior that occurs when invalid params are submitted
         Company.any_instance.stub(:save).and_return(false)
-        post :create, {:company => { "name" => "invalid value" }}, valid_session
+        post :create, {:company => { "name" => "invalid value", contact_attributes: { } }}, valid_session
         assigns(:company).should be_a_new(Company)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Company.any_instance.stub(:save).and_return(false)
-        post :create, {:company => { "name" => "invalid value" }}, valid_session
+        post :create, {:company => { "name" => "invalid value", contact_attributes: { } }}, valid_session
         response.should render_template("new")
       end
     end

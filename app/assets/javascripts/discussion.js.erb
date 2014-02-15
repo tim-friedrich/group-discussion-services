@@ -42,18 +42,21 @@ function bind_new_question(){
     $("#question").text("Frage: "+data.topic);
   });
 }
-function register_events(discussionId){
+function register_vote_buttons(){
   $(".vote_button").click(function( event ){
-
     $.each($($(this).attr('data-argument')), function(){}).addClass("disabled");
   });
+}
+
+function register_events(discussionId){
+  register_vote_buttons();
 
   $("#new_question_button").click(function( event ){
     is_question = true;
     $.ajax({
       type: 'POST',
       url: '/questions/',
-      data: { question: { topic: $('#argument_content').val() , discussion_id: discussionId } },
+      data: { question: { topic: $('#argument_content').val() , discussion_id: discussion_id } },
     });
     $('#argument_content').val('');
   });
@@ -98,7 +101,6 @@ function connect_to_pusher(discussionId){
 }
 
 function leave_discussion(){
-  
   pusher.disconnect();
   $.ajax({
     type: 'POST',

@@ -21,17 +21,17 @@ require 'spec_helper'
 describe VotesController do
 
 
-  before do
+  before(:each) do
       @user = FactoryGirl.create(:user)
       sign_in @user
       @discussion = FactoryGirl.create(:discussion)
+      @argument = FactoryGirl.create(:argument, user: FactoryGirl.create(:user))
   end
   
   let(:question) { FactoryGirl.create(:question, discussion_id: @discussion.id) }
   let(:argument) { FactoryGirl.build(:argument, question: question) }
 
-  let(:valid_attributes) { FactoryGirl.attributes_for(:argument, question: question, user_id: @user.id, discussion_id: @discussion.id) }
-  let(:valid_attributes) { FactoryGirl.attributes_for(:vote, user_id: @user.id, argument_id: argument.id) }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:vote, user: FactoryGirl.create(:user), argument_id: @argument.id ) }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -40,6 +40,8 @@ describe VotesController do
 
   describe "GET index" do
     it "assigns all votes as @votes" do
+   
+
       vote = Vote.create! valid_attributes
       get :index, {}, valid_session
       assigns(:votes).should eq([vote])
@@ -82,11 +84,6 @@ describe VotesController do
         assigns(:vote).should be_a(Vote)
         assigns(:vote).should be_persisted
       end
-
-      it "redirects to the created vote" do
-        post :create, {:vote => valid_attributes}, valid_session
-        response.should redirect_to(Vote.last)
-      end
     end
 
     describe "with invalid params" do
@@ -95,13 +92,6 @@ describe VotesController do
         Vote.any_instance.stub(:save).and_return(false)
         post :create, {:vote => { "argument_id" => "invalid value" }}, valid_session
         assigns(:vote).should be_a_new(Vote)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Vote.any_instance.stub(:save).and_return(false)
-        post :create, {:vote => { "argument_id" => "invalid value" }}, valid_session
-        response.should render_template("new")
       end
     end
   end
@@ -123,12 +113,6 @@ describe VotesController do
         put :update, {:id => vote.to_param, :vote => valid_attributes}, valid_session
         assigns(:vote).should eq(vote)
       end
-
-      it "redirects to the vote" do
-        vote = Vote.create! valid_attributes
-        put :update, {:id => vote.to_param, :vote => valid_attributes}, valid_session
-        response.should redirect_to(vote)
-      end
     end
 
     describe "with invalid params" do
@@ -139,14 +123,6 @@ describe VotesController do
         put :update, {:id => vote.to_param, :vote => { "argument_id" => "invalid value" }}, valid_session
         assigns(:vote).should eq(vote)
       end
-
-      it "re-renders the 'edit' template" do
-        vote = Vote.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Vote.any_instance.stub(:save).and_return(false)
-        put :update, {:id => vote.to_param, :vote => { "argument_id" => "invalid value" }}, valid_session
-        response.should render_template("edit")
-      end
     end
   end
 
@@ -156,12 +132,6 @@ describe VotesController do
       expect {
         delete :destroy, {:id => vote.to_param}, valid_session
       }.to change(Vote, :count).by(-1)
-    end
-
-    it "redirects to the votes list" do
-      vote = Vote.create! valid_attributes
-      delete :destroy, {:id => vote.to_param}, valid_session
-      response.should redirect_to(votes_url)
     end
   end
 

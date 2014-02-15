@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "discussions/index" do
   before(:each) do
-     @user = User.new(firstName: "karl", surname: "Peterson", email: "karl@example.com", role: Role.where(name:"user").first, password: "foobar", password_confirmation: "foobar")
+     @user = FactoryGirl.create(:user)
     
     assign(:discussions, [
       stub_model(Discussion,
@@ -17,6 +17,7 @@ describe "discussions/index" do
       )
     ])
   end
+  
   let(:user) { FactoryGirl.create(:user)}
   let(:discussions) { [FactoryGirl.create(:discussion, moderator: :user), FactoryGirl.create(:discussion, moderator: FactoryGirl.create(:user))]}
   
