@@ -1,5 +1,5 @@
 $("#probands").append("<tr><td>"
-	+"<%= j @discussion_user.user.firstname %></td>"
-	+"<td><%= j @discussion_user.user.lastname %></td>"
-	+"<td><%= j @discussion_user.user.email %></td>"
-	+'<td><%= link_to "Löschen", @discussion_user, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td></tr>');
+	+"<%= j @discussions_user.user.firstname %></td>"
+	+"<td><%= j @discussions_user.user.lastname %></td>"
+	+"<td><%= j @discussions_user.user.email %></td>"
+	+'<td><%= link_to "Löschen", @discussions_user, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td></tr>');

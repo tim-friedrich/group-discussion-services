@@ -4,7 +4,7 @@ describe "discussions/new" do
   before(:each) do
      @user = FactoryGirl.create(:user)
     assign(:discussion, stub_model(Discussion,
-      :topic => "",
+      :topic => "Test",
       :moderator => @user,
       :due_date => ""
     ).as_new_record)

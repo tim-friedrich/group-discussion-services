@@ -81,7 +81,7 @@ describe CompaniesController do
 
       it "redirects to the created company" do
         post :create, {:company => valid_attributes}, valid_session
-        response.should redirect_to(Company.last)
+        response.should redirect_to(current_user)
       end
     end
 

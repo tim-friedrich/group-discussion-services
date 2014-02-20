@@ -49,7 +49,7 @@ describe ContactsController do
   describe "GET new" do
     it "assigns a new contact as @contact" do
       get :new, {}, valid_session
-      assigns(:contact).should be_a_new(contact)
+      assigns(:contact).should be_a_new(Contact)
     end
   end
 

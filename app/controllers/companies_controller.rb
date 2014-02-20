@@ -29,7 +29,7 @@ class CompaniesController < ApplicationController
     @company.research_institute = current_user.research_institutes.first
     respond_to do |format|
       if @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
+        format.html { redirect_to current_user, notice: 'Company was successfully created.' }
         format.json { render action: 'show', status: :created, location: @company }
       else
         format.html { render action: 'new' }

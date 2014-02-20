@@ -317,7 +317,7 @@
         null,
         null,
         1,
-        276,
+        280,
         null,
         null,
         1,
@@ -352,6 +352,7 @@
       ],
       "/home/tim/rails/GDS/app/helpers/application_helper.rb": [
         1,
+        null,
         null
       ],
       "/home/tim/rails/GDS/app/helpers/argument_helper.rb": [
@@ -401,8 +402,8 @@
         null,
         null,
         1,
-        65,
-        65,
+        69,
+        69,
         null,
         null,
         1,
@@ -973,7 +974,7 @@
         1,
         1,
         1,
-        0,
+        1,
         null,
         null,
         null,
@@ -3431,30 +3432,6 @@
         null,
         null
       ],
-      "/home/tim/rails/GDS/app/controllers/sessions_controller.rb": [
-        1,
-        null,
-        1,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null
-      ],
       "/home/tim/rails/GDS/app/controllers/users_controller.rb": [
         1,
         1,
@@ -3541,8 +3518,32 @@
         0,
         null,
         null
+      ],
+      "/home/tim/rails/GDS/app/controllers/sessions_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null
       ]
     },
-    "timestamp": 1392477054
+    "timestamp": 1392840291
   }
 }
