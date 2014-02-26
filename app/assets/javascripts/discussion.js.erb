@@ -48,7 +48,7 @@ function register_vote_buttons(){
   });
 }
 
-function register_events(discussionId){
+function register_events(){
   register_vote_buttons();
 
   $("#new_question_button").click(function( event ){
@@ -56,7 +56,8 @@ function register_events(discussionId){
     $.ajax({
       type: 'POST',
       url: '/questions/',
-      data: { question: { topic: $('#argument_content').val() , discussion_id: discussion_id } },
+      data: { question: { topic: $('#argument_content').val() , 
+                          discussion_id:  discussion_id } },
     });
     $('#argument_content').val('');
   });

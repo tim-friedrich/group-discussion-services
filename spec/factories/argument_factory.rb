@@ -10,7 +10,7 @@ FactoryGirl.define do
   factory :argument do
     content "das sehe ich ganz anders"
     association :question, factory: :question
-    association :discussion, factory: :discussion
+    association :discussion, factory: :discussion, current_question: FactoryGirl.create(:question)
     argument_type ArgumentType.where(name:'proband').first
     association :user, factory: :user
   end

@@ -53,8 +53,8 @@ class User < ActiveRecord::Base
 		!discussion.users.find_by_id(self.id).nil?
 	end
 
-	def is_staff()
-		self.role = Role.where(name: 'moderator').first || self.role = Role.where(name: 'deputy').first
+	def is_staff?()
+		return (self.role == Role.where(name: 'moderator').first || self.role == Role.where(name: 'deputy').first)
 	end
 
 	private

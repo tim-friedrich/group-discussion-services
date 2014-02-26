@@ -28,10 +28,11 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-    @question.discussion.current_question = @question
+    
     
     respond_to do |format|
       if @question.save
+        @question.discussion.current_question = @question
         @question.discussion.save
         Pusher['discussion'+@question.discussion.id.to_s].trigger('newQuestion', {
           topic: @question.topic

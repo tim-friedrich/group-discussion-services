@@ -75,10 +75,12 @@ class DiscussionsController < ApplicationController
     @discussion.moderator = current_user
     @discussion.users << current_user
     @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
+
     @discussion.current_question = @question
 
     respond_to do |format|
       if @discussion.save
+        @question.save;
         format.html { redirect_to current_user, notice: 'Eine neue Diskussion wurde erfolgreich erstellt.' }
         format.json { render action: 'show', status: :created, location: @discussion }
       else
@@ -115,6 +117,7 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1/evaluate
   def evaluate
     puts 'A' * 50
+    puts
     puts @discussion
   end
 

@@ -40,7 +40,7 @@
     </tbody>
   </table>
   <br>
-  <% if current_user.is_staff %>
+  <% if current_user.is_staff? %>
   	<%= link_to 'neue Diskussion erstellen', new_discussion_path, class: "btn btn-xs btn-primary" %>
     <%= link_to 'neuen Kunden anlegen', new_company_path, class: "btn btn-xs btn-primary" %>
   <% end %>
