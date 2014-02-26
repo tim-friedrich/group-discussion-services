@@ -1,6 +1,7 @@
 class DiscussionsController < ApplicationController
-  before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy]
+  before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate]
   before_action :check_rights
+  
   # GET /discussions
   # GET /discussions.json
   def index
@@ -48,6 +49,7 @@ class DiscussionsController < ApplicationController
       format.js
     end
   end
+
   # GET /discussions/new
   def new
     @discussion = Discussion.new
@@ -108,6 +110,12 @@ class DiscussionsController < ApplicationController
       format.html { redirect_to discussions_url }
       format.json { head :no_content }
     end
+  end
+
+  # GET /discussions/1/evaluate
+  def evaluate
+    puts 'A' * 50
+    puts @discussion
   end
 
   private

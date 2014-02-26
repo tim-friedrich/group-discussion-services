@@ -1,0 +1,21 @@
+<% @discussion.questions.each do | question | %>
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          <%= question.topic %>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <%= question.arguments.length %>
+        <% question.arguments.each do | argument | %>
+          <p><%= argument.likes %></p>  
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

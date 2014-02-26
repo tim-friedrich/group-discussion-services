@@ -26,6 +26,9 @@ GDS::Application.routes.draw do
   post '/discussions/:id/leave' => 'discussions#leave'
   get '/user_leaved/:id' => 'discussions#user_leaved'
   get '/user_entered/:id' => 'discussions#user_entered'
+
+  get '/discussions/:id/evaluate' => 'discussions#evaluate'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
