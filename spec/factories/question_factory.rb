@@ -6,6 +6,6 @@
 FactoryGirl.define do
   factory :question do
     topic "Test Topic"
-  	:discussion
+  	association :discussion, factory: :discussion
   end
 end

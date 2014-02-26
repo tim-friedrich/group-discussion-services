@@ -5,7 +5,7 @@
 
 FactoryGirl.define do
   factory :discussions_user do
-  	:user
-  	:discussion
+  	association :user, factory: :user
+  	association :discussion, factory: :discussion
   end
 end

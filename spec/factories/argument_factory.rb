@@ -12,10 +12,6 @@ FactoryGirl.define do
     association :question, factory: :question
     association :discussion, factory: :discussion
     argument_type ArgumentType.where(name:'proband').first
-    
-
-    before(:create) do | user |
-    	user = FactoryGirl.create(:user)
-    end
+    association :user, factory: :user
   end
 end

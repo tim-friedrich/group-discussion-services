@@ -7,7 +7,8 @@
 FactoryGirl.define do
   factory :vote do
     is_like true
-    :argument
-  	:user
+    association :user, factory: :user
+    association :argument, factory: :argument
+  	
   end
 end

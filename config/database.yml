@@ -1,8 +1,4 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
+
 development:
   adapter: postgresql
   encoding: unicode
@@ -11,6 +7,7 @@ development:
   username: postgres
   host: localhost
   port: 5432
+  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

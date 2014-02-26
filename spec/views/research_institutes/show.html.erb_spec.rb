@@ -2,10 +2,7 @@ require 'spec_helper'
 
 describe "research_institutes/show" do
   before(:each) do
-    @research_institute = assign(:research_institute, stub_model(ResearchInstitute,
-      :name => "",
-      :contact_id => ""
-    ))
+    @research_institute = FactoryGirl.create(:research_institute, contact_id: FactoryGirl.create(:contact).id)
   end
 
   it "renders attributes in <p>" do

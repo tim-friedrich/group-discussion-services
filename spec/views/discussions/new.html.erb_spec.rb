@@ -3,10 +3,12 @@ require 'spec_helper'
 describe "discussions/new" do
   before(:each) do
      @user = FactoryGirl.create(:user)
-    assign(:discussion, stub_model(Discussion,
+     sign_in(@user)
+     assign(:discussion, FactoryGirl.stub(Discussion,
       :topic => "Test",
       :moderator => @user,
-      :due_date => ""
+      :due_date => DateTime.now,
+      :company =>  FactoryGirl.create(:company)
     ).as_new_record)
   end
 
@@ -18,6 +20,7 @@ describe "discussions/new" do
       assert_select "input#discussion_topic[name=?]", "discussion[topic]"
       assert_select "select#discussion_moderator_id[name=?]", "discussion[moderator_id]"
       assert_select "input#discussion_due_date[name=?]", "discussion[due_date]"
+      assert_select "select#discussion_company[name=?]", "discussion[company]"
     end
   end
 end
