@@ -38,7 +38,7 @@ describe User do
 	end	
 
 	#Tests max length of parameters
-	describe "the firstName is to long" do
+	describe "the firstname is to long" do
 		before { @user.firstname = "a"*51 }
 		it { should_not be_valid }
 	end

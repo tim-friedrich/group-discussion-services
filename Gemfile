@@ -52,6 +52,18 @@ group :development, :test do
 	gem 'capybara', '1.1.2'
 	gem 'factory_girl_rails', :require => false
   	gem 'codeclimate-test-reporter', :require => nil
+ 	
+ 	#gem for automated tests
+  	gem 'guard-rspec', '2.5.0'
+
+  	#gems for faster test runs
+  	gem 'spork-rails'
+    gem 'guard-spork'
+    gem 'childprocess'
+end
+
+group :test do
+	gem 'libnotify', '0.8.0'
 end
 
 #gem for test coverage report

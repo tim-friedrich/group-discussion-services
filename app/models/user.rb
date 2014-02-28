@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
 
 	has_one :research_institute
 	
-
 	belongs_to :role
 
 	before_save { self.email = email.downcase }

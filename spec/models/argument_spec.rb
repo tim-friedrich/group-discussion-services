@@ -10,13 +10,29 @@ require 'spec_helper'
     t.integer  "argument_type_id"'
 
 describe Argument do
+  before(:each) do
+    @argument = FactoryGirl.build(:argument, 
+                                      content: "ASD",
+                                      question: FactoryGirl.create(:question, 
+                                        discussion: @discussion), 
+                                      discussion: @discussion)
+  end
 
-	let(:argument) { FactoryGirl.create(:argument, user: FactoryGirl.create(:user, email:'a@a.de')) }
+  subject{ @argument }
+ 
+  it { should respond_to(:content) }
+  it { should respond_to(:user) }
+  it { should respond_to(:likes) }
+  it { should respond_to(:dislikes) }
+  it { should respond_to(:question) }
+  it { should respond_to(:argument_type) }
 
-  	it { argument.should respond_to(:content) }
-  	it { argument.should respond_to(:user) }
-  	it { argument.should respond_to(:likes) }
-  	it { argument.should respond_to(:dislikes) }
-  	it { argument.should respond_to(:question) }
-  	it { argument.should respond_to(:argument_type) }
+  it { should be_valid }
+
+  describe "when content not present" do
+    #@argument = Argument.create()
+    puts "A"*50
+    puts @argument.content
+    it {  }
+  end
 end

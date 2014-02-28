@@ -8,7 +8,7 @@ require 'spec_helper'
 #    t.integer  "company_id"
 
 describe Discussion do
-  let(:discussion) { FactoryGirl.create(:discussion) }
+  let(:discussion) { FactoryGirl.create(:discussion, current_question_id: FactoryGirl.create(:question).id) }
 
   	it { discussion.should respond_to(:topic) }
   	it { discussion.should respond_to(:moderator) }

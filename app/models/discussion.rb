@@ -9,7 +9,6 @@ class Discussion < ActiveRecord::Base
 	validates :company_id, presence: true
 	validates :moderator_id, presence: true
 	validates :due_date, presence: true
-	validates :current_question_id, presence: true
 
 
 

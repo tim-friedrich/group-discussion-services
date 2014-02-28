@@ -3,7 +3,11 @@ require 'spec_helper'
 describe DiscussionsController do
 
   let(:valid_session) {  }
-  let(:valid_attributes) { FactoryGirl.attributes_for(:discussion, company_id: FactoryGirl.create(:company).id, current_question_id: FactoryGirl.create(:question).id, moderator_id: FactoryGirl.create(:user).id) }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:discussion, 
+                              current_question_id: FactoryGirl.create(:question).id,
+                              moderator_id: FactoryGirl.create(:user).id,
+                              company_id: FactoryGirl.create(:company).id)
+                          }
 
   describe "signed in" do
     before do

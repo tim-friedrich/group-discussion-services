@@ -24,14 +24,16 @@ describe VotesController do
   before(:each) do
       @user = FactoryGirl.create(:user)
       sign_in @user
-      @discussion = FactoryGirl.create(:discussion)
-      @argument = FactoryGirl.create(:argument, user: FactoryGirl.create(:user))
+      @discussion = FactoryGirl.create(:discussion, current_question: FactoryGirl.create(:question))
   end
   
   let(:question) { FactoryGirl.create(:question, discussion_id: @discussion.id) }
-  let(:argument) { FactoryGirl.build(:argument, question: question) }
-
-  let(:valid_attributes) { FactoryGirl.attributes_for(:vote, argument_id: @argument.id ) }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:vote,
+                                argument_id: FactoryGirl.create(:argument, 
+                                          question: Question.create(topic: "ASDasd",
+                                              discussion: @discussion), 
+                                              discussion: @discussion).id,
+                                user_id: FactoryGirl.create(:user).id )}
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
