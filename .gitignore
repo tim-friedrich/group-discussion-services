@@ -12,5 +12,7 @@
 /tmp
 bundler_stubs/
 
+#ignore coverage reports
+/coverage
 
 db/schema.rb
