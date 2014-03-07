@@ -23,6 +23,11 @@ describe User do
 
 	it { should be_valid }
 
+	it "should respond the full name of the user" do
+		@user.full_name.should eq "%{firstname} %{lastname}" \
+				% { firstname: @user.firstname, lastname: @user.lastname }
+	end
+
 	#Test not optional parameters of Users 
 	describe "when firstname is not present" do
 		before { @user.firstname = " " }
@@ -125,4 +130,60 @@ describe User do
 		its(:remember_token) { should_not be_blank }
 	end
 
+	#tests for discussion functionalities
+	describe "user was added to discussion" do
+		before do
+			@discussion = FactoryGirl.create(:discussion)
+			@discussion.users << @user
+		end
+
+		it "should respond that it is part of discussion" do
+			@user.is_part_of_discussion?(@discussion).should be_true
+		end
+
+		it "should respond that it is not part of discussion when it is no longer part of the discussion" do
+			@discussion.users.find_by_email(@user.email).delete
+			@user.is_part_of_discussion?(@discussion).should be_false
+		end
+
+		describe "when user enters discussion" do
+			before { @user.enter_discussion(@discussion) }
+
+			it "should create a new Discussion Presence for the user" do		
+				DiscussionPresence.last.user.should eq @user
+			end
+			it "should register the User as present" do
+				DiscussionPresence.last.present.should be_true
+			end
+			it "should respond that he/she is present" do
+				@user.is_present_in(@discussion).should be_true
+			end
+		end
+
+		describe "when user enters discussion" do
+			before { @user.leave_discussion(@discussion) }
+
+			it "should create a new Discussion Presence for the user" do		
+				DiscussionPresence.last.user.should eq @user
+			end
+			it "should register the User not as present" do
+				DiscussionPresence.last.present.should be_false
+			end
+			it "should respond that he/she is not present" do
+				@user.is_present_in(@discussion).should be_false
+			end
+		end
+	end
+
+	describe "should respond the right role" do
+		it "moderator should respond that it is staff" do
+			@user.role = Role.where(name: 'moderator').first
+			@user.is_staff?.should be_true
+		end
+
+		it "user should not respond that it is staff" do
+			@user.role = Role.where(name: 'user').first
+			@user.is_staff?.should be_false
+		end
+	end
 end

@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
 	end
 
 	def is_staff?()
-		return (self.role == Role.where(name: 'moderator').first || self.role == Role.where(name: 'deputy').first)
+		self.role == Role.where(name: 'moderator').first
 	end
 
 	private

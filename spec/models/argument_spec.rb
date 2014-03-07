@@ -11,12 +11,11 @@ require 'spec_helper'
 
 describe Argument do
   before(:each) do
-    @argument = FactoryGirl.build(:argument, 
-                                      content: "ASD",
-                                      question: FactoryGirl.create(:question, 
-                                        discussion: @discussion), 
-                                      discussion: @discussion)
+      User.delete_all
+      @argument = FactoryGirl.create(:argument)
   end
+
+
 
   subject{ @argument }
  
@@ -29,10 +28,24 @@ describe Argument do
 
   it { should be_valid }
 
+
   describe "when content not present" do
-    #@argument = Argument.create()
-    puts "A"*50
-    puts @argument.content
-    it {  }
+    before { @argument.content = " " }
+    it { should_not be_valid }
   end
+
+  describe "when user is not present" do
+    before { @argument.user = nil }
+    it { should_not be_valid }
+  end
+
+  describe "when question is not present" do
+    before { @argument.question = nil }
+    it { should_not be_valid }
+  end
+
+  describe "when argument type is not present" do
+    before { @argument.argument_type = nil }
+    it { should_not be_valid }
+  end 
 end

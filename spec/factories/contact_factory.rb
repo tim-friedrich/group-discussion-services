@@ -11,7 +11,6 @@ FactoryGirl.define do
 		street "examplestr. 5"
 		postalcode "33739"
 		town "Bielefeld"
-		email "aa@aa.de"
 		telephone "051092999"		
 	end
 end
