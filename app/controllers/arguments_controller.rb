@@ -20,12 +20,7 @@ class ArgumentsController < ApplicationController
 	   	set_argument_type(@argument)
 		if @argument.save
 			Pusher['discussion'+@argument.discussion.id.to_s].trigger('newArgument', {
-	  			firstname: @argument.user.firstname.to_s,
-	  			argument: @argument.content.to_s,
-	  			created_at: @argument.created_at.strftime("%H:%M").to_s,
-	  			argument_type: @argument.argument_type.name.to_s,
-	  			id: @argument.id,
-	  			obj: @argument
+	  			id: @argument.id
 			})
 		end
 	

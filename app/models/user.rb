@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 	end
 
 	def is_present_in(discussion)
-		DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.is_present?
+		DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).last.is_present?
 	end
 
 	def is_part_of_discussion?(discussion)

@@ -21,6 +21,7 @@ GDS::Application.routes.draw do
   resources :users	
 	root 'static_pages#home'
   post '/discussions/:id/leave' => 'discussions#leave'
+  post '/discussions/:id/enter' => 'discussions#enter'
   get '/user_leaved/:id' => 'discussions#user_leaved'
   get '/user_entered/:id' => 'discussions#user_entered'
 

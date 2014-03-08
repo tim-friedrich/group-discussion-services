@@ -1,5 +1,5 @@
 class DiscussionsController < ApplicationController
-  before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate]
+  before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate, :enter]
   before_action :check_rights
   
   # GET /discussions
@@ -18,12 +18,9 @@ class DiscussionsController < ApplicationController
       @questions = Question.where(discussion_id: params[:id])
       @type_proband = ArgumentType.where(name:'proband').first
       @type_moderator = ArgumentType.where(name:'moderator').first 
-      current_user.enter_discussion(@discussion)
+      
       @moderator_arguments = Argument.where(discussion_id: @discussion.id, argument_type: @type_moderator)
       @proband_arguments = Argument.where(discussion_id: @discussion.id, argument_type: @type_proband)
-      Pusher['discussion'+@discussion.id.to_s].trigger('userEntered', {
-        user_id: current_user.id
-      })
     end
   end
 
@@ -34,6 +31,14 @@ class DiscussionsController < ApplicationController
       user_id: current_user.id
     })
     render nothing: true
+  end
+
+  def enter
+    current_user.enter_discussion(@discussion)
+      Pusher['discussion'+@discussion.id.to_s].trigger('userEntered', {
+        user_id: current_user.id
+      })
+      render nothing: true
   end
 
   def user_leaved

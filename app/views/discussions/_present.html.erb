@@ -5,6 +5,7 @@
 			<% @discussion.users.each do | proband | %>
 				<% if proband.is_present_in(@discussion) %>
 					<%= render partial: 'proband', locals: { user: proband } %>
+					<%= render partial: 'proband', locals: { user: current_user } %>
 				<% end %>
 	  		<% end %>
 		</ul>
