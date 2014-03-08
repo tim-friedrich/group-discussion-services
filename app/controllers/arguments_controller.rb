@@ -13,38 +13,22 @@ class ArgumentsController < ApplicationController
 	end
 	
 	def create 
-		
-		if params[:commit]!="Neue Frage" 
-			@argument = Argument.new(argument_params)
-			@argument.user = current_user
+		@argument = Argument.new(argument_params)
+		@argument.user = current_user
 			
-	    	@argument.question = @argument.discussion.current_question
-	    	set_argument_type(@argument)
-			if @argument.save
-				Pusher['discussion'+@argument.discussion.id.to_s].trigger('newArgument', {
-		  			firstname: @argument.user.firstname.to_s,
-		  			argument: @argument.content.to_s,
-		  			created_at: @argument.created_at.strftime("%H:%M").to_s,
-		  			argument_type: @argument.argument_type.name.to_s,
-		  			id: @argument.id,
-		  			obj: @argument
-	  			})
-			end
-		else
-			@question = Question.new
-			@question.topic = argument_params[:content]
-			@question.discussion_id = argument_params[:discussion_id]
-
-			@question.discussion.current_question = @question
-			@question.discussion.save
-
-			if @question.save
-
-				Pusher['discussion'+@question.discussion.id.to_s].trigger('newQuestion', {
-					topic: @question.topic
-				})
-			end
+	   	@argument.question = @argument.discussion.current_question
+	   	set_argument_type(@argument)
+		if @argument.save
+			Pusher['discussion'+@argument.discussion.id.to_s].trigger('newArgument', {
+	  			firstname: @argument.user.firstname.to_s,
+	  			argument: @argument.content.to_s,
+	  			created_at: @argument.created_at.strftime("%H:%M").to_s,
+	  			argument_type: @argument.argument_type.name.to_s,
+	  			id: @argument.id,
+	  			obj: @argument
+			})
 		end
+	
 	end
 
 	def new
