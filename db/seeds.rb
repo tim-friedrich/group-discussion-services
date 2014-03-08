@@ -23,6 +23,6 @@ User.create!([{
 		lastname: "Friedrich",
 		email: "friedrich.tim@googlemail.com",
 	   	role_id: Role.where(name: 'admin').first.id,
-	   	password: "123456",
-	   	password_confirmation: "123456"
+	   	password: "123456789",
+	   	password_confirmation: "123456789"
 	}])

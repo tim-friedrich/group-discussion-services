@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        sign_in @user
+        #sign_in @user
         format.html { redirect_to @user, notice: 'Ihr Benutzer Konto wurde erfolgreich angelegt.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:firstname, :lastname, :email, :password, :password_confirmation, :remember_token, :discussions)
+      params.require(:user).permit(:firstname, :lastname, :email, :password, :password_confirmation, :discussions)
     end
 
     # Before filters

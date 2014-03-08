@@ -5,6 +5,7 @@ GDS::Application.configure do
   Pusher.key    = '77d609e946e412d4a24f'
   Pusher.secret = '0fcbc0e8d0df2e48ce24'
  
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -33,7 +34,4 @@ GDS::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-
-
-
 end

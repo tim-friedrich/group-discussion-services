@@ -12,8 +12,8 @@ FactoryGirl.define do
 	sequence(:firstname)  { |n| "User #{n}" }
     sequence(:lastname)  { |n| "the #{n} of his kind" }
     sequence(:email) { |n| "user_#{n}@example.com" } 
-    password "123456"
-    password_confirmation "123456"
+    password "123456789"
+    password_confirmation "123456789"
     role Role.where(name:"user").first
   end
 end

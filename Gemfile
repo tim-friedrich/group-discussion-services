@@ -14,7 +14,7 @@ gem 'pusher'
 gem 'pg'
 
 #gem for heroku
-gem  'rails_12factor'
+gem 'rails_12factor'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -40,6 +40,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+# gem for user management
+gem 'devise'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -51,15 +54,15 @@ group :development, :test do
  	gem 'rake'
 	gem 'capybara', '1.1.2'
 	gem 'factory_girl_rails', :require => false
-  	gem 'codeclimate-test-reporter', :require => nil
+  gem 'codeclimate-test-reporter', :require => nil
  	
  	#gem for automated tests
-  	gem 'guard-rspec', '2.5.0'
+  gem 'guard-rspec', '2.5.0'
 
-  	#gems for faster test runs
-  	gem 'spork-rails'
-    gem 'guard-spork'
-    gem 'childprocess'
+  #gems for faster test runs
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'childprocess'
 end
 
 group :test do

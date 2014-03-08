@@ -1,4 +1,5 @@
 GDS::Application.routes.draw do
+  devise_for :users
   resources :companies
 
   resources :research_institutes
@@ -19,10 +20,6 @@ GDS::Application.routes.draw do
 
   resources :users	
 	root 'static_pages#home'
-	resources :sessions, only: [:new, :create, :destroy]
-	get '/signup' => 'users#new'
-	get '/signin' => 'sessions#new'
-	delete '/signout' => 'sessions#destroy'
   post '/discussions/:id/leave' => 'discussions#leave'
   get '/user_leaved/:id' => 'discussions#user_leaved'
   get '/user_entered/:id' => 'discussions#user_entered'

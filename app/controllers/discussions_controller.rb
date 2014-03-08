@@ -133,6 +133,6 @@ class DiscussionsController < ApplicationController
     end
 
     def check_rights
-      redirect_to signin_url, notice: "Bitte melden Sie sich an." unless signed_in?
+      redirect_to signin_url, notice: "Bitte melden Sie sich an." unless current_user == nil || signed_in?
     end
 end

@@ -20,7 +20,6 @@ describe DiscussionsController do
     
     describe "GET" do  
       describe "index" do
-
         it "assigns all discussions as @discussions" do
           discussions = Discussion.all
           get :index, valid_session
@@ -151,38 +150,43 @@ describe DiscussionsController do
 
   describe "not signed in" do
     before do
-      sign_out
+      @research_institute = FactoryGirl.create(:research_institute, deputy: FactoryGirl.create(:user), contact: FactoryGirl.create(:contact))
+      @user = @research_institute.deputy
+      @company = FactoryGirl.create(:company, research_institute: @research_institute, contact: FactoryGirl.create(:contact))
+      @user.research_institutes << @research_institute
+      @discussion = FactoryGirl.create(:discussion)
+      @discussion.moderator = @user
+      sign_out @user
     end
-    let(:discussion) { FactoryGirl.create(:discussion) }
     context "should be redirected to the signin page" do
       describe "get" do
         it "index" do
-          get :index, valid_session
-          response.should redirect_to(signin_url)
+          get :index
+          response.should redirect_to(new_user_session_url)
         end
         it "show" do
-          get :show, {:id => discussion.to_param}, valid_session
-          response.should redirect_to(signin_url)
+          get :show, {:id => @discussion.to_param}
+          response.should redirect_to(new_user_session_url)
         end
         it "new" do
-          get :new, valid_session
-          response.should redirect_to(signin_url)
+          get :new
+          response.should redirect_to(new_user_session_url)
         end
         it "edit" do
-          get :edit, {:id => discussion.to_param}, valid_session
-          response.should redirect_to(signin_url)
+          get :edit, {:id => @discussion.to_param}
+          response.should redirect_to(new_user_session_url)
         end
       end
       describe "post" do
         it "create" do
-          post :create, {:discussion => valid_attributes}, valid_session
-          response.should redirect_to(signin_url)
+          post :create, {discussion: valid_attributes}
+          response.should redirect_to(new_user_session_url)
         end
       end
       describe "put" do
         it "update" do
-          put :update, {:id => discussion.to_param, :discussion => { "topic" => "" }}, valid_session
-          response.should redirect_to(signin_url)
+          put :update, {:id => discussion.to_param, :discussion => { "topic" => "" }}
+          response.should redirect_to(new_user_session_url)
         end
       end
     end
