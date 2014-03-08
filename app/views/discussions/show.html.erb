@@ -35,6 +35,7 @@
     <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
     <% if @discussion.moderator == current_user %>
       <%= f.submit "Neue Frage", class: "btn btn-success", id: "new_question_button" %>
+      <%= link_to "Evaluierung", {action: "evaluate"}, {class: "btn btn-success", color: "white"} %>
     <% end %>
   <% end %>
 </div>

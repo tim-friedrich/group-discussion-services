@@ -11,18 +11,67 @@ Role.create!(name: 'moderator', level: 2)
 Role.create!(name: 'deputy', level: 3)
 Role.create!(name: 'admin', level: 4)
 
+
 ArgumentType.delete_all
 ArgumentType.create!(name: 'proband')
 ArgumentType.create!(name: 'moderator')
 ArgumentType.create!(name: 'observer')
 
 
+ResearchInstitute.delete_all
+ResearchInstitute.create!(
+	[
+		{
+			id: 1,
+			name: "Buchstabensuppe",
+			contact_id: 2,
+			#created_at: datetime,
+			#updated_at: datetime,
+			deputy_id: 2
+		}
+	])
+
+
 User.delete_all
-User.create!([{
-		firstname: "Tim",
-		lastname: "Friedrich",
-		email: "friedrich.tim@googlemail.com",
-	   	role_id: Role.where(name: 'admin').first.id,
-	   	password: "123456789",
-	   	password_confirmation: "123456789"
-	}])
+
+User.create!(
+	[
+		{
+			firstname: "Tim",
+			lastname: "Friedrich",
+			email: "friedrich.tim@googlemail.com",
+		   	role_id: Role.where(name: 'admin').first.id,
+		   	password: "123456",
+		   	password_confirmation: "123456",
+		   	research_institutes: [ResearchInstitute.take]
+		},
+
+		{
+			firstname: "Falco",
+			lastname: "D.",
+			email: "falco@example.org",
+			role_id: Role.where(name: 'admin').first.id,
+			password: 'test42',
+			password_confirmation: 'test42',
+			research_institutes: [ResearchInstitute.take]
+		}
+	])
+
+
+Contact.delete_all
+Contact.create!(
+	[
+		{
+			research_institutes: [ResearchInstitute.take],
+		}
+	])
+
+
+Company.delete_all
+Company.create!(
+	[
+		{
+			contact: Contact.take,
+			research_institute: ResearchInstitute.take
+		}
+	])
