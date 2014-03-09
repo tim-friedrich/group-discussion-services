@@ -1,7 +1,7 @@
 <div class="list-group-item argument-panel clearfix" >
 
 		
-		<div class="left_argument <% if argument.discussion.moderator == argument.user %>moderator_argument<% end %>"><div class="name"><%= argument.user.firstname %>:</div>  <div class="argument"></span><%= argument.content %></div></div>
+		<div class="left_argument <% if argument.discussion.moderator == argument.user %>moderator_argument<% end %>"><div class="name"><%= argument.user.username %>:</div>  <div class="argument"></span><%= argument.content %></div></div>
 		<div class="right_argument pull-right">
 
 		<% if argument.argument_type != ArgumentType.where(name:'moderator').first  %>

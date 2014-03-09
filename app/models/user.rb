@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
 	has_one :research_institute
 	
 	belongs_to :role
-	
+
+	validates :username, presence: true, length: { maximum: 50 }
 	validates :firstname, presence: true, length: { maximum: 50 }
 	validates :lastname, presence: true, length: { maximum: 50 }
 
@@ -44,9 +45,4 @@ class User < ActiveRecord::Base
 	def is_staff?()
 		self.role == Role.where(name: 'deputy').first
 	end
-
-	#private
-	#	def create_remember_token
-	#		self.remember_token = User.encrypt(User.new_remember_token)
-	#	end
 end

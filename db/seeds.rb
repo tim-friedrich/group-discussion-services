@@ -37,22 +37,24 @@ User.delete_all
 User.create!(
 	[
 		{
+			username: "tim",
 			firstname: "Tim",
 			lastname: "Friedrich",
 			email: "friedrich.tim@googlemail.com",
-		   	role_id: Role.where(name: 'admin').first.id,
-		   	password: "123456",
-		   	password_confirmation: "123456",
+		   	role_id: Role.where(name: 'deputy').first.id,
+		   	password: "123456789",
+		   	password_confirmation: "123456789",
 		   	research_institutes: [ResearchInstitute.take]
 		},
 
 		{
+			username: "falco",
 			firstname: "Falco",
 			lastname: "D.",
 			email: "falco@example.org",
-			role_id: Role.where(name: 'admin').first.id,
-			password: 'test42',
-			password_confirmation: 'test42',
+			role_id: Role.where(name: 'deputy').first.id,
+			password: 'test4321',
+			password_confirmation: 'test4321',
 			research_institutes: [ResearchInstitute.take]
 		}
 	])
