@@ -10,6 +10,7 @@ class ArgumentsController < ApplicationController
 
 	def argument
 		@moderator_type = ArgumentType.where(name:'moderator').first 
+
 	end
 	
 	def create 

@@ -1,7 +1,11 @@
-<div class="list-group-item argument-panel clearfix" >
+<div class="list-group-item argument-panel clearfix" style= "background-color:<%= DiscussionsUser.where(discussion_id: argument.discussion.id, user_id: argument.user.id).first.color %>;" > 
 
 		
-		<div class="left_argument <% if argument.discussion.moderator == argument.user %>moderator_argument<% end %>"><div class="name"><%= argument.user.username %>:</div>  <div class="argument"></span><%= argument.content %></div></div>
+		<div class="left_argument <% if argument.discussion.moderator == argument.user %>moderator_argument<% end %>" 
+				 %>
+			<div class="name"><%= argument.user.username %>:</div> 
+			<div class="argument"></span><%= argument.content %></div>
+		</div>
 		<div class="right_argument pull-right">
 
 		<% if argument.argument_type != ArgumentType.where(name:'moderator').first  %>

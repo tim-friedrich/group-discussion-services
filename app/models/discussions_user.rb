@@ -4,6 +4,29 @@ class DiscussionsUser < ActiveRecord::Base
 	has_many :presences, :class_name => "DiscussionPresence"
 
 	validates :user, uniqueness: { scope: :discussion }
+	after_create :set_color
+	
+
+  	def set_color
+  		colors = [	"#759399", "#cc6d6a", "#FFFCE8", "#ffb1ad", "#a6a6a6",
+  					"#CCC1A3", "#C2CCA5", "#FFF29B", "#bbff99", "#c6bdd1"]
+  		user_colors = []
+  		puts "A"*60
+  		DiscussionsUser.where(discussion_id: self.discussion.id).each do | discussions_user | 
+  			user_colors.push(discussions_user.color)  
+  		end
+
+  		colors.each do | color |
+  			if not user_colors.include? color
+  				self.color = color 
+  				self.save
+  				return self.color
+  			end
+  		end
+  		self.color = '#FFFFFF'
+  		self.save
+  		return self.color
+  	end
 
 	def enter_discussion
 		DiscussionPresence.create(discussions_user_id: self.id, present: true)
