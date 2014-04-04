@@ -1,0 +1,6 @@
+de:
+  activerecord:
+    attributes:
+      name: "Name"
+      contact: "Kontakt"
+      deputy: "Verantwortlicher Mitarbeiter"

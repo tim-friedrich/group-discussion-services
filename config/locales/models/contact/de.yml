@@ -1,0 +1,8 @@
+de:
+  activerecord:
+    attributes:
+      street: "Straße"
+      postalcode: "Postleitzahl"
+      town: "Stadt"
+      email: "E-Mail"
+      telephone: "Telefon"

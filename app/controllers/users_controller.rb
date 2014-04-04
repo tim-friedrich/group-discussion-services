@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @discussions = @user.discussions
+    @companies = Company.all
   end
 
   # GET /users/new

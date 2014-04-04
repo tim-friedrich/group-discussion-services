@@ -14,34 +14,88 @@
 </p>
 
 <% if !@discussions.nil? %>
-  <h2>Meine Diskussionen </h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Thema</th>
-        <th>Moderator</th>
-        <th>Datum</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @discussions.each do |discussion| %>
-        <tr>
-          <td><%= discussion.topic %></td>
-          <td><%= discussion.moderator.firstname %> <%= discussion.moderator.lastname %></td>
-          <td><%= discussion.due_date %></td>
-          <td><%= link_to 'Diskussion beitreten', discussion, class: "btn btn-xs btn-primary" %></td>
-          <td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-xs btn-primary" %></td>
-          <td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
-        </tr>
+
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#discussions" data-toggle="tab">Diskussionen</a></li>
+  <li><a href="#companies" data-toggle="tab">Kunden</a></li>
+  <li><a href="#settings" data-toggle="tab">Einstellungen</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane fade in active" id="discussions">
+      <h2>Meine Diskussionen</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Thema</th>
+            <th>Moderator</th>
+            <th>Datum</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @discussions.each do |discussion| %>
+            <tr>
+              <td><%= discussion.topic %></td>
+              <td><%= discussion.moderator.firstname %> <%= discussion.moderator.lastname %></td>
+              <td><%= discussion.due_date %></td>
+              <td><%= link_to 'Diskussion beitreten', discussion, class: "btn btn-xs btn-primary" %></td>
+              <td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-xs btn-primary" %></td>
+              <td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <br>
+      <% if current_user.is_staff? %>
+        <%= link_to 'neue Diskussion erstellen', new_discussion_path, class: "btn btn-xs btn-primary" %>
+       
       <% end %>
-    </tbody>
-  </table>
-  <br>
-  <% if current_user.is_staff? %>
-  	<%= link_to 'neue Diskussion erstellen', new_discussion_path, class: "btn btn-xs btn-primary" %>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="companies">
+    <h2>Kunden</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Straße</th>
+            <th>Stadt</th>
+            <th>E-Mail</th>
+            <th>Telefon</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @companies.each do |company| %>
+            <tr>
+              <td><%= company.name %></td>
+              <td><%= company.contact.street %></td>
+              <td><%= company.contact.postalcode %> <%= company.contact.town %></td>
+              <td><%= company.contact.email %></td>
+              <td><%= company.contact.telephone %></td>
+
+              <td><%= link_to 'Bearbeiten', edit_company_path(company), class: "btn btn-xs btn-primary" %></td>
+              <td><%= link_to 'Löschen', company, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     <%= link_to 'neuen Kunden anlegen', new_company_path, class: "btn btn-xs btn-primary" %>
-  <% end %>
-<% end %>
+  </div>
+  <div class="tab-pane fade" id="settings">
+    <%= form_for(@user, :html => { :multipart => true, class: "form-horizontal", role: "form" }) do |f| %>
+  
+      <%= render 'shared/error_messages' %>
+
+      <%= render 'form' %>
+    <% end %>
+  </div>
+</div>

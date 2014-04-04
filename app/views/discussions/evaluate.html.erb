@@ -1,18 +1,33 @@
-<% @discussion.questions.each do | question | %>
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          <%= question.topic %>
-        </a>
-      </h4>
-    </div>
-      <div id="collapseOne" class="panel-collapse collapse in">
-          <ul class="list-group">
-            <%= render question.arguments %> 
-          </ul>  
+
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#script" data-toggle="tab">Verlauf</a></li>
+  <li><a href="#probands" data-toggle="tab">Probanden</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane fade in active" id="script">
+    <% @discussion.questions.each do | question | %>
+      <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<%= question.id %>">
+                <%= question.topic %>
+              </a>
+            </h4>
+          </div>
+            <div id="collapse_<%= question.id %>" class="panel-collapse collapse in">
+                <ul class="list-group">
+                  <%= render question.arguments %> 
+                </ul>  
+            </div>
+        </div>
       </div>
+    <% end %>  
   </div>
+
+  <div class="tab-pane fade" id="probands"> </div>
 </div>
-<% end %>

@@ -114,16 +114,13 @@ class DiscussionsController < ApplicationController
   def destroy
     @discussion.destroy
     respond_to do |format|
-      format.html { redirect_to discussions_url }
+      format.html { redirect_to current_user }
       format.json { head :no_content }
     end
   end
 
   # GET /discussions/1/evaluate
   def evaluate
-    puts 'A' * 50
-    puts
-    puts @discussion
   end
 
   private

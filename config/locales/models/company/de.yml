@@ -1,0 +1,6 @@
+de:
+  activerecord:
+    attributes:
+      research_institute:
+        name: "name"
+        deputy: "Zuständiger Mitarbeiter"

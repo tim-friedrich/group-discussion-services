@@ -1,0 +1,8 @@
+de:
+  activerecord:
+    attributes:
+      topic: "Thema"
+      moderator: "Moderator"
+      due_date: "Datum"
+      current_question: "aktuelle Frage"
+      company: "Unternehmen"

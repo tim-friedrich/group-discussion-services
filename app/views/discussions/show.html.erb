@@ -29,7 +29,7 @@
   
   <%= form_for Argument.new , class: "form-inline", role: "form", remote: true do |f| %>
     <div class="form-group">
-      <%= f.text_area :content, class: "form-control", rows: 2, html: { "x-webkit-speech" } %>
+      <%= f.text_area :content, class: "form-control", rows: 2 %>
     </div>
     <%= f.hidden_field :discussion_id, value: @discussion.id %>
     <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
@@ -40,3 +40,9 @@
   <% end %>
   <input type="text" x-webkit-speech />
 </div>
+
+<script type="text/javascript">  
+$( document ).ready(function() {
+ init_discussion();
+});
+</script>
