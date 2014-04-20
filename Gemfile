@@ -22,6 +22,12 @@ gem 'sass-rails', '~> 4.0.0'
 # nested form support
 gem "nested_form"
 
+#webserver
+gem "thin"
+
+#gem for websockets
+gem "faye-rails"
+
 # gem for newrelic (performance monitoring)
 gem 'newrelic_rpm'
 
@@ -46,13 +52,16 @@ gem 'jbuilder', '~> 1.2'
 # gem for user management
 gem 'devise'
 
+#Authorization Gem
+gem 'cancan'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
 group :development, :test do
-  	gem 'rspec-rails', '~> 2.0'
+  gem 'rspec-rails', '~> 2.0'
 	gem 'cucumber-rails', '1.2.1', :require => false
  	gem 'rake'
 	gem 'capybara', '1.1.2'
