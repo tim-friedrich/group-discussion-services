@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309173520) do
+ActiveRecord::Schema.define(version: 20140804164321) do
 
   create_table "argument_types", force: true do |t|
     t.string   "name"
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 20140309173520) do
     t.datetime "due_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "current_question_id"
     t.integer  "company_id"
   end
 

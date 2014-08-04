@@ -81,8 +81,6 @@ class DiscussionsController < ApplicationController
     @discussion.users << current_user
     @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
 
-    @discussion.current_question = @question
-
     respond_to do |format|
       if @discussion.save
         @question.save;

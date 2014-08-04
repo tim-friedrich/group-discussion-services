@@ -7,7 +7,7 @@
 FactoryGirl.define do 
 	factory :company do
 		name "test"
-		association :contact, factory: :contact
-		association :research_institute, factory: :research_institute
+		association :contact
+		association :research_institute
 	end
 end

@@ -5,5 +5,6 @@
 
 FactoryGirl.define do
   factory :discussions_user do
+
   end
 end

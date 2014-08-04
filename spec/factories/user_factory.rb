@@ -15,6 +15,6 @@ FactoryGirl.define do
     sequence(:email) { |n| "user_#{n}@example.com" } 
     password "123456789"
     password_confirmation "123456789"
-    role Role.where(name:"user").first
+    role { Role.where(name:"user").first }
   end
 end

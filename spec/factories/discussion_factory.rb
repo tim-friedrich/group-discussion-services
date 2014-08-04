@@ -11,6 +11,6 @@ FactoryGirl.define do
     topic "Test Topic"
     due_date DateTime.new(2020,2,3)
     association :moderator, factory: :user 
-    association :company, factory: :company
+    association :company
   end
 end
