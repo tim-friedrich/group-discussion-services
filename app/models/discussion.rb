@@ -6,13 +6,11 @@ class Discussion < ActiveRecord::Base
 	has_and_belongs_to_many :users
 	belongs_to :company
 
-	validates :company_id, presence: true
-	validates :moderator_id, presence: true
-	validates :due_date, presence: true
+	validates :company_id, presence:true
+	validates :moderator_id, presence:true
+	validates :due_date, presence:true
 
-
-
-  	def research_institute
-  		self.moderator.research_institutes.first
-  	end
+  def research_institute
+    self.moderator.research_institutes.first
+  end
 end

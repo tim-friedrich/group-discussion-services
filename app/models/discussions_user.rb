@@ -12,7 +12,7 @@ class DiscussionsUser < ActiveRecord::Base
   					"#CCC1A3", "#C2CCA5", "#FFF29B", "#bbff99", "#c6bdd1"]
   		user_colors = []
   		puts "A"*60
-  		DiscussionsUser.where(discussion_id: self.discussion.id).each do | discussions_user | 
+  		DiscussionsUser.where(discussion_id:self.discussion.id).each do | discussions_user |
   			user_colors.push(discussions_user.color)  
   		end
 
@@ -29,11 +29,11 @@ class DiscussionsUser < ActiveRecord::Base
   	end
 
 	def enter_discussion
-		DiscussionPresence.create(discussions_user_id: self.id, present: true)
+		DiscussionPresence.create(discussions_user_id:self.id, present:true)
 	end
 
 	def leave_discussion
-		DiscussionPresence.create(discussions_user_id: self.id, present: false)
+		DiscussionPresence.create(discussions_user_id:self.id, present:false)
 	end
 
 	def is_present?

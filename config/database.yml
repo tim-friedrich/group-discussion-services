@@ -5,6 +5,7 @@ development:
   database: gds
   pool: 5
   username: postgres
+  password: qhFD4FhnTTT3m
   host: localhost
   port: 5432
   
@@ -18,6 +19,7 @@ test:
   database: gds_test
   pool: 5
   username: postgres
+  password: qhFD4FhnTTT3m
   host: localhost
   port: 5432
 
@@ -28,5 +30,6 @@ production:
   database: gds
   pool: 5
   username: postgres
+  password: qhFD4FhnTTT3m
   host: localhost
   port: 5432

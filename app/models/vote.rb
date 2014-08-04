@@ -3,5 +3,5 @@ class Vote < ActiveRecord::Base
 	belongs_to :user
 	validates :user_id, presence:true
 	validates :argument_id, presence:true
-  	validates :user, uniqueness: { scope: :argument }
+  validates :user, uniqueness: { scope: :argument }
 end

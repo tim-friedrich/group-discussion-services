@@ -13,8 +13,9 @@ class ApplicationController < ActionController::Base
 	  I18n.locale = params[:locale] || I18n.default_locale
 	end
 
-  	def configure_permitted_parameters
-    	devise_parameter_sanitizer.for(:sign_up) << :firstname
-    	devise_parameter_sanitizer.for(:sign_up) << :lastname
-  	end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :firstname
+    devise_parameter_sanitizer.for(:sign_up) << :lastname
+    devise_parameter_sanitizer.for(:sign_up) << :username
+  end
 end

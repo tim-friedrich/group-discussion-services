@@ -16,3 +16,5 @@ bundler_stubs/
 /coverage
 
 db/schema.rb
+
+.idea/

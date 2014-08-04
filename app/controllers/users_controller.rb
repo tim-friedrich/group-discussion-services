@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    puts user_params
     @role = Role.where(name: 'user').first
 
     respond_to do |format|

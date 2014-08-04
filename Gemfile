@@ -10,7 +10,7 @@ gem 'bcrypt-ruby', '~> 3.0.1'
 #push service for the chat
 gem 'pusher'
 
-# Use sqlite3 as the database for Active Record
+# Use postgresql as the database for Active Record
 gem 'pg'
 
 #gem for heroku
@@ -65,7 +65,7 @@ group :development, :test do
 	gem 'cucumber-rails', '1.2.1', :require => false
  	gem 'rake'
 	gem 'capybara', '1.1.2'
-	gem 'factory_girl_rails', :require => false
+	gem 'factory_girl_rails'
   gem 'codeclimate-test-reporter', :require => nil
  	
  	#gem for automated tests
