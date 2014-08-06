@@ -24,14 +24,14 @@ describe VotesController do
   before(:each) do
       @user = FactoryGirl.create(:user)
       sign_in @user
-      @discussion = FactoryGirl.create(:discussion, current_question: FactoryGirl.create(:question))
+      @discussion = FactoryGirl.create(:discussion)
   end
   
-  let(:question) { FactoryGirl.create(:question, discussion_id: @discussion.id) }
+  let(:question) { FactoryGirl.create(:question) }
   let(:valid_attributes) { FactoryGirl.attributes_for(:vote,
-                                argument_id: FactoryGirl.create(:argument, 
+                                argument_id: FactoryGirl.create(:argument,
                                           question: Question.create(topic: "ASDasd",
-                                              discussion: @discussion), 
+                                              discussion: @discussion),
                                               discussion: @discussion).id,
                                 user_id: FactoryGirl.create(:user).id )}
 

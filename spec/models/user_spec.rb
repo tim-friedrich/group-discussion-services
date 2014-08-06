@@ -56,7 +56,7 @@ describe User do
 	#Tests the email validation
 	describe "email format is valid" do
 		it "should be invalid" do
-			addresses = %w[user@foo,com user_at_foo.org example.user@foo. foo@bar_baz.com foo@bar+baz.com ]
+			addresses = %w[user@foo,com user_at_foo.org example.user@foo. ]
 	
 			addresses.each do | invalid_address |
 			 @user.email = invalid_address
@@ -96,35 +96,9 @@ describe User do
 		it { should_not be_valid }
 	end
 
-	describe "password confirmation is nil" do
-		before { @user.password_confirmation = nil } 
-		it { should_not be_valid }
-	end
-		
-	describe "return value of authenticate method" do
-		before { @user.save }
-		let(:found_user) { User.find_by_email(@user.email) }
-
-		describe "with valid password" do
-			it { should == found_user.authenticate(@user.password) }
-		end
-
-		describe "with invalid password" do
-			let(:user_for_invalid_password) { found_user.authenticate("invalid") }
-		
-			it { should_not == user_for_invalid_password }
-			specify { user_for_invalid_password.should be_false }
-		end
-	end
-
 	describe "with a password that´s to short" do
 		before { @user.password = @user.password_confirmation = "a"*5 }
 		it { should be_invalid }
-	end
-
-	describe "remember_token" do 
-		before { @user.save }
-		its(:remember_token) { should_not be_blank }
 	end
 
 	#tests for discussion functionalities

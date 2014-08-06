@@ -6,9 +6,13 @@ require 'spec_helper'
 #    t.integer  "research_institute_id"
 
 describe Company do
-	let(:company) { FactoryGirl.create(:company) }
-	
-	it { company.should respond_to(:name) }
-	it { company.should respond_to(:contact) }
-	it { company.should respond_to(:research_institute) }
+	let(:company) { FactoryGirl.build(:company) }
+
+  subject { company }
+
+	it { should respond_to(:name) }
+	it { should respond_to(:contact) }
+	it { should respond_to(:research_institute) }
+  it { should be_valid
+  }
 end

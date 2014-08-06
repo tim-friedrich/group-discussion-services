@@ -10,7 +10,7 @@ require 'spec_helper'
 describe Discussion do
   before do
   	User.delete_all
-  	@discussion = FactoryGirl.build(:discussion, current_question_id: FactoryGirl.create(:question).id)
+  	@discussion = FactoryGirl.build(:discussion)
   end
 
   subject { @discussion }
@@ -20,6 +20,7 @@ describe Discussion do
   it { should respond_to(:current_question) }
   it { should respond_to(:company) }
   it { should respond_to(:questions) }
+  it { should be_valid }
 
   describe "when company is not present" do
   	before { @discussion.company = nil }
@@ -34,6 +35,11 @@ describe Discussion do
   describe "when due_date is not present" do
   	before { @discussion.due_date = nil }
   	it { should_not be_valid }
+  end
+
+  it "should return the new current question if a new question is created" do
+    question = FactoryGirl.create(:question, discussion: @discussion)
+    @discussion.current_question.should eq question
   end
 
   it "should return the research institute that the discussion belongs to" do

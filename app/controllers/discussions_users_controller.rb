@@ -1,4 +1,5 @@
 class DiscussionsUsersController < ApplicationController
+  before_filter :authenticate_user!
  	def new
  		@discussion_user = DiscussionsUser.new
  	end

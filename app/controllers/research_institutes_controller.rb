@@ -1,6 +1,6 @@
 class ResearchInstitutesController < ApplicationController
   before_action :set_research_institute, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!, only: [:show, :edit, :update, :destroy]
   # GET /research_institutes
   # GET /research_institutes.json
   def index

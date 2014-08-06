@@ -29,6 +29,11 @@ describe ContactsController do
   # in order to pass any filters (e.g. authentication) defined in
   # contactsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+  before do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+
+  end
 
   describe "GET index" do
     it "assigns all contacts as @contacts" do

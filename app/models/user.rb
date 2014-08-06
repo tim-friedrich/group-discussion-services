@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 	
 	belongs_to :role
 
+  validates :email, presence: true, length: { maximum: 50 }
 	validates :username, presence: true, length: { maximum: 50 }
 	validates :firstname, presence: true, length: { maximum: 50 }
 	validates :lastname, presence: true, length: { maximum: 50 }
@@ -43,6 +44,6 @@ class User < ActiveRecord::Base
 	end
 
 	def is_staff?()
-		self.role == Role.where(name: 'deputy').first
+		self.role == Role.where(name: 'deputy').first || self.role == Role.where(name: 'moderator').first
 	end
 end

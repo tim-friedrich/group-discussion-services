@@ -1,5 +1,6 @@
 class ArgumentsController < ApplicationController
-	before_action :check_rights
+  before_filter :authenticate_user!
+
 	def show
 		@argument = Argument.where(id: params[:id]).first
 		@moderator_type = ArgumentType.where(name: 'moderator').first

@@ -81,7 +81,7 @@ describe CompaniesController do
 
       it "redirects to the created company" do
         post :create, {:company => valid_attributes}, valid_session
-        response.should redirect_to(current_user)
+        response.should redirect_to(user_url(@research_institute.deputy))
       end
     end
 
@@ -120,10 +120,10 @@ describe CompaniesController do
         assigns(:company).should eq(company)
       end
 
-      it "redirects to the company" do
+      it "redirects to the users page" do
         company = Company.create! valid_attributes
         put :update, {:id => company.to_param, :company => valid_attributes}, valid_session
-        response.should redirect_to(company)
+        response.should redirect_to(@research_institute.deputy)
       end
     end
 
@@ -154,10 +154,10 @@ describe CompaniesController do
       }.to change(Company, :count).by(-1)
     end
 
-    it "redirects to the companies list" do
+    it "redirects to the users home page" do
       company = Company.create! valid_attributes
       delete :destroy, {:id => company.to_param}, valid_session
-      response.should redirect_to(companies_url)
+      response.should redirect_to(user_url(@research_institute.deputy))
     end
   end
 

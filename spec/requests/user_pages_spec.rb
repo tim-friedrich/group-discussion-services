@@ -9,26 +9,17 @@ describe "User pages" do
 	
 		describe "with valid information" do
 			before do
+        fill_in "user_username", 		with: "Example"
 				fill_in "user_firstname", 		with: "Example"
 				fill_in "user_lastname", 			with: "User"
 				fill_in "user_email",				with:	"user@example.com"
-				fill_in "user_password",			with: "foobar"
-				fill_in "user_password_confirmation",	with:	"foobar"
+				fill_in "user_password",			with: "123456789"
+				fill_in "user_password_confirmation",	with:	"123456789"
 			end
 	
 			it "should create a user" do
-				expect { click_button 'Sign in' }.to change(User, :count).by(1)
+				expect { click_button 'User erstellen' }.to change(User, :count).by(1)
 			end
-
-		
-		 let(:submit) { "Sign in" }
-		 
-		describe "after saving the user" do
-			before { click_button submit }
-			let(:user) { User.find_by(email: 'user@example.com') }
-
-			it { should have_link('Abmelden') }
-		end
 	end
 
 

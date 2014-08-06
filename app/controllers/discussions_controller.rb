@@ -1,6 +1,6 @@
 class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate, :enter]
-  before_action :check_rights
+  before_filter :authenticate_user!
   
   # GET /discussions
   # GET /discussions.json
@@ -12,13 +12,14 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1.json
   def show
 
-    if !current_user.is_part_of_discussion?(@discussion)
+    if !current_user and !current_user.is_part_of_discussion?(@discussion)
       redirect_to discussions_url, notice: "Du bist nicht für diese Discussion eingetragen"
     else
       @questions = Question.where(discussion_id: params[:id])
       @type_proband = ArgumentType.where(name:'proband').first
       @type_moderator = ArgumentType.where(name:'moderator').first 
-      
+      @type_moderator = ArgumentType.where(name:'moderator').first
+
       @moderator_arguments = Argument.where(discussion_id: @discussion.id, argument_type: @type_moderator)
       @proband_arguments = Argument.where(discussion_id: @discussion.id, argument_type: @type_proband)
     end
@@ -132,7 +133,4 @@ class DiscussionsController < ApplicationController
       params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id, :company)
     end
 
-    def check_rights
-      redirect_to signin_url, notice: "Bitte melden Sie sich an." unless current_user == nil || signed_in?
-    end
 end

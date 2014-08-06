@@ -10,8 +10,10 @@ require 'spec_helper'
 describe Contact do
 	let(:contact) { FactoryGirl.create(:contact) }
 
-	it { contact.should respond_to(:street) }
-	it { contact.should respond_to(:postalcode) }
-	it { contact.should respond_to(:town) }
-	it { contact.should respond_to(:telephone) }
+  subject { contact }
+	it { should respond_to(:street) }
+	it { should respond_to(:postalcode) }
+	it { should respond_to(:town) }
+	it { should respond_to(:telephone) }
+  it { should be_valid }
 end 
