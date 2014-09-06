@@ -36,10 +36,8 @@ class DiscussionsController < ApplicationController
 
   def enter
     current_user.enter_discussion(@discussion)
-      Pusher['discussion'+@discussion.id.to_s].trigger('userEntered', {
-        user_id: current_user.id
-      })
-      render nothing: true
+    PrivatePub.publish_to "/discussion/"+@discussion.id.to_s+"/users/entered", user_id: current_user.id
+    render nothing: true
   end
 
   def user_leaved

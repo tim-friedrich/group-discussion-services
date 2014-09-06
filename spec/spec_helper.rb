@@ -16,9 +16,9 @@ Spork.prefork do
   require 'factory_girl_rails'
   require 'simplecov'
 
-  SimpleCov.start do
-    add_filter "/spec/"
-  end
+  #SimpleCov.start do
+  #  add_filter "/spec/"
+  #end
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -57,6 +57,15 @@ Spork.prefork do
     #     --seed 1234
     config.order = "random"
     config.include Capybara::DSL
+    require 'capybara/rails'
+    class ActionDispatch::IntegrationTest
+      include Capybara::DSL
+      def teardown
+        Capybara.reset_sessions!
+        Capybara.use_default_driver
+      end
+    end
+
     include Devise::TestHelpers
 
   end

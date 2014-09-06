@@ -28,6 +28,8 @@ gem "thin"
 #gem for websockets
 gem "faye-rails"
 
+gem "private_pub"
+
 # gem for newrelic (performance monitoring)
 gem 'newrelic_rpm'
 

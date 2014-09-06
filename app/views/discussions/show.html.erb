@@ -1,48 +1,54 @@
-<script src=" https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js"></script>
+<%= javascript_include_tag "private_pub" %>
 
-<div id="discussion" data-isModerator="<%= current_user == @discussion.moderator %>" data-discussionId="<%= @discussion.id%>";>
+<div id="discussion" data-isModerator="<%= current_user == @discussion.moderator %>" data-discussionId="<%= @discussion.id %>">
 
-<%= render 'present' %>
+    <%= render 'present' %>
 
-<div class="left">
-  <div class="clearfix top">
-        <div id="moderator_show">
-          <h5><%= @discussion.moderator.firstname+" "+@discussion.moderator.lastname %></h5>
-          <%= image_tag('Unknown-person.gif', size: "80x80", alt: "Bild des Moderators") %>
-        </div>
-      <div class="panel panel-default" id="moderator_panel">
-        <div class="panel-heading">
-          <h3 class="panel-title" id="question">Frage: <%= @discussion.current_question.topic %></h3>
-        </div>
-        
-        <ul class="list-group" id="moderator_chat">
-          <%= render @moderator_arguments %>
-        </ul> 
+    <div class="left">
+      <div class="clearfix top">
+            <div id="moderator_show">
+              <h5><%= @discussion.moderator.firstname+" "+@discussion.moderator.lastname %></h5>
+              <%= image_tag('Unknown-person.gif', size: "80x80", alt: "Bild des Moderators") %>
+            </div>
+          <div class="panel panel-default" id="moderator_panel">
+            <div class="panel-heading">
+              <h3 class="panel-title" id="question">Frage: <%= @discussion.current_question.topic %></h3>
+            </div>
+
+            <ul class="list-group" id="moderator_chat">
+              <%= render @moderator_arguments %>
+            </ul>
+          </div>
       </div>
-  </div>
 
-  <div class="panel panel-default" id="discussion_panel">
-    <ul class="list-group" id="discussion_chat">
-      <%= render @proband_arguments %>
-    </ul>
-  </div>
-  
-  <%= form_for Argument.new , class: "form-inline", role: "form", remote: true do |f| %>
-    <div class="form-group">
-      <%= f.text_area :content, class: "form-control", rows: 2 %>
+      <div class="panel panel-default" id="discussion_panel">
+        <ul class="list-group" id="discussion_chat">
+          <%= render @proband_arguments %>
+        </ul>
+      </div>
+
+      <%= form_for Argument.new , class: "form-inline", role: "form", remote: true do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, class: "form-control", rows: 2 %>
+        </div>
+        <%= f.hidden_field :discussion_id, value: @discussion.id %>
+        <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
+        <% if @discussion.moderator == current_user %>
+          <%= f.submit "Neue Frage", class: "btn btn-success", id: "new_question_button" %>
+          <%= link_to "Evaluierung", {action: "evaluate"}, {class: "btn btn-success", color: "white"} %>
+        <% end %>
+      <% end %>
+      <input type="text" x-webkit-speech />
     </div>
-    <%= f.hidden_field :discussion_id, value: @discussion.id %>
-    <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
-    <% if @discussion.moderator == current_user %>
-      <%= f.submit "Neue Frage", class: "btn btn-success", id: "new_question_button" %>
-      <%= link_to "Evaluierung", {action: "evaluate"}, {class: "btn btn-success", color: "white"} %>
-    <% end %>
-  <% end %>
-  <input type="text" x-webkit-speech />
-</div>
 
-<script type="text/javascript">  
-$( document ).ready(function() {
- init_discussion();
-});
-</script>
+      <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/arguments/new" %>
+      <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/questions/new" %>
+      <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/votes/new" %>
+
+    <script type="text/javascript">
+    $( document ).ready(function() {
+
+     init_discussion();
+    });
+    </script>
+ </div>

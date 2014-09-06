@@ -1,6 +1,4 @@
-var pusher;
 var is_question = false;
-var channel;
 var discussion_id;
   $(document).bind('popstate', function() {
     alert("A");
@@ -14,43 +12,23 @@ function init_discussion(){
   scroll_down($('#moderator_chat'));
   scroll_down($('#discussion_chat'));
   register_events();
-  //connect_to_pusher(discussion_id);
-  open_websocket(discussion_id);
-  register_websocket_events();
   bind_new_argument();
   bind_vote($('#discussion').attr('data-isModerator'));
   bind_new_question();
   bind_user_leaved();
   bind_user_entered();
   enter_discussion()
+
 }
 
-function open_websocket(discussion_id){
-  var scheme   = "ws://";
-  var uri      = scheme + window.document.location.host + "/";
-  var ws       = new WebSocket(uri);
-}
-
-function register_websocket_events(){
-  ws.onmessage = function(message) {
-    alert(message.text)  
-  };
-  $("#new_argument").on("submit", function(event) {
-    event.preventDefault();
-    var handle = "";
-    var text   = "Hallo";
-    ws.send(JSON.stringify({ handle: handle, text: text }));
-   // $("#input-text")[0].value = "";
-  });
-}
 
 function bind_new_argument(){
-    channel.bind('newArgument', function(data){
-    $.ajax({
-      type: 'GET',
-      url: '/arguments/'+data.id,
-    });
-  });
+    PrivatePub.subscribe("/discussion/"+discussion_id+"/arguments/new", function(data){
+        $.ajax({
+          type: 'GET',
+          url: '/arguments/'+data.id
+        });
+    })
 }
 
 function submit_argument(){
@@ -60,7 +38,7 @@ function submit_argument(){
 
 function bind_vote(is_moderator){
   if(is_moderator){
-    channel.bind('newVote', function(data){
+      PrivatePub.subscribe("/discussion/"+discussion_id+"/votes/new", function(data){
       if(data.is_like){
         $("#like_badge_"+data.id).text((parseInt($("#like_badge_"+data.id).text())+1));
       }
@@ -72,7 +50,7 @@ function bind_vote(is_moderator){
 }
 
 function bind_new_question(){
-  channel.bind('newQuestion', function(data){
+    PrivatePub.subscribe("/discussion/"+discussion_id+"/questions/new", function(data){
     $("#question").text("Frage: "+data.topic);
   });
 }
@@ -91,7 +69,7 @@ function register_events(){
       type: 'POST',
       url: '/questions/',
       data: { question: { topic: $('#argument_content').val() , 
-                          discussion_id:  discussion_id } },
+                          discussion_id:  discussion_id } }
     });
     $('#argument_content').val('');
   });
@@ -119,24 +97,7 @@ function register_events(){
 
 }
 
-function connect_to_pusher(discussionId){
-  if(channel!=null){
-    disconnect_from_pusher();
-  }
-
-  pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
-
-  Pusher.log = function(message) {
-    if (window.console && window.console.log) {
-      window.console.log(message);
-      }
-    };
-  channel = pusher.subscribe('discussion'+discussionId);
-
-}
-
 function leave_discussion(){
-  pusher.disconnect();
   $.ajax({
     type: 'POST',
     url: '/discussions/'+$('#discussion').attr('data-discussionId')+'/leave',
@@ -154,19 +115,19 @@ function enter_discussion(){
 
 
 function bind_user_leaved(){
-  channel.bind('userLeaved', function(data){
+    PrivatePub.subscribe("/discussion/"+discussion_id+"/users/leaved", function(data){
     $.ajax({
       type: 'GET',
-      url: '/user_leaved/'+data.user_id,
+      url: '/user_leaved/'+data.user_id
     });
   });
 }
 
 function bind_user_entered(){
-  channel.bind('userEntered', function(data){
+    PrivatePub.subscribe("/discussion/"+discussion_id+"/users/entered", function(data){
     $.ajax({
       type: 'GET',
-      url: '/user_entered/'+data.user_id,
+      url: '/user_entered/'+data.user_id
     });
   });
 }

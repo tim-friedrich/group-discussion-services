@@ -16,6 +16,9 @@
 //= require jquery_nested_form
 
 //= require bootstrap
+//= require faye
+//= require private_pub
+
 //= require_tree .
 
 

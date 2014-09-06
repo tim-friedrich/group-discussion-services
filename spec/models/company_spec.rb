@@ -13,6 +13,5 @@ describe Company do
 	it { should respond_to(:name) }
 	it { should respond_to(:contact) }
 	it { should respond_to(:research_institute) }
-  it { should be_valid
-  }
+  it { should be_valid }
 end

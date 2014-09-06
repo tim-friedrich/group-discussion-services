@@ -31,9 +31,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.save
         @question.discussion.save
-        Pusher['discussion'+@question.discussion.id.to_s].trigger('newQuestion', {
-          topic: @question.topic
-        })
+        PrivatePub.publish_to "/discussion/"+@question.discussion.id.to_s+"/questions/new", topic: @question.topic
         format.html { redirect_to @question }
         format.json { render action: 'show', status: :created, location: @question }
       else

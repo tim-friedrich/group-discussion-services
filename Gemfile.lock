@@ -163,6 +163,8 @@ GEM
     orm_adapter (0.5.0)
     pg (0.17.1)
     polyglot (0.3.3)
+    private_pub (1.0.3)
+      faye
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -297,6 +299,7 @@ DEPENDENCIES
   nested_form
   newrelic_rpm
   pg
+  private_pub
   pusher
   rails (= 4.0.0)
   rails_12factor

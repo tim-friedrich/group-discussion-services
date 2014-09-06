@@ -18,13 +18,10 @@ class ArgumentsController < ApplicationController
 		@argument = Argument.new(argument_params)
 		@argument.user = current_user
 			
-	   	@argument.question = @argument.discussion.current_question
-	   	set_argument_type(@argument)
-		if @argument.save
-			Pusher['discussion'+@argument.discussion.id.to_s].trigger('newArgument', {
-	  			id: @argument.id
-			})
-		end
+	  @argument.question = @argument.discussion.current_question
+	  set_argument_type(@argument)
+
+    PrivatePub.publish_to "/discussion/"+@argument.discussion.id.to_s+"/arguments/new", id: @argument.id if @argument.save
 	
 	end
 
@@ -46,7 +43,7 @@ class ArgumentsController < ApplicationController
 
     	def set_argument_type (argument)
 	   		if (argument.discussion.moderator == current_user)
-				argument.argument_type = ArgumentType.where(name: 'moderator').first
+				  argument.argument_type = ArgumentType.where(name: 'moderator').first
 			else
 				argument.argument_type = ArgumentType.where(name: 'proband').first
 			end
