@@ -1,0 +1,45 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.teaser{
+  //width: 810px;
+  width: 1024px;
+  height: 340px;
+  background-color: white;
+  //margin-top: 50px;
+  img{
+    padding: 10px;
+    height: 340px;
+    width: 480px;
+    float: left;
+  }
+  .teaser-description{
+    padding: 20px 40px;
+    width: 524px;
+    height: 340px;
+    float: left;
+  }
+  .separate-arrow{
+    float: none;
+    padding: 10px 0px;
+  }
+
+}
+.prev-images{
+  floate: none;
+
+  img{
+    width: 230px;
+    height: 176px;
+  }
+  img:first-child{
+    margin: 10px 16px 10px 0px;
+  }
+  img:nth-child(2), img:nth-child(3){
+    margin: 10px 15px;
+  }
+  img:nth-child(4){
+    margin: 10px 0px 10px 16px;
+  }
+}

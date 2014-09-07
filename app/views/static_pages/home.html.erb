@@ -1,69 +1,62 @@
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
+<div id="home">
+    <div class="teaser center-block">
 
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    <div class="item active">
-     <!-- <%= image_tag("Discussion-image.jpg") %> http://marynoor.co.uk/?page_id=74 (gestohlen)-->
-      <div class="carousel-caption">
+      <div class="our-service-teaser">
+        <%= image_tag(image_url("home/our_service.jpg")) %>
+
+        <div class="teaser-description">
+          <h1>Gruppendiskussionen mit<br> Persönlichkeit</h1>
+          <h2>Unser Service</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac nisl et felis viverra egestas. Nulla blandit massa sit amet sodales luctus. Pellentesque et augue sodales, maximus ligula vitae, </p>
+        </div>
+      </div>
+
+
+
+      <div class="research-institutes-teaser">
+        <%= image_tag(image_url("home/research_institute.jpg")) %>
+
+        <div class="teaser-description">
+          <h1>Gruppendiskussionen mit<br> Persönlichkeit</h1>
+          <h2>Unser Service</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac nisl et felis viverra egestas. Nulla blandit massa sit amet sodales luctus. Pellentesque et augue sodales, maximus ligula vitae, </p>
+        </div>
+      </div>
+
+      <div class="probands-teaser">
+        <%= image_tag(image_url("home/proband.jpg")) %>
+
+        <div class="teaser-description">
+          <h1>Gruppendiskussionen mit<br> Persönlichkeit</h1>
+          <h2>Unser Service</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac nisl et felis viverra egestas. Nulla blandit massa sit amet sodales luctus. Pellentesque et augue sodales, maximus ligula vitae, </p>
+        </div>
+      </div>
+
+
+
+      <div class="companies-teaser">
+        <%= image_tag(image_url("home/company.jpg")) %>
+
+        <div class="teaser-description">
+          <h1>Gruppendiskussionen mit<br> Persönlichkeit</h1>
+          <h2>Unser Service</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac nisl et felis viverra egestas. Nulla blandit massa sit amet sodales luctus. Pellentesque et augue sodales, maximus ligula vitae, </p>
+        </div>
       </div>
     </div>
-    ...
-  </div>
 
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-  </a>
-</div>
+    <%= image_tag(image_url("home/arrow_a.png"), class: "separate-arrow our-service-teaser center-block") %>
+    <%= image_tag(image_url("home/arrow_b.png"), class: "separate-arrow center-block research-institutes-teaser") %>
+    <%= image_tag(image_url("home/arrow_c.png"), class: "separate-arrow center-block probands-teaser") %>
+    <%= image_tag(image_url("home/arrow_d.png"), class: "separate-arrow center-block companies-teaser") %>
 
-<div class="row research_institute_thumb">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <%= image_tag("300x200.svg") %>
-      <div class="caption">
-        <h3>Marktforschungs Institute</h3>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        <p>
-			<%= link_to("Anmelden", new_research_institute_path, class: "btn btn-primary") %>
-			<a href="#" class="btn btn-default" role="button">Informationen</a>
-		</p>
-      </div>
+    <div class="prev-images center-block">
+      
+      <%= image_tag(image_url("home/our_service.jpg"), data: { "id" => "our-service-teaser" }) %>
+      <%= image_tag(image_url("home/research_institute.jpg"), data: { "id" => "research-institutes-teaser" }) %>
+      <%= image_tag(image_url("home/proband.jpg"), data: { "id" => "probands-teaser" }) %>
+      <%= image_tag(image_url("home/company.jpg"), data: { "id" => "companies-teaser" }) %>
     </div>
-  </div>
-</div>
 
-<div class="row proband_thumb">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <%= image_tag("300x200.svg") %>
-      <div class="caption">
-        <h3>Probanden</h3>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        <p><%= link_to("Registrieren", new_user_registration_path, class: "btn btn-primary") %>
-       	<a href="#" class="btn btn-default" role="button">Informationen</a></p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row proband_thumb">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <%= image_tag("300x200.svg") %>
-      <div class="caption">
-        <h3>Probanden</h3>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        <p><%= link_to("Registrieren", new_user_registration_path, class: "btn btn-primary") %>
-        <a href="#" class="btn btn-default" role="button">Informationen</a></p>
-      </div>
-    </div>
-  </div>
 </div>

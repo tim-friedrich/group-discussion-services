@@ -3,8 +3,7 @@
 <head>
   <title>Group Discussion Services</title>
   <meta charset="UTF-8">
-  
-<script src=" https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js"></script>
+
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
@@ -14,11 +13,11 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
-<body>
-  <header class="navbar-fixed-top">
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<body class="center-block">
+  <header>
+		<nav class="navbar navbar-default center-block" role="navigation">
   		<!-- Brand and toggle get grouped for better mobile display -->
-      <%= link_to "GDS - Group Discussion Services", root_path, class: "navbar-brand" %>
+      <%= link_to image_tag(image_url("logo.png")), root_path, class: "navbar-brand" %>
       
   		<!-- Collect the nav links, forms, and other content for toggling -->
   		<div class="collapse navbar-collapse">
