@@ -2,7 +2,7 @@
     <div class="teaser center-block">
 
       <div class="our-service-teaser">
-        <%= image_tag(image_url("home/our_service.jpg")) %>
+        <%= image_tag(image_url("our_service.jpg")) %>
 
         <div class="teaser-description">
           <h1>Gruppendiskussionen mit<br> Persönlichkeit</h1>
@@ -11,51 +11,69 @@
         </div>
       </div>
 
-
-
       <div class="research-institutes-teaser">
-        <%= image_tag(image_url("home/research_institute.jpg")) %>
+        <%= image_tag(image_url("research_institute.jpg")) %>
 
         <div class="teaser-description">
-          <h1>Gruppendiskussionen mit<br> Persönlichkeit</h1>
-          <h2>Unser Service</h2>
+          <h1>Gemeinsam in die Zukunft</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac nisl et felis viverra egestas. Nulla blandit massa sit amet sodales luctus. Pellentesque et augue sodales, maximus ligula vitae, </p>
         </div>
       </div>
 
       <div class="probands-teaser">
-        <%= image_tag(image_url("home/proband.jpg")) %>
+        <%= image_tag(image_url("proband.jpg")) %>
 
         <div class="teaser-description">
-          <h1>Gruppendiskussionen mit<br> Persönlichkeit</h1>
-          <h2>Unser Service</h2>
+          <h1>Ihre Meinung zählt</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac nisl et felis viverra egestas. Nulla blandit massa sit amet sodales luctus. Pellentesque et augue sodales, maximus ligula vitae, </p>
         </div>
       </div>
 
-
-
       <div class="companies-teaser">
-        <%= image_tag(image_url("home/company.jpg")) %>
+        <%= image_tag(image_url("company.jpg")) %>
 
         <div class="teaser-description">
-          <h1>Gruppendiskussionen mit<br> Persönlichkeit</h1>
-          <h2>Unser Service</h2>
+          <h1>Strategieplanung mit Fundament</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac nisl et felis viverra egestas. Nulla blandit massa sit amet sodales luctus. Pellentesque et augue sodales, maximus ligula vitae, </p>
         </div>
       </div>
     </div>
 
-    <%= image_tag(image_url("home/arrow_a.png"), class: "separate-arrow our-service-teaser center-block") %>
-    <%= image_tag(image_url("home/arrow_b.png"), class: "separate-arrow center-block research-institutes-teaser") %>
-    <%= image_tag(image_url("home/arrow_c.png"), class: "separate-arrow center-block probands-teaser") %>
-    <%= image_tag(image_url("home/arrow_d.png"), class: "separate-arrow center-block companies-teaser") %>
+    <div id="separation-arrow-container">
+        <%= image_tag(image_url("arrow_a.png"), class: "separate-arrow our-service-teaser center-block") %>
+        <%= image_tag(image_url("arrow_b.png"), class: "separate-arrow center-block research-institutes-teaser") %>
+        <%= image_tag(image_url("arrow_c.png"), class: "separate-arrow center-block probands-teaser") %>
+        <%= image_tag(image_url("arrow_d.png"), class: "separate-arrow center-block companies-teaser") %>
+    </div>
 
-    <div class="prev-images center-block"><
-      <%= image_tag(image_url("home/our_service.jpg"), data: { "id" => "our-service-teaser" }) %>
-      <%= image_tag(image_url("home/research_institute.jpg"), data: { "id" => "research-institutes-teaser" }) %>
-      <%= image_tag(image_url("home/proband.jpg"), data: { "id" => "probands-teaser" }) %>
-      <%= image_tag(image_url("home/company.jpg"), data: { "id" => "companies-teaser" }) %>
+    <div class="prev-images center-block">
+      <div>
+
+        <p>UNSER SERVICE</p>
+        <div class="our-service-prev prev-image">
+          <div id="image-overlay" data-id="our-service-teaser"></div>
+        </div>
+      </div>
+      <div>
+        <p>MARKTFORSCHUNGSINSTITUTE</p>
+        <div class="research-institute-prev prev-image">
+          <div id="image-overlay" data-id="research-institutes-teaser"></div>
+        </div>
+      </div>
+      <div>
+        <p>PROBANDEN</p>
+        <div class="proband-prev prev-image">
+          <div id="image-overlay" data-id="probands-teaser"></div>
+        </div>
+      </div>
+      <div>
+        <p>UNTERNEHMEN</p>
+        <div class="company-prev prev-image">
+          <div id="image-overlay" data-id="companies-teaser"></div>
+        </div>
+      </div>
+
+
     </div>
 
 </div>

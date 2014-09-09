@@ -7,7 +7,7 @@
 initHome = () ->
   $teasers = $($(".teaser").children())
   $arrows = $(".separate-arrow")
-  prevImages = $(".prev-images").find("img")
+  prevImages = $(".prev-image")
 
   $arrows.hide()
   $teasers.hide()
