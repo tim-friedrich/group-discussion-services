@@ -112,8 +112,6 @@ function enter_discussion(){
   });
 }
 
-
-
 function bind_user_leaved(){
     PrivatePub.subscribe("/discussion/"+discussion_id+"/users/leaved", function(data){
     $.ajax({
