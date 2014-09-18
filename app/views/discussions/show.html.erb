@@ -38,7 +38,6 @@
           <%= link_to "Evaluierung", {action: "evaluate"}, {class: "btn btn-success", color: "white"} %>
         <% end %>
       <% end %>
-      <input type="text" x-webkit-speech />
     </div>
 
       <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/arguments/new" %>
@@ -46,9 +45,8 @@
       <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/votes/new" %>
 
     <script type="text/javascript">
-    $( document ).ready(function() {
-
-     init_discussion();
-    });
+        $( document ).ready(function() {
+            init_discussion();
+        });
     </script>
  </div>

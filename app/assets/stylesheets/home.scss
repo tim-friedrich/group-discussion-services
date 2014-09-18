@@ -57,19 +57,19 @@
     height: 154px;
   }
   .company-prev{
-    background: transparent url("/assets/company.jpg") no-repeat;
+    background: transparent image_url("company.jpg") no-repeat;
     background-size: contain;
   }
   .our-service-prev{
-    background: transparent url("/assets/our_service.jpg") no-repeat;
+    background: transparent image_url("our_service.jpg") no-repeat;
     background-size: contain;
   }
   .research-institute-prev{
-    background: transparent url("/assets/research_institute.jpg") no-repeat;
+    background: transparent image_url("research_institute.jpg") no-repeat;
     background-size: contain;
   }
   .proband-prev{
-    background: transparent url("/assets/proband.jpg") no-repeat;
+    background: transparent image_url("proband.jpg") no-repeat;
     background-size: contain;
   }
   .prev-image:hover #image-overlay{
