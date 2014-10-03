@@ -18,6 +18,10 @@
 //= require bootstrap
 //= require faye
 //= require private_pub
+//= require date
+//= require date/de-DE
+//= require date/extras
+//= require Chart
 
 //= require_tree .
 

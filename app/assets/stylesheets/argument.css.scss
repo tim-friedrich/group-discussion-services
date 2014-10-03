@@ -39,5 +39,11 @@ ul#moderator_chat.list-group div.list-group-item div.left_argument{
 	width: 570px;
 }
 ul#discussion_chat.list-group div.list-group-item div.left_argument{
-	width: 665px;
+	width: 655px;
+    .color{
+      width: 5px;
+      height: 20px;
+      float: left;
+      margin-right: 3px;
+    }
 }

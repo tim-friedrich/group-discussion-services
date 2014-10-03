@@ -34,8 +34,8 @@
 	overflow-x: hidden;
 }
 
-.panel.panel-default.probands{
-	float: right;
+.toolbox{
+	float: left;
 	width: 200px;
 	text-align: right;
 	overflow: hidden;
@@ -45,12 +45,13 @@
 	float: left;
 	width: 810px;
 }
-.left{
-	float: left;
+.chat{
+	float: right;
 	width: 810px;
 	margin-right: 10px;
 	height: 100%;
 }
+
 .top{
 	clear: both;
 	height: 125px;
@@ -61,5 +62,6 @@ html, body, .content, #discussion{
 }
 
 .tab-content {
-	margin-top: 10px;
+  margin-top: 10px;
+  text-align: center;
 }

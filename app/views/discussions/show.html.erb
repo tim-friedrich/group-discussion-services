@@ -1,10 +1,17 @@
 <%= javascript_include_tag "private_pub" %>
 
-<div id="discussion" data-isModerator="<%= current_user == @discussion.moderator %>" data-discussionId="<%= @discussion.id %>">
+<div id="discussion">
+    <div class="toolbox">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+      </div>
+    </div>
 
-    <%= render 'present' %>
 
-    <div class="left">
+    <div class="chat">
       <div class="clearfix top">
             <div id="moderator_show">
               <h5><%= @discussion.moderator.firstname+" "+@discussion.moderator.lastname %></h5>
@@ -12,18 +19,15 @@
             </div>
           <div class="panel panel-default" id="moderator_panel">
             <div class="panel-heading">
-              <h3 class="panel-title" id="question">Frage: <%= @discussion.current_question.topic %></h3>
+              <h3 class="panel-title" id="question"></h3>
             </div>
-
             <ul class="list-group" id="moderator_chat">
-              <%= render @moderator_arguments %>
             </ul>
           </div>
       </div>
 
       <div class="panel panel-default" id="discussion_panel">
         <ul class="list-group" id="discussion_chat">
-          <%= render @proband_arguments %>
         </ul>
       </div>
 
@@ -43,10 +47,7 @@
       <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/arguments/new" %>
       <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/questions/new" %>
       <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/votes/new" %>
-
-    <script type="text/javascript">
-        $( document ).ready(function() {
-            init_discussion();
-        });
+    <script>
+        $(window).load(function(){ new Discussion() });
     </script>
  </div>

@@ -21,9 +21,21 @@ class ArgumentsController < ApplicationController
 	  @argument.question = @argument.discussion.current_question
 	  set_argument_type(@argument)
 
-    PrivatePub.publish_to "/discussion/"+@argument.discussion.id.to_s+"/arguments/new", id: @argument.id if @argument.save
-	
-	end
+    if @argument.save
+      argument_json = render_to_string( template: 'arguments/_argument.json.jbuilder', locals: { current_user: current_user, argument: @argument } )
+      puts "AAAAA"*50
+      puts argument_json
+      puts argument_json.as_json()
+      puts PrivatePub.publish_to "/discussion/"+@argument.discussion.id.to_s+"/arguments/new", JSON.parse(argument_json)
+    end
+  end
+
+  def votes
+    @votes = Argument.where(id: params[:id]).first().votes
+    respond_to do |format|
+      format.json
+    end
+  end
 
 	def new
 		@argument = Argument.new(argument_params)
@@ -39,13 +51,11 @@ class ArgumentsController < ApplicationController
       	redirect_to signin_url, notice: "Bitte melden Sie sich an." unless signed_in?
     end
 
-    private
-
-    	def set_argument_type (argument)
-	   		if (argument.discussion.moderator == current_user)
-				  argument.argument_type = ArgumentType.where(name: 'moderator').first
-			else
-				argument.argument_type = ArgumentType.where(name: 'proband').first
-			end
-		end
+    def set_argument_type (argument)
+      if (argument.discussion.moderator == current_user)
+        argument.argument_type = ArgumentType.where(name: 'moderator').first
+      else
+        argument.argument_type = ArgumentType.where(name: 'proband').first
+      end
+    end
 end

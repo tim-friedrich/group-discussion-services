@@ -4,10 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :discussions_users
 	has_many :arguments
 	has_many :likes
 	has_many :dislikes
-	has_and_belongs_to_many :discussions
+	has_many :discussions, through: :discussions_users
 	has_and_belongs_to_many :research_institutes	
 
 	has_one :research_institute

@@ -7,8 +7,11 @@ gem 'bootstrap-sass'
 
 gem 'bcrypt-ruby', '~> 3.0.1'
 
-#push service for the chat
-gem 'pusher'
+#syntactic sugar for JavaScript Date
+gem 'datejs-rails'
+
+#js charts api
+gem 'chart-js-rails'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -38,6 +41,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+
 gem 'jquery-turbolinks'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

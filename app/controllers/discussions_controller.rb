@@ -1,5 +1,5 @@
 class DiscussionsController < ApplicationController
-  before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate, :enter]
+  before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate, :enter, :arguments]
   before_filter :authenticate_user!
   
   # GET /discussions
@@ -11,17 +11,14 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1
   # GET /discussions/1.json
   def show
-
-    if !current_user and !current_user.is_part_of_discussion?(@discussion)
-      redirect_to discussions_url, notice: "Du bist nicht für diese Discussion eingetragen"
-    else
-      @questions = Question.where(discussion_id: params[:id])
-      @type_proband = ArgumentType.where(name:'proband').first
-      @type_moderator = ArgumentType.where(name:'moderator').first 
-      @type_moderator = ArgumentType.where(name:'moderator').first
-
-      @moderator_arguments = Argument.where(discussion_id: @discussion.id, argument_type: @type_moderator)
-      @proband_arguments = Argument.where(discussion_id: @discussion.id, argument_type: @type_proband)
+    respond_to do | format |
+      if !current_user and !current_user.is_part_of_discussion?(@discussion)
+        format.html{ redirect_to current_user, notice: "Du bist nicht für diese Discussion eingetragen" }
+        format.json{ render status: :forbidden }
+      else
+        format.html{ @questions = Question.where(discussion_id: params[:id]) }
+        format.json
+      end
     end
   end
 
@@ -118,6 +115,13 @@ class DiscussionsController < ApplicationController
 
   # GET /discussions/1/evaluate
   def evaluate
+  end
+
+  def arguments
+    respond_to do | format |
+      format.json{ render json: @discussion.arguments }
+      format.html{ render json: @discussion.arguments }
+    end
   end
 
   private
