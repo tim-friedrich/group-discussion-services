@@ -50,8 +50,6 @@ class @View
         return false
     )
 
-    #window.onbeforeunload = () -> leave_discussion()
-
   draw: () =>
     @draw_arguments()
     @update_question(@discussion.questions[..].pop())
@@ -87,9 +85,8 @@ class @View
       """
         <div class="tab-pane active" id="users">
           <div class="panel panel-default probands">
-            <div class="panel-heading"><h3 class="panel-title">Teilnehmer</h3></div>
 
-            <ul class="list-group probands_list">
+            <ul class="list-group proband-list">
 
             </ul>
           </div>
@@ -103,6 +100,27 @@ class @View
         <li class="active"><a href="#users" role="tab" data-toggle="tab">Teilnehmer</a></li>
       """)
 
+    $.each(@discussion.users, (index, user) =>
+      $(".proband-list").append(
+        """
+          <li class="list-group-item">
+            <div style="width: 5px; height: 20px; background-color: #{ user.color }; float: left"></div>
+            #{ user.name }
+            <div class="proband-status"><img src="#{ image_path("offline.jpg") }"></img></div>
+          </li>
+        """
+      )
+
+    )
 
   update_question: (question) =>
     $("#question").text(question.topic)
+
+
+  change_user_status: (online=true, user) =>
+    img = $(".proband-list").filter((proband_dom) => proband_dom.text == user.name)[0].find("img")
+
+    if online
+      img.attr("src", image_path("online"))
+    else
+      img.attr("src", image_path("offline"))

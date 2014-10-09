@@ -29,11 +29,13 @@ class User < ActiveRecord::Base
 	end
 
 	def enter_discussion(discussion)
-		DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.enter_discussion
+    discussion.discussions_users.find(user_id=self.id).enter_discussion
+		#DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.enter_discussion
 	end
 
 	def leave_discussion(discussion)
-		DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.leave_discussion
+    discussion.discussions_users.find(user_id=self.id).leave_discussion
+		#DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.leave_discussion
 	end
 
 	def is_present_in(discussion)

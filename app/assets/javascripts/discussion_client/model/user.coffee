@@ -31,3 +31,6 @@ class @User
       argument.user == @
     )
     return arg.length
+
+  is_moderator: () =>
+    return @discussion.moderator.id == @id

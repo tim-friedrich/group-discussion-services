@@ -28,8 +28,7 @@ class VotesController < ApplicationController
     @vote.user = current_user
     respond_to do |format|
       if @vote.save
-        PrivatePub.publish_to "/discussion/"+@vote.argument.discussion.id.to_s+"/votes/new", id: @vote.argument.id, is_like: @vote.is_like
-
+        PrivatePub.publish_to "/discussion/"+@vote.argument.discussion.id.to_s+"/votes/new", @vote
         format.html { }
         format.json { }
       else

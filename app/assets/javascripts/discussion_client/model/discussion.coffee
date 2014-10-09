@@ -66,10 +66,12 @@ class @Discussion
 
     @bind_new_argument()
     @bind_new_question()
+    @bind_new_vote()
+    window.onbeforeunload = () -> @current_user.leave_discussion()
 
 
   bind_user_leaved: () =>
-    PrivatePub.subscribe("/discussion/"+@discussion.id+"/users/leaved", (data) ->
+    PrivatePub.subscribe("/discussion/"+@id+"/users/leaved", (data) ->
       $.each(@users, (index, user) =>
         if data.id == user.id
           user.leaved
@@ -77,9 +79,15 @@ class @Discussion
     )
 
   bind_user_entered: () =>
-    PrivatePub.subscribe("/discussion/"+@discussion.id+"/users/entered", (data) ->
+    PrivatePub.subscribe("/discussion/"+@id+"/users/entered", (data) ->
       $.each(@users, (index, user) =>
         if data.id == user.id
           user.entered
       )
     )
+  bind_new_vote: () =>
+    if @ and @current_user.is_moderator()
+      PrivatePub.subscribe("/discussion/"+@id+"/votes/new", (vote) =>
+        argument = @arguments.filter((argument) => vote.argument_id == argument.id)[0]
+        argument.add_vote(vote)
+      )

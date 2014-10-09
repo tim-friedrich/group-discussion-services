@@ -30,11 +30,6 @@ class @Argument
     dislikes = @votes.filter((vote) => (not vote.is_like))
     return dislikes.length
 
-  bind_vote: (is_moderator) ->
-    if @
-      PrivatePub.subscribe("/discussion/"+@discussion.id+"/votes/new", (data) ->
-        if(data.is_like)
-          $("#like_badge_"+data.id).text((parseInt($("#like_badge_"+data.id).text())+1))
-        else
-          $("#dislike_badge_"+data.id).text((parseInt($("#dislike_badge_"+data.id).text())+1))
-      )
+  add_vote: (vote) =>
+    @votes.push(vote)
+    @discussion.view.update_voting(@)

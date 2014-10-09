@@ -5,8 +5,8 @@ class @ModeratorView extends View
   draw_voting: (argument) =>
     dom_element =
       """
-        <span class="vote_count badge like_badge">#{argument.num_likes()}</span>
-				<span class="vote_count badge dislike_badge" >#{argument.num_dislikes()}</span>
+        <span class="vote_count badge like_badge">#{ argument.num_likes() }</span>
+				<span class="vote_count badge dislike_badge" >#{ argument.num_dislikes() }</span>
       """
     $(argument.dom_element).find(".right_argument").prepend(dom_element)
 
@@ -20,8 +20,8 @@ class @ModeratorView extends View
     @draw_voting(argument)
 
   draw_toolbox: () =>
-    @draw_participation()
     super
+    @draw_participation()
 
   draw_participation: () =>
     content_dom =
@@ -31,11 +31,7 @@ class @ModeratorView extends View
         </div>
       """
 
-    $(".toolbox").find(".tab-content").append(content_dom)
-    $(".toolbox").find(".nav-tabs").append(
-      """
-        <li><a href="#participation" role="tab" data-toggle="tab">Beteiligung</a></li>
-      """)
+    $(".toolbox").find("#users").append(content_dom)
     data = []
     $.each(@discussion.users, ((index, user) =>
       if user != @discussion.moderator
@@ -55,3 +51,4 @@ class @ModeratorView extends View
       segment.value = user.argument_count()
     )
     @participation_chart.update()
+
