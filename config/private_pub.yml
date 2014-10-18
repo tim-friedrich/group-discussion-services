@@ -7,8 +7,8 @@ test:
   secret_token: "secret"
   rackup: private_pub.ru
 production:
-  server: "https://group-discussion-services.herokuapp.com/faye"
-  secret_token: "559c1806ca482ab39f941d5755cf38d44ce470ad9c0fe6db83dd20ac6262a0cb"
+  server: "http://sheltered-island-3221.herokuapp.com/ "
+  secret_token: "batkaro"
   signature_expiration: 3600 # one hour
   port: 4443
   ssl: true
