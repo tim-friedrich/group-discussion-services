@@ -24,13 +24,13 @@ module Chat
 				  p [:message, event.data]
 				  @clients.each {|client| client.send(event.data) }
 				end
-    		
+
     		ws.on :close do |event|
 				  p [:close, ws.object_id, event.code, event.reason]
 				  @clients.delete(ws)
 				  ws = nil
 				end
-				
+
     		#Return async Rack response
     		ws.rack_response
  			else
