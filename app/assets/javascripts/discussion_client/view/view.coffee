@@ -110,7 +110,8 @@ class @View
           </li>
         """
       )
-
+      if user.is_present
+        @change_user_status(true, user)
     )
 
   update_question: (question) =>
@@ -118,9 +119,10 @@ class @View
 
 
   change_user_status: (online=true, user) =>
-    img = $(".proband-list").filter((proband_dom) => proband_dom.text == user.name)[0].find("img")
+    images = $(".proband-list").children()
+    img = $((image for image in images when image.textContent.trim() == user.name)).find("img")
 
     if online
-      img.attr("src", image_path("online"))
+      img.attr("src", image_path("online.jpg"))
     else
-      img.attr("src", image_path("offline"))
+      img.attr("src", image_path("offline.jpg"))

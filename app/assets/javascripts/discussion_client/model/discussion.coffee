@@ -40,12 +40,14 @@ class @Discussion
         @topic = json.discussion.topic
         #@conversation.set_question(discussion.questions[discussion.questions.length])
         $.each(json.discussion.users, (index, user) =>
-          @users.push(new User(
+          new_user = new User(
             id = user.id,
             name = user.name,
             color = user.color,
+            is_present = user.is_present
             @
-          ))
+          )
+          @users.push(new_user)
         )
         $.each(json.discussion.arguments, (index, argument) =>
           @new_argument(argument)
@@ -54,7 +56,6 @@ class @Discussion
         @moderator = @users.filter((user) => user.id == json.discussion.moderator_id)[0]
         @questions = json.discussion.questions
         @init_discussion()
-
     )
 
   init_discussion: () =>
@@ -67,24 +68,27 @@ class @Discussion
     @bind_new_argument()
     @bind_new_question()
     @bind_new_vote()
-    window.onbeforeunload = () -> @current_user.leave_discussion()
+    @bind_user_entered()
+    @bind_user_leaved()
+    window.onbeforeunload = () => @current_user.leave()
 
 
   bind_user_leaved: () =>
-    PrivatePub.subscribe("/discussion/"+@id+"/users/leaved", (data) ->
+    PrivatePub.subscribe("/discussion/"+@id+"/users/leave", (data) =>
       $.each(@users, (index, user) =>
-        if data.id == user.id
-          user.leaved
+        if data.user_id == user.id
+          user.leaved()
       )
     )
 
   bind_user_entered: () =>
-    PrivatePub.subscribe("/discussion/"+@id+"/users/entered", (data) ->
+    PrivatePub.subscribe("/discussion/"+@id+"/users/enter", (data) =>
       $.each(@users, (index, user) =>
-        if data.id == user.id
-          user.entered
+        if data.user_id == user.id
+          user.enter()
       )
     )
+
   bind_new_vote: () =>
     if @ and @current_user.is_moderator()
       PrivatePub.subscribe("/discussion/"+@id+"/votes/new", (vote) =>

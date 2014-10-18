@@ -1,5 +1,5 @@
 class DiscussionsController < ApplicationController
-  before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate, :enter, :arguments]
+  before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate, :arguments]
   before_filter :authenticate_user!
   
   # GET /discussions
@@ -16,6 +16,8 @@ class DiscussionsController < ApplicationController
         format.html{ redirect_to current_user, notice: "Du bist nicht für diese Discussion eingetragen" }
         format.json{ render status: :forbidden }
       else
+        current_user.enter_discussion(@discussion)
+        PrivatePub.publish_to "/discussion/"+@discussion.id.to_s+"/users/enter", user_id: current_user.id
         format.html{ @questions = Question.where(discussion_id: params[:id]) }
         format.json
       end
@@ -23,32 +25,10 @@ class DiscussionsController < ApplicationController
   end
 
   def leave
+    puts ("A")*50
     current_user.leave_discussion(@discussion)
-
-    Pusher['discussion'+@discussion.id.to_s].trigger('userLeaved', {
-      user_id: current_user.id
-    })
+    PrivatePub.publish_to "/discussion/"+@discussion.id.to_s+"/users/leave", user_id: current_user.id
     render nothing: true
-  end
-
-  def enter
-    current_user.enter_discussion(@discussion)
-    PrivatePub.publish_to "/discussion/"+@discussion.id.to_s+"/users/entered", user_id: current_user.id
-    render nothing: true
-  end
-
-  def user_leaved
-    @user = User.find_by_id(params[:id])
-    respond_to do | format |
-      format.js
-    end
-  end
-
-  def user_entered
-    @user = User.find_by_id(params[:id])
-    respond_to do | format |
-      format.js
-    end
   end
 
   # GET /discussions/new

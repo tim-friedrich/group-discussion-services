@@ -23,10 +23,7 @@ class ArgumentsController < ApplicationController
 
     if @argument.save
       argument_json = render_to_string( template: 'arguments/_argument.json.jbuilder', locals: { current_user: current_user, argument: @argument } )
-      puts "AAAAA"*50
-      puts argument_json
-      puts argument_json.as_json()
-      puts PrivatePub.publish_to "/discussion/"+@argument.discussion.id.to_s+"/arguments/new", JSON.parse(argument_json)
+      PrivatePub.publish_to "/discussion/"+@argument.discussion.id.to_s+"/arguments/new", JSON.parse(argument_json)
     end
   end
 

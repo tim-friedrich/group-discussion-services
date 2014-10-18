@@ -1,30 +1,20 @@
 class @User
-  constructor: (@id, @name, @color, @discussion) ->
+  constructor: (@id, @name, @color, @is_present, @discussion) ->
 
-  enter: () =>
+  leave: () =>
     $.ajax({
       type: 'POST',
-      url: '/discussions/'+$('#discussion').attr('data-discussionId')+'/enter'
-    })
-
-  leave: () ->
-    $.ajax({
-      type: 'POST',
-      url: '/discussions/'+$('#discussion').attr('data-discussionId')+'/leave',
+      url: '/discussions/'+@discussion.id+'/leave',
       async: false
     })
 
   leaved: () =>
-    $.ajax({
-      type: 'GET',
-      url: '/user_leaved/'+data.user_id
-    })
+    @is_present = false
+    @discussion.view.change_user_status(false, @)
 
-  entered: () =>
-    $.ajax({
-      type: 'GET',
-      url: '/user_entered/'+data.user_id
-    })
+  enter: () =>
+    @is_present = true
+    @discussion.view.change_user_status(true, @)
 
   argument_count: () =>
     arg = @discussion.arguments.filter((argument) =>
