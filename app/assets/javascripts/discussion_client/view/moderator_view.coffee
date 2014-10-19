@@ -33,6 +33,7 @@ class @ModeratorView extends View
 
     $(".toolbox").find("#users").append(content_dom)
     data = []
+    all_zero = true
     $.each(@discussion.users, ((index, user) =>
       if user != @discussion.moderator
         data.push(
@@ -40,7 +41,14 @@ class @ModeratorView extends View
           color: user.color
           label: user.name
         )
+        if data[data.length-1].value != 0
+          all_zero = false
     ))
+    #workaround for chart.js if all values are 0
+    if all_zero
+      $.each(data, (index, datum) =>
+        datum.value = 1
+      )
 
     ctx = $("#participation").find("#chart").get(0).getContext("2d");
     @participation_chart = new Chart(ctx).Doughnut(data);
