@@ -52,6 +52,8 @@ class @View
 
   draw: () =>
     @draw_arguments()
+    @scroll_down(@moderator_chat)
+    @scroll_down(@proband_chat)
     @update_question(@discussion.questions[..].pop())
     @draw_toolbox()
 
@@ -61,15 +63,23 @@ class @View
     )
 
   draw_argument: (argument) =>
+
     if argument.type == 'proband'
-      argument.dom_element = @proband_chat.append(argument.dom_element).children().last()
-      @draw_voting(argument)
+      chat = @proband_chat
 
     if argument.type == 'moderator'
-      argument.dom_element = @moderator_chat.append(argument.dom_element).children().last()
+      chat = @moderator_chat
 
-    @scroll_down($('#moderator_chat'))
-    @scroll_down($('#discussion_chat'))
+    if @scrolled_down(chat)
+      scroll = true
+
+    argument.dom_element = chat.append(argument.dom_element).children().last()
+
+    if argument.type == 'proband'
+      @draw_voting(argument)
+
+    if scroll
+      @scroll_down(chat)
 
   draw_voting: (argument) =>
 
@@ -126,3 +136,6 @@ class @View
       img.attr("src", image_path("online.jpg"))
     else
       img.attr("src", image_path("offline.jpg"))
+
+  scrolled_down: (elem) =>
+    return ( elem.outerHeight() + 5 > elem[0].scrollHeight - elem.scrollTop() > elem.outerHeight() - 5)
