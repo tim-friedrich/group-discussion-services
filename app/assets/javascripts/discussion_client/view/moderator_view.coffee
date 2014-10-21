@@ -30,30 +30,30 @@ class @ModeratorView extends View
           <canvas id="chart" width="180" height="180"></canvas>
         </div>
       """
-
+    @init_participation_diagram = true
+    $('#participation').remove()
     $(".toolbox").find("#users").append(content_dom)
     data = []
-    all_zero = true
-    $.each(@discussion.users, ((index, user) =>
+
+    $.each(@discussion.users, (index, user) =>
       if user != @discussion.moderator
+        if user.argument_count() != 0
+          @init_participation_diagram = false
+
         data.push(
           value: user.argument_count()
           color: user.color
           label: user.name
         )
-        if data[data.length-1].value != 0
-          all_zero = false
-    ))
-    #workaround for chart.js if all values are 0
-    if all_zero
-      $.each(data, (index, datum) =>
-        datum.value = 1
-      )
+    )
 
     ctx = $("#participation").find("#chart").get(0).getContext("2d");
     @participation_chart = new Chart(ctx).Doughnut(data);
 
   update_participation: () =>
+    if @init_participation_diagram
+      @draw_participation()
+
     $.each(@participation_chart.segments, (index, segment) =>
       user = @discussion.users.filter((user) => user.name == segment.label)[0]
       segment.value = user.argument_count()
