@@ -51,11 +51,14 @@ class @View
     )
 
   draw: () =>
+    @init_emoticons()
     @draw_arguments()
     @scroll_down(@moderator_chat)
     @scroll_down(@proband_chat)
     @update_question(@discussion.questions[..].pop())
     @draw_toolbox()
+
+
 
   draw_arguments: () =>
     $.each(@discussion.arguments, (index, argument) =>
@@ -63,6 +66,7 @@ class @View
     )
 
   draw_argument: (argument) =>
+    argument.generate_dom()
 
     if argument.type == 'proband'
       chat = @proband_chat
@@ -139,3 +143,104 @@ class @View
 
   scrolled_down: (elem) =>
     return ( elem.outerHeight() + 5 > elem[0].scrollHeight - elem.scrollTop() > elem.outerHeight() - 5)
+
+  init_emoticons: () =>
+    $.emoticons.define(
+      "smile": {
+        "title": "Smile",
+        "codes": [":)", ":=)", ":-)"]
+      },
+      "smile": {
+        "title": "Smile",
+        "codes": [":)", ":=)", ":-)"]
+      },
+      "sad-smile": {
+        "title": "Sad Smile",
+        "codes": [":(", ":=(", ":-("]
+      },
+      "big-smile": {
+        "title": "Big Smile",
+        "codes": [":D", ":=D", ":-D", ":d", ":=d", ":-d"]
+      },
+      "cool": {
+        "title": "Cool",
+        "codes": ["8)", "8=)", "8-)", "B)", "B=)", "B-)", "(cool)"]
+      },
+      "wink": {
+        "title": "Wink",
+        "codes": [":o", ":=o", ":-o", ":O", ":=O", ":-O", ";)", ";-)"]
+      },
+      "crying": {
+        "title": "Crying",
+        "codes": [";(", ";-(", ";=("]
+      },
+      "sweating": {
+        "title": "Sweating",
+        "codes": ["(sweat)", "(:|"]
+      },
+      "speechless": {
+        "title": "Speechless",
+        "codes": [":|", ":=|", ":-|"]
+      },
+      "kiss": {
+        "title": "Kiss",
+        "codes": [":*", ":=*", ":-*"]
+      },
+      "tongue-out": {
+        "title": "Tongue Out",
+        "codes": [":P", ":=P", ":-P", ":p", ":=p", ":-p"]
+      },
+      "blush": {
+        "title": "Blush",
+        "codes": ["(blush)", ":$", ":-$", ":=$", ":\">"]
+      },
+      "wondering": {
+        "title": "Wondering",
+        "codes": [":^)"]
+      },
+      "sleepy": {
+        "title": "Sleepy",
+        "codes": ["|-)", "I-)", "I=)", "(snooze)"]
+      },
+      "dull": {
+        "title": "Dull",
+        "codes": ["|(", "|-(", "|=("]
+      },
+      "in-love": {
+        "title": "In love",
+        "codes": ["(inlove)"]
+      },
+      "evil-grin": {
+        "title": "Evil grin",
+        "codes": ["]:)", ">:)", "(grin)"]
+      },
+      "talking": {
+        "title": "Talking",
+        "codes": ["(talk)"]
+      },
+      "yawn": {
+        "title": "Yawn",
+        "codes": ["(yawn)", "|-()"]
+      },
+      "angry": {
+        "title": "Angry",
+        "codes": [":@", ":-@", ":=@", "x(", "x-(", "x=(", "X(", "X-(", "X=("]
+      },
+      "it-wasnt-me": {
+        "title": "It wasn't me",
+        "codes": ["(wasntme)"]
+      },
+      "kiss": {
+        "title": "Kiss",
+        "codes": [":*", ":=*", ":-*"]
+      },
+      "tongue-out": {
+        "title": "Tongue Out",
+        "codes": [":P", ":=P", ":-P", ":p", ":=p", ":-p"]
+      },
+      "worried": {
+        "title": "Worried",
+        "codes": [":S", ":-S", ":=S", ":s", ":-s", ":=s"]
+      },
+
+    );

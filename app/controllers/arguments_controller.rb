@@ -17,7 +17,8 @@ class ArgumentsController < ApplicationController
 	def create 
 		@argument = Argument.new(argument_params)
 		@argument.user = current_user
-			
+
+    @argument.content = CGI::escapeHTML(@argument.content)
 	  @argument.question = @argument.discussion.current_question
 	  set_argument_type(@argument)
 
@@ -36,6 +37,7 @@ class ArgumentsController < ApplicationController
 
 	def new
 		@argument = Argument.new(argument_params)
+    @argument.content = CGI::escapeHTML(@argument.content)
 		@argument.user = current_user
 		@argument.save
 	end

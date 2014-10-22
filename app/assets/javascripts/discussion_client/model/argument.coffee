@@ -1,18 +1,6 @@
 class @Argument
   constructor: (@id, @content, @user, @timestamp, @discussion, @type, @is_voted, @votes = []) ->
-    @dom_element =
-    """
-      <div class="list-group-item argument-panel clearfix">
-        <div class="left_argument">
-          <div class="color" style='background-color: #{ @user.color }'></div>
-          <div class="name">#{ @user.name }:</div>
-          <div class="argument"></span> #{ @content }</div>
-        </div>
-        <div class="right_argument pull-right">
-          <span class = "time_stamp">#{ @timestamp.toString("HH:mm") }</span>
-        </div>
-      </div>
-    """
+
 
   vote: (is_like) =>
     $.post(
@@ -33,3 +21,18 @@ class @Argument
   add_vote: (vote) =>
     @votes.push(vote)
     @discussion.view.update_voting(@)
+
+  generate_dom: () =>
+    @dom_element =
+    """
+      <div class="list-group-item argument-panel clearfix">
+        <div class="left_argument">
+          <div class="color" style='background-color: #{ @user.color }'></div>
+          <div class="name">#{ @user.name }:</div>
+          <div class="argument"></span> #{ $.emoticons.replace(@content) }</div>
+        </div>
+        <div class="right_argument pull-right">
+          <span class = "time_stamp">#{ @timestamp.toString("HH:mm") }</span>
+        </div>
+      </div>
+    """

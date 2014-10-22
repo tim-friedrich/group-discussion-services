@@ -1,0 +1,113 @@
+.emoticon {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    background-size: contain !important;
+    text-indent: -10000px;
+    overflow: hidden;
+    cursor: text;
+    text-align: left;
+}
+.emoticon-smile { background: asset_url('emoticons/smile.png') no-repeat; }
+.emoticon-sad-smile { background: asset_url('emoticons/sad-smile.png') no-repeat; }
+.emoticon-big-smile { background: asset_url('emoticons/big-smile.png') no-repeat; }
+.emoticon-cool { background: asset_url('emoticons/cool.png') no-repeat; }
+.emoticon-surprised { background: asset_url('emoticons/surprised.png') no-repeat; }
+.emoticon-wink { background: asset_url('emoticons/wink.png') no-repeat; }
+.emoticon-crying { background: asset_url('emoticons/crying.png') no-repeat; }
+.emoticon-sweating { background: asset_url('emoticons/sweating.png') no-repeat; }
+.emoticon-speechless { background: asset_url('emoticons/speachless.png') no-repeat; }
+.emoticon-kiss { background: asset_url('emoticons/kiss.png') no-repeat; }
+.emoticon-tongue-out { background: asset_url('emoticons/tongue-out.png') no-repeat; }
+.emoticon-blush { background: asset_url('emoticons/blush.png') no-repeat; }
+.emoticon-wondering { background: asset_url('emoticons/wondering.png') no-repeat; }
+.emoticon-sleepy { background: asset_url('emoticons/sleepy.png') no-repeat; }
+.emoticon-dull { background: asset_url('emoticons/dull.png') no-repeat; }
+.emoticon-in-love { background: asset_url('emoticons/in-love.png') no-repeat; }
+.emoticon-evil-grin { background: asset_url('emoticons/evil-grin.png') no-repeat; }
+.emoticon-talking { background: asset_url('emoticons/talking.png') no-repeat; }
+.emoticon-yawn { background: asset_url('emoticons/yawn.png') no-repeat; }
+//.emoticon-puke { background-position: 0 -551px; }
+//.emoticon-doh { background-position: 0 -580px; }
+.emoticon-angry { background: asset_url('emoticons/angry.png') no-repeat; }
+//.emoticon-speechless-1 { background-position: 0 -638px; }
+.emoticon-it-wasnt-me { background: asset_url('emoticons/it-wasnt-me.png') no-repeat; }
+.emoticon-kiss-1 { background: asset_url('emoticons/kiss-1.png') no-repeat; }
+//.emoticon-party { background-position: 0 -725px; }
+.emoticon-tongue-out-1 { background: asset_url('emoticons/tongue-out-1.png') no-repeat; }
+//.emoticon-wondering-1 { background-position: 0 -783px; }
+.emoticon-worried { background: asset_url('emoticons/worried.png') no-repeat; }
+//.emoticon-mmm { background-position: 0 -841px; }
+/*
+.emoticon-sleepy-1 { background-position: 0 -870px; }
+.emoticon-dull-1 { background-position: 0 -899px; }
+.emoticon-nerd { background-position: 0 -928px; }
+.emoticon-evil-grin-1 { background-position: 0 -957px; }
+.emoticon-lips-sealed { background-position: 0 -986px; }
+.emoticon-hi { background-position: 0 -1015px; }
+.emoticon-call { background-position: 0 -1044px; }
+.emoticon-devil { background-position: 0 -1073px; }
+.emoticon-angel { background-position: 0 -1102px; }
+.emoticon-angry-1 { background-position: 0 -1131px; }
+.emoticon-envy { background-position: 0 -1160px; }
+.emoticon-worried-1 { background-position: 0 -1189px; }
+.emoticon-nerd-1 { background-position: 0 -1218px; }
+.emoticon-wait { background-position: 0 -1247px; }
+.emoticon-bear { background-position: 0 -1276px; }
+.emoticon-lips-sealed-1 { background-position: 0 -1305px; }
+.emoticon-make-up { background-position: 0 -1334px; }
+.emoticon-giggle { background-position: 0 -1363px; }
+.emoticon-clapping { background-position: 0 -1392px; }
+.emoticon-thinking { background-position: 0 -1421px; }
+.emoticon-bow { background-position: 0 -1450px; }
+.emoticon-rofl { background-position: 0 -1479px; }
+.emoticon-whew { background-position: 0 -1508px; }
+.emoticon-happy { background-position: 0 -1537px; }
+.emoticon-smirk { background-position: 0 -1566px; }
+.emoticon-nod { background-position: 0 -1595px; }
+.emoticon-shake { background-position: 0 -1624px; }
+.emoticon-punch { background-position: 0 -1653px; }
+.emoticon-emo { background-position: 0 -1682px; }
+.emoticon-yes { background-position: 0 -1711px; }
+.emoticon-no { background-position: 0 -1740px; }
+.emoticon-handshake { background-position: 0 -1769px; }
+.emoticon-skype { background-position: 0 -1798px; }
+.emoticon-heart { background-position: 0 -1827px; }
+.emoticon-broken-heart { background-position: 0 -1856px; }
+.emoticon-mail { background-position: 0 -1885px; }
+.emoticon-flower { background-position: 0 -1914px; }
+.emoticon-rain { background-position: 0 -1943px; }
+.emoticon-sun { background-position: 0 -1972px; }
+.emoticon-time { background-position: -29px 0; }
+.emoticon-music { background-position: -29px -29px; }
+.emoticon-movie { background-position: -29px -58px; }
+.emoticon-phone { background-position: -29px -87px; }
+.emoticon-coffee { background-position: -29px -116px; }
+.emoticon-pizza { background-position: -29px -145px; }
+.emoticon-cash { background-position: -29px -174px; }
+.emoticon-muscle { background-position: -29px -203px; }
+.emoticon-cake { background-position: -29px -232px; }
+.emoticon-beer { background-position: -29px -261px; }
+.emoticon-drink { background-position: -29px -290px; }
+.emoticon-dance { background-position: -29px -319px; }
+.emoticon-ninja { background-position: -29px -348px; }
+.emoticon-star { background-position: -29px -377px; }
+.emoticon-mooning { background-position: -29px -406px; }
+.emoticon-middlefinger { background-position: -29px -435px; }
+.emoticon-bandit { background-position: -29px -464px; }
+.emoticon-drunk { background-position: -29px -493px; }
+.emoticon-smoke { background-position: -29px -522px; }
+.emoticon-toivo { background-position: -29px -551px; }
+.emoticon-rock { background-position: -29px -580px; }
+.emoticon-headbang { background-position: -29px -609px; }
+.emoticon-bug { background-position: -29px -638px; }
+.emoticon-fubar { background-position: -29px -666px; }
+.emoticon-poolparty { background-position: -29px -695px; }
+.emoticon-swear { background-position: -29px -724px; }
+.emoticon-tmi { background-position: -29px -753px; }
+.emoticon-heidy { background-position: -29px -782px; }
+.emoticon-myspace { background-position: -29px -811px; }
+.emoticon-malthe { background-position: -29px -840px; }
+.emoticon-tauri { background-position: -29px -869px; }
+.emoticon-priidu { background-position: -29px -898px; }
+*/
