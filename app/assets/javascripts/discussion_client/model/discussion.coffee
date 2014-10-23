@@ -52,9 +52,7 @@ class @Discussion
         )
         if json.discussion.votes
           $.each(json.discussion.votes, (index, vote) =>
-            argument = @arguments.filter((argument) => argument.id == vote.argument_id)[0]
-            argument.votes.push(vote)
-            console.log(argument)
+            @arguments.filter((argument) => argument.id == vote.argument_id)[0].votes.push(vote)
           )
         @current_user = @users.filter((user) => user.id == json.current_user_id)[0]
         @moderator = @users.filter((user) => user.id == json.discussion.moderator_id)[0]
