@@ -15,8 +15,6 @@ class @Discussion
       timestamp = new Date(json.created_at),
       discussion = @,
       type = json.argument_type,
-      is_voted = json.is_voted,
-      votes = json.votes
     )
     @arguments.push(argument)
     return argument
@@ -52,6 +50,12 @@ class @Discussion
         $.each(json.discussion.arguments, (index, argument) =>
           @new_argument(argument)
         )
+        if json.discussion.votes
+          $.each(json.discussion.votes, (index, vote) =>
+            argument = @arguments.filter((argument) => argument.id == vote.argument_id)[0]
+            argument.votes.push(vote)
+            console.log(argument)
+          )
         @current_user = @users.filter((user) => user.id == json.current_user_id)[0]
         @moderator = @users.filter((user) => user.id == json.discussion.moderator_id)[0]
         @questions = json.discussion.questions

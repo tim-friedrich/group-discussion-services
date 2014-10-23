@@ -1,5 +1,5 @@
 class @Argument
-  constructor: (@id, @content, @user, @timestamp, @discussion, @type, @is_voted, @votes = []) ->
+  constructor: (@id, @content, @user, @timestamp, @discussion, @type, @votes = []) ->
 
 
   vote: (is_like) =>
@@ -36,3 +36,8 @@ class @Argument
         </div>
       </div>
     """
+
+  is_voted: () =>
+    console.log(@votes)
+    console.log(@votes.filter((vote) => vote.user_id == @discussion.current_user.id))
+    return @votes.filter((vote) => vote.user_id == @discussion.current_user.id)?.length >= 1

@@ -28,6 +28,7 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
+    @question.topic = CGI::escapeHTML(@question.topic)
     respond_to do |format|
       if @question.save
         @question.discussion.save

@@ -19,7 +19,13 @@ class DiscussionsController < ApplicationController
         current_user.enter_discussion(@discussion)
         PrivatePub.publish_to "/discussion/"+@discussion.id.to_s+"/users/enter", user_id: current_user.id
         format.html{ @questions = Question.where(discussion_id: params[:id]) }
-        format.json
+        format.json do
+          if current_user == @discussion.moderator
+            @votes = Vote.where('argument_id in (:arguments)', {arguments: @discussion.arguments})
+          else
+            @votes = Vote.where('argument_id in (:arguments) and user_id = :user', {arguments: @discussion.arguments, user: current_user})
+          end
+        end
       end
     end
   end

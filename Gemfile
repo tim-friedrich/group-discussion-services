@@ -17,7 +17,7 @@ gem 'chart-js-rails'
 gem 'pg'
 
 #gem for heroku
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

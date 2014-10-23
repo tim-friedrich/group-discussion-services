@@ -19,7 +19,7 @@ class @ProbandView extends View
     $like_button = $(argument.dom_element).find("#like_button")
     $dislike_button = $(argument.dom_element).find("#dislike_button")
 
-    if argument.is_voted
+    if argument.is_voted()
       $like_button.addClass("disabled")
       $dislike_button.addClass("disabled")
     else

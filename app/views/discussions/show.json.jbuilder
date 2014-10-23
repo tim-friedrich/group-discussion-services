@@ -7,5 +7,6 @@ json.discussion do
   json.arguments @discussion.arguments, partial: 'arguments/argument', as: :argument
   json.questions @discussion.questions
   json.users @discussion.discussions_users, partial: 'discussions_users/user', as: :discussions_user
+  json.votes @votes
 end
 json.current_user_id current_user.id
