@@ -21,5 +21,8 @@ module GDS
     config.i18n.default_locale = :de
     config.middleware.use FayeRails::Middleware, mount: '/faye', :timeout => 25
     config.middleware.delete Rack::Lock
+    Dir.glob("#{Rails.root}/app/assets/images/**/").each do |path|
+      config.assets.paths << path
+    end
   end
 end
