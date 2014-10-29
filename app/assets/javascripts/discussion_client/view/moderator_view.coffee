@@ -26,6 +26,7 @@ class @ModeratorView extends View
   draw_participation: () =>
     content_dom =
       """
+        <h3>Beteiligung</h3>
         <div class="tab-pane" id="participation">
           <canvas id="chart" width="180" height="180"></canvas>
         </div>

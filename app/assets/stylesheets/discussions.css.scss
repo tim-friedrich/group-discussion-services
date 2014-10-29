@@ -50,6 +50,11 @@
 	width: 810px;
 	margin-right: 10px;
 	height: 100%;
+
+    .emoticon{
+      width: 13px;
+      height: 13px;
+    }
 }
 
 .top{
@@ -71,5 +76,53 @@ html, body, .content, #discussion{
 
   img{
     width: 13px;
+  }
+}
+
+
+
+.new_argument{
+
+  .form-group {
+    float: left;
+    width: 700px;
+    height: 75px;
+    position: relative;
+
+    div{
+      width: 700px;
+      overflow-y: scroll;
+      height: 75px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .emoticon_picker{
+      left: 665px;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+      overflow-y: visible;
+
+      .emoticon_prev{
+        width: 126px;
+        height:88px;
+        background-color: lightslategray;
+        overflow: hidden;
+        display: none;
+        opacity: 0.9;
+
+        input{
+          border: none;
+          margin: 2px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+  #submit_buttons{
+    .btn{
+      margin: 0px 5px 5px 5px;
+    }
   }
 }

@@ -33,11 +33,11 @@ class QuestionsController < ApplicationController
       if @question.save
         @question.discussion.save
         PrivatePub.publish_to "/discussion/"+@question.discussion.id.to_s+"/questions/new", topic: @question.topic
-        format.html { redirect_to @question }
-        format.json { render action: 'show', status: :created, location: @question }
+        format.html { render nothing: true }
+        format.json { render nothing: true }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.html { render nothing: true }
+        format.json { render nothing: true }
       end
     end
   end

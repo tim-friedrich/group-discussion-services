@@ -33,14 +33,18 @@
 
       <%= form_for Argument.new , class: "form-inline", role: "form", remote: true do |f| %>
         <div class="form-group">
-          <%= f.text_area :content, class: "form-control", rows: 2 %>
+          <div contentEditable="true" class="form-control" id="argument_content"></div>
+          <div class="emoticon_picker"><span class="emoticon emoticon-smile" title="Smiley hinzufügen">:)</span>
+            <div class="emoticon_prev" ></div>
+          </div>
         </div>
         <%= f.hidden_field :discussion_id, value: @discussion.id %>
-        <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
-        <% if @discussion.moderator == current_user %>
-          <%= f.submit "Neue Frage", class: "btn btn-success", id: "new_question_button" %>
-          <%= link_to "Evaluierung", {action: "evaluate"}, {class: "btn btn-success", color: "white"} %>
-        <% end %>
+          <div id="submit_buttons">
+            <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
+            <% if @discussion.moderator == current_user %>
+              <%= f.submit "Neue Frage", class: "btn btn-success", id: "new_question_button" %>
+            <% end %>
+          </div>
       <% end %>
     </div>
 

@@ -22,6 +22,7 @@
 //= require date/de-DE
 //= require date/extras
 //= require Chart
+//= require jquery.caret
 
 //= require_tree .
 
