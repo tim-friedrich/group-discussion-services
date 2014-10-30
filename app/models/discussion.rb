@@ -1,5 +1,4 @@
 class Discussion < ActiveRecord::Base
-	belongs_to :moderator, :class_name => "User", :foreign_key => "moderator_id"
 
 	has_many :questions
 	has_many :arguments
@@ -8,7 +7,6 @@ class Discussion < ActiveRecord::Base
 	belongs_to :company
 
 	validates :company_id, presence:true
-	validates :moderator_id, presence:true
 	validates :due_date, presence:true
 
   def research_institute
@@ -16,5 +14,14 @@ class Discussion < ActiveRecord::Base
   end
   def current_question
     self.questions.last
+  end
+
+  def moderator
+    for user in self.discussions_users do
+      if user.role == Role.where(name: 'moderator').first()
+        return user.user
+      end
+    end
+    return nil
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804164321) do
+ActiveRecord::Schema.define(version: 20141030104519) do
 
   create_table "argument_types", force: true do |t|
     t.string   "name"
@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 20140804164321) do
 
   create_table "discussions", force: true do |t|
     t.string   "topic"
-    t.integer  "moderator_id"
     t.datetime "due_date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -69,6 +68,7 @@ ActiveRecord::Schema.define(version: 20140804164321) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "color"
+    t.integer  "role_id"
   end
 
   create_table "questions", force: true do |t|

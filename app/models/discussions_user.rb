@@ -2,6 +2,7 @@ class DiscussionsUser < ActiveRecord::Base
 	belongs_to :discussion
 	belongs_to :user
 	has_many :presences, :class_name => "DiscussionPresence"
+  belongs_to :role
 
 	validates :user, uniqueness: { scope: :discussion }
 	after_create :set_color

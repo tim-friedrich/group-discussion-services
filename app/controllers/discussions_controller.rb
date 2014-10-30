@@ -31,7 +31,6 @@ class DiscussionsController < ApplicationController
   end
 
   def leave
-    puts ("A")*50
     current_user.leave_discussion(@discussion)
     PrivatePub.publish_to "/discussion/"+@discussion.id.to_s+"/users/leave", user_id: current_user.id
     render nothing: true
@@ -59,8 +58,8 @@ class DiscussionsController < ApplicationController
   # POST /discussions.json
   def create
     @discussion = Discussion.new(discussion_params)
-    @discussion.moderator = current_user
     @discussion.users << current_user
+    @discussion.discussions_users.first().role = Role.where(name: 'moderator').first()
     @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
 
     respond_to do |format|
