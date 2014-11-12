@@ -42,7 +42,8 @@ class @Discussion
             id = user.id,
             name = user.name,
             color = user.color,
-            is_present = user.is_present
+            is_present = user.is_present,
+            role = user.role,
             @
           )
           @users.push(new_user)

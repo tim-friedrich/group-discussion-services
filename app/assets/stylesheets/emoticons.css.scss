@@ -7,6 +7,7 @@
     overflow: hidden;
     cursor: text;
     text-align: left;
+    z-index: 5;
 }
 .emoticon-smile { background: asset_url('emoticons/smile.png') no-repeat; }
 .emoticon-sad-smile { background: asset_url('emoticons/sad-smile.png') no-repeat; }

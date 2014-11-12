@@ -20,9 +20,19 @@ class DiscussionsController < ApplicationController
         PrivatePub.publish_to "/discussion/"+@discussion.id.to_s+"/users/enter", user_id: current_user.id
         format.html{ @questions = Question.where(discussion_id: params[:id]) }
         format.json do
+
           if current_user == @discussion.moderator
+            @arguments = @discussion.arguments
             @votes = Vote.where('argument_id in (:arguments)', {arguments: @discussion.arguments})
+
           else
+            @arguments = []
+            discussion_user = DiscussionsUser.where(discussion_id: @discussion.id, user_id: current_user).first()
+            @discussion.arguments.each do | argument |
+              if argument.argument_type.name == 'proband' or argument.argument_type.name == 'moderator' or discussion_user.role.name == 'observer'
+                @arguments.push(argument)
+              end
+            end
             @votes = Vote.where('argument_id in (:arguments) and user_id = :user', {arguments: @discussion.arguments, user: current_user})
           end
         end
@@ -50,6 +60,10 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1/edit
   def edit
     @companies = current_user.research_institutes.first.companies
+    @proband_role =  Role.where(name: 'proband').first()
+    @observer_role =  Role.where(name: 'observer').first()
+    @probands = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @proband_role.id)
+    @observers = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @observer_role.id)
     @proband = DiscussionsUser.new
     @users = User.all
   end

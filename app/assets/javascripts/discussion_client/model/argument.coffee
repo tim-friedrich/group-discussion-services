@@ -36,6 +36,8 @@ class @Argument
         </div>
       </div>
     """
+    if @type == 'observer'
+      @dom_element = $(@dom_element).addClass('observer_argument')
 
   is_voted: () =>
     console.log(@votes)

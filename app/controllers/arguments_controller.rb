@@ -14,13 +14,15 @@ class ArgumentsController < ApplicationController
 
 	end
 	
-	def create 
-		@argument = Argument.new(argument_params)
+	def create
+		@argument = Argument.new
+    @argument.content = argument_params['content']
+    @argument.discussion_id = argument_params['discussion_id']
+    @argument.argument_type_id = ArgumentType.where(name: argument_params['type']).first.id
 		@argument.user = current_user
 
     @argument.content = CGI::escapeHTML(@argument.content)
 	  @argument.question = @argument.discussion.current_question
-	  set_argument_type(@argument)
 
     if @argument.save
       argument_json = render_to_string( template: 'arguments/_argument.json.jbuilder', locals: { current_user: current_user, argument: @argument } )
@@ -43,18 +45,10 @@ class ArgumentsController < ApplicationController
 	end
 
 	def argument_params
-      	params.require(:argument).permit(:content, :user, :question, :discussion_id, :user_id, :created_at, :likes, :dislikes, :question_id)
+      	params.require(:argument).permit(:content, :user, :question, :type, :discussion_id, :user_id, :created_at, :likes, :dislikes, :question_id)
     end
     
     def check_rights
       	redirect_to signin_url, notice: "Bitte melden Sie sich an." unless signed_in?
-    end
-
-    def set_argument_type (argument)
-      if (argument.discussion.moderator == current_user)
-        argument.argument_type = ArgumentType.where(name: 'moderator').first
-      else
-        argument.argument_type = ArgumentType.where(name: 'proband').first
-      end
     end
 end

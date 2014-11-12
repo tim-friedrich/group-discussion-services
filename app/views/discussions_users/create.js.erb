@@ -1,5 +1,15 @@
-$("#probands").append("<tr><td>"
-	+"<%= j @discussions_user.user.firstname %></td>"
-	+"<td><%= j @discussions_user.user.lastname %></td>"
-	+"<td><%= j @discussions_user.user.email %></td>"
-	+'<td><%= link_to "Löschen", @discussions_user, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td></tr>');
+
+<% if (@discussions_user.role.name == 'proband') %>
+    $("#probands").append("<tr><td>"
+            + "<%= j @discussions_user.user.firstname %></td>"
+            + "<td><%= j @discussions_user.user.lastname %></td>"
+            + "<td><%= j @discussions_user.user.email %></td>"
+            + '<td><%= link_to "Löschen", @discussions_user, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td></tr>');
+<% end %>
+<% if (@discussions_user.role.name == 'observer') %>
+    $("#observers").append("<tr><td>"
+            + "<%= j @discussions_user.user.firstname %></td>"
+            + "<td><%= j @discussions_user.user.lastname %></td>"
+            + "<td><%= j @discussions_user.user.email %></td>"
+            + '<td><%= link_to "Löschen", @discussions_user, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td></tr>');
+<% end %>

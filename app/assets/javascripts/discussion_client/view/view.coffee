@@ -9,10 +9,6 @@ class @View
     @proband_chat = $("#discussion_chat")
     @moderator_chat = $("#moderator_chat")
 
-  submit_argument: () =>
-    $("#new_argument_button").submit()
-    $('#argument_content').val('')
-
   scroll_down: (div) =>
     div.stop().animate({
       scrollTop: div[0].scrollHeight}, 800)
@@ -20,6 +16,7 @@ class @View
   #event registration
   register_events: () =>
     $("#new_question_button").click( (event) =>
+      event.preventDefault
       $.ajax({
         type: 'POST',
         url: '/questions/',
@@ -32,13 +29,22 @@ class @View
     )
 
     $("#new_argument_button").click( (event) =>
+      event.preventDefault()
       @submit_argument()
+      return false;
+    )
+
+    $("#new_observer_argument_button").click( (event) =>
+      event.preventDefault()
+      @submit_argument('observer')
+      return false
     )
 
     $('#argument_content').keydown( (event) =>
       if(event.keyCode == 13)
         @submit_argument()
         return false
+
       if(event.keyCode == 32)
         caret = $('#argument_content').caret('pos')
         $('#argument_content').html($.emoticons.replace($("#argument_content").text()))
@@ -71,7 +77,10 @@ class @View
       window.set_caret(document.getElementById("argument_content"), caret+$(event.target).attr('data-type').length+1)
     )
 
-  submit_argument: () =>
+  submit_argument: (type) =>
+    if not type?
+      type = @discussion.current_user.role
+
     $.ajax({
       type: 'POST',
       url: '/arguments/',
@@ -79,6 +88,7 @@ class @View
         argument:
           content: $('#argument_content').text()
           discussion_id:  @discussion.id
+          type: type
     })
     $('#argument_content').text("")
 
@@ -100,22 +110,25 @@ class @View
   draw_argument: (argument) =>
     argument.generate_dom()
 
-    if argument.type == 'proband'
-      chat = @proband_chat
 
     if argument.type == 'moderator'
-      chat = @moderator_chat
+      if @scrolled_down(@moderator_chat)
+        scroll = true
+      @moderator_chat.append(argument.dom_element).children().last()
+      if scroll
+        @scroll_down(@moderator_chat)
 
-    if @scrolled_down(chat)
+    if @scrolled_down(@proband_chat)
       scroll = true
 
-    argument.dom_element = chat.append(argument.dom_element).children().last()
+    argument.dom_element = @proband_chat.append(argument.dom_element).children().last()
 
     if argument.type == 'proband'
       @draw_voting(argument)
 
     if scroll
-      @scroll_down(chat)
+      @scroll_down(@proband_chat)
+
 
   draw_voting: (argument) =>
 
@@ -155,17 +168,18 @@ class @View
       """)
 
     $.each(@discussion.users, (index, user) =>
-      $(".proband-list").append(
-                               """
-          <li class="list-group-item">
-            <div style="width: 5px; height: 20px; background-color: #{ user.color }; float: left"></div>
-            #{ user.name }
-            <div class="proband-status"><img src="#{ image_path("offline.jpg") }"></img></div>
-          </li>
-        """
-      )
-      if user.is_present
-        @change_user_status(true, user)
+      if user.role == 'proband'
+        $(".proband-list").append(
+                                 """
+            <li class="list-group-item">
+              <div style="width: 5px; height: 20px; background-color: #{ user.color }; float: left"></div>
+              #{ user.name }
+              <div class="proband-status"><img src="#{ image_path("offline.jpg") }"></img></div>
+            </li>
+          """
+        )
+        if user.is_present
+          @change_user_status(true, user)
     )
 
   update_question: (question) =>

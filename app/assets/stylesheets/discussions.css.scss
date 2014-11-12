@@ -79,18 +79,16 @@ html, body, .content, #discussion{
   }
 }
 
-
-
 .new_argument{
 
   .form-group {
     float: left;
-    width: 700px;
+    width: 652px;
     height: 75px;
     position: relative;
 
     div{
-      width: 700px;
+      width: 652px;
       overflow-y: scroll;
       height: 75px;
       position: absolute;
@@ -98,7 +96,7 @@ html, body, .content, #discussion{
       left: 0;
     }
     .emoticon_picker{
-      left: 665px;
+      left: 620px;
       top: 5px;
       width: 20px;
       height: 20px;
@@ -111,6 +109,7 @@ html, body, .content, #discussion{
         overflow: hidden;
         display: none;
         opacity: 0.9;
+        z-index: 10;
 
         input{
           border: none;
@@ -122,7 +121,11 @@ html, body, .content, #discussion{
   }
   #submit_buttons{
     .btn{
-      margin: 0px 5px 5px 5px;
+
     }
   }
+}
+
+.observer_argument {
+  background-color: #d3d3d3 !important;
 }

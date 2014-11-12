@@ -1,5 +1,5 @@
 class @User
-  constructor: (@id, @name, @color, @is_present, @discussion) ->
+  constructor: (@id, @name, @color, @is_present, @role, @discussion) ->
 
   leave: () =>
     $.ajax({

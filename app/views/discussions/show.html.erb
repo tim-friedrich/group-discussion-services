@@ -40,9 +40,19 @@
         </div>
         <%= f.hidden_field :discussion_id, value: @discussion.id %>
           <div id="submit_buttons">
-            <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
             <% if @discussion.moderator == current_user %>
-              <%= f.submit "Neue Frage", class: "btn btn-success", id: "new_question_button" %>
+              <div class="btn-group">
+                <button type="button" class="btn btn-default" id="new_argument_button">Nachricht Senden</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="javascript:void(0);" id="new_question_button">Neue Frage</a></li>
+                  <li><a href="javascript:void(0);" id="new_observer_argument_button">An Beobachter senden</a></li>
+                </ul>
+              </div>
+            <% else %>
+                <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
             <% end %>
           </div>
       <% end %>

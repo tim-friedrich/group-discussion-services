@@ -8,7 +8,7 @@ class DiscussionsUsersController < ApplicationController
 	    @discussions_user = DiscussionsUser.new(discussion_user_params)
 	    respond_to do |format|
 	      if @discussions_user.save
-	        format.js {}
+	        format.js {  }
 	      end
 	    end
 	end
@@ -24,6 +24,6 @@ class DiscussionsUsersController < ApplicationController
 
 	private
 		def discussion_user_params
-	      	params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user)
+	      	params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user, :role_id)
 	    end
 end
