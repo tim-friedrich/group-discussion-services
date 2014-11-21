@@ -23,7 +23,8 @@
 //= require date/extras
 //= require Chart
 //= require jquery.caret
-
+//= require jquery.fileupload
+//= require jquery-ui
 //= require_tree .
 
 

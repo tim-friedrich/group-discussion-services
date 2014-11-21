@@ -28,6 +28,12 @@ gem "nested_form"
 #webserver
 gem "thin"
 
+gem 'aws-sdk'
+
+gem 'jquery-ui-rails'
+
+gem 'jquery.fileupload-rails'
+
 #gem for websockets
 gem "faye-rails"
 

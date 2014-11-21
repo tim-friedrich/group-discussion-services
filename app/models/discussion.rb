@@ -4,6 +4,7 @@ class Discussion < ActiveRecord::Base
 	has_many :arguments
   has_many :discussions_users
 	has_many :users, through: :discussions_users
+  has_many :visual_aids
 	belongs_to :company
 
 	validates :company_id, presence:true

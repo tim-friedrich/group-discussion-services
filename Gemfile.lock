@@ -28,6 +28,11 @@ GEM
     addressable (2.3.6)
     arel (4.0.2)
     atomic (1.1.14)
+    aws-sdk (1.59.0)
+      aws-sdk-v1 (= 1.59.0)
+    aws-sdk-v1 (1.59.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
@@ -140,6 +145,11 @@ GEM
     jquery-turbolinks (2.0.2)
       railties (>= 3.1.0)
       turbolinks
+    jquery-ui-rails (5.0.2)
+      railties (>= 3.2.16)
+    jquery.fileupload-rails (1.11.0)
+      jquery-ui-rails (~> 5.0)
+      railties (>= 3.1)
     json (1.8.1)
     libnotify (0.8.0)
       ffi (>= 1.0.11)
@@ -277,6 +287,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk
   bcrypt-ruby (~> 3.0.1)
   bootstrap-sass
   cancan
@@ -295,6 +306,8 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
+  jquery.fileupload-rails
   libnotify (= 0.8.0)
   nested_form
   newrelic_rpm

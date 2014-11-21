@@ -24,6 +24,6 @@ class DiscussionsUsersController < ApplicationController
 
 	private
 		def discussion_user_params
-	      	params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user, :role_id)
-	    end
+	  	params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user, :role_id)
+	  end
 end

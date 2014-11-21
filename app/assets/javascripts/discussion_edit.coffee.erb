@@ -1,0 +1,77 @@
+@init_edit_discussion = () ->
+  $('.directUpload').find("input:file").each( (i, elem) =>
+    @fileInput    = $(elem);
+    form         = $(fileInput.parents('form:first'));
+    submitButton = form.find('input[type="submit"]');
+    progressBar  = $("<div class='bar'></div>");
+    barContainer = $("<div class='progress'></div>").append(progressBar);
+    @fileInput.after(barContainer);
+
+    @fileInput.fileupload(
+      fileInput:       fileInput,
+      url:             window.s3_url,
+      type:            'POST',
+      autoUpload:       false,
+      formData:         window.s3_form_data,
+      paramName:        'file',
+      dataType:         'XML',
+      replaceFileInput: false
+
+      progressall: (e, data) =>
+        progress = parseInt(data.loaded / data.total * 100, 10);
+        progressBar.css('width', progress + '%')
+
+      start: (e) =>
+        submitButton.prop('disabled', true);
+
+        progressBar.
+          css('background', 'green').
+          css('display', 'block').
+          css('width', '0%').
+          text("Loading...");
+
+      done: (e, data) =>
+        submitButton.prop('disabled', false);
+
+        key   = $(data.jqXHR.responseXML).find("Key").text();
+
+        $.post(
+          "/visual_aids/"
+          visual_aid:
+            discussion_id: window.discussion_id
+            url: window.s3_url_host + key
+          () =>
+            progressBar.text("Upload abgeschlossen");
+            row = """
+                    <tr>
+                      <td>#{ key.split('/')[key.split('/').length-1] }</td>
+                      <td><a class="btn btn-xs btn-primary" data-method="delete" data-remote="true" href="" rel="nofollow">Löschen</a></td>
+                    </tr>
+                  """
+            $('#visual_aids_table').append(row)
+        )
+        .fail(() =>
+          alert("Leider war ihr Upload nicht erfolgreich bitte versuchen sie es erneut.")
+          progressBar.text("Fehler");
+        )
+
+      fail: (e, data) =>
+        submitButton.prop('disabled', false);
+        alert("Leider war ihr Upload nicht erfolgreich bitte versuchen sie es erneut.")
+        progressBar.text("Fehler");
+
+      add: (e, data) =>
+        $('.directUpload').find('.btn').on('click', (event) =>
+          data.submit()
+        )
+      progressBar.
+        css("background", "red").
+        text("Failed");
+    )
+  )
+
+  $('.directUpload').on('submit', (event) =>
+    return false
+  )
+
+

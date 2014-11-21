@@ -17,6 +17,7 @@ GDS::Application.routes.draw do
   resources :questions, only: [:create, :show, :new]
   resources :arguments, only: [:create, :show, :new]
   resources :discussions_users
+  resource :visual_aids
 
   resources :users	
 	root 'static_pages#home'

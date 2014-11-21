@@ -18,6 +18,7 @@ class DiscussionsController < ApplicationController
       else
         current_user.enter_discussion(@discussion)
         PrivatePub.publish_to "/discussion/"+@discussion.id.to_s+"/users/enter", user_id: current_user.id
+
         format.html{ @questions = Question.where(discussion_id: params[:id]) }
         format.json do
 
@@ -64,8 +65,11 @@ class DiscussionsController < ApplicationController
     @observer_role =  Role.where(name: 'observer').first()
     @probands = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @proband_role.id)
     @observers = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @observer_role.id)
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201, acl: :public_read)
     @proband = DiscussionsUser.new
+    @visual_aid = VisualAid.new
     @users = User.all
+
   end
 
   # POST /discussions
@@ -123,15 +127,20 @@ class DiscussionsController < ApplicationController
     end
   end
 
+  def add_visual_aid
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
+
     def set_discussion
       @discussion = Discussion.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discussion_params
-      params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id, :company)
+      params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id, :company, :visual_aids)
     end
 
 end
