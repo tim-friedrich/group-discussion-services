@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120164727) do
+ActiveRecord::Schema.define(version: 20141124170314) do
 
   create_table "argument_types", force: true do |t|
     t.string   "name"
@@ -124,6 +124,13 @@ ActiveRecord::Schema.define(version: 20141120164727) do
   create_table "visual_aids", force: true do |t|
     t.integer  "discussion_id"
     t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "visual_aids_logs", force: true do |t|
+    t.integer  "visual_aid_id"
+    t.boolean  "open"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -22,6 +22,40 @@ class @ModeratorView extends View
   draw_toolbox: () =>
     super
     @draw_participation()
+    @draw_visual_aids_tab()
+
+  draw_visual_aids_tab: () =>
+    $('.toolbox').find(".nav-tabs").append(
+      """
+        <li>
+          <a href="#visual_aids" role="tab" data-toggle="tab">Medien</a>
+        </li>
+      """
+    )
+
+    $('.toolbox').find('.tab-content').append(
+      """
+        <div class="tab-pane" id="visual_aids">
+          <div class="list-group"></div>
+        </div>
+      """
+    )
+
+    $.each(@discussion.visual_aids, (index, visual_aid) =>
+      list_group = $('#visual_aids').find('.list-group')
+      list_group.append(
+        """
+          <a href="#" class="list-group-item" id="#{ visual_aid.id }">#{ visual_aid.name() }</a>
+        """
+      )
+      $(list_group.children()[list_group.children().length-1]).on('click', (event) =>
+        list_group.children().removeClass('active')
+        visual_aid.show()
+        $(event.target).addClass('active')
+        @resize()
+      )
+    )
+
 
   draw_participation: () =>
     content_dom =

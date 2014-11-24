@@ -5,6 +5,7 @@ class @Discussion
   constructor: () ->
     @arguments = []
     @users = []
+    @visual_aids = []
     @load_discussion()
 
   new_argument: (json) =>
@@ -51,6 +52,13 @@ class @Discussion
         $.each(json.discussion.arguments, (index, argument) =>
           @new_argument(argument)
         )
+        $.each(json.discussion.visual_aids, (index, visual_aid) =>
+          @visual_aids.push(new ImageAid(
+            id = visual_aid.id,
+            url = visual_aid.url,
+            @
+          ))
+        )
         if json.discussion.votes
           $.each(json.discussion.votes, (index, vote) =>
             @arguments.filter((argument) => argument.id == vote.argument_id)[0].votes.push(vote)
@@ -73,6 +81,8 @@ class @Discussion
     @bind_new_vote()
     @bind_user_entered()
     @bind_user_leaved()
+    @bind_open_visual_aid()
+    @bind_close_visual_aid()
     window.onbeforeunload = () => @current_user.leave()
 
 
@@ -81,6 +91,22 @@ class @Discussion
       $.each(@users, (index, user) =>
         if data.user_id == user.id
           user.leaved()
+      )
+    )
+
+  bind_open_visual_aid: () =>
+    PrivatePub.subscribe("/discussion/"+@id+"/visualAid/open", (data) =>
+      $.each(@visual_aids, (index, visual_aid) =>
+        if visual_aid.id == data.id
+          visual_aid.open()
+      )
+    )
+
+  bind_close_visual_aid: () =>
+    PrivatePub.subscribe("/discussion/"+@id+"/visualAid/close", (data) =>
+      $.each(@visual_aids, (index, visual_aid) =>
+        if visual_aid.id == data.id
+          visual_aid.close()
       )
     )
 

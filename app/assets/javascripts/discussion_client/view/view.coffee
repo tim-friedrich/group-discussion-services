@@ -77,6 +77,10 @@ class @View
       window.set_caret(document.getElementById("argument_content"), caret+$(event.target).attr('data-type').length+1)
     )
 
+    $(window).resize(() =>
+      @resize()
+    )
+
   submit_argument: (type) =>
     if not type?
       type = @discussion.current_user.role
@@ -93,6 +97,7 @@ class @View
     $('#argument_content').text("")
 
   draw: () =>
+    $('header').hide()
     @init_emoticons()
     @draw_arguments()
     @scroll_down(@moderator_chat)
@@ -100,6 +105,7 @@ class @View
     @update_question(@discussion.questions[..].pop())
     @draw_toolbox()
     @draw_emoticon_prev()
+    @resize()
 
 
   draw_arguments: () =>
@@ -197,6 +203,14 @@ class @View
 
   scrolled_down: (elem) =>
     return ( elem.outerHeight() + 5 > elem[0].scrollHeight - elem.scrollTop() > elem.outerHeight() - 5)
+
+  resize: () =>
+    chat_height = $(window).height()-$('.chat').find('.top').height()-$('.chat').find('form').height();
+
+    if chat_height < 130
+      chat_height = 130
+
+    $('#discussion_panel').css('height', chat_height+'px')
 
   init_emoticons: () =>
     @emoticons =

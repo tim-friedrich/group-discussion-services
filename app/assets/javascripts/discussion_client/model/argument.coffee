@@ -40,6 +40,4 @@ class @Argument
       @dom_element = $(@dom_element).addClass('observer_argument')
 
   is_voted: () =>
-    console.log(@votes)
-    console.log(@votes.filter((vote) => vote.user_id == @discussion.current_user.id))
     return @votes.filter((vote) => vote.user_id == @discussion.current_user.id)?.length >= 1

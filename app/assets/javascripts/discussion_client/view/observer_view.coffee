@@ -1,2 +1,2 @@
-class @ModeratorView extends View
+class @ObserverView extends ModeratorView
 

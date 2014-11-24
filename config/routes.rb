@@ -24,6 +24,8 @@ GDS::Application.routes.draw do
   post '/discussions/:id/leave' => 'discussions#leave'
   post '/discussions/:id/enter' => 'discussions#enter'
 
+  post '/visual_aids/:id/open' => 'visual_aids#open'
+  post '/visual_aids/:id/close' => 'visual_aids#close'
   get '/discussions/:id/arguments' => 'discussions#arguments'
 
   get '/user_leaved/:id' => 'discussions#user_leaved'
