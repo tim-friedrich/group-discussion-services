@@ -146,3 +146,16 @@ html, body, .content, #discussion{
 #visual_aids_table a {
   width: 300px
 }
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  input{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    opacity: 0;
+    height: 500px;
+    cursor: pointer;
+  }
+}

@@ -1,95 +1,91 @@
 @init_edit_discussion = () ->
 
-  $('.directUpload').find("input:file").each( (i, elem) =>
+  @fileInput    = $('#fileupload');
+  submitButton = $('.fileinput-button');
+  progressBar  = $("<div class='bar'></div>");
+  barContainer = $("<div class='progress'></div>").append(progressBar);
+  submitButton.removeClass('disabled');
+  $('.fileinput-button').after(barContainer);
 
-    @fileInput    = $(elem);
-    form         = $(fileInput.parents('form:first'));
-    submitButton = form.find('input[type="submit"]');
-    progressBar  = $("<div class='bar'></div>");
-    barContainer = $("<div class='progress'></div>").append(progressBar);
-    submitButton.removeClass('disabled');
-    @fileInput.after(barContainer);
+  @fileInput.fileupload(
+    url:             window.s3_url,
+    type:            'POST',
+    autoUpload:       true,
+    formData:         window.s3_form_data,
+    paramName:        'file',
+    dataType:         'XML',
 
-    @fileInput.fileupload(
-      fileInput:       fileInput,
-      url:             window.s3_url,
-      type:            'POST',
-      autoUpload:       false,
-      formData:         window.s3_form_data,
-      paramName:        'file',
-      dataType:         'XML',
-      replaceFileInput: false
 
-      progressall: (e, data) =>
-        progress = parseInt(data.loaded / data.total * 100, 10);
-        progressBar.css('width', progress + '%')
+    progressall: (e, data) =>
+      progress = parseInt(data.loaded / data.total * 100, 10);
+      progressBar.css('width', progress + '%')
 
-      start: (e) =>
-        submitButton.addClass('disabled');
-        progressBar.
-          css('background', 'green').
-          css('display', 'block').
-          css('width', '0%').
-          text("Loading...");
+    start: (e) =>
+      submitButton.addClass('disabled');
+      progressBar.
+      css('background', 'green').
+      css('display', 'block').
+      css('width', '0%').
+      text("Loading...");
 
-      done: (e, data) =>
+    done: (e, data) =>
+      submitButton.removeClass('disabled');
+
+      key   = $(data.jqXHR.responseXML).find("Key").text();
+
+      $.post(
+        "/visual_aids/"
+        visual_aid:
+          discussion_id: window.discussion_id
+          url: 'https://'+window.s3_url_host + key
+
+        (data) =>
+          progressBar.text("Upload abgeschlossen");
+          row = """
+                  <tr>
+                    <td>
+                      <a href="#" class="thumbnail">
+                        <img src="https://#{window.s3_url_host + key}" alt="#{ key.split('/')[key.split('/').length-1] }">
+                      </a>
+                    </td>
+                    <td>#{ key.split('/')[key.split('/').length-1] }</td>
+                    <td>
+                      <a class="btn btn-xs btn-primary delete_file" data-method="delete" data-remote="true" href="/visual_aids/#{data.id}" rel="nofollow">Löschen</a>
+                    </td>
+                  </tr>
+                """
+          $('#visual_aids_table').append(row)
+          $('#visual_aids_table').children().last().find('a').click((event) =>
+            $(event.target).parent().parent().remove()
+          )
+         'json'
+      )
+      .fail(() =>
         submitButton.removeClass('disabled');
-
-        key   = $(data.jqXHR.responseXML).find("Key").text();
-
-        $.post(
-          "/visual_aids/"
-          visual_aid:
-            discussion_id: window.discussion_id
-            url: window.s3_url_host + key
-
-          () =>
-            progressBar.text("Upload abgeschlossen");
-            row = """
-                    <tr>
-                      <td>
-                        <a href="#" class="thumbnail">
-                          <img src="https://#{window.s3_url_host + key}" alt="#{key.split('/').length-1}">
-                        </a>
-                      </td>
-                      <td>#{ key.split('/')[key.split('/').length-1] }</td>
-                    </tr>
-                  """
-            $('#visual_aids_table').append(row)
-        )
-        .fail(() =>
-          alert("Leider war ihr Upload nicht erfolgreich bitte versuchen sie es erneut.")
-          progressBar.text("Fehler");
-        )
-
-      fail: (e, data) =>
-        submitButton.addClass('disabled');
         alert("Leider war ihr Upload nicht erfolgreich bitte versuchen sie es erneut.")
         progressBar.text("Fehler");
+      )
 
-      add: (e, data) =>
-        valid = true
-        $('#not-supported-file').addClass('hidden')
-        acceptFileTypes = /^image\/(gif|jpe?g|png)$/i
-        submitButton.removeClass('disabled');
-        if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type']))
-          valid = false
-          $('#not-supported-file').removeClass('hidden')
-          submitButton.addClass('disabled');
+    fail: (e, data) =>
+      submitButton.removeClass('disabled');
+      alert("Leider war ihr Upload nicht erfolgreich bitte versuchen sie es erneut.")
+      progressBar.text("Fehler");
 
-        $('.directUpload').find('.btn').on('click', (event) =>
-          if valid
-            data.submit()
-        )
+    add: (e, data) =>
+      valid = true
+      $('#not-supported-file').addClass('hidden')
+      acceptFileTypes = /^image\/(gif|jpe?g|png)$/i
+      submitButton.removeClass('disabled');
+      if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type']))
+        valid = false
+        $('#not-supported-file').removeClass('hidden')
 
-      progressBar.
-        css("background", "red").
-        text("Failed");
-    )
+      if valid
+        data.submit()
+
   )
 
-  $('.directUpload').on('submit', (event) =>
-    return false
+  $('.delete_file').click((event) =>
+    $(event.target).parent().parent().remove()
   )
-
 

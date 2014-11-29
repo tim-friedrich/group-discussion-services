@@ -9,7 +9,7 @@ class @ImageAid extends VisualAid
     container.append(
       """
         <div id="visual_aid_container">
-          <img src="https://#{ @url }" alt="#{ @name() }"/>
+          <img src="#{ @url }" alt="#{ @name() }"/>
         </div>
       """)
 

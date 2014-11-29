@@ -21,7 +21,7 @@ class DiscussionsController < ApplicationController
 
         format.html{ @questions = Question.where(discussion_id: params[:id]) }
         format.json do
-
+          @visual_aids_log = VisualAidsLog.where('visual_aid_id in (:visual_aids)', { visual_aids: @discussion.visual_aids } )
           if current_user == @discussion.moderator
             @arguments = @discussion.arguments
             @votes = Vote.where('argument_id in (:arguments)', {arguments: @discussion.arguments})

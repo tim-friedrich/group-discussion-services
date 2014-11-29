@@ -99,25 +99,19 @@
 
     <h2>Anschauungsmaterial</h2>
 
-    <div class="alert alert-danger hidden" id="not-supported-file" role="alert">Die der von Ihnen ausgewählte Dateityp wird nicht unterstützt. Bitte wählen sie eine Bilddatei.</div>
-    <%= form_for(@visual_aid, html: { multipart: true, class: "form-horizontal visual_aids directUpload", role: "form", remote: true  }) do |f| %>
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="input-group">
+    <span class="btn btn-success fileinput-button disabled">
+      <i class="glyphicon glyphicon-plus"></i>
+      <span>Select files...</span>
+      <input id="fileupload" type="file" name="files[]" multiple="">
+      <input id="visual_aid_discussion_id" name="visual_aid[discussion_id]" type="hidden" value="<%= @discussion.id %>">
+    </span>
 
-            <%= f.file_field :visual_aid  %>
-            <span class="input-group-btn">
-                <%= f.submit "Hochladen", class: "btn btn-default disabled"%>
-            </span>
-            <%= f.hidden_field :discussion_id, value: @discussion.id %>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-      </div><!-- /.row -->
-    <% end %>
+    <div class="alert alert-danger hidden" id="not-supported-file" role="alert">Die der von Ihnen ausgewählte Dateityp wird nicht unterstützt. Bitte wählen sie eine Bilddatei.</div>
 
     <table class="table">
       <thead>
       <tr>
+        <th>Vorschau</th>
         <th>Name</th>
         <th></th>
       </tr>
@@ -129,11 +123,14 @@
         <tr>
           <td>
             <a href="#" class="thumbnail">
-              <img src="https://<%= visual_aid.url %>" alt="<%= visual_aid.url.split('/').last() %>">
+              <img src="<%= visual_aid.url %>" alt="<%= visual_aid.url.split('/').last() %>">
             </a>
           </td>
           <td>
             <%= visual_aid.url.split('/').last() %>
+          </td>
+          <td>
+          <td><%= link_to 'Löschen', visual_aids_path+"/"+visual_aid.id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary delete_file" %></td>
           </td>
         </tr>
 

@@ -67,6 +67,13 @@ class @Discussion
         @moderator = @users.filter((user) => user.id == json.discussion.moderator_id)[0]
         @questions = json.discussion.questions
         @init_discussion()
+
+        last_log = json.discussion.visual_aids_logs[json.discussion.visual_aids_logs.length-1]
+        if last_log.open == true
+          $.each(@visual_aids, (index, visual_aid) =>
+            if(visual_aid.id == last_log.visual_aid_id)
+              visual_aid.open()
+          )
     )
 
   init_discussion: () =>

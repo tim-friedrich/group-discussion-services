@@ -211,6 +211,8 @@ class @View
       chat_height = 130
 
     $('#discussion_panel').css('height', chat_height+'px')
+    @scroll_down(@proband_chat)
+    @scroll_down(@moderator_chat)
 
   init_emoticons: () =>
     @emoticons =
