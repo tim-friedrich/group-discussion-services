@@ -71,7 +71,7 @@ class @ModeratorView extends View
     data = []
 
     $.each(@discussion.users, (index, user) =>
-      if user != @discussion.moderator
+      if user.role != 'moderator' and user.role != 'observer'
         if user.argument_count() != 0
           @init_participation_diagram = false
 

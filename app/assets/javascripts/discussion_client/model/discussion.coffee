@@ -26,6 +26,13 @@ class @Discussion
       @view.draw_argument(argument)
     )
 
+    if @current_user.is_moderator() or @current_user.role == 'observer'
+      PrivatePub.subscribe("/discussion/"+@id+"/observer/arguments/new", (data) =>
+        argument = @new_argument(data)
+        @view.draw_argument(argument)
+      )
+
+
   bind_new_question: () =>
     PrivatePub.subscribe("/discussion/"+@id+"/questions/new", (data) ->
       $("#question").text("Frage: "+data.topic)
@@ -69,7 +76,7 @@ class @Discussion
         @init_discussion()
 
         last_log = json.discussion.visual_aids_logs[json.discussion.visual_aids_logs.length-1]
-        if last_log.open == true
+        if last_log?.open == true
           $.each(@visual_aids, (index, visual_aid) =>
             if(visual_aid.id == last_log.visual_aid_id)
               visual_aid.open()
@@ -77,10 +84,12 @@ class @Discussion
     )
 
   init_discussion: () =>
-    if @current_user == @moderator
+    if @current_user.is_moderator()
       @view = new ModeratorView(@)
-    else
+    else if @current_user.role == 'proband'
       @view = new ProbandView(@)
+    else if @current_user.role == 'observer'
+      @view = new ObserverView(@)
     @view.draw()
 
     @bind_new_argument()

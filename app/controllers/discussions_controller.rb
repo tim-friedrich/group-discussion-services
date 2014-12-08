@@ -16,21 +16,22 @@ class DiscussionsController < ApplicationController
         format.html{ redirect_to current_user, notice: "Du bist nicht für diese Discussion eingetragen" }
         format.json{ render status: :forbidden }
       else
+        @discussion_user = DiscussionsUser.where(discussion_id: @discussion.id, user_id: current_user).first()
         current_user.enter_discussion(@discussion)
         PrivatePub.publish_to "/discussion/"+@discussion.id.to_s+"/users/enter", user_id: current_user.id
 
         format.html{ @questions = Question.where(discussion_id: params[:id]) }
         format.json do
           @visual_aids_log = VisualAidsLog.where('visual_aid_id in (:visual_aids)', { visual_aids: @discussion.visual_aids } )
-          if current_user == @discussion.moderator
+          if current_user == @discussion.moderator or @discussion_user.role.name == 'observer'
             @arguments = @discussion.arguments
             @votes = Vote.where('argument_id in (:arguments)', {arguments: @discussion.arguments})
 
           else
             @arguments = []
-            discussion_user = DiscussionsUser.where(discussion_id: @discussion.id, user_id: current_user).first()
+
             @discussion.arguments.each do | argument |
-              if argument.argument_type.name == 'proband' or argument.argument_type.name == 'moderator' or discussion_user.role.name == 'observer'
+              if argument.argument_type.name == 'proband' or argument.argument_type.name == 'moderator'
                 @arguments.push(argument)
               end
             end
@@ -65,7 +66,7 @@ class DiscussionsController < ApplicationController
     @observer_role =  Role.where(name: 'observer').first()
     @probands = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @proband_role.id)
     @observers = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @observer_role.id)
-    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201, acl: :public_read)
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "visual_aids/#{ @discussion.id }/#{ SecureRandom.uuid }/${filename}", success_action_status: 201, acl: :public_read)
     @proband = DiscussionsUser.new
     @visual_aid = VisualAid.new
     @users = User.all

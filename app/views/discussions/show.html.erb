@@ -59,6 +59,11 @@
     </div>
 
     <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/arguments/new" %>
+
+
+  <% if current_user == @discussion.moderator || @discussion_user.role.name == 'observer' %>
+      <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/observer/arguments/new" %>
+    <% end %>
     <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/questions/new" %>
     <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/open" %>
     <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/close" %>
