@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124170314) do
+ActiveRecord::Schema.define(version: 20141211180052) do
 
   create_table "argument_types", force: true do |t|
     t.string   "name"
@@ -126,6 +126,8 @@ ActiveRecord::Schema.define(version: 20141124170314) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "media_type"
   end
 
   create_table "visual_aids_logs", force: true do |t|

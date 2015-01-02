@@ -6,18 +6,18 @@ GDS::Application.routes.draw do
 
   resources :contacts
 
-  resources :votes
+  resources :votes, only: [:create]
 
-  resources :dislikes
+  resources :dislikes, only: [:create]
 
-  resources :likes
+  resources :likes, only: [:create]
 
-  resources :discussions
+  resources :discussions, only: [:create, :show, :edit, :new]
 
-  resources :questions, only: [:create, :show, :new]
-  resources :arguments, only: [:create, :show, :new]
+  resources :questions, only: [:create]
+  resources :arguments, only: [:create]
   resources :discussions_users
-  resource :visual_aids
+  resource :visual_aids, only: [:create]
 
   resources :users	
 	root 'static_pages#home'
@@ -25,6 +25,7 @@ GDS::Application.routes.draw do
   post '/discussions/:id/enter' => 'discussions#enter'
 
   post '/visual_aids/:id/open' => 'visual_aids#open'
+  post '/visual_aids/:id/command' => 'visual_aids#command'
   post '/visual_aids/:id/close' => 'visual_aids#close'
   get '/discussions/:id/arguments' => 'discussions#arguments'
   delete 'visual_aids/:id' => 'visual_aids#destroy'

@@ -45,12 +45,12 @@ class @ModeratorView extends View
       list_group = $('#visual_aids').find('.list-group')
       list_group.append(
         """
-          <a href="#" class="list-group-item" id="#{ visual_aid.id }">#{ visual_aid.name() }</a>
+          <a href="#" class="list-group-item" id="#{ visual_aid.id }">#{ visual_aid.name }</a>
         """
       )
       $(list_group.children()[list_group.children().length-1]).on('click', (event) =>
         list_group.children().removeClass('active')
-        visual_aid.show()
+        visual_aid.send_command('open')
         $(event.target).addClass('active')
         @resize()
       )

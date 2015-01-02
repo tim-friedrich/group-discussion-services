@@ -1,12 +1,7 @@
 class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate, :arguments]
   before_filter :authenticate_user!
-  
-  # GET /discussions
-  # GET /discussions.json
-  def index
-    @discussions = Discussion.all
-  end
+
 
   # GET /discussions/1
   # GET /discussions/1.json
@@ -54,9 +49,6 @@ class DiscussionsController < ApplicationController
     @users = User.all
     @proband = DiscussionsUser.new
     @companies = current_user.research_institutes.first.companies
-    if @companies.empty?
-      redirect_to new_company_path, notice: 'Bitte erstellen sie zuerst einen Kunden.'
-    end
   end
 
   # GET /discussions/1/edit
@@ -126,10 +118,6 @@ class DiscussionsController < ApplicationController
       format.json{ render json: @discussion.arguments }
       format.html{ render json: @discussion.arguments }
     end
-  end
-
-  def add_visual_aid
-
   end
 
   private

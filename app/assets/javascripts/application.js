@@ -24,6 +24,7 @@
 //= require Chart
 //= require jquery.caret
 //= require jquery.fileupload
+//= require mediaelement_rails
 //= require jquery-ui
 //= require_tree .
 

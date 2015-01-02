@@ -1,19 +1,6 @@
 class ArgumentsController < ApplicationController
   before_filter :authenticate_user!
 
-	def show
-		@argument = Argument.where(id: params[:id]).first
-		@moderator_type = ArgumentType.where(name: 'moderator').first
-		respond_to do | format |
-			format.js
-		end
-	end
-
-	def argument
-		@moderator_type = ArgumentType.where(name:'moderator').first 
-
-	end
-	
 	def create
 		@argument = Argument.new
     @argument.content = CGI::escapeHTML(argument_params['content'])
@@ -35,25 +22,7 @@ class ArgumentsController < ApplicationController
     end
   end
 
-  def votes
-    @votes = Argument.where(id: params[:id]).first().votes
-    respond_to do |format|
-      format.json
-    end
-  end
-
-	def new
-		@argument = Argument.new(argument_params)
-    @argument.content = CGI::escapeHTML(@argument.content)
-		@argument.user = current_user
-		@argument.save
-	end
-
 	def argument_params
-      	params.require(:argument).permit(:content, :user, :question, :type, :discussion_id, :user_id, :created_at, :likes, :dislikes, :question_id)
-    end
-    
-    def check_rights
-      	redirect_to signin_url, notice: "Bitte melden Sie sich an." unless signed_in?
-    end
+  	params.require(:argument).permit(:content, :user, :question, :type, :discussion_id, :user_id, :created_at, :likes, :dislikes, :question_id)
+  end
 end

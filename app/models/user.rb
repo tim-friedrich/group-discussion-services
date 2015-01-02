@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  ROLES = %w[moderator proband admin]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -20,8 +21,7 @@ class User < ActiveRecord::Base
 	validates :firstname, presence: true, length: { maximum: 50 }
 	validates :lastname, presence: true, length: { maximum: 50 }
 
-	
-  	accepts_nested_attributes_for :discussions
+  accepts_nested_attributes_for :discussions
 
 
 	def full_name
@@ -48,5 +48,19 @@ class User < ActiveRecord::Base
 
 	def is_staff?()
 		self.role == Role.where(name: 'deputy').first || self.role == Role.where(name: 'moderator').first
-	end
+  end
+
+  def is_deputy?
+    self.role == Role.where(name: 'deputy').first
+  end
+
+  def is_moderator?
+    self.role == Role.where(name: 'moderator').first
+  end
+
+  def role?(base_role)
+    ROLES.index(base_role.to_s) <= ROLES.index(role)
+  end
+
+
 end

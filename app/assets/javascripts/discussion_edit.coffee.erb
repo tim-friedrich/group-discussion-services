@@ -32,12 +32,15 @@
       submitButton.removeClass('disabled');
 
       key   = $(data.jqXHR.responseXML).find("Key").text();
+      name = key.split('/')[key.split('/').length-1]
 
       $.post(
         "/visual_aids/"
         visual_aid:
           discussion_id: window.discussion_id
+          name: name
           url: 'https://'+window.s3_url_host + key
+          media_type: data.originalFiles[0]['type']
 
         (data) =>
           progressBar.text("Upload abgeschlossen");
@@ -45,10 +48,10 @@
                   <tr>
                     <td>
                       <a href="#" class="thumbnail">
-                        <img src="https://#{window.s3_url_host + key}" alt="#{ key.split('/')[key.split('/').length-1] }">
+                        <img src="https://#{window.s3_url_host + key}" alt="#{ name }">
                       </a>
                     </td>
-                    <td>#{ key.split('/')[key.split('/').length-1] }</td>
+                    <td>#{ name }</td>
                     <td>
                       <a class="btn btn-xs btn-primary delete_file" data-method="delete" data-remote="true" href="/visual_aids/#{data.id}" rel="nofollow">Löschen</a>
                     </td>
@@ -74,11 +77,15 @@
     add: (e, data) =>
       valid = true
       $('#not-supported-file').addClass('hidden')
-      acceptFileTypes = /^image\/(gif|jpe?g|png)$/i
+      acceptFileTypes = /(^image\/(gif|jpe?g|png)$)|(^video\/(ogg|mp4|webm))/i
       submitButton.removeClass('disabled');
-      if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type']))
-        valid = false
-        $('#not-supported-file').removeClass('hidden')
+
+      $(data.originalFiles).each((index, file) =>
+        if(file['type'].length && !acceptFileTypes.test(file['type']))
+          valid = false
+          $('#not-supported-file').removeClass('hidden')
+      )
+
 
       if valid
         data.submit()

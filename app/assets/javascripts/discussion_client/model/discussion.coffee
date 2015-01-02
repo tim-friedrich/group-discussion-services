@@ -44,7 +44,6 @@ class @Discussion
       (json) =>
         @id = json.discussion.id
         @topic = json.discussion.topic
-        #@conversation.set_question(discussion.questions[discussion.questions.length])
         $.each(json.discussion.users, (index, user) =>
           new_user = new User(
             id = user.id,
@@ -56,22 +55,35 @@ class @Discussion
           )
           @users.push(new_user)
         )
+        @current_user = @users.filter((user) => user.id == json.current_user_id)[0]
+        @moderator = @users.filter((user) => user.id == json.discussion.moderator_id)[0]
+
         $.each(json.discussion.arguments, (index, argument) =>
           @new_argument(argument)
         )
         $.each(json.discussion.visual_aids, (index, visual_aid) =>
-          @visual_aids.push(new ImageAid(
-            id = visual_aid.id,
-            url = visual_aid.url,
-            @
-          ))
+          if /image/i.test(visual_aid.media_type)
+            @visual_aids.push(new ImageAid(
+              id = visual_aid.id,
+              url = visual_aid.url,
+              name = visual_aid.name,
+              media_type = visual_aid.media_type
+              @
+            ))
+          else if /video/i.test(visual_aid.media_type)
+            @visual_aids.push(new VideoAid(
+              id = visual_aid.id,
+              url = visual_aid.url,
+              @name = visual_aid.name,
+              @media_type = visual_aid.media_type
+              @
+            ))
         )
         if json.discussion.votes
           $.each(json.discussion.votes, (index, vote) =>
             @arguments.filter((argument) => argument.id == vote.argument_id)[0].votes.push(vote)
           )
-        @current_user = @users.filter((user) => user.id == json.current_user_id)[0]
-        @moderator = @users.filter((user) => user.id == json.discussion.moderator_id)[0]
+
         @questions = json.discussion.questions
         @init_discussion()
 
@@ -99,6 +111,7 @@ class @Discussion
     @bind_user_leaved()
     @bind_open_visual_aid()
     @bind_close_visual_aid()
+    @bind_visual_aid_command()
     window.onbeforeunload = () => @current_user.leave()
 
 
@@ -114,7 +127,7 @@ class @Discussion
     PrivatePub.subscribe("/discussion/"+@id+"/visualAid/open", (data) =>
       $.each(@visual_aids, (index, visual_aid) =>
         if visual_aid.id == data.id
-          visual_aid.open()
+          visual_aid.run_command('open')
       )
     )
 
@@ -122,7 +135,15 @@ class @Discussion
     PrivatePub.subscribe("/discussion/"+@id+"/visualAid/close", (data) =>
       $.each(@visual_aids, (index, visual_aid) =>
         if visual_aid.id == data.id
-          visual_aid.close()
+          visual_aid.run_command('close')
+      )
+    )
+
+  bind_visual_aid_command: () =>
+    PrivatePub.subscribe("/discussion/"+@id+"/visualAid/command", (data) =>
+      $.each(@visual_aids, (index, visual_aid) =>
+        if visual_aid.id == data.id
+          visual_aid.run_command(data.command)
       )
     )
 

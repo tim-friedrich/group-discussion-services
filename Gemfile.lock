@@ -162,6 +162,9 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mediaelement_rails (0.8.0)
+      jquery-rails (>= 1.0)
+      railties (>= 3.1)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.5.2)
@@ -309,6 +312,7 @@ DEPENDENCIES
   jquery-ui-rails
   jquery.fileupload-rails
   libnotify (= 0.8.0)
+  mediaelement_rails
   nested_form
   newrelic_rpm
   pg

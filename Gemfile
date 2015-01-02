@@ -13,6 +13,9 @@ gem 'datejs-rails'
 #js charts api
 gem 'chart-js-rails'
 
+#gem for js musik and video player
+gem 'mediaelement_rails'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 

@@ -7,7 +7,6 @@ class Discussion < ActiveRecord::Base
   has_many :visual_aids
 	belongs_to :company
 
-	validates :company_id, presence:true
 	validates :due_date, presence:true
 
   def research_institute
