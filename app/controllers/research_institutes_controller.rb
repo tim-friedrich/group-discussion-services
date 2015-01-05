@@ -1,6 +1,10 @@
 class ResearchInstitutesController < ApplicationController
   before_action :set_research_institute, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only: [:show, :edit, :update, :destroy]
+  before_action :new_research_institute, only: :create
+
+  load_and_authorize_resource only: [ :edit, :delete ]
+
   # GET /research_institutes
   # GET /research_institutes.json
   def index
@@ -28,9 +32,7 @@ class ResearchInstitutesController < ApplicationController
   # POST /research_institutes
   # POST /research_institutes.json
   def create
-    @research_institute = ResearchInstitute.new(research_institute_params)
-    @research_institute.users << @research_institute.deputy
-    @research_institute.deputy.role = Role.where(name: "deputy").first
+
 
     respond_to do |format|
       if @research_institute.save
@@ -79,5 +81,11 @@ class ResearchInstitutesController < ApplicationController
       params.require(:research_institute).permit(:name, :deputy,
         deputy_attributes: [:username, :firstname, :lastname, :email, :password, :password_confirmation, :remember_token, :discussions], 
         contact_attributes: [:street, :postalcode, :town, :email, :telephone])
+    end
+
+    def new_research_institute
+      @research_institute = ResearchInstitute.new(research_institute_params)
+      @research_institute.users << @research_institute.deputy
+      @research_institute.deputy.role = Role.where(name: "moderator").first
     end
 end

@@ -38,6 +38,7 @@ describe ResearchInstitutesController do
   describe "GET edit" do
     it "assigns the requested research_institute as @research_institute" do
       research_institute = ResearchInstitute.create! valid_attributes
+      research_institute.deputy = @user
       get :edit, {:id => research_institute.to_param}, valid_session
       assigns(:research_institute).should eq(research_institute)
     end

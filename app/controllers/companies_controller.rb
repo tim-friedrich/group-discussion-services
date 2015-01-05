@@ -1,6 +1,10 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  before_action :new_company, only: :create
+
+  load_and_authorize_resource
+  check_authorization
 
   # GET /companies
   # GET /companies.json
@@ -26,8 +30,7 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(company_params)
-    @company.research_institute = current_user.research_institutes.first
+
     respond_to do |format|
       if @company.save
         format.html { redirect_to current_user, notice: 'Company was successfully created.' }
@@ -72,5 +75,10 @@ class CompaniesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name, contact_attributes: [:street, :postalcode, :town, :email, :telephone])
+    end
+
+    def new_company
+      @company = Company.new(company_params)
+      @company.research_institute = current_user.research_institutes.first
     end
 end

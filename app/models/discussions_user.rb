@@ -12,8 +12,8 @@ class DiscussionsUser < ActiveRecord::Base
   		colors = [	"#759399", "#cc6d6a", "#FFFCE8", "#ffb1ad", "#a6a6a6",
   					"#CCC1A3", "#C2CCA5", "#FFF29B", "#bbff99", "#c6bdd1"]
   		user_colors = []
-  		puts "A"*60
-  		DiscussionsUser.where(discussion_id:self.discussion.id).each do | discussions_user |
+
+  		DiscussionsUser.where(discussion_id: discussion.id).each do | discussions_user |
   			user_colors.push(discussions_user.color)  
   		end
 

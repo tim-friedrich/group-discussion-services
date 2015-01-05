@@ -40,38 +40,6 @@ describe VotesController do
   # VotesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all votes as @votes" do
-   
-
-      vote = Vote.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:votes).should eq([vote])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested vote as @vote" do
-      vote = Vote.create! valid_attributes
-      get :show, {:id => vote.to_param}, valid_session
-      assigns(:vote).should eq(vote)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new vote as @vote" do
-      get :new, {}, valid_session
-      assigns(:vote).should be_a_new(Vote)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested vote as @vote" do
-      vote = Vote.create! valid_attributes
-      get :edit, {:id => vote.to_param}, valid_session
-      assigns(:vote).should eq(vote)
-    end
-  end
 
   describe "POST create" do
     describe "with valid params" do
@@ -95,45 +63,6 @@ describe VotesController do
         post :create, {:vote => { "argument_id" => "invalid value" }}, valid_session
         assigns(:vote).should be_a_new(Vote)
       end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested vote" do
-        vote = Vote.create! valid_attributes
-        # Assuming there are no other votes in the database, this
-        # specifies that the Vote created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Vote.any_instance.should_receive(:update).with({ "argument_id" => "1" })
-        put :update, {:id => vote.to_param, :vote => { "argument_id" => "1" }}, valid_session
-      end
-
-      it "assigns the requested vote as @vote" do
-        vote = Vote.create! valid_attributes
-        put :update, {:id => vote.to_param, :vote => valid_attributes}, valid_session
-        assigns(:vote).should eq(vote)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the vote as @vote" do
-        vote = Vote.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Vote.any_instance.stub(:save).and_return(false)
-        put :update, {:id => vote.to_param, :vote => { "argument_id" => "invalid value" }}, valid_session
-        assigns(:vote).should eq(vote)
-      end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested vote" do
-      vote = Vote.create! valid_attributes
-      expect {
-        delete :destroy, {:id => vote.to_param}, valid_session
-      }.to change(Vote, :count).by(-1)
     end
   end
 

@@ -21,8 +21,6 @@ describe Argument do
  
   it { should respond_to(:content) }
   it { should respond_to(:user) }
-  it { should respond_to(:likes) }
-  it { should respond_to(:dislikes) }
   it { should respond_to(:question) }
   it { should respond_to(:argument_type) }
 

@@ -36,6 +36,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -47,12 +48,13 @@
               <td><%= link_to 'Diskussion beitreten', discussion, class: "btn btn-xs btn-primary" %></td>
               <td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-xs btn-primary" %></td>
               <td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+              <td><%= link_to 'Evaluation', '/discussions/'+discussion.id.to_s+"/evaluate", class: "btn btn-xs btn-primary" %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
       <br>
-      <% if current_user.is_staff? %>
+      <% if current_user.is_moderator? %>
         <%= link_to 'neue Diskussion erstellen', new_discussion_path, class: "btn btn-xs btn-primary" %>
        
       <% end %>

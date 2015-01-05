@@ -3,10 +3,6 @@ require "spec_helper"
 describe DiscussionsController do
   describe "routing" do
 
-    it "routes to #index" do
-      get("/discussions").should route_to("discussions#index")
-    end
-
     it "routes to #new" do
       get("/discussions/new").should route_to("discussions#new")
     end
@@ -25,10 +21,6 @@ describe DiscussionsController do
 
     it "routes to #update" do
       put("/discussions/1").should route_to("discussions#update", id: "1")
-    end
-
-    it "routes to #destroy" do
-      delete("/discussions/1").should route_to("discussions#destroy", id: "1")
     end
 
     it "routes to #leave" do

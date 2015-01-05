@@ -4,9 +4,11 @@ describe QuestionsController do
 
   before do
       @user = FactoryGirl.create(:user)
+      @user.role = Role.where(name: 'moderator').first
+       @user.save()
       sign_in @user
-      @discussion = FactoryGirl.create(:discussion, moderator: @user)
-    end
+      @discussion = FactoryGirl.create(:discussion)
+  end
 
   describe "POST create" do
     let(:valid_attributes) { FactoryGirl.attributes_for(:question, user_id: @user.id, discussion_id: @discussion.id) }

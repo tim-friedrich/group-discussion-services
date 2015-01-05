@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only: [:show, :edit, :update, :destroy, :index]
+
+  load_and_authorize_resource
+  check_authorization
+
+
   # GET /users
   # GET /users.json
   def index
@@ -11,7 +16,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @discussions = @user.discussions
-    @companies = Company.all
+    @companies = current_user.research_institutes.first.companies
   end
 
   # GET /users/new

@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
-  ROLES = %w[moderator proband admin]
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  after_initialize :set_default_role
 
   has_many :discussions_users
 	has_many :arguments
@@ -58,9 +60,12 @@ class User < ActiveRecord::Base
     self.role == Role.where(name: 'moderator').first
   end
 
-  def role?(base_role)
-    ROLES.index(base_role.to_s) <= ROLES.index(role)
+  def is_guest?
+    self.role == nil
   end
 
-
+  def set_default_role
+    self.role ||= Role.where(name: 'proband').first
+    save
+  end
 end

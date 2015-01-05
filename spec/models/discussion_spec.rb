@@ -22,16 +22,6 @@ describe Discussion do
   it { should respond_to(:questions) }
   it { should be_valid }
 
-  describe "when company is not present" do
-  	before { @discussion.company = nil }
-  	it { should_not be_valid}
-  end
-
-  describe "when moderator is not present" do
-  	before { @discussion.moderator = nil }
-  	it { should_not be_valid }
-  end
-
   describe "when due_date is not present" do
   	before { @discussion.due_date = nil }
   	it { should_not be_valid }
@@ -45,6 +35,7 @@ describe Discussion do
   it "should return the research institute that the discussion belongs to" do
   	@research_institute = FactoryGirl.create(:research_institute)
   	@moderator = FactoryGirl.create(:user, role: Role.where(name: 'moderator').first)
+    @discussion.save
   	@moderator.research_institutes << @research_institute
   	@discussion.moderator = @moderator
   	@discussion.research_institute.should eq @research_institute

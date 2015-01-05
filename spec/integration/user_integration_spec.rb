@@ -27,7 +27,7 @@ describe 'users' do
         should_not have_link "Profile"
       end
       it "should redirect to the users page after sign_up" do
-        current_path.should eq user_path User.last
+        current_path.should eq root_path
       end
     end
   end

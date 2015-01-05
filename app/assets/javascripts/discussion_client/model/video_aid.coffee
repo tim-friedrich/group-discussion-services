@@ -41,16 +41,17 @@ class @VideoAid extends VisualAid
           #pause the video if the user is not allowed to start it
           @player.pause() unless @can_start
           @send_command('play') if @can_control
+          @send_command('time_update', mediaElement.currentTime) if @can_control
         ,false);
 
         mediaElement.addEventListener('pause', (e) =>
           @send_command('pause') if @can_control
         )
         mediaElement.addEventListener('timeupdate', (e) =>
-          current_time = mediaElement.currentTime
-          @send_command('time_update', current_time) if current_time - @last_current_time > 1
-          console.log(current_time - @last_current_time)
-          @last_current_time = mediaElement.currentTime
+          if @can_control
+            current_time = mediaElement.currentTime
+            @send_command('time_update', current_time) if current_time - @last_current_time > 1 || current_time - @last_current_time < 0
+            @last_current_time = mediaElement.currentTime
         )
 
     )

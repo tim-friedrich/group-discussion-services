@@ -26,7 +26,6 @@
 
           <% if signed_in? %>
             <li><%= link_to "Profil", current_user %></li>
-            <li><%= link_to "Einstellungen", edit_user_path(current_user) %> </li>
             <li><%= link_to "Abmelden", destroy_user_session_path, method: "delete" %></li>
           <% else %>
             <li><%= link_to "Anmelden", new_user_session_path %></li>

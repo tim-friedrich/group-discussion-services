@@ -22,6 +22,8 @@ describe CompaniesController do
 
   before do
     @research_institute = FactoryGirl.create(:research_institute, deputy: FactoryGirl.create(:user), contact: FactoryGirl.create(:contact))
+    @research_institute.deputy.role = Role.where(name: 'moderator').first()
+    @research_institute.deputy.save()
     sign_in @research_institute.deputy
   end
   # This should return the minimal set of attributes required to create a valid

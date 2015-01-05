@@ -34,5 +34,5 @@ class @VisualAid
         params: params
     )
 
-  run_command: (command) =>
-    @commands[command]()
+  run_command: (command, params) =>
+    @commands[command](params)

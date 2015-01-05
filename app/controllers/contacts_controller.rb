@@ -1,6 +1,10 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  before_action :new_contact, only: :create
+  load_and_authorize_resource
+  check_authorization
+
   # GET /contacts
   # GET /contacts.json
   def index
@@ -24,7 +28,7 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = Contact.new(contact_params)
+
 
     respond_to do |format|
       if @contact.save
@@ -70,5 +74,9 @@ class ContactsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
       params.require(:contact).permit(:street, :postalcode, :town, :email, :telephone)
+    end
+
+    def new_contact
+      @contact = Contact.new(contact_params)
     end
 end

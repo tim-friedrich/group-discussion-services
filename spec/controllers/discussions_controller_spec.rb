@@ -4,7 +4,6 @@ describe DiscussionsController do
 
   let(:valid_session) {  }
   let(:valid_attributes) { FactoryGirl.attributes_for(:discussion,
-                              moderator_id: FactoryGirl.create(:user).id,
                               company_id: FactoryGirl.create(:company).id)
                           }
 
@@ -12,23 +11,31 @@ describe DiscussionsController do
     before do
       @research_institute = FactoryGirl.create(:research_institute, deputy: FactoryGirl.create(:user), contact: FactoryGirl.create(:contact))
       @user = @research_institute.deputy
+      @user.role = Role.where(name: 'moderator').first()
       @company = FactoryGirl.create(:company, research_institute: @research_institute, contact: FactoryGirl.create(:contact))
       @user.research_institutes << @research_institute
+      @user.save
       sign_in @user
     end
     
     describe "GET" do  
-      describe "index" do
-        it "assigns all discussions as @discussions" do
-          discussions = Discussion.all
-          get :index, valid_session
-          assigns(:discussions).should eq(discussions)
-        end
-      end
 
       describe "show" do
         it "assigns the requested discussion as @discussion" do
           discussion = Discussion.create! valid_attributes
+          discussion.moderator = @user
+          discussion.save
+          get :show, {:id => discussion.to_param}, valid_session
+          assigns(:discussion).should eq(discussion)
+        end
+
+        it "should be allowed to access a discussion that one is assigned for" do
+          discussion = Discussion.create! valid_attributes
+          discussion.moderator = @user
+          discussion.save
+          @proband = FactoryGirl.create(:user)
+          discussion.users << @proband
+          sign_in @proband
           get :show, {:id => discussion.to_param}, valid_session
           assigns(:discussion).should eq(discussion)
         end
@@ -44,6 +51,7 @@ describe DiscussionsController do
       describe "edit" do
         it "assigns the requested discussion as @discussion" do
           discussion = Discussion.create! valid_attributes
+          discussion.moderator=@user
           get :edit, {:id => discussion.to_param}, valid_session
           assigns(:discussion).should eq(discussion)
         end
@@ -91,6 +99,8 @@ describe DiscussionsController do
       describe "with valid params" do
         it "updates the requested discussion" do
           discussion = Discussion.create! valid_attributes
+          discussion.moderator = @user
+          discussion.save
           # Assuming there are no other discussions in the database, this
           # specifies that the Discussion created on the previous line
           # receives the :update_attributes message with whatever params are
@@ -101,12 +111,16 @@ describe DiscussionsController do
 
         it "assigns the requested discussion as @discussion" do
           discussion = Discussion.create! valid_attributes
+          discussion.moderator = @user
           put :update, {:id => discussion.to_param, :discussion => valid_attributes}, valid_session
           assigns(:discussion).should eq(discussion)
         end
 
         it "redirects to the discussion" do
           discussion = Discussion.create! valid_attributes
+
+          discussion.moderator = @user
+
           put :update, {:id => discussion.to_param, :discussion => valid_attributes}, valid_session
           response.should redirect_to(@user)
         end
@@ -115,6 +129,7 @@ describe DiscussionsController do
       describe "with invalid params" do
         it "assigns the discussion as @discussion" do
           discussion = Discussion.create! valid_attributes
+          discussion.moderator = @user
           # Trigger the behavior that occurs when invalid params are submitted
           Discussion.any_instance.stub(:save).and_return(false)
           put :update, {:id => discussion.to_param, :discussion => { "topic" => "invalid value" }}, valid_session
@@ -123,6 +138,8 @@ describe DiscussionsController do
 
         it "re-renders the edit template" do
           discussion = Discussion.create! valid_attributes
+          discussion.moderator = @user
+          discussion.save()
           # Trigger the behavior that occurs when invalid params are submitted
           Discussion.any_instance.stub(:save).and_return(false)
           put :update, {:id => discussion.to_param, :discussion => { "topic" => "invalid value" }}, valid_session
@@ -130,10 +147,11 @@ describe DiscussionsController do
         end
       end
     end
-
+=begin
     describe "DELETE destroy" do
       it "destroys the requested discussion" do
         discussion = Discussion.create! valid_attributes
+        discussion.moderator = @user
         expect {
           delete :destroy, {:id => discussion.to_param}, valid_session
         }.to change(Discussion, :count).by(-1)
@@ -141,13 +159,15 @@ describe DiscussionsController do
 
       it "redirects to the users page" do
         discussion = Discussion.create! valid_attributes
+        discussion.moderator = @user
         delete :destroy, {:id => discussion.to_param}, valid_session
         response.should redirect_to(@user)
       end
     end
   end
 
-=begin
+
+
   describe "not signed in" do
     before do
       #@research_institute = FactoryGirl.create(:research_institute, deputy: FactoryGirl.create(:user), contact: FactoryGirl.create(:contact))
@@ -195,4 +215,5 @@ describe DiscussionsController do
     end
   end
 =end
+  end
 end

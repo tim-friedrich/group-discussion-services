@@ -1,12 +1,14 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  before_action :new_question
+  load_and_authorize_resource
+  #check_authorization
 
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(question_params)
-    @question.topic = CGI::escapeHTML(@question.topic)
+
     respond_to do |format|
       if @question.save
         @question.discussion.save
@@ -29,5 +31,10 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:topic, :description, :discussion_id)
+    end
+
+    def new_question
+      @question = Question.new(question_params)
+      @question.topic = CGI::escapeHTML(@question.topic)
     end
 end

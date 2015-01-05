@@ -2,10 +2,11 @@ class VisualAidsController < ApplicationController
 
   before_filter :authenticate_user!
   before_action :set_visual_aid, only: [ :open, :destroy, :close, :command ]
+  before_action :new_visual_aid, only: [ :create ]
+  load_and_authorize_resource
+  check_authorization
 
   def create
-    @visual_aid = VisualAid.new(visual_aid_params)
-
     respond_to do |format|
       if @visual_aid.save
 
@@ -36,19 +37,6 @@ class VisualAidsController < ApplicationController
     end
   end
 
-  def open
-    if current_user.id == @visual_aid.discussion.moderator.id
-      PrivatePub.publish_to "/discussion/"+@visual_aid.discussion.id.to_s+"/visualAid/open", JSON.parse(@visual_aid.to_json())
-      @visual_aids_log = VisualAidsLog.new(visual_aid_id: @visual_aid.id, open: true)
-      @visual_aids_log.save()
-      @visual_aid.visual_aids_logs << @visual_aids_log
-    end
-    respond_to do |format|
-      format.html { render nothing: true }
-      format.json {  }
-    end
-  end
-
   def command
     if current_user.id == @visual_aid.discussion.moderator.id
       PrivatePub.publish_to "/discussion/"+@visual_aid.discussion.id.to_s+"/visualAid/command", JSON.parse({
@@ -56,22 +44,8 @@ class VisualAidsController < ApplicationController
         command: params[:command],
         params: params[:params]
         }.to_json)
-      #@visual_aids_log = VisualAidsLog.new(visual_aid_id: @visual_aid.id, open: true)
-      #@visual_aids_log.save()
-      # @visual_aid.visual_aids_logs << @visual_aids_log
-    end
-    respond_to do |format|
-      format.html { render nothing: true }
-      format.json {  }
-    end
-  end
-
-  def close
-    if current_user.id == @visual_aid.discussion.moderator.id
-      PrivatePub.publish_to "/discussion/"+@visual_aid.discussion.id.to_s+"/visualAid/close", JSON.parse(@visual_aid.to_json)
-      @visual_aids_log = VisualAidsLog.new(visual_aid_id: @visual_aid.id, open: false)
-      @visual_aids_log.save()
-      @visual_aid.visual_aids_logs << @visual_aids_log
+      write_log(true) if params[:command] == 'open'
+      write_log(false) if params[:command] == 'close'
     end
     respond_to do |format|
       format.html { render nothing: true }
@@ -87,4 +61,15 @@ class VisualAidsController < ApplicationController
   def set_visual_aid
     @visual_aid = VisualAid.find(params[:id])
   end
+
+  def new_visual_aid
+    @visual_aid = VisualAid.new(visual_aid_params)
+  end
+
+  def write_log(open)
+    @visual_aids_log = VisualAidsLog.new(visual_aid_id: @visual_aid.id, open: open)
+    @visual_aids_log.save()
+    @visual_aid.visual_aids_logs << @visual_aids_log
+  end
+
 end

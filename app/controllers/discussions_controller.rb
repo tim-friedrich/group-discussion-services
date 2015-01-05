@@ -1,7 +1,9 @@
 class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate, :arguments]
+  before_action :new_discussion, only: [ :create ]
   before_filter :authenticate_user!
 
+  load_and_authorize_resource
 
   # GET /discussions/1
   # GET /discussions/1.json
@@ -62,20 +64,15 @@ class DiscussionsController < ApplicationController
     @proband = DiscussionsUser.new
     @visual_aid = VisualAid.new
     @users = User.all
-
   end
 
   # POST /discussions
   # POST /discussions.json
   def create
-    @discussion = Discussion.new(discussion_params)
-    @discussion.users << current_user
-    @discussion.discussions_users.first().role = Role.where(name: 'moderator').first()
-    @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
-
     respond_to do |format|
       if @discussion.save
-        @question.save;
+        @discussion.moderator = current_user
+        @question.save
         format.html { redirect_to current_user, notice: 'Eine neue Diskussion wurde erfolgreich erstellt.' }
         format.json { render action: 'show', status: :created, location: @discussion }
       else
@@ -125,6 +122,12 @@ class DiscussionsController < ApplicationController
 
     def set_discussion
       @discussion = Discussion.find(params[:id])
+    end
+
+    def new_discussion
+      @discussion = Discussion.new(discussion_params)
+
+      @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

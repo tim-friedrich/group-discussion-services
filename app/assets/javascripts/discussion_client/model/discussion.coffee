@@ -143,7 +143,7 @@ class @Discussion
     PrivatePub.subscribe("/discussion/"+@id+"/visualAid/command", (data) =>
       $.each(@visual_aids, (index, visual_aid) =>
         if visual_aid.id == data.id
-          visual_aid.run_command(data.command)
+          visual_aid.run_command(data.command, data.params)
       )
     )
 
