@@ -29,5 +29,29 @@
     <% end %>  
   </div>
 
-  <div class="tab-pane fade" id="probands"> </div>
+  <div class="tab-pane fade" id="probands">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Vorname</th>
+        <th>Nachname</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody id="probands">
+
+      <% @discussion.users.each do |proband| %>
+        <tr>
+          <td><%= proband.firstname %></td>
+          <td><%= proband.lastname %></td>
+          <td><%= proband.email %></td>
+          <td><%= link_to 'Details', proband, class: "btn btn-xs btn-primary" %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
 </div>
