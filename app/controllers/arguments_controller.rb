@@ -5,19 +5,15 @@ class ArgumentsController < ApplicationController
   check_authorization
 
 	def create
-
-
     if @argument.save
-      discussion_user = DiscussionsUser.where(discussion_id: @argument.discussion.id, user_id: current_user.id).first()
       argument_json = render_to_string( template: 'arguments/_argument.json.jbuilder', locals: { current_user: current_user, argument: @argument } )
       if @argument.argument_type.name == 'observer'
-        #or discussion_user.role.name == 'moderator' or discussion_user.role.name == 'observer'
         PrivatePub.publish_to "/discussion/"+@argument.discussion.id.to_s+"/observer/arguments/new", JSON.parse(argument_json)
       else
         PrivatePub.publish_to "/discussion/"+@argument.discussion.id.to_s+"/arguments/new", JSON.parse(argument_json)
       end
-
     end
+    render nothing: true
   end
 
 	def argument_params

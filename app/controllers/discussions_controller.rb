@@ -126,7 +126,6 @@ class DiscussionsController < ApplicationController
 
     def new_discussion
       @discussion = Discussion.new(discussion_params)
-
       @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
     end
 

@@ -16,7 +16,11 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @discussions = @user.discussions
-    @companies = current_user.research_institutes.first.companies
+    if current_user.research_institutes.first
+      @companies = current_user.research_institutes.first.companies
+    else
+      @companies = []
+    end
   end
 
   # GET /users/new

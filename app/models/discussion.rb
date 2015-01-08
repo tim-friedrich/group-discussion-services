@@ -7,6 +7,7 @@ class Discussion < ActiveRecord::Base
   has_many :visual_aids
 	belongs_to :company
 
+
 	validates :due_date, presence:true
 
   def research_institute
@@ -32,4 +33,5 @@ class Discussion < ActiveRecord::Base
     discussions_user.role = Role.where(name: 'moderator').first()
     discussions_user.save
   end
+
 end

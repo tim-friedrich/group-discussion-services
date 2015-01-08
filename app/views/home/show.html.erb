@@ -1,13 +1,25 @@
 <div id="home">
     <div class="teaser center-block">
 
-      <div class="our-service-teaser">
+      <!--<div class="our-service-teaser">
         <%= image_tag(image_url("our_service.jpg")) %>
 
         <div class="teaser-description">
           <h1>Gruppendiskussionen mit<br> Persönlichkeit</h1>
           <h2>Unser Service</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac nisl et felis viverra egestas. Nulla blandit massa sit amet sodales luctus. Pellentesque et augue sodales, maximus ligula vitae, </p>
+        </div>
+      </div>-->
+
+      <div class="our-service-teaser">
+        <%= image_tag(image_url("our_service.jpg")) %>
+
+        <div class="teaser-description">
+          <h1>Moderation mit<br> Persönlichkeit</h1>
+          <h2>Sie sind selbständiger Moderator?</h2>
+          <p>Wir bieten Schulungen zum Zertifizierten Online Moderator an.<br>
+          Fragen? Dann kontaktieren sie uns jetzt:</p>
+          <%= link_to 'Kontakt', '/contact_us', class: "btn btn-primary" %>
         </div>
       </div>
 
@@ -52,7 +64,7 @@
     <div class="prev-images center-block">
       <div>
 
-        <p>UNSER SERVICE</p>
+        <p>MODERATOREN</p>
         <div class="our-service-prev prev-image">
           <div id="image-overlay" data-id="our-service-teaser"></div>
         </div>

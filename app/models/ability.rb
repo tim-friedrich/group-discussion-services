@@ -34,11 +34,11 @@ class Ability
       can [ :manage ], Contact
 
       can [ :create, :read ], Argument do | argument |
-        user.discussions.all.include? argument.discussion
+        user.discussions.to_a.include? argument.discussion
       end
 
       can [ :leave, :show, ], Discussion do | discussion |
-        user.discussions.all.include? discussion
+        user.discussions.to_a.include? discussion
       end
 
       can [ :create ], Vote

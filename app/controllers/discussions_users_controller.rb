@@ -9,7 +9,6 @@ class DiscussionsUsersController < ApplicationController
  	end
 
  	def create
-
 	    respond_to do |format|
 	      if @discussions_user.save
 	        format.js {  }

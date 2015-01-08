@@ -19,8 +19,12 @@ GDS::Application.routes.draw do
   resources :discussions_users
   resource :visual_aids, only: [:create]
 
+
+
   resources :users	
-	root 'static_pages#home'
+	root 'home#show'
+  get '/contact_us' => 'contact_us#show'
+  post '/contact_us/send_mail' => 'contact_us#send_mail'
   post '/discussions/:id/leave' => 'discussions#leave'
   post '/discussions/:id/enter' => 'discussions#enter'
 
