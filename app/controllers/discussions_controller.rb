@@ -108,6 +108,10 @@ class DiscussionsController < ApplicationController
 
   # GET /discussions/1/evaluate
   def evaluate
+    respond_to do | format |
+      format.html{ }
+      format.pdf{ }
+    end
   end
 
   def arguments

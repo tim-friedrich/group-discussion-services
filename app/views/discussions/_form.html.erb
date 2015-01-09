@@ -22,7 +22,7 @@
   <div class="form-group">
     <%= f.label :due_date, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.date_select  :due_date, :class => 'datepicker form-control', :value => (@discussion.due_date.blank? ? '' : @discussion.due_date.strftime('%d-%m-%Y'))%>
+      <%= f.datetime_select  :due_date, :class => 'datepicker form-control', :value => (@discussion.due_date.blank? ? '' : @discussion.due_date.strftime('%d-%m-%Y-%H-%M'))%>
     </div>
   </div>
 

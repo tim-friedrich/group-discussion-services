@@ -20,8 +20,8 @@ class DiscussionsUsersController < ApplicationController
 		@discussions_user = DiscussionsUser.find(params[:id])
 	 	@discussions_user.destroy
 	    respond_to do |format|
-	      format.html {  }
-	      format.json {  }
+	      format.html { render nothing: true }
+	      format.json { render nothing: true }
 	    end
 	end
 

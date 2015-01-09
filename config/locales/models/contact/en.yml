@@ -1,3 +1,11 @@
 en:
   activerecord:
+    models:
+      contact: contact
     attributes:
+      contact:
+        street: street
+        postalcode: postalcode
+        town: town
+        email: email
+        telephone: telephone

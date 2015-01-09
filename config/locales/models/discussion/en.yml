@@ -1,3 +1,11 @@
 en:
   activerecord:
+    models:
+      discussion: Discussion
     attributes:
+      discussion:
+        topic: topic
+        moderator: moderator
+        due_date: due_date
+        current_question: current_question
+        company: company

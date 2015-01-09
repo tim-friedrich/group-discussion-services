@@ -1,8 +1,11 @@
 de:
   activerecord:
+    models:
+      contact: Kontakt
     attributes:
-      street: "Straße"
-      postalcode: "Postleitzahl"
-      town: "Stadt"
-      email: "E-Mail"
-      telephone: "Telefon"
+      contact:
+        street: Straße
+        postalcode: Postleitzahl
+        town: Stadt
+        email: E-Mail
+        telephone: Telefon

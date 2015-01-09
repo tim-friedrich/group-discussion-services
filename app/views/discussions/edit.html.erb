@@ -1,4 +1,4 @@
-<h1>Discussion bearbeiten</h1>
+<h1>Diskussion bearbeiten</h1>
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
@@ -48,7 +48,7 @@
             <td><%= proband.user.firstname %></td>
             <td><%= proband.user.lastname %></td>
             <td><%= proband.user.email %></td>
-            <td><%= link_to 'Löschen', DiscussionsUser.where(user: proband, discussion: @discussion).first, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
+            <td><%= link_to 'Löschen', discussions_users_path+'/'+DiscussionsUser.where(user_id: proband.user.id, discussion_id: @discussion.id).first().id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
           </tr>
         <% end %>
       </tbody>
@@ -88,7 +88,7 @@
             <td><%= proband.user.firstname %></td>
             <td><%= proband.user.lastname %></td>
             <td><%= proband.user.email %></td>
-            <td><%= link_to 'Löschen', DiscussionsUser.where(user: proband, discussion: @discussion).first, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
+            <td><%= link_to 'Löschen', discussions_user_path(DiscussionsUser.where(user: proband.user, discussion: @discussion).first), method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
           </tr>
       <% end %>
       </tbody>
@@ -140,7 +140,7 @@
   </div>
 </div>
 
-<%= link_to 'Back', users_path(current_user) %>
+<%= link_to 'Zurück', users_path(current_user) %>
 
 
 <%= javascript_tag do %>

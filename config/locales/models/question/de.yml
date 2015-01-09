@@ -1,5 +1,6 @@
 de:
   activerecord:
     attributes:
-      topic: "Frage"
-      discussion: "Diskussion"
+      question:
+        topic: "Frage"
+        discussion: "Diskussion"

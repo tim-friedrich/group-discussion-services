@@ -7,6 +7,10 @@
   submitButton.removeClass('disabled');
   $('.fileinput-button').after(barContainer);
 
+  $('#probands, #observers').find('a').click((event) =>
+    $(event.target).parent().parent().remove()
+  )
+
   @fileInput.fileupload(
     url:             window.s3_url,
     type:            'POST',

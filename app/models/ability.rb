@@ -49,6 +49,7 @@ class Ability
     end
 
     cannot :index, User
+    cannot :index, ResearchInstitute
 
   end
 end

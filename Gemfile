@@ -3,6 +3,10 @@ ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
+gem 'devise-i18n'
+
+gem 'rails-i18n', '~> 4.0.0'
+
 gem 'bootstrap-sass'
 
 gem 'bcrypt-ruby', '~> 3.0.1'
@@ -18,6 +22,9 @@ gem 'mediaelement_rails'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
+
+#gem for pdf generation
+gem 'prawn-rails'
 
 #gem for heroku
 gem 'rails_12factor', group: :production

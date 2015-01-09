@@ -1,6 +1,7 @@
 de:
   activerecord:
     attributes:
-      name: "Name"
-      contact: "Kontakt"
-      deputy: "Verantwortlicher Mitarbeiter"
+      research_institute:
+        name: "Name"
+        contact: "Kontakt"
+        deputy: "Verantwortlicher Mitarbeiter"
