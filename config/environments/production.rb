@@ -81,4 +81,14 @@ GDS::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
 	config.force_ssl = true
+
+  config.action_mailer.default_url_options = { :host => 'https://group-discussion-services.herokuapp.com' }
+
+  config.action_mailer.smtp_settings = {
+      :address              => 'smtp.1und1.de',
+      :port                 => 25,
+      :user_name            => 'info@group-discussion-services.de',
+      :password             => 'ftp60h2r',
+      :authentication       => 'plain'
+  }
 end
