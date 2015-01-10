@@ -22,6 +22,7 @@ class @VisualAid
     $('#visual_aid_container').remove()
     container.children().show()
     container.css('height', '125px')
+    $('#visual_aids').find('.active').removeClass('active')
     @discussion.view.resize()
 
   send_command: (command, params) =>

@@ -46,6 +46,7 @@ class @VideoAid extends VisualAid
 
         mediaElement.addEventListener('pause', (e) =>
           @send_command('pause') if @can_control
+          @player.play() if @can_start
         )
         mediaElement.addEventListener('timeupdate', (e) =>
           if @can_control
@@ -80,8 +81,4 @@ class @VideoAid extends VisualAid
   close: () =>
     @can_start = false unless @can_control
 
-    container = $('.chat').find('.top')
-    $('#visual_aid_container').remove()
-    container.children().show()
-    container.css('height', '125px')
-    @discussion.view.resize()
+    super close()

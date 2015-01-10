@@ -17,6 +17,9 @@ gem 'datejs-rails'
 #js charts api
 gem 'chart-js-rails'
 
+#gem for viewing emails in browser instead of sending them in development
+gem "letter_opener", :group => :development
+
 #gem for js musik and video player
 gem 'mediaelement_rails'
 
