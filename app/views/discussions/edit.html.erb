@@ -48,7 +48,7 @@
             <td><%= proband.user.firstname %></td>
             <td><%= proband.user.lastname %></td>
             <td><%= proband.user.email %></td>
-            <td><%= link_to 'Löschen', discussions_users_path+'/'+DiscussionsUser.where(user_id: proband.user.id, discussion_id: @discussion.id).first().id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
+            <td><%= link_to 'Löschen', discussions_users_path+'/'+proband.id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
           </tr>
         <% end %>
       </tbody>
@@ -83,12 +83,12 @@
 
       <tbody id="observers">
 
-      <% @observers.each do |proband| %>
+      <% @observers.each do |observer| %>
           <tr>
-            <td><%= proband.user.firstname %></td>
-            <td><%= proband.user.lastname %></td>
-            <td><%= proband.user.email %></td>
-            <td><%= link_to 'Löschen', discussions_user_path(DiscussionsUser.where(user: proband.user, discussion: @discussion).first), method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
+            <td><%= observer.user.firstname %></td>
+            <td><%= observer.user.lastname %></td>
+            <td><%= observer.user.email %></td>
+            <td><%= link_to 'Löschen', discussions_users_path+'/'+observer.id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
           </tr>
       <% end %>
       </tbody>

@@ -6,13 +6,20 @@ class DiscussionsUsersController < ApplicationController
 
  	def new
  		@discussion_user = DiscussionsUser.new
+
  	end
 
  	def create
+    puts "Z"*30
 	    respond_to do |format|
 	      if @discussions_user.save
-	        format.js {  }
-	      end
+          puts "b"*100
+          puts UserMailer.invitation_to_discussion(@discussions_user).deliver
+	        format.js { puts "a"*100 }
+
+        else
+          puts "fail"*40
+        end
 	    end
 	end
 
