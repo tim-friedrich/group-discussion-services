@@ -6,6 +6,7 @@ class DiscussionsUser < ActiveRecord::Base
 
 	validates :user, uniqueness: { scope: :discussion }
 	after_create :set_color
+  after_initialize :set_default_role
 	
 
   	def set_color
@@ -43,5 +44,9 @@ class DiscussionsUser < ActiveRecord::Base
 		else
 			return false
 		end
-	end
+  end
+
+  def set_default_role
+    self.role ||= Role.where(name: 'proband').first
+  end
 end

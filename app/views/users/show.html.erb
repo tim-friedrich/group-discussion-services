@@ -19,7 +19,9 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
   <li class="active"><a href="#discussions" data-toggle="tab">Diskussionen</a></li>
-  <li><a href="#companies" data-toggle="tab">Kunden</a></li>
+  <% if can? :manage, :Company %>
+    <li><a href="#companies" data-toggle="tab">Kunden</a></li>
+  <% end %>
   <li><a href="#settings" data-toggle="tab">Einstellungen</a></li>
 </ul>
 

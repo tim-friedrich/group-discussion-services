@@ -64,6 +64,7 @@ class DiscussionsController < ApplicationController
     @proband = DiscussionsUser.new
     @visual_aid = VisualAid.new
     @users = User.all
+    @user = User.new
   end
 
   # POST /discussions

@@ -77,6 +77,9 @@ gem 'jbuilder', '~> 1.2'
 # gem for user management
 gem 'devise'
 
+#devise extension for user invitations
+gem 'devise_invitable'
+
 #Authorization Gem
 gem 'cancan'
 

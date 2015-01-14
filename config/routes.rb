@@ -1,5 +1,5 @@
 GDS::Application.routes.draw do
-  devise_for :users
+  #devise_for :users
   resources :companies
 
   resources :research_institutes
@@ -19,9 +19,9 @@ GDS::Application.routes.draw do
   resources :discussions_users
   resource :visual_aids, only: [:create]
 
+  devise_for :users, :controllers => { :invitations => 'users_invitations' }
+  resources :users
 
-
-  resources :users	
 	root 'home#show'
   get '/contact_us' => 'contact_us#show'
   post '/contact_us/send_mail' => 'contact_us#send_mail'
