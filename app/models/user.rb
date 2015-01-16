@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
 	validates :username, presence: true, length: { maximum: 50 }
 	validates :firstname, presence: true, length: { maximum: 50 }
 	validates :lastname, presence: true, length: { maximum: 50 }
+  validates :username, uniqueness: true
+  #validates :email, uniqueness: true
 
   accepts_nested_attributes_for :discussions
 
@@ -31,12 +33,10 @@ class User < ActiveRecord::Base
 	end
 
 	def enter_discussion(discussion)
-    #discussion.discussions_users.find(user_id=self.id).enter_discussion
 		DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.enter_discussion
 	end
 
 	def leave_discussion(discussion)
-    #discussion.discussions_users.find(user_id=self.id).leave_discussion
 		DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.leave_discussion
 	end
 

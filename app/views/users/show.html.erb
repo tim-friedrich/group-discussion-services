@@ -19,7 +19,7 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
   <li class="active"><a href="#discussions" data-toggle="tab">Diskussionen</a></li>
-  <% if can? :manage, :Company %>
+  <% if can? :manage, Company %>
     <li><a href="#companies" data-toggle="tab">Kunden</a></li>
   <% end %>
   <li><a href="#settings" data-toggle="tab">Einstellungen</a></li>
@@ -36,9 +36,9 @@
             <th>Moderator</th>
             <th>Datum</th>
             <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <% if can? :edit, Discussion %><th></th><% end %>
+            <% if can? :delete, Discussion %><th></th><% end %>
+            <% if can? :evaluate, Discussion %><th></th><% end %>
           </tr>
         </thead>
         <tbody>
@@ -48,9 +48,9 @@
               <td><%= discussion.moderator.firstname %> <%= discussion.moderator.lastname %></td>
               <td><%= discussion.due_date %></td>
               <td><%= link_to 'Diskussion beitreten', discussion, class: "btn btn-xs btn-primary" %></td>
-              <td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-xs btn-primary" %></td>
-              <td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
-              <td><%= link_to 'Evaluation', '/discussions/'+discussion.id.to_s+"/evaluate", class: "btn btn-xs btn-primary" %></td>
+              <% if can? :edit, discussion %><td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-xs btn-primary" %></td><% end %>
+              <% if can? :delete, discussion %><td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td><% end %>
+              <% if can? :evaluate, discussion %><td><%= link_to 'Evaluation', '/discussions/'+discussion.id.to_s+"/evaluate", class: "btn btn-xs btn-primary" %></td><% end %>
             </tr>
           <% end %>
         </tbody>

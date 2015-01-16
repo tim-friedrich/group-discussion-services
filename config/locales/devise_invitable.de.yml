@@ -9,8 +9,8 @@ de:
       no_invitations_remaining: "No invitations remaining"
       invitation_removed: 'Your invitation was removed.'
       new:
-        header: "Send invitation"
-        submit_button: "Send an invitation"
+        header: "Einladung versenden"
+        submit_button: "Einladung senden"
       edit:
         header: "Anmeldung abschließen"
         submit_button: "Registrieren"

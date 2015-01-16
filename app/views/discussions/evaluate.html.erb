@@ -12,15 +12,16 @@
 <!-- Tab panes -->
 <div class="tab-content">
 
-  <div class="tab-pane fade" id="overview">
+  <div class="tab-pane fade active" id="overview">
 
   </div>
 
   <div class="tab-pane fade" id="summary">
+    <textarea rows="20"></textarea>
 
   </div>
 
-  <div class="tab-pane fade in active" id="script">
+  <div class="tab-pane fade in" id="script">
     <% @discussion.questions.each do | question | %>
       <div class="panel-group" id="accordion">
         <div class="panel panel-default">
