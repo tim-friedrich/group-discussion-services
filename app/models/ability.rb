@@ -40,6 +40,9 @@ class Ability
       can [ :leave, :show, ], Discussion do | discussion |
         user.discussions.to_a.include? discussion
       end
+      can :manage, DiscussionsUser do | discussion_user |
+        discussion_user.user.id == user.id
+      end
 
       can [ :create ], Vote
 

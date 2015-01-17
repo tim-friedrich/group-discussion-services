@@ -65,7 +65,7 @@
       <tbody id="probands">
 
         <% @probands.each do |proband| %>
-          <tr>
+          <tr <% if proband.confirmed %>class="bg-success"<% else %>class="bg-danger" <% end %>  >
             <td><%= proband.user.firstname %></td>
             <td><%= proband.user.lastname %></td>
             <td><%= proband.user.email %></td>

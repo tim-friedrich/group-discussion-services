@@ -27,6 +27,7 @@ GDS::Application.routes.draw do
   post '/contact_us/send_mail' => 'contact_us#send_mail'
   post '/discussions/:id/leave' => 'discussions#leave'
   post '/discussions/:id/enter' => 'discussions#enter'
+  post '/discussions_users/:id' => 'discussions_users#confirm'
 
   post '/visual_aids/:id/open' => 'visual_aids#open'
   post '/visual_aids/:id/command' => 'visual_aids#command'

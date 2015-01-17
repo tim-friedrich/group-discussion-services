@@ -17,8 +17,18 @@
   </div>
 
   <div class="tab-pane fade" id="summary">
-    <textarea rows="20"></textarea>
+    <%= form_for(@discussion, html: { multipart: true, role: "form"  }) do |f| %>
 
+      <div class="form-group">
+        <%= f.label "Zusammenfassung", class: "control-label" %>
+          <%= f.text_area(:summary, class: "form-control", rows: 20) %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Zusammenfassung speichern", class: "btn btn-large btn-primary"%>
+      </div>
+
+    <% end %>
   </div>
 
   <div class="tab-pane fade in" id="script">

@@ -6,9 +6,9 @@ pdf.bounding_box([pdf.bounds.left, pdf.bounds.top - 35], :width  => pdf.bounds.w
   pdf.font_size(h1){ pdf.text "Auswertung der Diskussion: "+@discussion.topic }
   pdf.font_size(h1){ pdf.text "Vom "+(l @discussion.due_date)  }
   pdf.move_down(h2)
-
   pdf.font_size(h2){ pdf.text "Zusammenfassung" }
   pdf.move_down 30
+  pdf.text @discussion.summary
   pdf.start_new_page
 
   if !@discussion.users.empty?

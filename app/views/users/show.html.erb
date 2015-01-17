@@ -13,7 +13,7 @@
   <%= @user.email %>
 </p>
 
-<% if !@discussions.nil? %>
+<% if !@discussions_users.nil? %>
 
 
 <!-- Nav tabs -->
@@ -29,7 +29,7 @@
 <div class="tab-content">
   <div class="tab-pane fade in active" id="discussions">
       <h2>Meine Diskussionen</h2>
-      <table class="table table-striped">
+      <table class="table">
         <thead>
           <tr>
             <th>Thema</th>
@@ -42,15 +42,18 @@
           </tr>
         </thead>
         <tbody>
-          <% @discussions.each do |discussion| %>
-            <tr>
-              <td><%= discussion.topic %></td>
-              <td><%= discussion.moderator.firstname %> <%= discussion.moderator.lastname %></td>
-              <td><%= discussion.due_date %></td>
-              <td><%= link_to 'Diskussion beitreten', discussion, class: "btn btn-xs btn-primary" %></td>
-              <% if can? :edit, discussion %><td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-xs btn-primary" %></td><% end %>
-              <% if can? :delete, discussion %><td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td><% end %>
-              <% if can? :evaluate, discussion %><td><%= link_to 'Evaluation', '/discussions/'+discussion.id.to_s+"/evaluate", class: "btn btn-xs btn-primary" %></td><% end %>
+          <% @discussions_users.each do |discussions_user| %>
+            <tr <% if discussions_user.confirmed %>class="bg-success"<% else %>class="bg-danger" <% end %>>
+              <td><%= discussions_user.discussion.topic %></td>
+              <td><%= discussions_user.discussion.moderator.firstname %> <%= discussions_user.discussion.moderator.lastname %></td>
+              <td><%= l discussions_user.discussion.due_date %></td>
+              <% if discussions_user.confirmed %><td><%= link_to 'Diskussion beitreten', discussions_user.discussion, class: "btn btn-xs btn-primary" %></td>
+              <% else %>
+                <td><%= link_to 'Zusagen', discussions_user, method: :confirm, data: { confirmed: true }, class: "btn btn-xs btn-primary" %></td>
+              <% end %>
+              <% if can? :edit, discussions_user.discussion %><td><%= link_to 'Bearbeiten', edit_discussion_path(discussions_user.discussion), class: "btn btn-xs btn-primary" %></td><% end %>
+              <% if can? :delete, discussions_user.discussion %><td><%= link_to 'Löschen', discussions_user.discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td><% end %>
+              <% if can? :evaluate, discussions_user.discussion %><td><%= link_to 'Evaluation', '/discussions/'+discussions_user.discussion.id.to_s+"/evaluate", class: "btn btn-xs btn-primary" %></td><% end %>
             </tr>
           <% end %>
         </tbody>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112131208) do
+ActiveRecord::Schema.define(version: 20150117132814) do
 
   create_table "argument_types", force: true do |t|
     t.string   "name"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20150112131208) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.text     "summary"
   end
 
   create_table "discussions_users", force: true do |t|
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 20150112131208) do
     t.datetime "updated_at"
     t.string   "color"
     t.integer  "role_id"
+    t.boolean  "confirmed",     default: false
   end
 
   create_table "questions", force: true do |t|

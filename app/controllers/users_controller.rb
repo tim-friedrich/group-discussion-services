@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @discussions = @user.discussions
+    @discussions_users = @user.discussions_users
     if current_user.research_institutes.first
       @companies = current_user.research_institutes.first.companies
     else
