@@ -11,8 +11,11 @@ class DiscussionsUsersController < ApplicationController
 
   def confirm
     @discussions_user.confirmed = true
-    @discussions_user.save
-    redirect_to user_path current_user
+    if @discussions_user.save
+      redirect_to user_path current_user
+    else
+      render nothing: true
+    end
   end
 
  	def create
