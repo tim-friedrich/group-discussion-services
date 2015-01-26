@@ -45,7 +45,6 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.9)
-    bcrypt-ruby (3.0.1)
     binding.repl (3.0.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -76,7 +75,7 @@ GEM
     codeclimate-test-reporter (0.4.6)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
-    coffee-rails (4.0.1)
+    coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
     coffee-script (2.3.0)
@@ -344,7 +343,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
-  bcrypt-ruby (~> 3.0.1)
+  bcrypt (~> 3.1.9)
   bootstrap-sass (= 3.1.1.0)
   byebug
   cancan
@@ -352,7 +351,7 @@ DEPENDENCIES
   capybara-screenshot
   chart-js-rails
   codeclimate-test-reporter
-  coffee-rails (~> 4.0.0)
+  coffee-rails (~> 4.1.0)
   datejs-rails
   devise
   devise-i18n
@@ -380,5 +379,5 @@ DEPENDENCIES
   simplecov
   test-unit
   thin
-  uglifier (~> 2.7)
+  uglifier (~> 2.7.0)
   web-console (~> 2.0)
