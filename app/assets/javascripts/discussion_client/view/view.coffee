@@ -4,7 +4,6 @@ class @View
 
   constructor: (@discussion) ->
     @register_events()
-    $('body').attr("data-no-turbolink", "true")
     @is_question = false
     @proband_chat = $("#discussion_chat")
     @moderator_chat = $("#moderator_chat")

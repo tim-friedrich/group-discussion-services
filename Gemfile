@@ -44,13 +44,6 @@ gem "private_pub"
 # gem for newrelic (performance monitoring)
 # gem 'newrelic_rpm'
 
-# TODO remove turbolinks
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-gem 'jquery-turbolinks'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -93,3 +86,5 @@ end
 
 #gem for test coverage report
 gem 'simplecov', :require => false, :group => :test
+
+# gem 'therubyracer', platforms: :ruby

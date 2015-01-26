@@ -4,9 +4,9 @@
   <title>Group Discussion Services</title>
   <meta charset="UTF-8">
 
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+
 
   <%= csrf_meta_tags %>
 
@@ -19,7 +19,7 @@
 		<nav class="navbar navbar-default center-block" role="navigation">
   		<!-- Brand and toggle get grouped for better mobile display -->
       <%= link_to image_tag(image_url("logo.png")), root_path, class: "navbar-brand" %>
-      
+
   		<!-- Collect the nav links, forms, and other content for toggling -->
   		<div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -38,9 +38,9 @@
 	<div class="content clearfix center-block ">
     <%= render 'layouts/messages' %>
 		<%= yield %>
-	</div>	
+	</div>
 
-	
+
 </body>
 </html>
 
