@@ -8,14 +8,14 @@
 
 === Start
 
-$ foreman
+$ foreman start
 
 Dev server will spin up at localhost:5000
 
 
 === Test Suite
 
-$ rspec
+$ foreman run rspec
 
 
 === Deployment
