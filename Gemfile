@@ -64,6 +64,7 @@ end
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 2.0'
+  gem 'test-unit' # TODO remove, see https://github.com/rspec/rspec-rails/issues/1273
  	gem 'rake'
 	gem 'capybara', '1.1.2' # TODO
 	gem 'factory_girl_rails'
