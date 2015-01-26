@@ -19,10 +19,10 @@ class DiscussionsController < ApplicationController
 
         format.html{ @questions = Question.where(discussion_id: params[:id]) }
         format.json do
-          @visual_aids_log = VisualAidsLog.where('visual_aid_id in (:visual_aids)', { visual_aids: @discussion.visual_aids } )
+          @visual_aids_log = VisualAidsLog.where('visual_aid_id in (:visual_aids)', { visual_aids: @discussion.visual_aids.to_a.map(&:id) } )
           if current_user == @discussion.moderator or @discussion_user.role.name == 'observer'
-            @arguments = @discussion.arguments
-            @votes = Vote.where('argument_id in (:arguments)', {arguments: @discussion.arguments})
+            @arguments = @discussion.arguments.to_a.map(&:id)
+            @votes = Vote.where('argument_id in (:arguments)', { arguments: @arguments })
 
           else
             @arguments = []
@@ -32,7 +32,7 @@ class DiscussionsController < ApplicationController
                 @arguments.push(argument)
               end
             end
-            @votes = Vote.where('argument_id in (:arguments) and user_id = :user', {arguments: @discussion.arguments, user: current_user})
+            @votes = Vote.where('argument_id in (:arguments) and user_id = :user', {arguments: @arguments.to_a.map(&:id), user: current_user})
           end
         end
       end
