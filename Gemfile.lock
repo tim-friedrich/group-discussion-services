@@ -42,17 +42,21 @@ GEM
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
     cancan (1.6.10)
-    capybara (1.1.2)
+    capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
-      selenium-webdriver (~> 2.0)
-      xpath (~> 0.1.4)
+      xpath (~> 2.0)
+    capybara-screenshot (1.0.4)
+      capybara (>= 1.0, < 3)
+      colored
+      launchy
+    capybara-webkit (1.4.0)
+      capybara (>= 2.3.0, < 2.5.0)
+      json
     chart-js-rails (0.0.8)
       railties (> 3.1)
-    childprocess (0.5.5)
-      ffi (~> 1.0, >= 1.0.11)
     codeclimate-test-reporter (0.4.6)
       simplecov (>= 0.7.1, < 1.0.0)
     coffee-rails (4.0.1)
@@ -62,6 +66,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    colored (1.2)
     columnize (0.9.0)
     cookiejar (0.3.2)
     daemons (1.1.9)
@@ -127,6 +132,8 @@ GEM
       jquery-ui-rails (~> 5.0)
       railties (>= 3.1)
     json (1.8.2)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     libnotify (0.8.0)
       ffi (>= 1.0.11)
     mail (2.6.3)
@@ -198,7 +205,6 @@ GEM
       rspec-core (~> 2.99.0)
       rspec-expectations (~> 2.99.0)
       rspec-mocks (~> 2.99.0)
-    rubyzip (1.1.6)
     sass (3.2.19)
     sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
@@ -208,11 +214,6 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    selenium-webdriver (2.44.0)
-      childprocess (~> 0.5)
-      multi_json (~> 1.0)
-      rubyzip (~> 1.0)
-      websocket (~> 1.0)
     simplecov (0.9.1)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -244,11 +245,10 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
-    websocket (1.2.1)
     websocket-driver (0.5.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.1)
-    xpath (0.1.4)
+    xpath (2.0.0)
       nokogiri (~> 1.3)
 
 PLATFORMS
@@ -260,7 +260,9 @@ DEPENDENCIES
   bootstrap-sass (= 3.1.1.0)
   byebug
   cancan
-  capybara (= 1.1.2)
+  capybara (~> 2.4)
+  capybara-screenshot
+  capybara-webkit
   chart-js-rails
   codeclimate-test-reporter
   coffee-rails (~> 4.0.0)

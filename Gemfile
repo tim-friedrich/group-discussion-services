@@ -66,7 +66,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'test-unit' # TODO remove, see https://github.com/rspec/rspec-rails/issues/1273
  	gem 'rake'
-	gem 'capybara', '1.1.2' # TODO
+	gem 'capybara', '~> 2.4'
+  # gem 'capybara-webkit'
+  gem 'capybara-screenshot'
 	gem 'factory_girl_rails'
   gem 'codeclimate-test-reporter', require: nil
 end

@@ -40,8 +40,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.include Capybara::DSL
   require 'capybara/rails'
+  require 'capybara-screenshot/rspec'
+  # Capybara.javascript_driver = :webkit
+
+  config.include Capybara::DSL
 
   class ActionDispatch::IntegrationTest
     include Capybara::DSL
