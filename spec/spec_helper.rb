@@ -21,15 +21,7 @@ ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 
 RSpec.configure do |config|
-  # ## Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
   # config.mock_with :rr
-
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -47,6 +39,7 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
   config.include Capybara::DSL
   require 'capybara/rails'
 
@@ -58,7 +51,7 @@ RSpec.configure do |config|
     end
   end
 
-  include Devise::TestHelpers
+  config.include Devise::TestHelpers, type: :controller
 end
 
 Rails.application.routes.default_url_options[:host] = 'localhost:3000'
