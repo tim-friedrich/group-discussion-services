@@ -59,5 +59,6 @@ RSpec.configure do |config|
   end
 
   include Devise::TestHelpers
-
 end
+
+Rails.application.routes.default_url_options[:host] = 'localhost:3000'
