@@ -44,6 +44,8 @@ end
 group :development, :test do
  	gem 'rake'
   gem 'byebug'
+  gem 'web-console', '~> 2.0'
+  gem 'irbtools', require: 'binding.repl'
 
   gem 'rspec-rails', '~> 2.0'
   gem 'test-unit' # TODO remove, see https://github.com/rspec/rspec-rails/issues/1273
