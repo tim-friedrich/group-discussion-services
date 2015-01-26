@@ -64,27 +64,19 @@ end
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 2.0'
-	gem 'cucumber-rails', '1.2.1', :require => false
  	gem 'rake'
 	gem 'capybara', '1.1.2' # TODO
 	gem 'factory_girl_rails'
-  gem 'codeclimate-test-reporter', :require => nil
-
-  # TODO remove guard/spork
- 	#gem for automated tests
-  gem 'guard-rspec', '2.5.0'
-
-  #gems for faster test runs
-  gem 'spork-rails'
-  gem 'guard-spork'
-  gem 'childprocess'
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :test do
 	gem 'libnotify', '0.8.0'
+
+  # gem for test coverage report
+  gem 'simplecov', require: false
 end
 
-#gem for test coverage report
-gem 'simplecov', :require => false, :group => :test
+
 
 # gem 'therubyracer', platforms: :ruby
