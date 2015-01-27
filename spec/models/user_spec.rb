@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe User do 
-	before(:each) do 
+describe User do
+	before(:each) do
 		@user = FactoryGirl.build(:user)
 	end
-	
+
 	after(:each) do
 		User.delete_all
 	end
@@ -25,19 +25,19 @@ describe User do
 				% { firstname: @user.firstname, lastname: @user.lastname }
 	end
 
-	#Test not optional parameters of Users 
+	#Test not optional parameters of Users
 	describe "when firstname is not present" do
 		before { @user.firstname = " " }
 		it { should_not be_valid }
-	end	
+	end
 	describe "lastname is not present" do
 		before { @user.lastname = " " }
 		it { should_not be_valid }
-	end	
+	end
 	describe "email is not present" do
 		before { @user.email = " " }
 		it { should_not be_valid }
-	end	
+	end
 
 	#Tests max length of parameters
 	describe "the firstname is to long" do
@@ -52,36 +52,36 @@ describe User do
 		before { @user.email = "a"*45+"@a.com" }
 		it { should_not be_valid }
 	end
-	
+
 	#Tests the email validation
 	describe "email format is valid" do
 		it "should be invalid" do
 			addresses = %w[user@foo,com user_at_foo.org example.user@foo. ]
-	
+
 			addresses.each do | invalid_address |
 			 @user.email = invalid_address
-			 @user.should_not be_valid 
+			 @user.should_not be_valid
 			end
 		end
 	end
-	
+
 	describe "email format is invalid" do
 		it "should be valid" do
 			addresses = %w[ user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn ]
-		
+
 			addresses.each do | invalid_address |
 				@user.email = invalid_address
-				@user.should be_valid 
+				@user.should be_valid
 			end
 		end
 	end
 
 	describe "email address is already taken" do
-		before do 
+		before do
 			user_with_same_email = @user.dup
 			user_with_same_email.save
 		end
-		
+
 		it { should_not be_valid }
 	end
 
@@ -109,39 +109,39 @@ describe User do
 		end
 
 		it "should respond that it is part of discussion" do
-			@user.is_part_of_discussion?(@discussion).should be_true
+			@user.is_part_of_discussion?(@discussion).should be_truthy
 		end
 
 		it "should respond that it is not part of discussion when it is no longer part of the discussion" do
 			@discussion.users.find_by_email(@user.email).delete
-			@user.is_part_of_discussion?(@discussion).should be_false
+			@user.is_part_of_discussion?(@discussion).should be_falsey
 		end
 
 		describe "when user enters discussion" do
 			before { @user.enter_discussion(@discussion) }
 
-			it "should create a new Discussion Presence for the user" do		
+			it "should create a new Discussion Presence for the user" do
 				DiscussionPresence.last.user.should eq @user
 			end
 			it "should register the User as present" do
-				DiscussionPresence.last.present.should be_true
+				DiscussionPresence.last.present.should be_truthy
 			end
 			it "should respond that he/she is present" do
-				@user.is_present_in(@discussion).should be_true
+				@user.is_present_in(@discussion).should be_truthy
 			end
 		end
 
 		describe "when user enters discussion" do
 			before { @user.leave_discussion(@discussion) }
 
-			it "should create a new Discussion Presence for the user" do		
+			it "should create a new Discussion Presence for the user" do
 				DiscussionPresence.last.user.should eq @user
 			end
 			it "should register the User not as present" do
-				DiscussionPresence.last.present.should be_false
+				DiscussionPresence.last.present.should be_falsey
 			end
 			it "should respond that he/she is not present" do
-				@user.is_present_in(@discussion).should be_false
+				@user.is_present_in(@discussion).should be_falsey
 			end
 		end
 	end
@@ -149,12 +149,12 @@ describe User do
 	describe "should respond the right role" do
 		it "moderator should respond that it is staff" do
 			@user.role = Role.where(name: 'moderator').first
-			@user.is_staff?.should be_true
+			@user.is_staff?.should be_truthy
 		end
 
 		it "user should not respond that it is staff" do
 			@user.role = Role.where(name: 'user').first
-			@user.is_staff?.should be_false
+			@user.is_staff?.should be_falsey
 		end
 	end
 end

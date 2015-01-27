@@ -10,45 +10,51 @@ require 'spec_helper'
 #     end
 #   end
 # end
+
 describe UsersHelper do
-    let(:user) { FactoryGirl.create(:user) }
+	include UsersHelper
+
+    let(:user) { create(:user) }
     describe "Role helpers with valid params" do
 	  	describe "Role is user" do
 	  		it "should respond that it is an user" do
 	  			user.role = Role.where(name:'user').first
 	  			user.save
-	  			is_user?(user).should be_true
+	  			is_user?(user).should be_truthy
 	  		end
 		end
-		
+
 		describe "Role is staff" do
 	  		it "should respond that it is staff" do
 	  			user.role = Role.where(name:'staff').first
 	  			user.save
-	  			is_staff?(user).should be_true
+	  			is_staff?(user).should be_truthy
 	  		end
 		end
-		
+
 		describe "Role is admin" do
 	  		it "should respond that it is an admin" do
-	  			
+
 	  			user.role = Role.where(name:'admin').first
 	  			user.save
-	  			is_admin?(user).should be_true
+	  			is_admin?(user).should be_truthy
 	  		end
 		end
 	end
+
 	describe "Role helpers with invalid params" do
 		it "should not answer that it is an admin" do
-			is_admin?(user).should be_false 
+			is_admin?(user).should be_falsey
 		end
+
 		it "should not answer that it is an staff" do
-			is_staff?(user).should be_false 
+			is_staff?(user).should be_falsey
 		end
+
 		it "staff should not answer that it is an user" do
 			user.role = Role.where(name:'staff').first
 			user.save
-			is_user?(user).should be_false 
+			is_user?(user).should be_falsey
 		end
 	end
 end

@@ -6,7 +6,7 @@ describe "User pages" do
 	describe "signup" do
 		before { visit new_user_registration_path }
 		let(:submit) { "Create User" }
-	
+
 		describe "with valid information" do
 			before do
         fill_in "user_username", 		with: "Example"
@@ -16,12 +16,10 @@ describe "User pages" do
 				fill_in "user_password",			with: "123456789"
 				fill_in "user_password_confirmation",	with:	"123456789"
 			end
-	
+
 			it "should create a user" do
-				expect { click_button 'User erstellen' }.to change(User, :count).by(1)
+				expect { click_button 'Benutzer erstellen' }.to change(User, :count).by(1)
 			end
-	end
-
-
+	  end
 	end
 end

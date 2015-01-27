@@ -22,3 +22,8 @@ coverage
 /.idea
 
 /.env
+
+# backup files
+*~
+*.swp
+*.swo

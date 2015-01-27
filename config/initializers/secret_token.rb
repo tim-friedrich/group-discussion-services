@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-GDS::Application.config.secret_key_base = 'c5168e2b8c90d9a933a0a06fe0d6eddb8c2f0ce736b2de8ab6c00acfb4f59c36b4caed7b9505acec339024bc699bca9f0fd92fe6f76bfc1568f3b2d6ca155e22'
+GDS::Application.config.secret_key_base = ENV['RAILS_SECRET_TOKEN']
