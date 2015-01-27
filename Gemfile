@@ -51,7 +51,7 @@ end
 
 group :test do
 	gem 'libnotify', '0.8.0'
-  gem 'simplecov', require: false # test coverage report
+  # gem 'simplecov', require: false # test coverage report
 end
 
 group :doc do

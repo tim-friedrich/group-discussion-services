@@ -3,9 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require File.expand_path("../../db/seeds", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'factory_girl_rails'
-# require 'simplecov'
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 Rails.application.routes.default_url_options[:host] = 'localhost:5000'

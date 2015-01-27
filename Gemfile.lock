@@ -383,7 +383,6 @@ DEPENDENCIES
   rspec-rails (~> 3.1)
   sass-rails (~> 4.0.5)
   sdoc
-  simplecov
   test-unit
   thin
   uglifier (~> 2.7.0)
