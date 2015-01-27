@@ -10,10 +10,10 @@ class UsersInvitationsController < Devise::InvitationsController
     user = User.invite!({ email: invite_params[:email] }, current_inviter)
     puts user.to_yaml
     respond_to do |format|
-      puts "A>"*100
+      # puts "A>"*100
       format.js do
         if invite_params['discussion_id']
-          puts "A"*100
+          # puts "A"*100
           puts params['discussion_id']
           #  puts user.to_yaml
           @discussion = Discussion.find(invite_params[:discussion_id])
