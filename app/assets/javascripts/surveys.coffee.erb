@@ -1,0 +1,58 @@
+$ ->
+  questions = JSON.parse '<%= File.read Rails.root + "config/survey.json" %>'
+  optionTemplate = '<label class="pm-survey-label"><input type="radio" name="{{identifier}}" value="{{value}}">{{description}}</label>'
+  questionNumber = 0
+  results = []
+
+  submitStep = ->
+    $('#pm-survey-error').text('')
+
+    if $('#pm-survey input[type=radio]:checked').length == 1 || questions[questionNumber].type == "page"
+      results[questionNumber] = extractAnswer()
+      questionNumber += 1
+      nextStep()
+    else
+      showError('please select')
+
+  extractAnswer = ->
+    answer = $('#pm-survey input[type=radio]:checked')
+    id: answer[0].name
+    value: answer[0].value
+
+  generateOptionMarkup = (options, identifier) ->
+    markup = ""
+    options.forEach (option, index) ->
+      markup += Mustache.render optionTemplate,
+        value: index
+        description: option
+        identifier: identifier
+
+    markup
+
+  submitSurveyToServer = ->
+    console.log 'submitting...'
+    console.log results
+
+  showSuccess = ->
+    $('#pm-survey').text('thank you')
+
+  showError = ->
+    $('#pm-survey-error').text('please answer')
+
+  nextStep = ->
+    question = questions[questionNumber]
+    if question
+      $('#pm-survey-text').text question.text
+      if question.type == 'custom' || question.type = "big5"
+        $('#pm-survey-options').html generateOptionMarkup(question.options, question.id)
+    else # survey done
+      submitSurveyToServer()
+      showSuccess()
+
+  $('#pm-survey').on 'submit', (e) ->
+    submitStep()
+    e.preventDefault()
+
+  # # #
+  # init
+  nextStep(questionNumber)

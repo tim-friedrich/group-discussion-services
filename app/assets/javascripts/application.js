@@ -25,6 +25,7 @@
 //= require jquery.fileupload
 //= require mediaelement_rails
 //= require jquery-ui
+//= require mustache
 //= require_tree .
 
 

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "how_often",
+    "type": "custom",
+    "text": "Für statistische Zwecke: Wie oft haben Sie schon an diesem Test teilgenommen?",
+    "options": [
+      "Das ist mein erstes Mal",
+      "Das ist mein zweites Mal"
+    ]
+  },
+  {
+    "id": "gender",
+    "type": "custom",
+    "text": "Für statistische Zwecke: Ihr Geschlecht:",
+    "options": [
+      "weiblich",
+      "männlich"
+    ]
+  },
+  {
+    "id": "age",
+    "type": "custom",
+    "text": "Für statistische Zwecke: Wie alt sind Sie?",
+    "options": [
+      "jünger als 20 Jahre",
+      "20 bis 30 Jahre",
+      "31 bis 40 Jahre",
+      "41 bis 50 Jahre",
+      "älter als 50 Jahre"
+    ]
+  }
+]
