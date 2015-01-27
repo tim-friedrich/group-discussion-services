@@ -35,6 +35,7 @@ gem 'prawn-rails'        # pdf generation
 
 group :development, :test do
  	gem 'rake'
+  gem 'database_cleaner'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'irbtools', require: 'binding.repl'
@@ -42,7 +43,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'test-unit' # TODO remove, see https://github.com/rspec/rspec-rails/issues/1273
 	gem 'capybara', '~> 2.4'
-  # gem 'capybara-webkit'
+  gem 'capybara-webkit'
   gem 'capybara-screenshot'
 	gem 'factory_girl_rails'
   gem 'codeclimate-test-reporter', require: nil
