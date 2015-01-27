@@ -45,15 +45,7 @@ class @Discussion
         @id = json.discussion.id
         @topic = json.discussion.topic
         $.each(json.discussion.users, (index, user) =>
-          new_user = new User(
-            id = user.id,
-            name = user.name,
-            color = user.color,
-            is_present = user.is_present,
-            role = user.role,
-            @
-          )
-          @users.push(new_user)
+          @new_user(user)
         )
         @current_user = @users.filter((user) => user.id == json.current_user_id)[0]
         @moderator = @users.filter((user) => user.id == json.discussion.moderator_id)[0]
@@ -109,6 +101,7 @@ class @Discussion
     @bind_new_vote()
     @bind_user_entered()
     @bind_user_leaved()
+    @bind_new_user()
     @bind_open_visual_aid()
     @bind_close_visual_aid()
     @bind_visual_aid_command()
@@ -129,6 +122,12 @@ class @Discussion
         if visual_aid.id == data.id
           visual_aid.run_command('open')
       )
+    )
+
+  bind_new_user: () =>
+    PrivatePub.subscribe("/discussion/"+@id+"/users/new", (data) =>
+      user = @new_user(data)
+      @view.draw_proband(user)
     )
 
   bind_close_visual_aid: () =>
@@ -161,3 +160,15 @@ class @Discussion
         argument = @arguments.filter((argument) => vote.argument_id == argument.id)[0]
         argument.add_vote(vote)
       )
+
+  new_user: (user) =>
+    user = new User(
+      id = user.id,
+      name = user.name,
+      color = user.color,
+      is_present = user.is_present,
+      role = user.role,
+      @
+    )
+    @users.push(user)
+    return user

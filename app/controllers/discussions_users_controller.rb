@@ -12,6 +12,8 @@ class DiscussionsUsersController < ApplicationController
   def confirm
     @discussions_user.confirmed = true
     if @discussions_user.save
+      @json = render_to_string( template: 'discussions_users/_user.json.jbuilder', locals: { discussions_user: @discussions_user })
+      PrivatePub.publish_to "/discussion/"+@discussions_user.discussion.id.to_s+"/users/new", JSON.parse(@json)
       redirect_to user_path current_user
     else
       render nothing: true
@@ -20,7 +22,6 @@ class DiscussionsUsersController < ApplicationController
 
  	def create
     if @discussions_user.save
-      puts "b"*100
       puts UserMailer.invitation_to_discussion(@discussions_user).deliver
     else
       render nothing: true
@@ -28,7 +29,6 @@ class DiscussionsUsersController < ApplicationController
 	end
 
 	def destroy
-
 	 	@discussions_user.destroy
 	    respond_to do |format|
 	      format.html { render nothing: true }

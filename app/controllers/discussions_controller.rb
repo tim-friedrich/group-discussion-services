@@ -19,10 +19,17 @@ class DiscussionsController < ApplicationController
 
         format.html{ @questions = Question.where(discussion_id: params[:id]) }
         format.json do
+
+          @discussions_user = []
+          @discussion.discussions_users.each do | discussions_user |
+            if discussions_user.confirmed
+              @discussions_user << discussions_user
+            end
+          end
           @visual_aids_log = VisualAidsLog.where('visual_aid_id in (:visual_aids)', { visual_aids: @discussion.visual_aids.to_a.map(&:id) } )
           if current_user == @discussion.moderator or @discussion_user.role.name == 'observer'
-            @arguments = @discussion.arguments.to_a.map(&:id)
-            @votes = Vote.where('argument_id in (:arguments)', { arguments: @arguments })
+            @arguments = @discussion.arguments
+            @votes = Vote.where('argument_id in (:arguments)', { arguments: @arguments.to_a.map(&:id) })
 
           else
             @arguments = []

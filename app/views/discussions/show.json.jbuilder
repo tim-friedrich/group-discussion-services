@@ -6,7 +6,7 @@ json.discussion do
   json.due_date @discussion.due_date
   json.arguments @arguments, partial: 'arguments/argument', as: :argument
   json.questions @discussion.questions
-  json.users @discussion.discussions_users, partial: 'discussions_users/user', as: :discussions_user
+  json.users @discussions_user, partial: 'discussions_users/user', as: :discussions_user
   json.votes @votes
   json.visual_aids @discussion.visual_aids
   json.visual_aids_logs @visual_aids_log

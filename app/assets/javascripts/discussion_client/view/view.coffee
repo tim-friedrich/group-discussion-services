@@ -174,19 +174,22 @@ class @View
       """)
 
     $.each(@discussion.users, (index, user) =>
-      if user.role == 'proband'
-        $(".proband-list").append(
-                                 """
+      @draw_proband(user)
+    )
+
+  draw_proband: (user) =>
+    if user.role == 'proband'
+      $(".proband-list").append(
+                               """
             <li class="list-group-item">
               <div style="width: 5px; height: 20px; background-color: #{ user.color }; float: left"></div>
               #{ user.name }
               <div class="proband-status"><img src="#{ image_path("offline.jpg") }"></img></div>
             </li>
           """
-        )
-        if user.is_present
-          @change_user_status(true, user)
-    )
+      )
+      if user.is_present
+        @change_user_status(true, user)
 
   update_question: (question) =>
     $("#question").text(question.topic)
