@@ -7,6 +7,8 @@
 #    t.string   "remember_token"
 #    t.integer  "role_id"
 
+# TODO different roles
+
 FactoryGirl.define do
   factory :user do
 	  sequence(:firstname)  { |n| "User #{n}" }
@@ -16,6 +18,6 @@ FactoryGirl.define do
     password "123456789"
     password_confirmation "123456789"
     confirmed_at Date.yesterday
-    role { Role.where(name:"user").first }
+    role { Role.where(name:"moderator").first }
   end
 end
