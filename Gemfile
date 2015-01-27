@@ -40,7 +40,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'irbtools', require: 'binding.repl'
 
-  gem 'rspec-rails', '~> 2.0'
+  gem 'rspec-rails', '~> 3.1'
   gem 'test-unit' # TODO remove, see https://github.com/rspec/rspec-rails/issues/1273
 	gem 'capybara', '~> 2.4'
   gem 'capybara-webkit'
