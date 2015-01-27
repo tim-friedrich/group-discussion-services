@@ -4,10 +4,10 @@ class @View
 
   constructor: (@discussion) ->
     @register_events()
-    $('body').attr("data-no-turbolink", "true")
     @is_question = false
     @proband_chat = $("#discussion_chat")
     @moderator_chat = $("#moderator_chat")
+    @argument_input = $('#argument_content')
 
   scroll_down: (div) =>
     div.stop().animate({
@@ -22,7 +22,7 @@ class @View
         url: '/questions/',
         data:
           question:
-            topic: $('#argument_content').text()
+            topic: @argument_input.text()
             discussion_id:  @discussion.id
       })
       $('#argument_content').text("")
@@ -51,10 +51,6 @@ class @View
         $('#argument_content .emoticon').attr("contenteditable", "false")
         window.set_caret(document.getElementById("argument_content"), caret)
     )
-
-    $('#argument_content').on("blur", =>
-      console.log($('#argument_content').caret('pos'))
-    )
     $('#new_argument').submit((event)=>
       return false
     )
@@ -71,10 +67,11 @@ class @View
       $argument = $('#argument_content')
       caret = $argument.caret('pos')
       post = $argument.text()
-      post = post.substr(0, caret)+""+$(event.target).attr('data-type')+" "+post.substr(caret, post.length)
+      post = post.substr(0, caret)+""+$(event.target).attr('data-type')+post.substr(caret, post.length)
       $argument.html($.emoticons.replace(post))
       $('#argument_content .emoticon').attr("contenteditable", "false")
-      window.set_caret(document.getElementById("argument_content"), caret+$(event.target).attr('data-type').length+1)
+      window.set_caret(document.getElementById("argument_content"), caret+$(event.target).attr('data-type').length)
+
     )
 
     $(window).resize(() =>
@@ -90,11 +87,11 @@ class @View
       url: '/arguments/',
       data:
         argument:
-          content: $('#argument_content').text()
+          content: @argument_input.text()
           discussion_id:  @discussion.id
           type: type
     })
-    $('#argument_content').text("")
+    @argument_input.text("")
 
   draw: () =>
     $('header').hide()
@@ -116,7 +113,6 @@ class @View
   draw_argument: (argument) =>
     argument.generate_dom()
 
-
     if argument.type == 'moderator'
       if @scrolled_down(@moderator_chat)
         scroll = true
@@ -134,6 +130,15 @@ class @View
 
     if scroll
       @scroll_down(@proband_chat)
+
+    argument.dom_element.click( () =>
+      @add_user_reference_to_input(argument.user)
+    )
+
+  add_user_reference_to_input: (user) =>
+    @argument_input.text(@argument_input.text()+"@"+user.name+": ")
+    @argument_input.focus()
+    window.set_caret(document.getElementById("argument_content"), @argument_input.text().length)
 
 
   draw_voting: (argument) =>
@@ -179,7 +184,8 @@ class @View
 
   draw_proband: (user) =>
     if user.role == 'proband'
-      $(".proband-list").append(
+      proband_list = $(".proband-list")
+      proband_list.append(
                                """
             <li class="list-group-item">
               <div style="width: 5px; height: 20px; background-color: #{ user.color }; float: left"></div>
@@ -190,6 +196,10 @@ class @View
       )
       if user.is_present
         @change_user_status(true, user)
+
+      proband_list.children().last().click( (event) =>
+        @add_user_reference_to_input(user)
+      )
 
   update_question: (question) =>
     $("#question").text(question.topic)
