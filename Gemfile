@@ -39,6 +39,7 @@ gem 'foreman'
 gem "paperclip"
 
 group :development, :test do
+  gem 'rake'
   gem 'database_cleaner'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
@@ -46,15 +47,15 @@ group :development, :test do
   gem 'foreman'
 
   gem 'rspec-rails', '~> 3.1'
-	gem 'capybara', '~> 2.4'
+  gem 'capybara', '~> 2.4'
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
-	gem 'factory_girl_rails'
+  gem 'factory_girl_rails'
   gem 'codeclimate-test-reporter', require: nil
 end
 
 group :test do
-	gem 'libnotify', '0.8.0'
+  gem 'libnotify', '0.8.0'
   # gem 'simplecov', require: false # test coverage report
 end
 
