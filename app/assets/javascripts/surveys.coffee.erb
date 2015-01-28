@@ -113,6 +113,12 @@ $ ->
     submitStep()
     e.preventDefault()
 
+  $(document).on 'keypress', (e) ->
+    if e.keyCode >= 49 && e.keyCode <= 57
+      option = $("#pm-survey-options input[type=radio]")[e.keyCode - 49]
+      if option
+        option.checked = "checked"
+
 
   # # #
   # init
