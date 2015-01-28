@@ -1,6 +1,6 @@
 $ ->
   QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root + "config/survey.json")) %>'
-  OPTION_TEMPLATE = '<label class="pm-survey-label"><input type="radio" name="{{identifier}}" value="{{value}}">{{description}}</label>'
+  OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="{{identifier}}" value="{{value}}">{{description}}</label></div>'
   MAX_RESTART_SECONDS = 10
 
   submitStep = ->
@@ -10,7 +10,7 @@ $ ->
       status.results[status.questionNumber] = extractAnswer()
       nextStep()
     else
-      displayError('please select')
+      displayError('Bitte wählen Sie eine der Antwortmöglichkeiten aus!')
 
   clearMarkup = ->
     $('#pm-survey-error').text('')
@@ -46,8 +46,8 @@ $ ->
   displaySuccess = ->
     $('#pm-survey').text('thank you')
 
-  displayError = ->
-    $('#pm-survey-error').text('please answer')
+  displayError = (errorText) ->
+    $('#pm-survey-error').text(errorText)
 
   nextStep = ->
     clearMarkup()
@@ -64,6 +64,10 @@ $ ->
         question_text = "Für statistische Zwecke: " + question_text
 
       $('#pm-survey-text').text(question_text)
+
+      if status.questionNumber > 0
+        $('#pm-survey-progress').text "Fortschritt: #{ Math.floor(Math.random() * 100) }%"
+
     else # survey done
       submitSurveyToServer()
       displaySuccess()

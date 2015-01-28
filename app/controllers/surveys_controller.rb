@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
-  # layout 'simple'
+  layout 'survey'
 
   def new
   end
