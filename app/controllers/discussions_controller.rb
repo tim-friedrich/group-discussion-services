@@ -65,8 +65,9 @@ class DiscussionsController < ApplicationController
     @companies = current_user.research_institutes.first.companies
     @proband_role =  Role.where(name: 'proband').first()
     @observer_role =  Role.where(name: 'observer').first()
-    @probands = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @proband_role.id)
-    @observers = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @observer_role.id)
+    @probands = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @proband_role.id).paginate(:page => params[:page], :per_page => 10)
+    @observers = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @observer_role.id).paginate(:page => params[:page], :per_page => 10)
+    @visual_aids = @discussion.visual_aids.paginate(:page => params[:page], :per_page => 10)
     @s3_direct_post = S3_BUCKET.presigned_post(key: "visual_aids/#{ @discussion.id }/#{ SecureRandom.uuid }/${filename}", success_action_status: 201, acl: :public_read)
     @proband = DiscussionsUser.new
     @visual_aid = VisualAid.new

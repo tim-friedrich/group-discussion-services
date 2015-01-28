@@ -20,6 +20,7 @@ gem "private_pub"
 
 gem 'sass-rails', '~> 4.0.5' # TODO
 gem 'bootstrap-sass', '3.1.1.0' # TODO (using css @import syntax)
+gem 'will_paginate-bootstrap'
 
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'

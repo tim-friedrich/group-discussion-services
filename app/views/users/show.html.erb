@@ -58,6 +58,7 @@
           <% end %>
         </tbody>
       </table>
+      <%= will_paginate @discussions_users, renderer: BootstrapPagination::Rails %>
       <br>
       <% if current_user.is_moderator? %>
         <%= link_to 'neue Diskussion erstellen', new_discussion_path, class: "btn btn-xs btn-primary" %>
@@ -65,38 +66,41 @@
       <% end %>
     <% end %>
   </div>
-
-  <div class="tab-pane fade" id="companies">
-    <h2>Kunden</h2>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Straße</th>
-            <th>Stadt</th>
-            <th>E-Mail</th>
-            <th>Telefon</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @companies.each do |company| %>
+  <% if can? :manage, Company %>
+    <div class="tab-pane fade" id="companies">
+      <h2>Kunden</h2>
+        <table class="table table-striped">
+          <thead>
             <tr>
-              <td><%= company.name %></td>
-              <td><%= company.contact.street %></td>
-              <td><%= company.contact.postalcode %> <%= company.contact.town %></td>
-              <td><%= company.contact.email %></td>
-              <td><%= company.contact.telephone %></td>
-
-              <td><%= link_to 'Bearbeiten', edit_company_path(company), class: "btn btn-xs btn-primary" %></td>
-              <td><%= link_to 'Löschen', company, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+              <th>Name</th>
+              <th>Straße</th>
+              <th>Stadt</th>
+              <th>E-Mail</th>
+              <th>Telefon</th>
+              <th></th>
+              <th></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <%= link_to 'neuen Kunden anlegen', new_company_path, class: "btn btn-xs btn-primary" %>
-  </div>
+          </thead>
+          <tbody>
+            <% @companies.each do |company| %>
+              <tr>
+                <td><%= company.name %></td>
+                <td><%= company.contact.street %></td>
+                <td><%= company.contact.postalcode %> <%= company.contact.town %></td>
+                <td><%= company.contact.email %></td>
+                <td><%= company.contact.telephone %></td>
+
+                <td><%= link_to 'Bearbeiten', edit_company_path(company), class: "btn btn-xs btn-primary" %></td>
+                <td><%= link_to 'Löschen', company, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <%= will_paginate @companies, renderer: BootstrapPagination::Rails %>
+      <%= link_to 'neuen Kunden anlegen', new_company_path, class: "btn btn-xs btn-primary" %>
+    </div>
+  <% end %>
+
   <div class="tab-pane fade" id="settings">
     <%= form_for(@user, :html => { :multipart => true, class: "form-horizontal", role: "form" }) do |f| %>
   

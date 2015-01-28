@@ -74,8 +74,28 @@
         <% end %>
       </tbody>
     </table>
+    <div class="pagination">
+        <%= will_paginate @probands, renderer: BootstrapPagination::Rails %>
+    </div>
 
     <h2>Beobachter</h2>
+    <%= form_for @user, :url => invitation_path(@user), html: { class: "form-horizontal", method: :post, remote: true } do |f| %>
+        <% User.invite_key_fields.each do |field| -%>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="input-group">
+                  <%= f.email_field field, class: "form-control", placeholder: "Email Adresse" %>
+                  <%= f.hidden_field :discussion_id, value: @discussion.id %>
+                  <%= f.hidden_field :discussions_user_role, value: 'observer' %>
+                  <span class="input-group-btn">
+                <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-default" %>
+              </span>
+                </div>
+              </div>
+            </div>
+        <% end -%>
+    <% end %>
+    <p>Laden Sie Probanden, die sich noch nicht registriert haben zu dieser Diskussion ein</p>
 
     <%= form_for(@proband, html: { multipart: true, class: "form-horizontal observers", role: "form", remote: true  }) do |f| %>
         <div class="row">
@@ -115,6 +135,7 @@
       </tbody>
     </table>
   </div>
+  <%= will_paginate @observers, renderer: BootstrapPagination::Rails %>
 
   <div class="tab-pane fade" id="visual_aids">
 
@@ -140,7 +161,7 @@
 
       <tbody id="visual_aids_table">
 
-      <% @discussion.visual_aids.each do | visual_aid | %>
+      <% @visual_aids.each do | visual_aid | %>
         <tr>
           <td>
             <a href="#" class="thumbnail">
@@ -160,6 +181,7 @@
     </table>
   </div>
 </div>
+<%= will_paginate @visual_aids, renderer: BootstrapPagination::Rails %>
 
 <%= link_to 'Zurück', users_path(current_user) %>
 
