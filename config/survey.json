@@ -1,26 +1,27 @@
 [
   {
+    "type": "statistic",
     "id": "how_often",
-    "type": "custom",
-    "text": "Für statistische Zwecke: Wie oft haben Sie schon an diesem Test teilgenommen?",
+    "text": "Wie oft haben Sie schon an diesem Test teilgenommen?",
     "options": [
       "Das ist mein erstes Mal",
-      "Das ist mein zweites Mal"
+      "Das ist mein zweites Mal",
+      "Mehr als zwei Mal"
     ]
   },
   {
+    "type": "statistic",
     "id": "gender",
-    "type": "custom",
-    "text": "Für statistische Zwecke: Ihr Geschlecht:",
+    "text": "Ihr Geschlecht:",
     "options": [
       "weiblich",
       "männlich"
     ]
   },
   {
+    "type": "statistic",
     "id": "age",
-    "type": "custom",
-    "text": "Für statistische Zwecke: Wie alt sind Sie?",
+    "text": "Wie alt sind Sie?",
     "options": [
       "jünger als 20 Jahre",
       "20 bis 30 Jahre",
@@ -28,5 +29,81 @@
       "41 bis 50 Jahre",
       "älter als 50 Jahre"
     ]
+  },
+  {
+    "type": "statistic",
+    "id": "school",
+    "text": "Welches ist Ihr höchster Schulabschluss?",
+    "options": [
+      "Hauptschule",
+      "Realschule",
+      "Fachabitur",
+      "Abitur",
+      "anderes"
+    ]
+  },
+  {
+    "type": "statistic",
+    "id": "degree",
+    "text": "Ihre Berufsausbildung / Studium?",
+    "options": [
+      "Lehre",
+      "Meister",
+      "Diplom",
+      "Bachelor",
+      "Master",
+      "Promotion",
+      "anderes"
+    ]
+  },
+  {
+    "type": "statistic",
+    "id": "personal_status",
+    "text": "Was trifft auf Sie zu?",
+    "options": [
+      "Ich bin Student.",
+      "Ich bin Arbeiter.",
+      "Ich bin Angestellter.",
+      "Ich bin Beamter.",
+      "Ich bin selbständig.",
+      "Ich bin arbeitslos",
+      "anderes"
+    ]
+  },
+  {
+    "type": "statistic",
+    "id": "income",
+    "text": "Ihr derzeitiges ungefähres Brutto-Monatseinkommen:",
+    "options": [
+      "< 1000 EURO",
+      "1000 - 3000 EURO",
+      "3000 - 5000 EURO",
+      "5000 - 7000 EURO",
+      "7000 - 9000 EURO",
+      "> 9000 EURO"
+    ]
+  },
+  {
+    "type": "statistic",
+    "id": "truthful",
+    "text": "Haben Sie vor, den Test wahrheitsgemäß zu beantworten?",
+    "options": [
+      "Ja, weil ich aussagekräftige Ergebnisse möchte",
+      "Eher nicht, weil ich den Test nur ausprobieren möchte"
+    ]
+  },
+  {
+    "type": "info",
+    "id": "intro_text",
+    "text": "Inwieweit treffen die folgenden Aussagen auf Sie zu? Antworten Sie möglichst spontan. Es gibt keine richtigen oder falschen Antworten."
+  },
+  {
+    "type": "big5",
+    "id": "frightened",
+    "text": "Ich bin ein ängstlicher Typ."
   }
+
+  // ...
+
+
 ]

@@ -1,18 +1,24 @@
 $ ->
-  questions = JSON.parse '<%= File.read Rails.root + "config/survey.json" %>'
+  questions = JSON.parse '<%= JSON.dump(JSON.load(Rails.root + "config/survey.json")) %>'
   optionTemplate = '<label class="pm-survey-label"><input type="radio" name="{{identifier}}" value="{{value}}">{{description}}</label>'
   questionNumber = 0
   results = []
 
   submitStep = ->
-    $('#pm-survey-error').text('')
-
-    if $('#pm-survey input[type=radio]:checked').length == 1 || questions[questionNumber].type == "page"
+    if questions[questionNumber].type == "info"
+      questionNumber += 1
+      nextStep()
+    else if $('#pm-survey input[type=radio]:checked').length == 1
       results[questionNumber] = extractAnswer()
       questionNumber += 1
       nextStep()
     else
       showError('please select')
+
+  clearMarkup = ->
+    $('#pm-survey-error').text('')
+    $('#pm-survey-text').text('')
+    $('#pm-survey-options').text('')
 
   extractAnswer = ->
     answer = $('#pm-survey input[type=radio]:checked')
@@ -29,6 +35,9 @@ $ ->
 
     markup
 
+  generateBig5Markup = (identifier) ->
+    generateOptionMarkup ["trifft gar nicht zu", "trifft eher nicht zu", "trifft eher zu", "trifft genau zu"], identifier
+
   submitSurveyToServer = ->
     console.log 'submitting...'
     console.log results
@@ -40,11 +49,18 @@ $ ->
     $('#pm-survey-error').text('please answer')
 
   nextStep = ->
+    clearMarkup()
     question = questions[questionNumber]
     if question
-      $('#pm-survey-text').text question.text
-      if question.type == 'custom' || question.type = "big5"
+      question_text = question.text
+
+      if question.type == "big5"
+        $('#pm-survey-options').html generateBig5Markup(question.id)
+      else if question.type == 'statistic'
         $('#pm-survey-options').html generateOptionMarkup(question.options, question.id)
+        question_text = "Für statistische Zwecke: " + question_text
+
+      $('#pm-survey-text').text(question_text)
     else # survey done
       submitSurveyToServer()
       showSuccess()
