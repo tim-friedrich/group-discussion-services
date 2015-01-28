@@ -54,7 +54,9 @@ $ ->
     $('#pm-survey').text('already done')
 
   displaySuccess = ->
-    $('#pm-survey').text('thank you')
+    clearMarkup()
+    $('#pm-survey-text').text('Vielen Dank. Ihre Ergebnisse:')
+    $('#pm-survey-button').hide()
 
   displayError = (errorText) ->
     $('#pm-survey-error').text(errorText)
