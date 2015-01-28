@@ -12,6 +12,7 @@
     "tests"
   ],
   "dependencies": {
-    "mustache": "~1.0.0"
+    "mustache": "~1.0.0",
+    "jquery.cookie": "~1.4.1"
   }
 }

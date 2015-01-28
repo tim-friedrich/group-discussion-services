@@ -1,5 +1,10 @@
 [
   {
+    "type": "info",
+    "id": "welcome",
+    "text": "Willkommen zum Persönlichkeitstest"
+  },
+  {
     "type": "statistic",
     "id": "how_often",
     "text": "Wie oft haben Sie schon an diesem Test teilgenommen?",
@@ -94,7 +99,7 @@
   },
   {
     "type": "info",
-    "id": "intro_text",
+    "id": "intro_big5",
     "text": "Inwieweit treffen die folgenden Aussagen auf Sie zu? Antworten Sie möglichst spontan. Es gibt keine richtigen oder falschen Antworten."
   },
   {
