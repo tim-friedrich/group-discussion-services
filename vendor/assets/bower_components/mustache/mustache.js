@@ -576,4 +576,3 @@
   mustache.Writer = Writer;
 
 }));
-

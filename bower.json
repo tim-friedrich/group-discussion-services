@@ -1,0 +1,17 @@
+{
+  "name": "group-discussion-services",
+  "version": "0.1.0",
+  "homepage": "https://github.com/tim-friedrich/group-discussion-services",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mustache": "~1.0.0"
+  }
+}

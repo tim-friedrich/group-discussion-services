@@ -4,18 +4,20 @@
 * Ruby 2.2
 * Postgres
 * .env file containing the secret tokens
-
+* bower (via npm)
 
 === Start
 
-$ foreman start
+    $ foreman start
 
-Dev server will spin up at localhost:5000
+Dev server will spin up at http://localhost:5000
 
 
 === Test Suite
 
-$ foreman run rspec
+    $ dotenv rspec
+
+You have to prefix every command with `dotenv` so that the necessary ENV variables get loaded.
 
 
 === Deployment
