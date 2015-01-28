@@ -2,6 +2,7 @@ $ ->
   QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root + "config/survey.json")) %>'
   OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="{{identifier}}" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
   MAX_RESTART_SECONDS = 10
+  ENDPOINT = '/survey'
 
   submitStep = ->
     if QUESTIONS[status.questionNumber].type == "info"
@@ -39,7 +40,15 @@ $ ->
   submitSurveyToServer = ->
     console.log 'submitting...'
     console.log status.results
-    # status.done = true
+    $.post ENDPOINT,
+      survey:
+        results: status.results
+    , (response) ->
+      console.log 'submit success', response
+      # status.done = true
+    , (error) ->
+      console.log 'submit', error
+
 
   displayAlreadyDone = ->
     $('#pm-survey').text('already done')
@@ -83,7 +92,7 @@ $ ->
   initStatus = ->
     done: false
     questionNumber: -1
-    results: []
+    results: {}
     updatedAt: Math.floor(new Date().getTime() / 1000)
 
   loadFromCookieOrInitStatus = ->
