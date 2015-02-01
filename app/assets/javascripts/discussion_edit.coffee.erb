@@ -100,3 +100,14 @@
     $(event.target).parent().parent().remove()
   )
 
+  $("#probands_pagination").find("a").on("click", (event) ->
+    $.get(
+      this.href,
+      (data) =>
+        console.log("AAAA")
+      "script"
+    )
+    return false
+  )
+
+

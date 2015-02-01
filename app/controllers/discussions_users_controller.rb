@@ -5,6 +5,14 @@ class DiscussionsUsersController < ApplicationController
   load_and_authorize_resource
   check_authorization
 
+
+  def index_by_discussion
+    @discussions_users = DiscussionsUser.where(discussion_id: params[:id]).paginate(:page => params[:page], :per_page => 10)
+    respond_to do | format |
+      format.json { render json: JSON.parse(render_to_string( template: 'discussions_users/_user.json.jbuilder', locals: { discussions_user: @discussions_users })) }
+    end
+  end
+
  	def new
  		@discussion_user = DiscussionsUser.new
   end

@@ -1,0 +1,14 @@
+<%= form_for(discussions_user, html: { multipart: true, class: "form-horizontal observers", role: "form", remote: true  }) do |f| %>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="input-group">
+        <%= f.collection_select(:user_id, users, :id, :email, {}, {class: "form-control"}) %>
+        <span class="input-group-btn">
+                <%= f.submit "hinzufügen", class: "btn btn-default"%>
+            </span>
+        <%= f.hidden_field :discussion_id, value: discussion_id %>
+        <%= f.hidden_field :role_id, value:  role %>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
+<% end %>

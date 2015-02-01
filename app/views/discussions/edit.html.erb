@@ -16,126 +16,30 @@
   <div class="tab-pane fade" id="users">
     <h2>Teilnehmer</h2>
 
+    <%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "proband" } %>
 
-    <%= form_for @user, :url => invitation_path(@user), html: { class: "form-horizontal", method: :post, remote: true } do |f| %>
-      <% User.invite_key_fields.each do |field| -%>
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="input-group">
-              <%= f.email_field field, class: "form-control", placeholder: "Email Adresse" %>
-              <%= f.hidden_field :discussion_id, value: @discussion.id %>
-              <%= f.hidden_field :discussions_user_role, value: 'proband' %>
-              <span class="input-group-btn">
-                <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-default" %>
-              </span>
-            </div>
-          </div>
-        </div>
-      <% end -%>
-    <% end %>
     <p>Laden Sie Probanden, die sich noch nicht registriert haben zu dieser Diskussion ein</p>
 
+    <%= render partial: "discussions_users/invite", locals: { discussions_user: @proband, role: @proband_role.id, users: @users, discussion_id: @discussion.id } %>
 
-    <%= form_for(@proband, html: { multipart: true, class: "form-horizontal probands", role: "form", remote: true  }) do |f| %>
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="input-group">
-              <%= f.collection_select(:user_id, @users, :id, :email, {}, {class: "form-control"}) %>
-              <span class="input-group-btn">
-                <%= f.submit "hinzufügen", class: "btn btn-default"%>
-            </span>
-            <%= f.hidden_field :discussion_id, value: @discussion.id %>
-            <%= f.hidden_field :role_id, value: @proband_role.id %>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-      </div><!-- /.row -->
-    <% end %>
     <p>Wählen Sie einen bereits von Ihnen eingeladenen Probanden aus</p>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Vorname</th>
-          <th>Nachname</th>
-          <th>Email</th>
-          <th></th>
-        </tr>
-      </thead>
 
-      <tbody id="probands">
+    <%= render partial: "discussions_users/list", locals: { discussions_users: @probands, id: "probands", page_name: "probands_page" } %>
 
-        <% @probands.each do |proband| %>
-          <tr <% if proband.confirmed %>class="bg-success"<% else %>class="bg-danger" <% end %>  >
-            <td><%= proband.user.firstname %></td>
-            <td><%= proband.user.lastname %></td>
-            <td><%= proband.user.email %></td>
-            <td><%= link_to 'Löschen', discussions_users_path+'/'+proband.id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <div class="pagination">
-        <%= will_paginate @probands, renderer: BootstrapPagination::Rails %>
-    </div>
 
     <h2>Beobachter</h2>
-    <%= form_for @user, :url => invitation_path(@user), html: { class: "form-horizontal", method: :post, remote: true } do |f| %>
-        <% User.invite_key_fields.each do |field| -%>
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="input-group">
-                  <%= f.email_field field, class: "form-control", placeholder: "Email Adresse" %>
-                  <%= f.hidden_field :discussion_id, value: @discussion.id %>
-                  <%= f.hidden_field :discussions_user_role, value: 'observer' %>
-                  <span class="input-group-btn">
-                <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-default" %>
-              </span>
-                </div>
-              </div>
-            </div>
-        <% end -%>
-    <% end %>
+
+    <%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "observer" } %>
     <p>Laden Sie Probanden, die sich noch nicht registriert haben zu dieser Diskussion ein</p>
 
-    <%= form_for(@proband, html: { multipart: true, class: "form-horizontal observers", role: "form", remote: true  }) do |f| %>
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="input-group">
-              <%= f.collection_select(:user_id, @users, :id, :full_name, {}, {class: "form-control"}) %>
-              <span class="input-group-btn">
-                <%= f.submit "hinzufügen", class: "btn btn-default"%>
-            </span>
-              <%= f.hidden_field :discussion_id, value: @discussion.id %>
-              <%= f.hidden_field :role_id, value: @observer_role.id %>
-            </div><!-- /input-group -->
-          </div><!-- /.col-lg-6 -->
-        </div><!-- /.row -->
-    <% end %>
 
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Vorname</th>
-        <th>Nachname</th>
-        <th>Email</th>
-        <th></th>
-      </tr>
-      </thead>
+    <%= render partial: "discussions_users/invite", locals: { discussions_user: @proband, role: @observer_role.id, users: @users, discussion_id:@discussion.id } %>
 
-      <tbody id="observers">
+    <%= render partial: "discussions_users/list", locals: { discussions_users: @observers, id: "observers", page_name: "observers_page" } %>
 
-      <% @observers.each do |observer| %>
-          <tr>
-            <td><%= observer.user.firstname %></td>
-            <td><%= observer.user.lastname %></td>
-            <td><%= observer.user.email %></td>
-            <td><%= link_to 'Löschen', discussions_users_path+'/'+observer.id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
   </div>
-  <%= will_paginate @observers, renderer: BootstrapPagination::Rails %>
+
 
   <div class="tab-pane fade" id="visual_aids">
 
@@ -181,7 +85,7 @@
     </table>
   </div>
 </div>
-<%= will_paginate @visual_aids, renderer: BootstrapPagination::Rails %>
+<%= will_paginate @visual_aids, renderer: BootstrapPagination::Rails, param_name: "visual_aids_page" %>
 
 <%= link_to 'Zurück', users_path(current_user) %>
 
