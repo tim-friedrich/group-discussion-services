@@ -46,7 +46,7 @@ describe 'research institute' do
       it "has a Profile link" do
         visit root_path
         click_link 'Profil'
-        expect( current_path ).to eq user_path(user)
+        expect( current_path ).to eq "/profile"
       end
 
       it "redirects to the new discussion page when link is clicked" do

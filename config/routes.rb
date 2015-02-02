@@ -24,7 +24,9 @@ GDS::Application.routes.draw do
 
 	root 'home#show'
   get '/contact_us' => 'contact_us#show'
+  get '/profile' => 'users#profile'
   post '/contact_us/send_mail' => 'contact_us#send_mail'
+
   post '/discussions/:id/leave' => 'discussions#leave'
   post '/discussions/:id/enter' => 'discussions#enter'
   post '/discussions_users/:id' => 'discussions_users#confirm'

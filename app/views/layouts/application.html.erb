@@ -25,7 +25,7 @@
         <ul class="nav navbar-nav navbar-right">
 
           <% if signed_in? %>
-            <li><%= link_to "Profil", current_user %></li>
+            <li><%= link_to "Profil", "/profile" %></li>
             <li><%= link_to "Abmelden", destroy_user_session_path, method: "delete" %></li>
           <% else %>
             <li><%= link_to "Anmelden", new_user_session_path %></li>
