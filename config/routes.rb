@@ -12,7 +12,7 @@ GDS::Application.routes.draw do
 
   resources :likes, only: [:create]
 
-  resources :discussions, only: [:create, :show, :edit, :new, :update]
+  resources :discussions
 
   resources :questions, only: [:create]
   resources :arguments, only: [:create]

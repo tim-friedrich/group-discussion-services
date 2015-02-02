@@ -1,0 +1,28 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Straße</th>
+    <th>Stadt</th>
+    <th>E-Mail</th>
+    <th>Telefon</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% companies.each do |company| %>
+    <tr>
+      <td><%= company.name %></td>
+      <td><%= company.contact.street %></td>
+      <td><%= company.contact.postalcode %> <%= company.contact.town %></td>
+      <td><%= company.contact.email %></td>
+      <td><%= company.contact.telephone %></td>
+
+      <td><%= link_to 'Bearbeiten', edit_company_path(company), class: "btn btn-xs btn-primary" %></td>
+      <td><%= link_to 'Löschen', company, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate companies, renderer: BootstrapPagination::Rails, param_name: 'companies_page' %>

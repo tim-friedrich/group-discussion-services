@@ -13,7 +13,7 @@
   <%= @user.email %>
 </p>
 
-<% if !@discussions_users.nil? %>
+
 
 
 <!-- Nav tabs -->
@@ -28,37 +28,11 @@
 <!-- Tab panes -->
 <div class="tab-content">
   <div class="tab-pane fade in active" id="discussions">
-      <h2>Meine Diskussionen</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Thema</th>
-            <th>Moderator</th>
-            <th>Datum</th>
-            <th></th>
-            <% if can? :edit, Discussion %><th></th><% end %>
-            <% if can? :delete, Discussion %><th></th><% end %>
-            <% if can? :evaluate, Discussion %><th></th><% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% @discussions_users.each do |discussions_user| %>
-            <tr <% if discussions_user.confirmed %>class="bg-success"<% else %>class="bg-danger" <% end %>>
-              <td><%= discussions_user.discussion.topic %></td>
-              <td><%= discussions_user.discussion.moderator.firstname %> <%= discussions_user.discussion.moderator.lastname %></td>
-              <td><%= l discussions_user.discussion.due_date %></td>
-              <% if discussions_user.confirmed %><td><%= link_to 'Diskussion beitreten', discussions_user.discussion, class: "btn btn-xs btn-primary" %></td>
-              <% else %>
-                <td><%= link_to 'Zusagen', discussions_user, method: :confirm, class: "btn btn-xs btn-primary" %></td>
-              <% end %>
-              <% if can? :edit, discussions_user.discussion %><td><%= link_to 'Bearbeiten', edit_discussion_path(discussions_user.discussion), class: "btn btn-xs btn-primary" %></td><% end %>
-              <% if can? :delete, discussions_user.discussion %><td><%= link_to 'Löschen', discussions_user.discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td><% end %>
-              <% if can? :evaluate, discussions_user.discussion %><td><%= link_to 'Evaluation', '/discussions/'+discussions_user.discussion.id.to_s+"/evaluate", class: "btn btn-xs btn-primary" %></td><% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <%= will_paginate @discussions_users, renderer: BootstrapPagination::Rails %>
+    <h2>Meine Diskussionen</h2>
+    <% if !@discussions_users.nil? %>
+      <div class="discussions_list">
+        <%= render partial: 'discussions_users/list_discussions', locals: { discussions_users: @discussions_users } %>
+      </div>
       <br>
       <% if current_user.is_moderator? %>
         <%= link_to 'neue Diskussion erstellen', new_discussion_path, class: "btn btn-xs btn-primary" %>
@@ -69,34 +43,9 @@
   <% if can? :manage, Company %>
     <div class="tab-pane fade" id="companies">
       <h2>Kunden</h2>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Straße</th>
-              <th>Stadt</th>
-              <th>E-Mail</th>
-              <th>Telefon</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @companies.each do |company| %>
-              <tr>
-                <td><%= company.name %></td>
-                <td><%= company.contact.street %></td>
-                <td><%= company.contact.postalcode %> <%= company.contact.town %></td>
-                <td><%= company.contact.email %></td>
-                <td><%= company.contact.telephone %></td>
-
-                <td><%= link_to 'Bearbeiten', edit_company_path(company), class: "btn btn-xs btn-primary" %></td>
-                <td><%= link_to 'Löschen', company, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <%= will_paginate @companies, renderer: BootstrapPagination::Rails %>
+      <div class="companies_list">
+        <%= render partial: 'companies/list', locals: { companies: @companies } %>
+      </div>
       <%= link_to 'neuen Kunden anlegen', new_company_path, class: "btn btn-xs btn-primary" %>
     </div>
   <% end %>
@@ -110,3 +59,7 @@
     <% end %>
   </div>
 </div>
+
+<%= javascript_tag do %>
+  $(window).load(function(){ register_paginations() });
+<% end %>

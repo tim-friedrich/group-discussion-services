@@ -1,0 +1,8 @@
+
+$('.discussions_list').children().remove()
+$('.discussions_list').html('' +
+    '<%= escape_javascript(render partial: 'discussions_users/list_discussions', locals: { discussions_users: @discussions_users }) %>')
+
+$('.companies_list').children().remove()
+$('.companies_list').html('' +
+'<%= escape_javascript(render partial: 'companies/list', locals: { companies: @companies }) %>')

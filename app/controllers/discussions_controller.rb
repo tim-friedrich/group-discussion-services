@@ -115,6 +115,7 @@ class DiscussionsController < ApplicationController
   # DELETE /discussions/1
   # DELETE /discussions/1.json
   def destroy
+    DiscussionsUser.where(discussion_id: @discussion.id).delete_all
     @discussion.destroy
     respond_to do |format|
       format.html { redirect_to current_user }

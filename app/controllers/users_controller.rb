@@ -15,11 +15,17 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @discussions_users = @user.discussions_users.paginate(:page => params[:page], :per_page => 10)
+    @discussions_users = @user.discussions_users.paginate(:page => params[:discussions_page], :per_page => 10)
+
     if current_user.research_institutes.first
-      @companies = current_user.research_institutes.first.companies.paginate(:page => params[:page], :per_page => 10)
+      @companies = current_user.research_institutes.first.companies.paginate(:page => params[:companies_page], :per_page => 10)
     else
       @companies = []
+    end
+
+    respond_to do |format|
+      format.html {}
+      format.js {}
     end
   end
 
