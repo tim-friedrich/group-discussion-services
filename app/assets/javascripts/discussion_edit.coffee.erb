@@ -39,7 +39,7 @@
       name = key.split('/')[key.split('/').length-1]
 
       $.post(
-        "/visual_aids/"
+        "/visual_aids?visual_aids_page="+$('.visual_aids_list').find('.pagination').find('.active').find('span').text()
         visual_aid:
           discussion_id: window.discussion_id
           name: name
@@ -48,24 +48,15 @@
 
         (data) =>
           progressBar.text("Upload abgeschlossen");
-          row = """
-                  <tr>
-                    <td>
-                      <a href="#" class="thumbnail">
-                        <img src="https://#{window.s3_url_host + key}" alt="#{ name }">
-                      </a>
-                    </td>
-                    <td>#{ name }</td>
-                    <td>
-                      <a class="btn btn-xs btn-primary delete_file" data-method="delete" data-remote="true" href="/visual_aids/#{data.id}" rel="nofollow">Löschen</a>
-                    </td>
-                  </tr>
-                """
-          $('#visual_aids_table').append(row)
+          $.get(
+            "?visual_aids_page="+$('.visual_aids_list').find('.pagination').find('.active').find('span').text(),
+            (data) => register_paginations()
+            "script"
+          )
           $('#visual_aids_table').children().last().find('a').click((event) =>
             $(event.target).parent().parent().remove()
           )
-         'json'
+         'script'
       )
       .fail(() =>
         submitButton.removeClass('disabled');
@@ -100,11 +91,13 @@
     $(event.target).parent().parent().remove()
   )
 
-  $("#probands_pagination").find("a").on("click", (event) ->
+  @register_paginations()
+
+@register_paginations = () ->
+  $(".pagination").find("a").on("click", (event) ->
     $.get(
       this.href,
-      (data) =>
-        console.log("AAAA")
+      (data) => register_paginations()
       "script"
     )
     return false

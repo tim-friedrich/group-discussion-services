@@ -62,19 +62,24 @@ class DiscussionsController < ApplicationController
 
   # GET /discussions/1/edit
   def edit
+    @proband_role =  Role.where(name: 'proband').first()
+    @observer_role =  Role.where(name: 'observer').first()
+    @probands = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
+    @observers = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
+    @visual_aids = @discussion.visual_aids.paginate(:page => params[:visual_aids_page], :per_page => 10)
+    respond_to do |format|
+      format.html do
         @companies = current_user.research_institutes.first.companies
-        @proband_role =  Role.where(name: 'proband').first()
-        @observer_role =  Role.where(name: 'observer').first()
-        @probands = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
-        @observers = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
-        @visual_aids = @discussion.visual_aids.paginate(:page => params[:visual_aids_page], :per_page => 10)
         @s3_direct_post = S3_BUCKET.presigned_post(key: "visual_aids/#{ @discussion.id }/#{ SecureRandom.uuid }/${filename}", success_action_status: 201, acl: :public_read)
         @proband = DiscussionsUser.new
         @visual_aid = VisualAid.new
         @users = User.all
         @user = User.new
+      end
+      format.js do
 
-
+      end
+    end
   end
 
   # POST /discussions

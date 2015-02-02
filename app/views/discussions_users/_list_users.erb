@@ -8,7 +8,7 @@
   </tr>
   </thead>
 
-  <tbody id="#{ id }">
+  <tbody>
 
   <% discussions_users.each do |discussions_user| %>
     <tr <% if discussions_user.confirmed %>class="bg-success"<% else %>class="bg-danger" <% end %>  >
@@ -21,4 +21,4 @@
   </tbody>
 </table>
 
-<%= will_paginate @probands, renderer: BootstrapPagination::Rails, param_name: page_name %>
+<%= will_paginate discussions_users, renderer: BootstrapPagination::Rails, param_name: page_name %>

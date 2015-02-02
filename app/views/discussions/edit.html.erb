@@ -24,9 +24,9 @@
 
     <p>Wählen Sie einen bereits von Ihnen eingeladenen Probanden aus</p>
 
-
-    <%= render partial: "discussions_users/list", locals: { discussions_users: @probands, id: "probands", page_name: "probands_page" } %>
-
+    <div class="probands_list">
+      <%= render partial: "discussions_users/list_users", locals: { discussions_users: @probands, id: "probands", page_name: "probands_page" } %>
+    </div>
 
     <h2>Beobachter</h2>
 
@@ -36,8 +36,9 @@
 
     <%= render partial: "discussions_users/invite", locals: { discussions_user: @proband, role: @observer_role.id, users: @users, discussion_id:@discussion.id } %>
 
-    <%= render partial: "discussions_users/list", locals: { discussions_users: @observers, id: "observers", page_name: "observers_page" } %>
-
+    <div class="observers_list">
+      <%= render partial: "discussions_users/list_users", locals: { discussions_users: @observers, id: "observers", page_name: "observers_page" } %>
+    </div>
   </div>
 
 
@@ -53,39 +54,12 @@
     </span>
 
     <div class="alert alert-danger hidden" id="not-supported-file" role="alert">Die der von Ihnen ausgewählte Dateityp wird nicht unterstützt. Bitte wählen sie eine Bilddatei.</div>
-
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Vorschau</th>
-        <th>Name</th>
-        <th></th>
-      </tr>
-      </thead>
-
-      <tbody id="visual_aids_table">
-
-      <% @visual_aids.each do | visual_aid | %>
-        <tr>
-          <td>
-            <a href="#" class="thumbnail">
-              <img src="<%= visual_aid.url %>" alt="<%= visual_aid.url.split('/').last() %>">
-            </a>
-          </td>
-          <td>
-            <%= visual_aid.url.split('/').last() %>
-          </td>
-          <td>
-          <td><%= link_to 'Löschen', visual_aids_path+"/"+visual_aid.id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary delete_file" %></td>
-          </td>
-        </tr>
-
-      <% end %>
-      </tbody>
-    </table>
+    <div class="visual_aids_list">
+      <%= render partial: "visual_aids/list", locals: { visual_aids: @visual_aids } %>
+    </div>
   </div>
 </div>
-<%= will_paginate @visual_aids, renderer: BootstrapPagination::Rails, param_name: "visual_aids_page" %>
+
 
 <%= link_to 'Zurück', users_path(current_user) %>
 
