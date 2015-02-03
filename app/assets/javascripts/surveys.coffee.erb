@@ -67,9 +67,9 @@ $ ->
     saveInCookie(status)
     status.questionNumber += 1
     question = QUESTIONS[status.questionNumber]
-    $('#pm-survey').addClass "pm-survey-type-#{question.type}"
 
     if question
+      $('#pm-survey').addClass "pm-survey-type-#{question.type}"
       question_text = question.text
 
       if question.type == "big5"
