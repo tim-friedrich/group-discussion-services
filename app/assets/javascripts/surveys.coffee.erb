@@ -80,12 +80,18 @@ $ ->
 
       $('#pm-survey-text').text(question_text)
 
-      if status.questionNumber > 0
-        $('#pm-survey-progress').text "Fortschritt: #{ Math.floor(Math.random() * 100) }%"
+      updateProgress()
 
     else # survey done
       submitSurveyToServer()
       displaySuccess()
+
+  updateProgress = ->
+    if status.questionNumber > 0
+      $('#pm-survey-progress').show()
+      $('#pm-survey-progress').attr 'max', QUESTIONS.length
+      $('#pm-survey-progress').attr 'value', status.questionNumber - 1
+
 
   currentTimestamp = ->
     Math.floor(new Date().getTime() / 1000)

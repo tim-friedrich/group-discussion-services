@@ -28,6 +28,9 @@
 //= require mediaelement_rails
 
 //= require mustache
+
+//= require progress-polyfill
+
 //= require_tree .
 
 
