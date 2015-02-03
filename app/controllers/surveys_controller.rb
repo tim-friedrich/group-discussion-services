@@ -14,8 +14,10 @@ class SurveysController < ApplicationController
   def create
     render text: 'forbidden', status: 403 if current_user.has_survey?
 
-    if create_survey_result(survey_params[:results], current_user)
-      render text: '\o/', status: 201
+    if survey = create_survey_result(survey_params[:results], current_user)
+      render json: survey.to_json, status: 201
+    else
+      render text: 'bad request', status: 400
     end
   end
 
@@ -23,10 +25,15 @@ class SurveysController < ApplicationController
   private
 
   def create_survey_result(results, user)
-    # code
-    puts "---------------------------------CREATING-SURVEY-----------------"
-    puts "-----------------------------------USER: #{user.username}"
-    p results
+    survey = current_user.build_survey
+    analyzed_results = Big5Analyzer.new(results).parse!
+    if analyzed_results
+      survey.update_attributes(analyzed_results.survey_data)
+      # survey.save!
+      survey
+    else
+      false
+    end
   end
 
   def survey_params

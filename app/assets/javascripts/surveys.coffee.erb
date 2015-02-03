@@ -50,7 +50,7 @@ $ ->
       success: (response) ->
         console.log 'submit success', response
       error: (error) ->
-        console.log 'submit', error
+        console.log 'submit', error.responseText
 
 
   displayAlreadyDone = ->
