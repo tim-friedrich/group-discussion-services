@@ -25,3 +25,14 @@
 .pm-survey-button {
   margin-top: 1em;
 }
+
+@media(min-width:767px){
+  .pm-survey-type-big5 {
+    .pm-survey-options {
+      .radio {
+        display: inline-block;
+        margin-right: 20px;
+      }
+    }
+  }
+}
