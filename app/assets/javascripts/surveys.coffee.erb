@@ -39,16 +39,18 @@ $ ->
     generateOptionMarkup ["trifft gar nicht zu", "trifft eher nicht zu", "trifft eher zu", "trifft genau zu"], identifier
 
   submitSurveyToServer = ->
-    console.log 'submitting...'
     console.log status.results
-    $.post ENDPOINT,
-      survey:
-        results: status.results
-    , (response) ->
-      console.log 'submit success', response
-      # status.done = true
-    , (error) ->
-      console.log 'submit', error
+
+    $.ajax
+      type: "POST"
+      url: ENDPOINT
+      data:
+        survey:
+          results: status.results
+      success: (response) ->
+        console.log 'submit success', response
+      error: (error) ->
+        console.log 'submit', error
 
 
   displayAlreadyDone = ->
