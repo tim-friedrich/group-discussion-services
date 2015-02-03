@@ -9,7 +9,14 @@
   padding-left: 7px;
 }
 
+.pm-survey-heading {
+  font-weight: bold;
+  margin-top: 1em;
+}
+
 .pm-survey-options {
+  margin-top: 0.2em;
+
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -19,7 +26,8 @@
 }
 
 .pm-survey-text {
-  margin-top: 2em;
+  margin-top: 0.7em;
+  font-size: 16px;
 }
 
 .pm-survey-button {
@@ -29,10 +37,29 @@
 @media(min-width:767px){
   .pm-survey-type-big5 {
     .pm-survey-options {
+      white-space: nowrap;
       .radio {
         display: inline-block;
         margin-right: 20px;
+        &:last-child {
+          margin-right: 0px;
+        }
       }
+    }
+  }
+}
+
+
+.pm-survey-type-big5 {
+  .pm-survey-text {
+    font-family: georgia, serif;
+    font-style: italic;
+    font-size: 20px;
+    &:before {
+      content: '„'
+    }
+    &:after {
+      content: '“'
     }
   }
 }
@@ -42,4 +69,5 @@
   width: 20em;
   position: relative;
   top: 1px;
+  margin-bottom: 0.4em;
 }

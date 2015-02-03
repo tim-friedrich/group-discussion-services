@@ -92,6 +92,7 @@ $ ->
 
       if question.type == "big5"
         $('#pm-survey-options').html generateBig5Markup(question.id)
+        # question_text = "„#{question_text}“"
       else if question.type == 'statistic'
         $('#pm-survey-options').html generateOptionMarkup(question.options, question.id)
         question_text = "Für statistische Zwecke: " + question_text
