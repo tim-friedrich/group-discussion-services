@@ -28,12 +28,13 @@ class SurveysController < ApplicationController
     survey = current_user.build_survey
     analyzed_results = Big5Analyzer.new(results).parse!
     if analyzed_results
-      survey.update_attributes(analyzed_results.survey_data)
-      # survey.save!
+      survey.update_attributes!(analyzed_results.survey_data)
       survey
     else
       false
     end
+  rescue
+    false # TODO applicaton wide error handling
   end
 
   def survey_params

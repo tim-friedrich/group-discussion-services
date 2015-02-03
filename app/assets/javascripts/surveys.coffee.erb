@@ -20,9 +20,17 @@ $ ->
     $('#pm-survey-options').text('')
 
   extractAnswer = ->
-    answer = $('#pm-survey input[type=radio]:checked')
-    id: answer[0].name
-    value: answer[0].value
+    question = QUESTIONS[status.questionNumber]
+    answer   = $('#pm-survey input[type=radio]:checked')
+    if question.type == 'statistic'
+      type: question.type
+      id: question.id
+      value: answer[0].value
+    else
+      type: question.type
+      value: answer[0].value
+      scale: question.scale
+      invert: !!question.invert
 
   generateOptionMarkup = (options, identifier) ->
     markup = ""
@@ -44,21 +52,26 @@ $ ->
     $.ajax
       type: "POST"
       url: ENDPOINT
+      dataType: 'json'
       data:
         survey:
           results: status.results
       success: (response) ->
-        console.log 'submit success', response
+        displaySuccess JSON.stringify(response)
       error: (error) ->
-        console.log 'submit', error.responseText
+        displaySuccess error.responseText
 
 
   displayAlreadyDone = ->
     $('#pm-survey').text('already done')
 
-  displaySuccess = ->
+  displaySubmitted = ->
     clearMarkup()
-    $('#pm-survey-text').text('Vielen Dank. Ihre Ergebnisse:')
+    $('#pm-survey-text').text('Vielen Dank. Ihre Daten werden ausgewertet...')
+    $('#pm-survey-button').hide()
+
+  displaySuccess = (successData) ->
+    $('#pm-survey-text').text('Vielen Dank. Ihre Ergebnisse:' + successData)
     $('#pm-survey-button').hide()
 
   displayError = (errorText) ->
@@ -87,7 +100,8 @@ $ ->
 
     else # survey done
       submitSurveyToServer(status.questionNumber)
-      displaySuccess()
+      displaySubmitted()
+      deleteCookie()
 
   updateProgress = (currentProgress) ->
       $('#pm-survey-progress').show()
@@ -101,6 +115,9 @@ $ ->
   saveInCookie = (statusToSave) ->
     statusToSave.updatedAt = currentTimestamp()
     $.cookie 'pm_survey', JSON.stringify(statusToSave)
+
+  deleteCookie = ->
+    $.cookie 'pm_survey', null
 
   initStatus = ->
     done: false
@@ -121,7 +138,7 @@ $ ->
           !statusFromCookie.questionNumber ||
           !statusFromCookie.updatedAt ||
           MAX_RESTART_SECONDS < currentTimestamp() - statusFromCookie.updatedAt
-        $.cookie 'pm_survey', null
+        deleteCookie()
         initStatus()
       else
         statusFromCookie
