@@ -103,6 +103,23 @@ ActiveRecord::Schema.define(version: 20150208143528) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
+=======
+  create_table "surveys", force: :cascade do |t|
+    t.float    "n"
+    t.float    "e"
+    t.float    "c"
+    t.float    "a"
+    t.float    "o"
+    t.float    "lm"
+    t.float    "mm"
+    t.float    "sm"
+    t.float    "h"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "firstname",              limit: 255
     t.string   "lastname",               limit: 255

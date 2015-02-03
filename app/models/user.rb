@@ -12,10 +12,11 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :dislikes
   has_many :discussions, through: :discussions_users
-  has_and_belongs_to_many :research_institutes  
+  has_and_belongs_to_many :research_institutes
 
   has_one :research_institute
-  
+  has_one :survey
+
   belongs_to :role
 
   validates :email, presence: true, length: { maximum: 50 }
@@ -48,8 +49,12 @@ class User < ActiveRecord::Base
     !discussion.users.find_by_id(self.id).nil?
   end
 
-  def is_staff?()
-    self.role == Role.where(name: 'deputy').first || self.role == Role.where(name: 'moderator').first
+  def has_survey?
+    !!survey
+  end
+
+	def is_staff?()
+		self.role == Role.where(name: 'deputy').first || self.role == Role.where(name: 'moderator').first
   end
 
   def is_deputy?
