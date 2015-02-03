@@ -8,7 +8,7 @@ $ ->
     if QUESTIONS[status.questionNumber].type == "info"
       nextStep()
     else if $('#pm-survey input[type=radio]:checked').length == 1
-      status.results[status.questionNumber] = extractAnswer()
+      status.results.push extractAnswer()
       nextStep()
     else
       displayError('Bitte wählen Sie eine der Antwortmöglichkeiten aus!')
@@ -70,6 +70,9 @@ $ ->
     status.questionNumber += 1
     question = QUESTIONS[status.questionNumber]
 
+    if status.questionNumber > 0
+      updateProgress(status.questionNumber - 1)
+
     if question
       $('#pm-survey').addClass "pm-survey-type-#{question.type}"
       question_text = question.text
@@ -82,17 +85,14 @@ $ ->
 
       $('#pm-survey-text').text(question_text)
 
-      updateProgress()
-
     else # survey done
-      submitSurveyToServer()
+      submitSurveyToServer(status.questionNumber)
       displaySuccess()
 
-  updateProgress = ->
-    if status.questionNumber > 0
+  updateProgress = (currentProgress) ->
       $('#pm-survey-progress').show()
-      $('#pm-survey-progress').attr 'max', QUESTIONS.length
-      $('#pm-survey-progress').attr 'value', status.questionNumber - 1
+      $('#pm-survey-progress').attr 'max', QUESTIONS.length - 1
+      $('#pm-survey-progress').attr 'value', currentProgress
 
 
   currentTimestamp = ->
@@ -105,7 +105,7 @@ $ ->
   initStatus = ->
     done: false
     questionNumber: -1
-    results: {}
+    results: []
     updatedAt: Math.floor(new Date().getTime() / 1000)
 
   loadFromCookieOrInitStatus = ->
