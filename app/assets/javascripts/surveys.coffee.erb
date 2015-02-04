@@ -1,8 +1,20 @@
 $ ->
-  QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_questions.json")) %>'
-  OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="answers" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
   MAX_RESTART_SECONDS = 10
   ENDPOINT = '/survey'
+  QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_questions.json")) %>'
+  ANALYSIS_TEXTS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_analysis_texts.json")) %>'
+  ANALYSIS_TEXT_ASSIGNMENTS =
+    1: "low"
+    2: "low"
+    3: "low"
+    4: "medium"
+    5: "medium"
+    6: "medium"
+    7: "high"
+    8: "high"
+    9: "high"
+  OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="answers" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
+  ANALYSIS_TEXT_TEMPLATE = '<div class="pm-survey-analysis-text">{{analysisText}}</div>'
 
   submitStep = ->
     if QUESTIONS[status.questionNumber].type == "info"
@@ -54,9 +66,9 @@ $ ->
         survey:
           results: status.results
       success: (response) ->
-        displaySuccess JSON.stringify(response)
+        displaySuccess(response)
       error: (error) ->
-        displaySuccess error.responseText
+        displayError error.responseText
 
   displaySubmitted = ->
     clearMarkup()
@@ -64,7 +76,7 @@ $ ->
     $('#pm-survey-button').hide()
 
   displaySuccess = (successData) ->
-    $('#pm-survey-text').text('Vielen Dank. Ihre Ergebnisse:' + successData)
+    $('#pm-survey-text').html('Vielen Dank. Ihre Ergebnisse:<br/><br/>' + createAnalysis(successData))
     $('#pm-survey-button').hide()
 
   displayError = (errorText) ->
@@ -101,6 +113,14 @@ $ ->
       $('#pm-survey-progress').attr 'max', QUESTIONS.length - 1
       $('#pm-survey-progress').attr 'value', currentProgress
 
+  createAnalysis = (successData) ->
+    markup = ""
+    Object.keys(successData).forEach (key) ->
+      if key.length == 1 && key != "h" # TODO only scales in result
+        markup += Mustache.render ANALYSIS_TEXT_TEMPLATE,
+          analysisText: ANALYSIS_TEXTS[key][ANALYSIS_TEXT_ASSIGNMENTS[successData[key]]]
+
+    markup
 
   currentTimestamp = ->
     Math.floor(new Date().getTime() / 1000)

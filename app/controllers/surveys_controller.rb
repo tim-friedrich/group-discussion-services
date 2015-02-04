@@ -16,7 +16,7 @@ class SurveysController < ApplicationController
 
     if survey = create_survey_result(survey_params[:results], current_user)
       render json: survey.to_json, status: 201
-    else
+    else # TODO applicaton wide error handling
       render text: 'bad request', status: 400
     end
   end
@@ -26,15 +26,13 @@ class SurveysController < ApplicationController
 
   def create_survey_result(results, user)
     survey = current_user.build_survey
-    analyzed_results = Big5Analyzer.new(results).parse!
+    analyzed_results = SurveyAnalyzer.new(results).parse!
     if analyzed_results
       survey.update_attributes!(analyzed_results.survey_data)
       survey
     else
       false
     end
-  rescue
-    false # TODO applicaton wide error handling
   end
 
   def survey_params
