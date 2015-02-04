@@ -1,6 +1,10 @@
 class Big5Analyzer
   SCALES = %w[n e c a o lm mm sm h]
+  NORM_TABLES = JSON.load File.read Rails.root.join('config', 'norm_tables.json')
+
+
   attr_reader :points, :stamines, :statistics
+
 
   def initialize(raw_results)
     @results    = raw_results.values
@@ -30,8 +34,21 @@ class Big5Analyzer
   end
 
   def build_stamines!
-    SCALES.each{ |label|
-      # bla bla bla
+    gender = @statistics["gender"] == 0 ? "female" : "male"
+    age =
+      case @statistics["age"]
+      when 0
+        "child"
+      when 4
+        "old"
+      else
+        "young"
+      end
+
+    SCALES.each{ |scale|
+      @stamines[scale] = 1 + NORM_TABLES[gender][age][scale].count{ |stamine_reached|
+        stamine_reached + 1 < @points[scale]
+      }
     }
   end
 
@@ -41,7 +58,7 @@ class Big5Analyzer
 
   def normalize_value(value, invert = nil)
     if value
-      invert ? 4 - value.to_i : 1 + value.to_i
+      invert && invert == "true" ? 4 - value.to_i : 1 + value.to_i
     end
   end
 end
