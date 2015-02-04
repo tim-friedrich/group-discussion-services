@@ -2,14 +2,11 @@ require 'spec_helper'
 
 describe User do
   before(:each) do
-    @user = FactoryGirl.build(:user)
-  end
-
-  after(:each) do
-    User.delete_all
+    @user = build(:user)
   end
 
   subject { @user }
+  let (:user_with_survey){ build(:user_with_survey) }
 
   it { should respond_to(:lastname) }
   it { should respond_to(:firstname) }
@@ -99,6 +96,17 @@ describe User do
   describe "with a password that´s to short" do
     before { @user.password = @user.password_confirmation = "a"*5 }
     it { should be_invalid }
+  end
+
+  # misc
+  describe "#has_survey?" do
+    it 'returns false if user has no related survey' do
+      expect( @user.has_survey? ).to be false
+    end
+
+    it 'returns true if user has a related survey' do
+      expect( user_with_survey.has_survey? ).to be true
+    end
   end
 
   #tests for discussion functionalities

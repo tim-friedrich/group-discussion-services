@@ -19,5 +19,9 @@ FactoryGirl.define do
     password_confirmation "123456789"
     confirmed_at Date.yesterday
     role { Role.where(name:"moderator").first }
+
+    factory :user_with_survey do
+      survey
+    end
   end
 end
