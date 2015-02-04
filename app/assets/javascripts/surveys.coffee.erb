@@ -1,6 +1,6 @@
 $ ->
   QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root + "config/survey.json")) %>'
-  OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="{{identifier}}" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
+  OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="answers" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
   MAX_RESTART_SECONDS = 10
   ENDPOINT = '/survey'
 
@@ -32,23 +32,20 @@ $ ->
       scale: question.scale
       invert: !!question.invert
 
-  generateOptionMarkup = (options, identifier) ->
+  generateOptionMarkup = (options) ->
     markup = ""
     options.forEach (option, index) ->
       markup += Mustache.render OPTION_TEMPLATE,
         value: index
         description: option
-        identifier: identifier
         tabindex: index + 1
 
     markup
 
-  generateBig5Markup = (identifier) ->
-    generateOptionMarkup ["trifft gar nicht zu", "trifft eher nicht zu", "trifft eher zu", "trifft genau zu"], identifier
+  generateBig5Markup = ->
+    generateOptionMarkup ["trifft gar nicht zu", "trifft eher nicht zu", "trifft eher zu", "trifft genau zu"]
 
   submitSurveyToServer = ->
-    console.log status.results
-
     $.ajax
       type: "POST"
       url: ENDPOINT
@@ -60,10 +57,6 @@ $ ->
         displaySuccess JSON.stringify(response)
       error: (error) ->
         displaySuccess error.responseText
-
-
-  displayAlreadyDone = ->
-    $('#pm-survey').text('already done')
 
   displaySubmitted = ->
     clearMarkup()
@@ -91,10 +84,9 @@ $ ->
       question_text = question.text
 
       if question.type == "big5"
-        $('#pm-survey-options').html generateBig5Markup(question.id)
-        # question_text = "„#{question_text}“"
+        $('#pm-survey-options').html generateBig5Markup()
       else if question.type == 'statistic'
-        $('#pm-survey-options').html generateOptionMarkup(question.options, question.id)
+        $('#pm-survey-options').html generateOptionMarkup(question.options)
         question_text = "Für statistische Zwecke: " + question_text
 
       $('#pm-survey-text').text(question_text)
@@ -121,7 +113,6 @@ $ ->
     $.cookie 'pm_survey', null
 
   initStatus = ->
-    done: false
     questionNumber: -1
     results: []
     updatedAt: Math.floor(new Date().getTime() / 1000)
@@ -159,13 +150,12 @@ $ ->
       option = $("#pm-survey-options input[type=radio]")[e.which - 49]
       if option
         option.checked = "checked"
+    else if e.which == 13
+      $('#pm-survey').submit()
 
 
   # # #
   # init
 
   status = loadFromCookieOrInitStatus()
-  if status.done
-    displayAlreadyDone()
-  else
-    nextStep(status.questionNumber)
+  nextStep(status.questionNumber)
