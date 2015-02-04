@@ -1,5 +1,5 @@
 $ ->
-  QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey.json")) %>'
+  QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_questions.json")) %>'
   OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="answers" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
   MAX_RESTART_SECONDS = 10
   ENDPOINT = '/survey'

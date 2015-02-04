@@ -8,7 +8,7 @@ Bundler.require(:default, Rails.env)
 
 module GDS
   class Application < Rails::Application
-    require 'big5_analyzer'
+    require 'survey_analyzer'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

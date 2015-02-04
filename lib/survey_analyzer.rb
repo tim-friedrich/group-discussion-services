@@ -1,6 +1,6 @@
-class Big5Analyzer
+class SurveyAnalyzer
   SCALES = %w[n e c a o lm mm sm h]
-  NORM_TABLES = JSON.load File.read Rails.root.join('db', 'norm_tables.json')
+  NORM_TABLES = JSON.load File.read Rails.root.join('db', 'survey_norm_tables.json')
 
 
   attr_reader :points, :stamines, :statistics
