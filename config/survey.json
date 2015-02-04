@@ -105,439 +105,367 @@
   },
   {
     "type": "big5",
-    "id": "frightend",
     "scale": "n",
     "text": "Ich bin ein ängstlicher Typ."
   },
   {
     "type": "big5",
-    "id": "private_things",
     "scale": "h",
     "text": "Im privaten Bereich habe ich schon mal Dinge gemacht, die besser nicht an die Öffentlichkeit kommen sollten."
   },
   {
     "type": "big5",
-    "id": "most_happy",
     "scale": "lm",
     "text": "Am glücklichsten bin ich dann, wenn viele Menschen mich bewundern und das toll finden, was ich mache."
   },
   {
     "type": "big5",
-    "id": "future_thinking",
     "scale": "n",
     "text": "Ich grübele viel Über meine Zukunft nach."
   },
   {
     "type": "big5",
-    "id": "overwhelmed",
     "scale": "n",
     "text": "Oft überwältigen mich meine Gefühle."
   },
   {
     "type": "big5",
-    "id": "insecure",
     "scale": "n",
     "text": "Ich bin mir in meinen Entscheidungen oft unsicher."
   },
   {
     "type": "big5",
-    "id": "other_people",
     "scale": "e",
     "text": "Ich bin gerne mit anderen Menschen zusammen."
   },
   {
     "type": "big5",
-    "id": "feelings",
     "scale": "n",
     "text": "Oft werde ich von meinen Gefühlen hin- und her gerissen."
   },
   {
     "type": "big5",
-    "id": "solitary_man",
     "scale": "e",
     "invert": true,
     "text": "Ich bin ein Einzelgänger."
   },
   {
     "type": "big5",
-    "id": "new_stuff",
     "scale": "o",
     "text": "Ich will immer neue Dinge ausprobieren."
   },
   {
     "type": "big5",
-    "id": "many_clubs",
     "scale": "e",
     "text": "Ich bin in vielen Vereinen aktiv."
   },
   {
     "type": "big5",
-    "id": "communication",
     "scale": "e",
     "text": "Ich bin ein gesprächiger und kommunikativer Mensch."
   },
   {
     "type": "big5",
-    "id": "power_politics",
     "scale": "mm",
     "invert": true,
     "text": "Ich kann Menschen verstehen, die sagen, dass andere Dinge wichtiger sind als Einfluss und Politik"
   },
   {
     "type": "big5",
-    "id": "security",
     "scale": "sm",
     "text": "Ich habe schon immer ein starkes Bedürfnis nach Sicherheit und Ruhe verspürt."
   },
   {
     "type": "big5",
-    "id": "penalty",
     "scale": "c",
     "text": "Auch kleine Bußgelder sind mir sehr unangenehm."
   },
   {
     "type": "big5",
-    "id": "insecure2",
     "scale": "n",
     "text": "Ich fÜhle mich oft unsicher."
   },
   {
     "type": "big5",
-    "id": "compulsion",
     "scale": "n",
     "text": "Ich verspüre oft eine große innere Unruhe."
   },
   {
     "type": "big5",
-    "id": "alone",
     "scale": "e",
     "invert": true,
     "text": "Im Grunde bin ich oft lieber für mich allein."
   },
   {
     "type": "big5",
-    "id": "conscientious",
     "scale": "c",
     "text": "Ich bin sehr pflichtbewusst."
   },
   {
     "type": "big5",
-    "id": "polite",
     "scale": "a",
     "text": "Ich bin ein höflicher Mensch."
   },
   {
     "type": "big5",
-    "id": "detailed_tasks",
     "scale": "c",
     "text": "Meine Aufgaben erledige ich immer sehr genau."
   },
   {
     "type": "big5",
-    "id": "helping",
     "scale": "a",
     "text": "Ich helfe anderen, auch wenn man mir es nicht dankt."
   },
   {
     "type": "big5",
-    "id": "quarrel",
     "scale": "a",
     "invert": true,
     "text": "Ich habe immer wieder Streit mit anderen."
   },
   {
     "type": "big5",
-    "id": "calm_life",
     "scale": "sm",
     "text": "Ich träume oft von einem ruhigen Leben ohne böse Überraschungen."
   },
   {
     "type": "big5",
-    "id": "salvaged",
     "scale": "sm",
     "text": "Am glücklichsten bin ich dann, wenn ich mich geborgen fühle."
   },
   {
     "type": "big5",
-    "id": "decisions",
     "scale": "mm",
     "text": "Wenn ich die Wahl hätte, würde ich in meinem Leben gerne weltbewegende Entscheidungen treffen."
   },
   {
     "type": "big5",
-    "id": "influence",
     "scale": "mm",
     "text": "Für mehr Einfluss würde ich auf vieles verzichten."
   },
   {
     "type": "big5",
-    "id": "worries",
     "scale": "n",
     "text": "Ich mache mir oft unnütze Sorgen."
   },
   {
     "type": "big5",
-    "id": "whistleblowing",
     "scale": "h",
     "text": "Ich habe schon mal Dinge weitererzählt, die ich besser für mich behalten hätte."
   },
   {
     "type": "big5",
-    "id": "appreciation",
     "scale": "lm",
     "text": "Für mehr Anerkennung würde ich auf vieles verzichten."
   },
   {
     "type": "big5",
-    "id": "tidy",
     "scale": "c",
     "text": "Ich war schon als Kind sehr ordentlich."
   },
   {
     "type": "big5",
-    "id": "methodical",
     "scale": "c",
     "text": "Ich gehe immer planvoll vor."
   },
   {
     "type": "big5",
-    "id": "necessities",
     "scale": "a",
     "text": "Es fällt mir sehr leicht, meine Bedürfnisse für andere zurückzustellen."
   },
   {
     "type": "big5",
-    "id": "contact_joy",
     "scale": "e",
     "text": "Ich bin sehr kontaktfreudig."
   },
   {
     "type": "big5",
-    "id": "empathy",
     "scale": "a",
     "text": "Ich kann mich gut in andere Menschen hinein versetzen."
   },
   {
     "type": "big5",
-    "id": "other_opinion",
     "scale": "a",
     "text": "Ich komme immer gut mit anderen aus, auch wenn sie nicht meiner Meinung sind."
   },
   {
     "type": "big5",
-    "id": "best_one",
     "scale": "lm",
     "text": "Ich habe schon immer ein starkes Bedürfnis verspürt nach meinen eigenen Maßstäben der Beste zu sein."
   },
   {
     "type": "big5",
-    "id": "sad_no_reason",
     "scale": "n",
     "text": "Ich bin oft ohne Grund traurig."
   },
   {
     "type": "big5",
-    "id": "stick_to_rules",
     "scale": "c",
     "text": "Ich achte sehr darauf, dass Regeln eingehalten werden."
   },
   {
     "type": "big5",
-    "id": "curiously",
     "scale": "o",
     "text": "Ich bin ein neugieriger Mensch."
   },
   {
     "type": "big5",
-    "id": "like_discussions",
     "scale": "o",
     "text": "Ich diskutiere gerne."
   },
   {
     "type": "big5",
-    "id": "stick_principles",
     "scale": "c",
     "text": "Ich habe meine festen Prinzipien und halte daran auch fest."
   },
   {
     "type": "big5",
-    "id": "influence_power",
     "scale": "mm",
     "text": "Tief in meinem Innersten gibt es eine Sehnsucht nach Einfluss und Macht."
   },
   {
     "type": "big5",
-    "id": "good_mood",
     "scale": "e",
     "text": "Ich kann schnell gute Stimmung verbreiten."
   },
   {
     "type": "big5",
-    "id": "other_cultures",
     "scale": "o",
     "text": "Ich reise viel, um andere Kulturen kennenzulernen."
   },
   {
     "type": "big5",
-    "id": "like_partys",
     "scale": "e",
     "text": "Ich gehe gerne auf Partys."
   },
   {
     "type": "big5",
-    "id": "no_deviation",
     "scale": "c",
     "text": "Wenn ich mich einmal entschieden habe, dann weiche ich davon auch nicht mehr ab."
   },
   {
     "type": "big5",
-    "id": "rapid_mistakes",
     "scale": "c",
     "text": "Ich mache eigentlich nie Flüchtigkeitsfehler."
   },
   {
     "type": "big5",
-    "id": "nervously",
     "scale": "n",
     "text": "Ich bin oft nervös."
   },
   {
     "type": "big5",
-    "id": "no_changes",
     "scale": "o",
     "invert": true,
     "text": "Am liebsten ist es mir, wenn alles so bleibt, wie es ist."
   },
   {
     "type": "big5",
-    "id": "little_sluts",
     "scale": "c",
     "text": "Auch kleine Schlampereien stören mich."
   },
   {
     "type": "big5",
-    "id": "learning_new",
     "scale": "o",
     "text": "Ich lerne immer wieder gerne neue Dinge."
   },
   {
     "type": "big5",
-    "id": "art_music",
     "scale": "o",
     "text": "Ich beschäftige mich viel mit Kunst, Musik und Literatur."
   },
   {
     "type": "big5",
-    "id": "always_polite",
     "scale": "a",
     "text": "Ich achte darauf, immer freundlich zu sein."
   },
   {
     "type": "big5",
-    "id": "stole_kept",
     "scale": "h",
     "text": "Ich habe schon mal etwas unterschlagen oder nicht gleich zurückgegeben."
   },
   {
     "type": "big5",
-    "id": "ego",
     "scale": "a",
     "invert": true,
     "text": "Ich bin ein Egoist."
   },
   {
     "type": "big5",
-    "id": "bad_mood",
     "scale": "a",
     "text": "Ich würde meine schlechte Laune nie an anderen auslassen."
   },
   {
     "type": "big5",
-    "id": "philosophy",
     "scale": "o",
     "text": "Ich interessiere mich sehr für philosophische Fragen."
   },
   {
     "type": "big5",
-    "id": "scientific_topics",
     "scale": "o",
     "text": "Ich lese viel über wissenschaftliche Themen, neue Entdeckungen oder historische Begebenheiten."
   },
   {
     "type": "big5",
-    "id": "many_ideas",
     "scale": "o",
     "text": "Ich habe viele Ideen und viel Fantasie."
   },
   {
     "type": "big5",
-    "id": "acknowledgement",
     "scale": "lm",
     "text": "Ich habe schon immer ein starkes Bedürfnis nach Anerkennung und Bewunderung verspürt."
   },
   {
     "type": "big5",
-    "id": "responsibility",
     "scale": "mm",
     "text": "Am glücklichsten bin ich dann, wenn ich Verantwortung übernehmen kann und wichtige Entscheidungen treffen darf."
   },
   {
     "type": "big5",
-    "id": "security_peace",
     "scale": "sm",
     "text": "Wenn ich die Wahl hätte, würde ich ein Leben in Sicherheit und Frieden wählen."
   },
   {
     "type": "big5",
-    "id": "be_active",
     "scale": "e",
     "text": "Ich bin unternehmungslustig."
   },
   {
     "type": "big5",
-    "id": "the_mid",
     "scale": "e",
     "text": "Ich stehe gerne im Mittelpunkt."
   },
   {
     "type": "big5",
-    "id": "be_the_best",
     "scale": "lm",
     "text": "Tief in meinem Innersten gibt es eine Sehnsucht danach der Beste sein zu wollen"
   },
   {
     "type": "big5",
-    "id": "dream_famous",
     "scale": "lm",
     "text": "Ich träume oft davon, berühmt zu sein."
   },
   {
     "type": "big5",
-    "id": "important_politics",
     "scale": "mm",
     "text": "Ich träume oft davon, wichtige Entscheidungen für Politiker oder andere mächtige Menschen zu treffen."
   },
   {
     "type": "big5",
-    "id": "no_bad_surprise",
     "scale": "sm",
     "text": "Für ein sicheres Leben ohne böse Überraschungen würde ich auf vieles verzichten."
   },
   {
     "type": "big5",
-    "id": "always_thankful",
     "scale": "a",
     "text": "Wenn mir jemand hilft, erweise ich mich immer als dankbar."
   },
   {
     "type": "big5",
-    "id": "calm_security",
     "scale": "sm",
     "text": "Tief in meinem Innersten gibt es eine Sehnsucht nach Ruhe und Geborgenheit."
   },
   {
     "type": "big5",
-    "id": "slandering",
     "scale": "h",
     "text": "Ich habe schon mal über andere gelästert oder schlecht über sie gedacht."
   }
