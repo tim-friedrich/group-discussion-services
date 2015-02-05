@@ -6,22 +6,20 @@
 
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
-
+  <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Open+Sans' %>
 
   <%= csrf_meta_tags %>
 
   <!--[if IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+
   <![endif]-->
 </head>
-<body class="center-block">
-  <header>
-		<nav class="navbar navbar-default center-block" role="navigation">
-  		<!-- Brand and toggle get grouped for better mobile display -->
+<body>
+  <header class="center-block">
+		<nav role="navigation">
       <%= link_to image_tag(image_url("logo.png")), root_path, class: "navbar-brand" %>
 
-  		<!-- Collect the nav links, forms, and other content for toggling -->
-  		<div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
 
           <% if signed_in? %>
@@ -31,7 +29,6 @@
             <li><%= link_to "Anmelden", new_user_session_path %></li>
           <% end %>
         </ul>
-  		</div><!-- /.navbar-collapse -->
 		</nav>
 	</header>
 

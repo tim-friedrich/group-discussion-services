@@ -3,76 +3,118 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .teaser{
-  //width: 810px;
-  width: 1024px;
-  height: 340px;
-  background-color: white;
-  //margin-top: 50px;
-  img{
-    padding: 10px;
-    height: 340px;
-    width: 480px;
-    float: left;
-  }
-  .teaser-description{
-    padding: 20px 40px;
-    width: 524px;
-    height: 340px;
-    float: left;
+  background-color: #e1e1e1;
+  padding: 20px 0px 0px 0px;
+  height: 420px;
+  #teaser-container {
+    width: 1024px;
+    height: 360px;
+    margin-bottom: 16px;
+
+    #nav-left, #nav-right{
+      height: 360px;
+      width: 62px;
+
+    }
+    #nav-left:hover, #nav-right:hover{
+      background-color: #7eb11c;
+      opacity: 0.6;
+    }
+    .disabled:hover{
+      background-color: transparent !important;
+    }
+    #nav-left{
+      float: left;
+    }
+    #nav-right{
+      float: right;
+    }
+    .teaser-div {
+      width: 0px;
+      height: 360px;
+      float: left;
+      overflow: visible;
+
+      background-color: #fbfbfb;
+      img {
+        padding: 0px;
+        height: 360px;
+        width: 540px;
+        float: left;
+      }
+      .teaser-description {
+        padding: 20px;
+        width: 354px;
+        height: 340px;
+        float: left;
+        overflow: visible;
+      }
+      .teaser-left, .teaser-right{
+        width: 450px;
+        height: 360px;
+        float: left;
+        overflow: visible;
+        padding: 10px 30px 30px 30px;
+      }
+    }
   }
 }
 
 #separation-arrow-container{
-  height: 33px;
+  height: 16px;
+  width: 1024px;
 }
 
 .prev-images{
-  //floate: none;
+  height: 130px;
+  width: 820px;
+
+  p{
+    letter-spacing: 1px;
+  }
+
 
   div{
     float: left;
+    margin: 10px 17px;
     p{
       text-align: center;
     }
   }
-  div:first-child{
-    margin: 10px 18px 10px 0px;
-  }
-  div:nth-child(2), div:nth-child(3){
-    margin: 10px 17px;
-  }
-  div:nth-child(4){
-    margin: 10px 0px 10px 18px;
-  }
+
   #image-overlay{
     background-color: #7eb11c;
-    width: 230px;
-    height: 154px;
+    width: 130px;
+    height: 130px;
     opacity: 0;
     margin: 0px ! important;
   }
   .prev-image{
-    width: 230px;
+    width: 130px;
     margin: 0px ! important;
-    height: 154px;
+    height: 130px;
   }
   .company-prev{
-    background: transparent image_url("company.jpg") no-repeat;
+    background: transparent image_url("home/companies_prev.jpg") no-repeat;
     background-size: contain;
   }
   .our-service-prev{
-    background: transparent image_url("our_service.jpg") no-repeat;
+    background: transparent image_url("home/our_service_prev.jpg") no-repeat;
     background-size: contain;
   }
   .research-institute-prev{
-    background: transparent image_url("research_institute.jpg") no-repeat;
+    background: transparent image_url("home/research_institute_prev.jpg") no-repeat;
+    background-size: contain;
+  }
+  .moderator-prev{
+    background: transparent image_url("home/moderators_prev.jpg") no-repeat;
     background-size: contain;
   }
   .proband-prev{
-    background: transparent image_url("proband.jpg") no-repeat;
+    background: transparent image_url("home/probands_prev.jpg") no-repeat;
     background-size: contain;
   }
   .prev-image:hover #image-overlay{
-    opacity: 0.7;
+    opacity: 0.6;
   }
 }
