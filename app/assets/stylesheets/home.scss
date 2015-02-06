@@ -33,9 +33,13 @@
       width: 0px;
       height: 360px;
       float: left;
-      overflow: visible;
+      overflow: hidden;
 
+      .teaser-width{
+        width: 900px;
+      }
       background-color: #fbfbfb;
+
       img {
         padding: 0px;
         height: 360px;
@@ -46,15 +50,16 @@
         padding: 20px;
         width: 354px;
         height: 340px;
-        float: left;
-        overflow: visible;
+        float: right;
       }
       .teaser-left, .teaser-right{
         width: 450px;
         height: 360px;
         float: left;
-        overflow: visible;
         padding: 10px 30px 30px 30px;
+      }
+      .teaser-description, .teaser-right, .teaser-left{
+        background-color: #fbfbfb !important;
       }
     }
   }
