@@ -36,9 +36,9 @@ gem 'prawn-rails'        # pdf generation
 
 gem 'whiskey_disk'
 
+gem 'rake'
 
 group :development, :test do
- 	gem 'rake'
   gem 'database_cleaner'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
