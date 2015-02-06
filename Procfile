@@ -1,3 +1,3 @@
-web: bundle exec rails server -p $PORT -b 0.0.0.0
+web: bundle exec rails server -p $PORT
 
 #web: rackup private_pub.ru -E production
