@@ -45,7 +45,7 @@ GDS::Application.configure do
   # Set to :debug to see everything in the log.
   config.log_level = :info
 
-  config.assets.precompile = [/^[-_a-zA-Z0-9]*\..*/]
+  # config.assets.precompile = [/^[-_a-zA-Z0-9]*\..*/]
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
