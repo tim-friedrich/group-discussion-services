@@ -34,7 +34,7 @@ gem 'chart-js-rails'     # js charts api
 gem 'mediaelement_rails' # js music and video player
 gem 'prawn-rails'        # pdf generation
 
-gem 'whiskey_disk'
+gem 'whiskey_disk', github: 'johnae/whiskey_disk'
 
 gem 'rake'
 

@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/johnae/whiskey_disk.git
+  revision: c74382bfd726d3bfee813e28f880230c4af9d39d
+  specs:
+    whiskey_disk (0.6.24)
+      rake
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -335,8 +342,6 @@ GEM
     websocket-driver (0.5.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.1)
-    whiskey_disk (0.6.24)
-      rake
     will-paginate-i18n (0.1.15)
     will_paginate (3.0.7)
     will_paginate-bootstrap (1.0.1)
@@ -389,6 +394,6 @@ DEPENDENCIES
   thin
   uglifier (~> 2.7.0)
   web-console (~> 2.0)
-  whiskey_disk
+  whiskey_disk!
   will-paginate-i18n
   will_paginate-bootstrap
