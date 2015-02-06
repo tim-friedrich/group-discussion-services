@@ -1,4 +1,4 @@
 echo "## SET RUBY ##"
-source /home/deploy/.bashrc
+source /usr/local/share/chruby/chruby.sh
 echo "## BUNDLE ##"
 bundle install --deployment --without test:development
