@@ -1,6 +1,7 @@
 GIT
   remote: git://github.com/johnae/whiskey_disk.git
-  revision: c74382bfd726d3bfee813e28f880230c4af9d39d
+  revision: 20c83e465d374d0ff487e311b5de5a6aafa7b5bb
+  branch: develop
   specs:
     whiskey_disk (0.6.24)
       rake
