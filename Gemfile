@@ -35,8 +35,8 @@ gem 'mediaelement_rails' # js music and video player
 gem 'prawn-rails'        # pdf generation
 
 gem 'whiskey_disk', github: 'johnae/whiskey_disk', branch: 'develop'
-
 gem 'rake'
+gem 'foreman'
 
 group :development, :test do
   gem 'database_cleaner'
