@@ -6,11 +6,13 @@
   $('.content').removeClass('content')
   @$arrows.hide()
   @$teasers.hide()
+  @enabled = true
   $('#teaser-container').show()
+  $('#separation-arrow-container').show()
   openPage(1, 'our-service-teaser')
 
-  prevImages.click((event)->
-    openPage(1, $(event.target).attr("data-id"))
+  prevImages.click((event)=>
+      openPage(1, $(event.target).attr("data-id"))
   )
   $('#nav-right').click((event) ->
     if !$(event.target).hasClass('disabled')
@@ -22,7 +24,8 @@
   )
 
 openPage = (pageNumber, id) =>
-  if id != $('.active').parent().attr('id') or pageNumber != $('.active').data('page')
+  if (id != $('.active').parent().attr('id') or pageNumber != $('.active').data('page')) and @enabled
+    @enabled = false
     @$arrows.hide()
     $('#nav-left').removeClass('disabled')
     $('#nav-right').removeClass('disabled')
@@ -33,10 +36,14 @@ openPage = (pageNumber, id) =>
     page = items.filter('[data-page='+pageNumber+']')
     page.addClass('active')
     page.show()
-    page.animate({ width: '900px' }, 1000 )
+    page.animate({ width: '900px' }, 1000, () =>
+      @enabled = true
+    )
 
     items.filter('.separate-arrow').show()
     if pageNumber == 1
       $('#nav-left').addClass('disabled')
     if items.filter('[data-page='+(pageNumber+1)+']').length == 0
       $('#nav-right').addClass('disabled')
+
+
