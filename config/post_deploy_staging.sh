@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "## SET RUBY ##"
 source /usr/local/share/chruby/chruby.sh
 chruby 2.2.0

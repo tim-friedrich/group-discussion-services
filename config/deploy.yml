@@ -3,8 +3,8 @@ staging:
   deploy_to: '/home/deploy/gds_staging'
   repository: 'git@github.com:tim-friedrich/group-discussion-services.git'
   branch: "staging"
-  post_deploy_script: 'config/post_deploy.sh'
-  post_setup_script: 'config/post_deploy.sh'
+  post_deploy_script: 'config/post_deploy_staging.sh'
+  post_setup_script: 'config/post_deploy_staging.sh'
   post_setup_rake_tasks_disabled: 'yes'
   post_deploy_rake_tasks_disabled: 'yes'
   rake_env:
@@ -14,8 +14,8 @@ production:
   deploy_to: '/home/deploy/gds_production'
   repository: 'git@github.com:tim-friedrich/group-discussion-services.git'
   branch: "production"
-  post_deploy_script: 'config/post_deploy.sh'
-  post_setup_script: 'config/post_deploy.sh'
+  post_deploy_script: 'config/post_deploy_production.sh'
+  post_setup_script: 'config/post_deploy_production.sh'
   post_setup_rake_tasks_disabled: 'yes'
   post_deploy_rake_tasks_disabled: 'yes'
   rake_env:
