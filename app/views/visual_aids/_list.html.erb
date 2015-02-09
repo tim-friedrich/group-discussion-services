@@ -13,11 +13,11 @@
     <tr>
       <td>
         <a href="#" class="thumbnail">
-          <img src="<%= visual_aid.url %>" alt="<%= visual_aid.url.split('/').last() %>">
+          <%= image_tag visual_aid.file.url %>
         </a>
       </td>
       <td>
-        <%= visual_aid.url.split('/').last() %>
+        <%= visual_aid.name %>
       </td>
       <td>
       <td><%= link_to 'Löschen', visual_aids_path+"/"+visual_aid.id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary delete_file" %></td>
@@ -28,4 +28,4 @@
   </tbody>
 </table>
 
-<%= will_paginate visual_aids, renderer: BootstrapPagination::Rails, param_name: "visual_aids_page" %>
+<%= will_paginate visual_aids, renderer: BootstrapPagination::Rails, param_name: "visual_aids_page", params: { controller: 'discussions', action: :edit, id:visual_aids.first().discussion.id }  %>

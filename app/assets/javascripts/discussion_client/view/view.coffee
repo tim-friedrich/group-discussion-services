@@ -71,7 +71,6 @@ class @View
       $argument.html($.emoticons.replace(post))
       $('#argument_content .emoticon').attr("contenteditable", "false")
       window.set_caret(document.getElementById("argument_content"), caret+$(event.target).attr('data-type').length)
-
     )
 
     $(window).resize(() =>

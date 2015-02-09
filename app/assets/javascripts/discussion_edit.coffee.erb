@@ -1,6 +1,6 @@
-@init_edit_discussion = () ->
+@init_edit_discussion = (discussion_id) ->
 
-  @fileInput    = $('#fileupload');
+  @fileInput   = $('#fileupload');
   submitButton = $('.fileinput-button');
   progressBar  = $("<div class='bar'></div>");
   barContainer = $("<div class='progress'></div>").append(progressBar);
@@ -12,12 +12,12 @@
   )
 
   @fileInput.fileupload(
-    url:             window.s3_url,
+    url:             '/visual_aids',
     type:            'POST',
     autoUpload:       true,
-    formData:         window.s3_form_data,
-    paramName:        'file',
-    dataType:         'XML',
+    paramName:        'visual_aid[file]',
+    dataType:         'script',
+    formData:         {'visual_aid[discussion_id]': discussion_id }
 
 
     progressall: (e, data) =>
@@ -34,35 +34,7 @@
 
     done: (e, data) =>
       submitButton.removeClass('disabled');
-
-      key   = $(data.jqXHR.responseXML).find("Key").text();
-      name = key.split('/')[key.split('/').length-1]
-
-      $.post(
-        "/visual_aids?visual_aids_page="+$('.visual_aids_list').find('.pagination').find('.active').find('span').text()
-        visual_aid:
-          discussion_id: window.discussion_id
-          name: name
-          url: 'https://'+window.s3_url_host + key
-          media_type: data.originalFiles[0]['type']
-
-        (data) =>
-          progressBar.text("Upload abgeschlossen");
-          $.get(
-            "?visual_aids_page="+$('.visual_aids_list').find('.pagination').find('.active').find('span').text(),
-            (data) => register_paginations()
-            "script"
-          )
-          $('#visual_aids_table').children().last().find('a').click((event) =>
-            $(event.target).parent().parent().remove()
-          )
-         'json'
-      )
-      .fail(() =>
-        submitButton.removeClass('disabled');
-        alert("Leider war ihr Upload nicht erfolgreich bitte versuchen sie es erneut.")
-        progressBar.text("Fehler");
-      )
+      @register_paginations()
 
     fail: (e, data) =>
       submitButton.removeClass('disabled');
@@ -80,18 +52,15 @@
           valid = false
           $('#not-supported-file').removeClass('hidden')
       )
-
-
       if valid
+        console.log(this.href)
         data.submit()
-
   )
-
   $('.delete_file').click((event) =>
     $(event.target).parent().parent().remove()
   )
-
   @register_paginations()
+
 
 @register_paginations = () ->
   $(".pagination").find("a").on("click", (event) ->
