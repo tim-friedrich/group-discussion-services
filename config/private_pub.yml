@@ -1,23 +1,30 @@
 development:
-  server: "https://gdswebsocketserver.herokuapp.com/faye/faye"
-  secret_token: "559c1806ca482ab39f941d5755cf38d44ce470ad9c0fe6db83dd20ac6262a0cb"
-  signature_expiration: 3600 # one hour
-  port: 4443
-  ssl: true
+  server: "http://localhost:9292/faye"
+  secret_token: "secret"
+  port: 4000
   rackup: private_pub.ru
 test:
-  server: "http://localhost:9292/faye/faye"
+  server: "http://localhost:9292/faye"
   secret_token: "secret"
+  port: 4000
   rackup: private_pub.ru
 production:
-  server: "https://gdswebsocketserver.herokuapp.com/faye/faye"
-  secret_token: "559c1806ca482ab39f941d5755cf38d44ce470ad9c0fe6db83dd20ac6262a0cb"
+  server: "<%= ENV['WS_ENDPOINT'] %>"
+  secret_token: "<%= ENV['WS_SECRET_TOKEN'] %>"
   signature_expiration: 3600 # one hour
-  port: 4443
-  ssl: true
+  port: 4000
+  ssl: false # done by nginx
   rackup: private_pub.ru
 
 #  server: "http://localhost:9292/faye/faye"
 #  secret_token: "secret"
 #  rackup: private_pub.ru
 #  port: 9292
+
+# production:
+#   server: "https://gdswebsocketserver.herokuapp.com/faye/faye"
+#   secret_token: "559c1806ca482ab39f941d5755cf38d44ce470ad9c0fe6db83dd20ac6262a0cb"
+#   signature_expiration: 3600 # one hour
+#   port: 4443
+#   ssl: true
+#   rackup: private_pub.ru
