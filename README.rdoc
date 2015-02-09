@@ -20,4 +20,16 @@ $ foreman run rspec
 
 === Deployment
 
-...
+(Replace staging with the proper branch/environment you want to deploy)
+
+* Push staging branch
+* run <tt>wd deploy --to=staging</tt>
+
+
+=== Important Server Config Files
+
+* /etc/init.d/thin-staging
+* /etc/thin/gds-staging
+* /etc/nginx/sites-enabled/gds
+* visudo
+
