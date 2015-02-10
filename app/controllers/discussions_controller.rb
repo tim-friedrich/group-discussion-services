@@ -70,7 +70,6 @@ class DiscussionsController < ApplicationController
     respond_to do |format|
       format.html do
         @companies = current_user.research_institutes.first.companies
-        @s3_direct_post = S3_BUCKET.presigned_post(key: "visual_aids/#{ @discussion.id }/#{ SecureRandom.uuid }/${filename}", success_action_status: 201, acl: :public_read)
         @proband = DiscussionsUser.new
         @visual_aid = VisualAid.new
         @users = User.all

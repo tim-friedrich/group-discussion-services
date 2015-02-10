@@ -8,7 +8,6 @@ $(".observers_list").html('' +
 '<%= escape_javascript(render partial: "discussions_users/list_users",
         locals: { discussions_users: @observers, id: "observers", page_name: "observers_page" }) %>')
 
-
 $(".visual_aids_list").children().remove()
 $(".visual_aids_list").html('' +
 '<%= escape_javascript(render partial: "visual_aids/list",

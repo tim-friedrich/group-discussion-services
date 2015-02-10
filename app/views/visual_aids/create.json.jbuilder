@@ -1,1 +1,1 @@
-json.extract! @visual_aid, :id, :discussion_id, :url
+json.extract! @visual_aid, :id, :discussion_id
