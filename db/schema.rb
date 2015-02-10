@@ -103,6 +103,30 @@ ActiveRecord::Schema.define(version: 20150208143528) do
     t.datetime "updated_at"
   end
 
+  create_table "surveys", force: :cascade do |t|
+    t.integer  "n"
+    t.integer  "e"
+    t.integer  "c"
+    t.integer  "a"
+    t.integer  "o"
+    t.integer  "lm"
+    t.integer  "mm"
+    t.integer  "sm"
+    t.integer  "h"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "n_points"
+    t.integer  "e_points"
+    t.integer  "c_points"
+    t.integer  "a_points"
+    t.integer  "o_points"
+    t.integer  "lm_points"
+    t.integer  "mm_points"
+    t.integer  "sm_points"
+    t.integer  "h_points"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "firstname",              limit: 255
     t.string   "lastname",               limit: 255
