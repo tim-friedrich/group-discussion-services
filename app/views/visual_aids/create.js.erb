@@ -1,0 +1,4 @@
+$(".visual_aids_list").children().remove()
+$(".visual_aids_list").html('' +
+'<%= escape_javascript(render partial: "visual_aids/list",
+        locals: { visual_aids: @visual_aids }) %>')

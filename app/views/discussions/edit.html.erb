@@ -65,9 +65,5 @@
 
 
 <%= javascript_tag do %>
-  window.s3_form_data = <%= @s3_direct_post.fields.to_json.html_safe %>;
-  window.s3_url = '<%= @s3_direct_post.url %>';
-  window.s3_url_host = '<%= @s3_direct_post.url.host %>/';
-  window.discussion_id = <%= @discussion.id %>;
-  $(window).load(function(){ init_edit_discussion() });
+  $(document).ready(function(){ init_edit_discussion(<%= @discussion.id %>) });
 <% end %>

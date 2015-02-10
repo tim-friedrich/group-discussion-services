@@ -8,7 +8,6 @@ gem 'rails-i18n', '~> 4.0.3'
 gem 'bcrypt', '~> 3.1.9'
 gem "nested_form" # nested form support
 gem 'devise-i18n'
-gem 'aws-sdk'
 gem 'jbuilder', '~> 1.2' # json apis https://github.com/rails/jbuilder
 
 gem 'devise' # user management
@@ -37,6 +36,7 @@ gem 'prawn-rails'        # pdf generation
 gem 'whiskey_disk', github: 'johnae/whiskey_disk', branch: 'develop'
 gem 'rake'
 gem 'foreman'
+gem "paperclip"
 
 group :development, :test do
   gem 'database_cleaner'

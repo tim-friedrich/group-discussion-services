@@ -10,7 +10,7 @@ class DiscussionsController < ApplicationController
   def show
     respond_to do | format |
       if !current_user and !current_user.is_part_of_discussion?(@discussion)
-        format.html{ redirect_to current_user, notice: "Du bist nicht für diese Discussion eingetragen" }
+        format.html{ redirect_to '/profile', notice: "Du bist nicht für diese Discussion eingetragen" }
         format.json{ render status: :forbidden }
       else
         @discussion_user = DiscussionsUser.where(discussion_id: @discussion.id, user_id: current_user).first()
@@ -70,7 +70,6 @@ class DiscussionsController < ApplicationController
     respond_to do |format|
       format.html do
         @companies = current_user.research_institutes.first.companies
-        @s3_direct_post = S3_BUCKET.presigned_post(key: "visual_aids/#{ @discussion.id }/#{ SecureRandom.uuid }/${filename}", success_action_status: 201, acl: :public_read)
         @proband = DiscussionsUser.new
         @visual_aid = VisualAid.new
         @users = User.all
@@ -89,7 +88,7 @@ class DiscussionsController < ApplicationController
       if @discussion.save
         @discussion.moderator = current_user
         @question.save
-        format.html { redirect_to current_user, notice: 'Eine neue Diskussion wurde erfolgreich erstellt.' }
+        format.html { redirect_to '/profile', notice: 'Eine neue Diskussion wurde erfolgreich erstellt.' }
         format.json { render action: 'show', status: :created, location: @discussion }
       else
         format.html { render action: 'new' }
@@ -103,7 +102,7 @@ class DiscussionsController < ApplicationController
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
-        format.html { redirect_to current_user, notice: 'Die Diskussion wurde erfolgreich aktualisiert.' }
+        format.html { redirect_to '/profile', notice: 'Die Diskussion wurde erfolgreich aktualisiert.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -118,7 +117,7 @@ class DiscussionsController < ApplicationController
     DiscussionsUser.where(discussion_id: @discussion.id).delete_all
     @discussion.destroy
     respond_to do |format|
-      format.html { redirect_to current_user }
+      format.html { redirect_to '/profile' }
       format.json { head :no_content }
     end
   end

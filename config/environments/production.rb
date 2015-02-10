@@ -82,7 +82,7 @@ GDS::Application.configure do
 
 	config.force_ssl = false
 
-  config.action_mailer.default_url_options = { :host => 'https://group-discussion-services.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'http://psychomatix.info' }
 
   config.action_mailer.smtp_settings = {
       :address              => 'smtp.1und1.de',
@@ -91,4 +91,6 @@ GDS::Application.configure do
       :password             => 'ftp60h2r',
       :authentication       => 'plain'
   }
+
+  Paperclip.options[:command_path] = "/usr/local/bin/" # TODO: Production image Magic path
 end
