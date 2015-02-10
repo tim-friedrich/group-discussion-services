@@ -1,14 +1,14 @@
 class Discussion < ActiveRecord::Base
 
-	has_many :questions
-	has_many :arguments
+  has_many :questions
+  has_many :arguments
   has_many :discussions_users
-	has_many :users, through: :discussions_users
+  has_many :users, through: :discussions_users
   has_many :visual_aids
-	belongs_to :company
+  belongs_to :company
 
 
-	validates :due_date, presence:true
+  validates :due_date, presence:true
 
   def research_institute
     self.moderator.research_institutes.first

@@ -22,7 +22,7 @@ GDS::Application.routes.draw do
   devise_for :users, :controllers => { :invitations => 'users_invitations', :registration => "registration" }
   resources :users
 
-	root 'home#show'
+  root 'home#show'
   get '/contact_us' => 'contact_us#show'
   get '/profile' => 'users#profile'
   post '/contact_us/send_mail' => 'contact_us#send_mail'
@@ -96,5 +96,5 @@ GDS::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-	
+  
 end

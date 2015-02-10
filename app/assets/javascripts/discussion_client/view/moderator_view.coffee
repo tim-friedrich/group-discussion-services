@@ -6,7 +6,7 @@ class @ModeratorView extends View
     dom_element =
       """
         <span class="vote_count badge like_badge">#{ argument.num_likes() }</span>
-				<span class="vote_count badge dislike_badge" >#{ argument.num_dislikes() }</span>
+        <span class="vote_count badge dislike_badge" >#{ argument.num_dislikes() }</span>
       """
     $(argument.dom_element).find(".right_argument").prepend(dom_element)
 
