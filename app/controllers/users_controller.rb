@@ -51,7 +51,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'Ihr Benutzer Konto wurde erfolgreich angelegt.' }
+        format.html { redirect_to '/profile', notice: 'Ihr Benutzer Konto wurde erfolgreich angelegt.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user, :bypass=>true)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to '/profile', notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to '/' }
       format.json { head :no_content }
     end
   end
