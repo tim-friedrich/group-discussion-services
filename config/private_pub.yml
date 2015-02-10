@@ -2,16 +2,16 @@ development:
   server: "http://localhost:9292/faye"
   secret_token: 'rV!z*9B{ZU(`_rsZ9qsA}|l*9ad4b(!_]/mXU2"hSBLy"kEAFdlozJS:3/_Bv!df'
   signature_expiration: 3600 # one hour
-  ssl: false # done by nginx
+  ssl: false
   rackup: private_pub.ru
 test:
   server: "http://localhost:9292/faye"
   secret_token: 'rV!z*9B{ZU(`_rsZ9qsA}|l*9ad4b(!_]/mXU2"hSBLy"kEAFdlozJS:3/_Bv!df'
   signature_expiration: 3600 # one hour
-  ssl: false # done by nginx
+  ssl: false
   rackup: private_pub.ru
 production:
-  server: "http://psychomatix.info:9292/faye"
+  server: "http://psychomatix.info/faye"
   secret_token: 'rV!z*9B{ZU(`_rsZ9qsA}|l*9ad4b(!_]/mXU2"hSBLy"kEAFdlozJS:3/_Bv!df'
   signature_expiration: 3600 # one hour
   ssl: false # done by nginx
