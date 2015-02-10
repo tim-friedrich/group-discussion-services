@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Question do
-	before do
+  before do
     User.delete_all
-		@question = FactoryGirl.build(:question)
+    @question = FactoryGirl.build(:question)
   end
 
   subject { @question }

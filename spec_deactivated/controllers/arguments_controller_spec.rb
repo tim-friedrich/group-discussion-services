@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe ArgumentsController do
-	before do
-		@argument = FactoryGirl.create(:argument)
+  before do
+    @argument = FactoryGirl.create(:argument)
     @discussion = FactoryGirl.create(:discussion)
-		@valid_attributes = FactoryGirl.attributes_for(:argument)
+    @valid_attributes = FactoryGirl.attributes_for(:argument)
     @valid_attributes[:type] = @valid_attributes[:argument_type].name
     @valid_attributes[:discussion_id] = @discussion.id
     @user = FactoryGirl.create(:user)

@@ -13,8 +13,8 @@ class DiscussionsUsersController < ApplicationController
     end
   end
 
- 	def new
- 		@discussion_user = DiscussionsUser.new
+   def new
+     @discussion_user = DiscussionsUser.new
   end
 
   def confirm
@@ -28,29 +28,29 @@ class DiscussionsUsersController < ApplicationController
     end
   end
 
- 	def create
+   def create
     if @discussions_user.save
       puts UserMailer.invitation_to_discussion(@discussions_user).deliver
     else
       render nothing: true
     end
-	end
+  end
 
-	def destroy
-	 	@discussions_user.destroy
-	    respond_to do |format|
-	      format.html { render nothing: true }
-	      format.json { render nothing: true }
-	    end
-	end
+  def destroy
+     @discussions_user.destroy
+      respond_to do |format|
+        format.html { render nothing: true }
+        format.json { render nothing: true }
+      end
+  end
 
-	private
+  private
 
     def set_discussions_user
       @discussions_user = DiscussionsUser.find(params[:id])
     end
-		def discussion_user_params
-	  	params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user, :role_id)
+    def discussion_user_params
+      params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user, :role_id)
     end
 
     def new_discussions_user

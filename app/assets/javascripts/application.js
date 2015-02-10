@@ -13,6 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery_nested_form
+//= require jquery.caret
+//= require jquery.fileupload
+//= require jquery-ui
+//= require jquery.cookie/jquery.cookie
 
 //= require bootstrap
 //= require faye
@@ -21,10 +25,12 @@
 //= require date/de-DE
 //= require date/extras
 //= require Chart
-//= require jquery.caret
-//= require jquery.fileupload
 //= require mediaelement_rails
-//= require jquery-ui
+
+//= require mustache
+
+//= require progress-polyfill
+
 //= require_tree .
 
 

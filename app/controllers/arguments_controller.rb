@@ -4,7 +4,7 @@ class ArgumentsController < ApplicationController
   load_and_authorize_resource
   check_authorization
 
-	def create
+  def create
     if @argument.save
       argument_json = render_to_string( template: 'arguments/_argument.json.jbuilder', locals: { current_user: current_user, argument: @argument } )
       if @argument.argument_type.name == 'observer'
@@ -16,8 +16,8 @@ class ArgumentsController < ApplicationController
     render nothing: true
   end
 
-	def argument_params
-  	params.require(:argument).permit(:content, :user, :question, :type, :discussion_id, :user_id, :created_at, :likes, :dislikes, :question_id)
+  def argument_params
+    params.require(:argument).permit(:content, :user, :question, :type, :discussion_id, :user_id, :created_at, :likes, :dislikes, :question_id)
   end
 
   def new_argument

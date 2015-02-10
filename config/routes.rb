@@ -26,6 +26,9 @@ GDS::Application.routes.draw do
 
   get '/imprint' => 'static_pages#imprint'
   get '/contact_us' => 'static_pages#contact_us'
+
+  get '/survey' => 'surveys#new'
+  post '/survey' => 'surveys#create'
   get '/profile' => 'users#profile'
   post '/contact_us/send_mail' => 'static_pages#send_contact_mail'
 
@@ -84,7 +87,7 @@ GDS::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
@@ -98,5 +101,5 @@ GDS::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-	
+
 end

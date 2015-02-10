@@ -1,0 +1,42 @@
+{
+  "n": {
+    "low": "n low",
+    "medium": "n medium",
+    "high": "n high"
+  },
+  "e": {
+    "low": "e low",
+    "medium": "e medium",
+    "high": "e high"
+  },
+  "c": {
+    "low": "c low",
+    "medium": "c medium",
+    "high": "c high"
+  },
+  "a": {
+    "low": "a low",
+    "medium": "a medium",
+    "high": "a high"
+  },
+  "o": {
+    "low": "o low",
+    "medium": "o medium",
+    "high": "o high"
+  },
+  "lm": {
+    "low": "lm low",
+    "medium": "lm medium",
+    "high": "lm high"
+  },
+  "sm": {
+    "low": "sm low",
+    "medium": "sm medium",
+    "high": "sm high"
+  },
+  "mm": {
+    "low": "mm low",
+    "medium": "mm medium",
+    "high": "mm high"
+  }
+}
