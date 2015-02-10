@@ -82,7 +82,7 @@ GDS::Application.configure do
 
 	config.force_ssl = false
 
-  config.action_mailer.default_url_options = { :host => 'http://psychomatix.info' }
+  config.action_mailer.default_url_options = { :host => ENV['DOMAIN'] }
 
   config.action_mailer.smtp_settings = {
       :address              => 'smtp.1und1.de',
