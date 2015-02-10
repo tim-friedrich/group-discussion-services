@@ -1,6 +1,6 @@
 development:
-  server: "<%= ENV['WS_ENDPOINT'] %>"
-  secret_token: "<%= ENV['WS_SECRET_TOKEN'] %>"
+  server: '<%= ENV['WS_ENDPOINT'] %>'
+  secret_token: '<%= ENV['WS_SECRET_TOKEN'] %>'
   signature_expiration: 3600 # one hour
   ssl: false
   rackup: private_pub.ru
@@ -11,8 +11,8 @@ test:
   ssl: false
   rackup: private_pub.ru
 production:
-  server: "<%= ENV['WS_ENDPOINT'] %>"
-  secret_token: "<%= ENV['WS_SECRET_TOKEN'] %>"
+  server: '<%= ENV['WS_ENDPOINT'] %>'
+  secret_token: '<%= ENV['WS_SECRET_TOKEN'] %>'
   signature_expiration: 3600 # one hour
   ssl: false # done by nginx
   rackup: private_pub.ru
