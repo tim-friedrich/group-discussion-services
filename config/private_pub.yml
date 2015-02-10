@@ -1,18 +1,15 @@
 development:
   server: "http://localhost:9292/faye"
   secret_token: "secret"
-  port: 4000
   rackup: private_pub.ru
 test:
   server: "http://localhost:9292/faye"
   secret_token: "secret"
-  port: 4000
   rackup: private_pub.ru
 production:
-  server: "https://gruppen-diskussionen.de/faye"
+  server: "http://pschomatix.info/faye"
   secret_token: 'rV!z*9B{ZU(`_rsZ9qsA}|l*9ad4b(!_]/mXU2"hSBLy"kEAFdlozJS:3/_Bv!df'
   signature_expiration: 3600 # one hour
-  port: 4000
   ssl: false # done by nginx
   rackup: private_pub.ru
 
