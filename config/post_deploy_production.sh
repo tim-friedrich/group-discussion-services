@@ -8,7 +8,7 @@ ruby -v
 echo "## BUNDLE ##"
 bundle install --deployment --without test:development
 echo "## RUN ERB HACK ##"
-ruby config/initializers/private_pub_erb.rb
+bundle exec dotenv ruby config/initializers/private_pub_erb.rb
 echo "## PRECOMPILE ASSETS ##"
 bundle exec dotenv rake assets:precompile
 echo "## MIGRATE DATABASE ##"
