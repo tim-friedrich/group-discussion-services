@@ -1,7 +1,9 @@
 <div id="home">
   <div class="teaser">
     <div id="teaser-container" style="display: none" class="center-block">
-      <div id="nav-left"></div>
+
+      <div class="underlay"><div id="nav-left"></div></div>
+
       <%= render partial: 'our_service' %>
 
       <%= render partial: 'research_institutes' %>
@@ -13,7 +15,8 @@
       <%= render partial: 'moderators' %>
 
 
-      <div id="nav-right"></div>
+      <div class="underlay"><div id="nav-right"></div></div>
+
     </div>
     <div id="separation-arrow-container" style="display: none" class="center-block">
       <%= image_tag(image_url("home/arrow_a.jpg"), class: "separate-arrow our-service-teaser center-block") %>
