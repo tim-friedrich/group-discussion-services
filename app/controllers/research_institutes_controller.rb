@@ -37,7 +37,7 @@ class ResearchInstitutesController < ApplicationController
     respond_to do |format|
       if @research_institute.save
         sign_in @research_institute.deputy
-        format.html { redirect_to @research_institute.deputy, notice: 'Herzlich Willkommen!.' }
+        format.html { redirect_to '/profile', notice: 'Herzlich Willkommen!.' }
         format.json { render action: 'show', status: :created, location: @research_institute }
       else
         format.html { render action: 'new' }
@@ -51,7 +51,7 @@ class ResearchInstitutesController < ApplicationController
   def update
     respond_to do |format|
       if @research_institute.update(research_institute_params)
-        format.html { redirect_to @research_institute, notice: 'Research institute was successfully updated.' }
+        format.html { redirect_to '/profile', notice: 'Research institute was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -65,7 +65,7 @@ class ResearchInstitutesController < ApplicationController
   def destroy
     @research_institute.destroy
     respond_to do |format|
-      format.html { redirect_to research_institutes_url }
+      format.html { redirect_to '/profile' }
       format.json { head :no_content }
     end
   end

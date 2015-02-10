@@ -1,124 +1,22 @@
 <div id="home">
   <div class="teaser">
     <div id="teaser-container" style="display: none" class="center-block">
-      <div id="nav-left"></div>
-      <div id="our-service-teaser">
-        <div class="teaser-div our-service-teaser center-block" data-page="1">
-          <div class="teaser-width">
-            <%= image_tag("home/our_service.jpg") %>
 
-            <div class="teaser-description">
-              <h2>Gemeinsam in die Zukunft</h2>
+      <div class="underlay"><div id="nav-left"></div></div>
 
-              <%= link_to 'Kontakt', '/contact_us', class: "btn btn-primary" %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="research-institutes-teaser">
-        <div class="teaser-div research-institutes-teaser center-block" data-page="1">
-          <div class="teaser-width">
-            <%= image_tag("home/research_institute.jpg") %>
+      <%= render partial: 'our_service' %>
 
-            <div class="teaser-description">
-              <h2>Marktforschungsinstitute</h2>
-              <p>Wir von psychomatix sind stolz, Ihnen unser neustes Produkt vorstellen zu können: Group Discussion Services!
-                Die Gruppendiskussion auf einem neuen Level.</p>
-              <p>Wir bieten Ihnen die Möglichkeit, ein neuartiges Erhebungswerkzeug in Ihr Methodenrepertoire aufzunehmen
-                und das ohne finanzielles Risiko mit pay per use Prinzip.</p>
-              <%= link_to 'Jetzt registrieren', new_research_institute_path, class: "btn btn-default btn-sm" %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="probands-teaser">
-        <div class="teaser-div probands-teaser center-block" data-page="1">
-          <div class="teaser-width">
-            <%= image_tag("home/probands.jpg") %>
+      <%= render partial: 'research_institutes' %>
 
-            <div class="teaser-description">
-              <h2>Ihre Meinung zählt</h2>
-              <p>Möchten Sie ihrer Stimme Gewicht verleihen? Registrieren Sie sich jetzt als Diskussionsteilnehmer zu
-                verschiedenen Themen. Profitieren Sie von einer attraktiven Aufwandsentschädigung sowie der Möglichkeit,
-                Einfluss auf wichtige Entscheidungen zu haben. </p>
-              <p>Im Rahmen ihrer Registrierung werden Sie unter anderem einen psychologischen Persönlichkeitstest ausfüllen.
-                Ihre Antworten werden anschließend genutzt, um Sie zu bestimmten Diskussionsthemen einzuladen.
-                Ihre Daten werden selbstverständlich anonymisiert behandelt.</p>
-              <%= link_to 'Jetzt registrieren', new_user_path, class: "btn btn-default btn-sm" %>
-            </div>
-          </div>
-        </div>
-        <div class="teaser-div probands-teaser center-block" data-page="2">
-          <div class="teaser-width">
-            <div class="teaser-left">
-              <p>Als Dankeschön für ihre Registrierung bekommen Sie die Ergebnisse ihres ausgewerteten Persönlichkeitstests
-                direkt im Anschluss an Ihre hinterlegte E-Mail Adresse zugeschickt.</p>
-            </div>
-            <div class="teaser-right">
-              <p>Als Dankeschön für ihre Registrierung bekommen Sie die Ergebnisse ihres ausgewerteten Persönlichkeitstests
-                direkt im Anschluss an Ihre hinterlegte E-Mail Adresse zugeschickt.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="companies-teaser">
-        <div class="teaser-div companies-teaser center-block" data-page="1">
-          <div class="teaser-width">
-            <%= image_tag("home/companies.jpg") %>
+      <%= render partial: 'probands' %>
 
-            <div class="teaser-description">
-              <h2>Strategieplanung mit Fundament</h2>
-              <p>Sie haben eine neue Idee und möchten diese gemeinsam mit Ihren Kunden auf wissenschaftlicher Grundlage weiterentwickeln?</p>
-              <p>Sie fragen sich, wie Ihr Konzept von Investoren bewertet wird?</p>
-              <p>Oder möchten Sie Marktforschung durchführen lassen, die Ihnen unmittelbare und hochqualitative Ergebnisse liefert?</p>
-              <%= link_to 'Mehr Informationen', '#', class: "btn btn-default btn-sm" %>
-            </div>
-          </div>
-        </div>
-        <div class="teaser-div companies-teaser center-block" data-page="2">
-          <div class="teaser-width">
-            <div class="teaser-left">
-              <h3>Optimale Diskussionsteilnehmer durch Persönlichkeitstest</h3>
-              <p>Unsere Probanden werden durch einen psychologischen Test klassifiziert. Auf diese Weise erheben wir
-                zusätzlich zu den bisher genutzten Klassifizierungen anhand von soziodemografischen Merkmalen
-                (Alter, Geschlecht, etc.) auch Persönlichkeitsmerkmale. Anhand dieser Daten bieten wir Ihnen die Möglichkeit,
-                Ihre Diskussionsteilnehmer effektiv Ihrer Bedürfnisse entsprechend auszuwählen.</p>
+      <%= render partial: 'companies' %>
 
-              <h3>Persönlichkeitstest</h3>
-              <p>Der von uns verwendete Test entspricht den psychologischen Test-Güte-Kriterien. Es handelt sich um ein
-                wissenschaftliches Messwerkzeug. Er wurde konstruiert, um bestmöglich den Ansprüchen zur Klassifizierung
-                von Probanden zu genügen.</p>
-            </div>
-            <div class="teaser-right">
-              <h3>Diskussionsraum für wissenschaftliche Online-Diskussionen</h3>
-              <p>Um den hohen wissenschaftlichen Standards von psychomatix zu genügen, haben wir viel Herzblut und Expertise
-              in die Konzeption und Gestaltung unserer Diskussionsumgebung investiert. Das Resultat ist eine Umgebung,
-              welche optimal auf die Bedürfnisse einer wissenschaftlichen Online-Diskussion abgestimmt ist.</p>
+      <%= render partial: 'moderators' %>
 
-              <h3>Transparenz und Vertrauen</h3>
-              <p>Durch unser pay per use Prinzip haben Sie stets volle Kontrolle über Ihre Kostenplanung.
-                Wir kümmern uns von Beginn an um Ihre Anliegen und sehen uns als Partner an Ihrer Seite.</p>
 
-              <h3>Marktforschung mit Begeisterung</h3>
-              <p>Lassen Sie uns ihr nächstes Projekt gemeinsam gestalten. Denn wir von GDS leben Marktforschung!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="moderators-teaser">
-        <div class="teaser-div moderators-teaser center-block" data-page="1">
-          <div class="teaser-width">
-            <%= image_tag("home/moderators.jpg") %>
+      <div class="underlay"><div id="nav-right"></div></div>
 
-            <div class="teaser-description">
-              <h2>Moderatoren</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac nisl et felis viverra egestas. Nulla blandit massa sit amet sodales luctus. Pellentesque et augue sodales, maximus ligula vitae, </p>
-              <%= link_to 'Mehr Informationen', '#', class: "btn btn-default btn-sm" %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="nav-right"></div>
     </div>
     <div id="separation-arrow-container" style="display: none" class="center-block">
       <%= image_tag(image_url("home/arrow_a.jpg"), class: "separate-arrow our-service-teaser center-block") %>

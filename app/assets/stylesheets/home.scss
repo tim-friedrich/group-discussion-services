@@ -11,14 +11,25 @@
     height: 360px;
     margin-bottom: 16px;
 
-    #nav-left, #nav-right{
+    .underlay{
       height: 360px;
       width: 62px;
-
+      float: left;
+      #nav-left, #nav-right{
+        width: 63px;
+        height: 360px;
+        margin: 0px ! important;
+      }
     }
-    #nav-left:hover, #nav-right:hover{
+    .underlay:hover{
       background-color: #7eb11c;
       opacity: 0.6;
+    }
+    #nav-left{
+      background-image: image_url('home/arrow_left.png');
+    }
+    #nav-right{
+      background-image: image_url('home/arrow_right.png');
     }
     .disabled:hover{
       background-color: transparent !important;
@@ -68,6 +79,7 @@
 #separation-arrow-container{
   height: 16px;
   width: 1024px;
+
 }
 
 .prev-images{
@@ -108,7 +120,7 @@
     background-size: contain;
   }
   .research-institute-prev{
-    background: transparent image_url("home/research_institute_prev.jpg") no-repeat;
+    background: transparent image_url("home/research_institutes_prev.jpg") no-repeat;
     background-size: contain;
   }
   .moderator-prev{
