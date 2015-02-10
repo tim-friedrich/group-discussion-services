@@ -7,6 +7,8 @@ chruby 2.2.0
 ruby -v
 echo "## BUNDLE ##"
 bundle install --deployment --without test:development
+echo "## RUN INITIALIZERS ##"
+bundle exec dotenv rails runner 'puts Rails.env'
 echo "## PRECOMPILE ASSETS ##"
 bundle exec dotenv rake assets:precompile
 echo "## MIGRATE DATABASE ##"
