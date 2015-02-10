@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     else
       @companies = Company.where(:id => nil).where("id IS NOT ?", nil)
     end
-    @companies.paginate(:page => params[:companies_page], :per_page => 10)
+    @companies = @companies.paginate(:page => params[:companies_page], :per_page => 10)
 
     respond_to do |format|
       format.html {}
