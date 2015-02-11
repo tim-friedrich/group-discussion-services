@@ -23,7 +23,7 @@ class SurveyAnalyzer
   end
 
   def survey_data
-    @stamines.merge Hash[@points.map{ |h,k| ["#{h}_points", k]}]
+    @stamines.merge(Hash[@points.map{ |h,k| ["#{h}_points", k]}]).merge({"statistics" => @statistics})
   end
 
 

@@ -72,7 +72,10 @@ describe SurveyAnalyzer do
   describe '#survey_data' do
     it 'returns a hash of all big 5 stamines and points, prefix _points is used for points' do
       survey_data = SurveyAnalyzer.new(results).parse!.survey_data
-      expect( survey_data.size ).to eq 18
+
+      expect( survey_data.size ).to eq 19
+      expect( survey_data ).to have_key "statistics"
+      expect( survey_data["statistics"] ).to be_a Hash
       SurveyAnalyzer::SCALES.each{ |scale|
         expect( survey_data ).to have_key scale
         expect( survey_data ).to have_key "#{scale}_points"

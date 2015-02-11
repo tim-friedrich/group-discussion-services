@@ -31,4 +31,10 @@ RSpec.describe Survey, :type => :model do
       end
     }
   end
+
+  describe 'statistics' do
+    it 'contains serialized statistics data' do
+      expect( survey.statistics ).to be_a Hash
+    end
+  end
 end

@@ -19,6 +19,7 @@ FactoryGirl.define do
     mm_points 15
     sm_points 15
     h_points 15
+    statistics({ "some" => "stats" })
   end
 
 end
