@@ -1,5 +1,4 @@
 class SurveyForUserSerializer < ActiveModel::Serializer
   attributes *(SurveyAnalyzer::SCALES - ["h"]).map(&:to_sym)
-  # look up :subject on the model, but use +title+ in the JSON
-  # attribute :subject, :key => :title
+  attribute :gender_and_age, key: :statistics
 end

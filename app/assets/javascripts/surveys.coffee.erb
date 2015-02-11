@@ -3,7 +3,9 @@ $ ->
     MAX_RESTART_SECONDS = 10
     ENDPOINT = '/survey'
     QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_questions.json")) %>'
-    ANALYSIS_INTRO_TEXT = "Geschafft! Herzlichen Dank, dass Sie sich die Zeit genommen haben, den Persönlichkeitstest auszufüllen. Ihre Ergebnisse werden ihnen umgehend per eMail zugesandt. Sollten Sie noch Fragen zur Interpretation der Ergebnisse haben, oder wenn Sie einfach nur eine genauere Erläuterung wünschen, zögern Sie bitte nicht uns zu kontaktieren. Auf Wunsch vereinbaren wir gerne einen individuellen Telefontermin und erklären Ihnen ihre Testergebnisse Schritt für Schritt."
+    OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="answers" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
+
+    ANALYSIS_TEMPLATE = "Geschafft! Herzlichen Dank, dass Sie sich die Zeit genommen haben, den Persönlichkeitstest auszufüllen. Ihre Ergebnisse:<br/><br/>{{{content}}}<br/><br/>Sollten Sie noch Fragen zur Interpretation der Ergebnisse haben, oder wenn Sie einfach nur eine genauere Erläuterung wünschen, zögern Sie bitte nicht uns zu kontaktieren. Auf Wunsch vereinbaren wir gerne einen individuellen Telefontermin und erklären Ihnen ihre Testergebnisse Schritt für Schritt."
     ANALYSIS_TEXTS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_analysis_texts.json")) %>'
     ANALYSIS_TEXT_ASSIGNMENTS =
       1: "low"
@@ -15,8 +17,9 @@ $ ->
       7: "high"
       8: "high"
       9: "high"
-    OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="answers" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
-    ANALYSIS_TEXT_TEMPLATE = '<div class="pm-survey-analysis-text">{{analysisText}}</div>'
+    ANALYSIS_GENDER = ["Frauen", "Männern"]
+    ANALYSIS_AGE = ["unter 20", "20 - 50", "20 - 50", "20 - 50", "über 50"]
+    ANALYSIS_TEXT_TEMPLATE = '<div class="pm-survey-analysis-text">{{{analysisText}}}</div>'
 
     leavePageWarning = ->
       "Wenn Sie den Test jetzt verlassen, muss er wieder von Anfang an ausgefüllt werden!"
@@ -31,7 +34,7 @@ $ ->
         displayError('Bitte wählen Sie eine der Antwortmöglichkeiten aus!')
 
     clearMarkup = ->
-      $('#pm-survey').removeClass ['pm-survey-type-info', 'pm-survey-type-statistics', 'pm-survey-type-big5']
+      $('#pm-survey').removeClass 'pm-survey-type-info pm-survey-type-statistics pm-survey-type-big5'
       $('#pm-survey-error').hide().text('')
       $('#pm-survey-text').text('')
       $('#pm-survey-options').text('')
@@ -81,8 +84,10 @@ $ ->
       $('#pm-survey-button').hide()
 
     displaySuccess = (successData) ->
-      $('#pm-survey-text').html('Vielen Dank. Ihre Ergebnisse:<br/><br/>' + createAnalysis(successData))
+      clearMarkup()
       $('#pm-survey-button').hide()
+      $('#pm-survey-progress').hide()
+      $('#pm-survey-text').html(createAnalysis(successData))
 
     displayError = (errorText) ->
       $('#pm-survey-error').text(errorText).show()
@@ -121,13 +126,18 @@ $ ->
       $('#pm-survey-progress').attr 'value', currentProgress
 
     createAnalysis = (successData) ->
-      markup = ANALYSIS_INTRO_TEXT + ""
+      markup = ""
+      statistics = successData.survey.statistics
+      delete successData.survey.statistics
       survey = successData.survey
+
       Object.keys(survey).forEach (key) ->
         markup += Mustache.render ANALYSIS_TEXT_TEMPLATE,
-          analysisText: ANALYSIS_TEXTS[key][ANALYSIS_TEXT_ASSIGNMENTS[survey[key]]]
+          analysisText: Mustache.render ANALYSIS_TEXTS[key][ANALYSIS_TEXT_ASSIGNMENTS[survey[key]]],
+            gender: ANALYSIS_GENDER[statistics.gender]
+            age: ANALYSIS_AGE[statistics.age]
 
-      markup
+      Mustache.render(ANALYSIS_TEMPLATE, {content: markup})
 
     currentTimestamp = ->
       Math.floor(new Date().getTime() / 1000)

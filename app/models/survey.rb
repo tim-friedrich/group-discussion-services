@@ -11,4 +11,11 @@ class Survey < ActiveRecord::Base
   }
 
   serialize :statistics
+
+  def gender_and_age
+    {
+      "gender" => statistics["gender"],
+      "age" => statistics["age"]
+    }
+  end
 end
