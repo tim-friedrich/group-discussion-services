@@ -7,7 +7,7 @@ class SurveyAnalyzer
 
 
   def initialize(raw_results)
-    @results    = raw_results.values
+    @results    = raw_results ? raw_results.values : nil
     @points     = Hash.new{ |h,k| h[k] = 0 }
     @stamines   = {}
     @statistics = {}
@@ -22,10 +22,18 @@ class SurveyAnalyzer
     return
   end
 
+  def survey_data
+    @stamines.merge Hash[@points.map{ |h,k| ["#{h}_points", k]}]
+  end
+
+
+  private
+
   def build_points_and_statistics!
     @results.each{ |result|
       case result["type"]
       when 'statistic'
+        raise ArgumentError, "invalid results, missing a value for <#{result["id"]}>" unless result["value"]
         @statistics[result["id"]] = result["value"].to_i
       when 'big5'
         @points[result["scale"]] += normalize_value(result["value"], result["invert"])
@@ -52,13 +60,11 @@ class SurveyAnalyzer
     }
   end
 
-  def survey_data
-    @stamines.merge Hash[@points.map{ |h,k| ["#{h}_points", k]}]
-  end
-
   def normalize_value(value, invert = nil)
     if value
       invert && invert == "true" ? 4 - value.to_i : 1 + value.to_i
+    else
+      raise ArgumentError, 'missing a big5 value'
     end
   end
 end
