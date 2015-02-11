@@ -16,7 +16,7 @@ class SurveysController < ApplicationController
 
     if survey = create_survey_result(survey_params[:results], current_user)
       render json: survey, status: 201, serializer: SurveyForUserSerializer, root: "survey"
-    else # TODO applicaton wide error handling
+    else # TODO applicaton wide error handling/format
       render text: 'bad request', status: 400
     end
   end

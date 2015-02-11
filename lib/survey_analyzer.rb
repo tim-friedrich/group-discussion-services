@@ -7,13 +7,14 @@ class SurveyAnalyzer
 
 
   def initialize(raw_results)
-    @results    = raw_results ? raw_results.values : nil
+    @results    = raw_results ? raw_results.values : []
     @points     = Hash.new{ |h,k| h[k] = 0 }
     @stamines   = {}
     @statistics = {}
   end
 
   def parse!
+    return if @results.empty?
     build_points_and_statistics!
     build_stamines!
 
