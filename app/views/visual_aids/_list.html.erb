@@ -12,9 +12,11 @@
   <% visual_aids.each do | visual_aid | %>
     <tr>
       <td>
-        <a href="#" class="thumbnail">
+        <% if visual_aid.file_content_type.include? 'image' %>
           <%= image_tag visual_aid.file.url %>
-        </a>
+        <% elsif visual_aid.file_content_type.include? 'video' %>
+          <%= video_tag visual_aid.file.url, class: "mejs-player" %>
+        <% end %>
       </td>
       <td>
         <%= visual_aid.name %>

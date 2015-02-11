@@ -8,7 +8,7 @@ json.discussion do
   json.questions @discussion.questions
   json.users @discussions_user, partial: 'discussions_users/user', as: :discussions_user
   json.votes @votes
-  json.visual_aids @discussion.visual_aids
+  json.visual_aids @discussion.visual_aids, partial: 'visual_aids/visual_aid', as: :visual_aid
   json.visual_aids_logs @visual_aids_log
 end
 json.current_user_id current_user.id

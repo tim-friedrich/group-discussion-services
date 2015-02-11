@@ -55,7 +55,9 @@
 
     <div class="alert alert-danger hidden" id="not-supported-file" role="alert">Die der von Ihnen ausgewählte Dateityp wird nicht unterstützt. Bitte wählen sie eine Bilddatei oder Videodatei.</div>
     <div class="visual_aids_list">
-      <%= render partial: "visual_aids/list", locals: { visual_aids: @visual_aids } %>
+      <% if @visual_aids != [] %>
+        <%= render partial: "visual_aids/list", locals: { visual_aids: @visual_aids } %>
+      <% end %>
     </div>
   </div>
 </div>

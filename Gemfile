@@ -38,6 +38,7 @@ gem 'rake'
 gem 'foreman'
 gem "paperclip"
 
+
 group :development, :test do
   gem 'database_cleaner'
   gem 'byebug'
