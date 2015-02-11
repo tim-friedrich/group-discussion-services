@@ -3,7 +3,7 @@
   {
     "type": "info",
     "id": "welcome",
-    "text": "Willkommen zum Persönlichkeitstest"
+    "text": "Herzlich Willkommen zum „Big-Five“ Persönlichkeitstest! Der Test wird ca. 15 Minuten in Anspruch nehmen und wird lediglich einmalig ausgefüllt.<br/><br/>Die Ergebnisse bieten die Basis für die Auswahl von Probanden zu einzelnen Gesprächsthemen. Selbstverständlich geben wir ihre Daten nur in einer streng anonymisierten Form weiter — Datenschutz ist uns wichtig.<br/><br/>Sollten Sie noch weitere Fragen haben, zögern Sie bitte nicht, uns zu kontaktieren."
   },
   {
     "type": "statistic",
@@ -442,7 +442,7 @@
   {
     "type": "big5",
     "scale": "lm",
-    "text": "Ich träume oft davon, berühmt zu sein."
+    "text": "Ich träume oft davon, berühmt zu sein."
   },
   {
     "type": "big5",
