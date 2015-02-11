@@ -18,7 +18,7 @@
   {
     "type": "statistic",
     "id": "gender",
-    "text": "Ihr Geschlecht:",
+    "text": "Ihr Geschlecht?",
     "options": [
       "weiblich",
       "männlich"
@@ -79,7 +79,7 @@
   {
     "type": "statistic",
     "id": "income",
-    "text": "Ihr derzeitiges ungefähres Brutto-Monatseinkommen:",
+    "text": "Ihr derzeitiges ungefähres Brutto-Monatseinkommen?",
     "options": [
       "< 1000 EURO",
       "1000 - 3000 EURO",
@@ -87,15 +87,6 @@
       "5000 - 7000 EURO",
       "7000 - 9000 EURO",
       "> 9000 EURO"
-    ]
-  },
-  {
-    "type": "statistic",
-    "id": "truthful",
-    "text": "Haben Sie vor, den Test wahrheitsgemäß zu beantworten?",
-    "options": [
-      "Ja, weil ich aussagekräftige Ergebnisse möchte",
-      "Eher nicht, weil ich den Test nur ausprobieren möchte"
     ]
   },
   {
