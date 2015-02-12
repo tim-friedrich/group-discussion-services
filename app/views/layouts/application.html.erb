@@ -34,9 +34,13 @@
 
   <div class="content clearfix center-block ">
     <%= render 'layouts/messages' %>
-    <%= yield %>
-  </div>
+		<%= yield %>
+	</div>
 
+  <hr>
+  <footer>
+    <%= link_to 'Kontakt', '/contact_us' %> | <%= link_to 'Impressum', '/imprint' %>
+  </footer>
 
 </body>
 </html>

@@ -1,182 +1,204 @@
 $ ->
-  MAX_RESTART_SECONDS = 10
-  ENDPOINT = '/survey'
-  QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_questions.json")) %>'
-  ANALYSIS_TEXTS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_analysis_texts.json")) %>'
-  ANALYSIS_TEXT_ASSIGNMENTS =
-    1: "low"
-    2: "low"
-    3: "low"
-    4: "medium"
-    5: "medium"
-    6: "medium"
-    7: "high"
-    8: "high"
-    9: "high"
-  OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="answers" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
-  ANALYSIS_TEXT_TEMPLATE = '<div class="pm-survey-analysis-text">{{analysisText}}</div>'
+  if $('#pm-survey').length
+    MAX_RESTART_SECONDS = 10
+    ENDPOINT = '/survey'
+    QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_questions.json")) %>'
+    OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="answers" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
 
-  submitStep = ->
-    if QUESTIONS[status.questionNumber].type == "info"
-      nextStep()
-    else if $('#pm-survey input[type=radio]:checked').length == 1
-      status.results.push extractAnswer()
-      nextStep()
-    else
-      displayError('Bitte wählen Sie eine der Antwortmöglichkeiten aus!')
+    ANALYSIS_TEMPLATE = "Geschafft! Herzlichen Dank, dass Sie sich die Zeit genommen haben, den Persönlichkeitstest auszufüllen. Ihre Ergebnisse:<br/><br/>{{{content}}}<br/><br/>Sollten Sie noch Fragen zur Interpretation der Ergebnisse haben, oder wenn Sie einfach nur eine genauere Erläuterung wünschen, zögern Sie bitte nicht uns zu kontaktieren. Auf Wunsch vereinbaren wir gerne einen individuellen Telefontermin und erklären Ihnen ihre Testergebnisse Schritt für Schritt."
+    ANALYSIS_TEXTS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_analysis_texts.json")) %>'
+    ANALYSIS_TEXT_ASSIGNMENTS =
+      1: "low"
+      2: "low"
+      3: "low"
+      4: "medium"
+      5: "medium"
+      6: "medium"
+      7: "high"
+      8: "high"
+      9: "high"
+    ANALYSIS_GENDER = ["Frauen", "Männern"]
+    ANALYSIS_AGE = ["unter 20", "20 - 50", "20 - 50", "20 - 50", "über 50"]
+    ANALYSIS_TEXT_TEMPLATE = '<div class="pm-survey-analysis-text">{{{analysisText}}}</div>'
 
-  clearMarkup = ->
-    $('#pm-survey').removeClass ['pm-survey-type-info', 'pm-survey-type-statistics', 'pm-survey-type-big5']
-    $('#pm-survey-error').text('')
-    $('#pm-survey-text').text('')
-    $('#pm-survey-options').text('')
+    leavePageWarning = ->
+      "Wenn Sie den Test jetzt verlassen, muss er wieder von Anfang an ausgefüllt werden!"
 
-  extractAnswer = ->
-    question = QUESTIONS[status.questionNumber]
-    answer   = $('#pm-survey input[type=radio]:checked')
-    if question.type == 'statistic'
-      type: question.type
-      id: question.id
-      value: answer[0].value
-    else
-      type: question.type
-      value: answer[0].value
-      scale: question.scale
-      invert: !!question.invert
+    submitStep = ->
+      if QUESTIONS[status.questionNumber].type == "info"
+        nextStep()
+      else if $('#pm-survey input[type=radio]:checked').length == 1
+        status.results.push extractAnswer()
+        nextStep()
+      else
+        displayError('Bitte wählen Sie eine der Antwortmöglichkeiten aus!')
 
-  generateOptionMarkup = (options) ->
-    markup = ""
-    options.forEach (option, index) ->
-      markup += Mustache.render OPTION_TEMPLATE,
-        value: index
-        description: option
-        tabindex: index + 1
+    clearMarkup = ->
+      $('#pm-survey').removeClass 'pm-survey-type-info pm-survey-type-statistics pm-survey-type-big5'
+      $('#pm-survey-error').hide().text('')
+      $('#pm-survey-text').text('')
+      $('#pm-survey-options').text('')
 
-    markup
+    extractAnswer = ->
+      question = QUESTIONS[status.questionNumber]
+      answer   = $('#pm-survey input[type=radio]:checked')
+      if question.type == 'statistic'
+        type: question.type
+        id: question.id
+        value: answer[0].value
+      else
+        type: question.type
+        value: answer[0].value
+        scale: question.scale
+        invert: !!question.invert
 
-  generateBig5Markup = ->
-    generateOptionMarkup ["trifft gar nicht zu", "trifft eher nicht zu", "trifft eher zu", "trifft genau zu"]
+    generateOptionMarkup = (options) ->
+      markup = ""
+      options.forEach (option, index) ->
+        markup += Mustache.render OPTION_TEMPLATE,
+          value: index
+          description: option
+          tabindex: index + 1
 
-  submitSurveyToServer = ->
-    $.ajax
-      type: "POST"
-      url: ENDPOINT
-      dataType: 'json'
-      data:
-        survey:
-          results: status.results
-      success: (response) ->
-        displaySuccess(response)
-      error: (error) ->
-        displayError error.responseText
+      markup
 
-  displaySubmitted = ->
-    clearMarkup()
-    $('#pm-survey-text').text('Vielen Dank. Ihre Daten werden ausgewertet...')
-    $('#pm-survey-button').hide()
+    generateBig5Markup = ->
+      generateOptionMarkup ["trifft gar nicht zu", "trifft eher nicht zu", "trifft eher zu", "trifft genau zu"]
 
-  displaySuccess = (successData) ->
-    $('#pm-survey-text').html('Vielen Dank. Ihre Ergebnisse:<br/><br/>' + createAnalysis(successData))
-    $('#pm-survey-button').hide()
+    submitSurveyToServer = ->
+      $.ajax
+        type: "POST"
+        url: ENDPOINT
+        dataType: 'json'
+        data:
+          survey:
+            results: status.results
+        success: (response) ->
+          displaySuccess(response)
+        error: (error) ->
+          displayError error.responseText
 
-  displayError = (errorText) ->
-    $('#pm-survey-error').text(errorText)
+    displaySubmitted = ->
+      clearMarkup()
+      $('#pm-survey-text').text('Vielen Dank. Ihre Daten werden ausgewertet...')
+      $('#pm-survey-button').hide()
 
-  nextStep = ->
-    clearMarkup()
-    saveInCookie(status)
-    status.questionNumber += 1
-    question = QUESTIONS[status.questionNumber]
+    displaySuccess = (successData) ->
+      clearMarkup()
+      $('#pm-survey-button').hide()
+      $('#pm-survey-progress').hide()
+      $('#pm-survey-text').html(createAnalysis(successData))
 
-    if status.questionNumber > 0
-      updateProgress(status.questionNumber - 1)
+    displayError = (errorText) ->
+      $('#pm-survey-error').text(errorText).show()
 
-    if question
-      $('#pm-survey').addClass "pm-survey-type-#{question.type}"
-      question_text = question.text
+    nextStep = ->
+      clearMarkup()
+      saveInCookie(status)
+      status.questionNumber += 1
+      question = QUESTIONS[status.questionNumber]
 
-      if question.type == "big5"
-        $('#pm-survey-options').html generateBig5Markup()
-      else if question.type == 'statistic'
-        $('#pm-survey-options').html generateOptionMarkup(question.options)
-        question_text = "Für statistische Zwecke: " + question_text
+      if status.questionNumber > 0
+        updateProgress(status.questionNumber - 1)
 
-      $('#pm-survey-text').text(question_text)
+      if question
+        $('#pm-survey').addClass "pm-survey-type-#{question.type}"
+        question_text = question.text
 
-    else # survey done
-      submitSurveyToServer(status.questionNumber)
-      displaySubmitted()
-      deleteCookie()
+        if question.type == "big5"
+          $('#pm-survey-options').html generateBig5Markup()
+        else if question.type == 'statistic'
+          $('#pm-survey-options').html generateOptionMarkup(question.options)
+          question_text = "Für statistische Zwecke: " + question_text
 
-  updateProgress = (currentProgress) ->
+        $('#pm-survey-text').html(question_text)
+
+      else # survey done
+        submitSurveyToServer(status.questionNumber)
+        displaySubmitted()
+        deleteCookie()
+        window.onbeforeunload = null
+
+    updateProgress = (currentProgress) ->
+      $('#pm-survey-heading').hide()
       $('#pm-survey-progress').show()
       $('#pm-survey-progress').attr 'max', QUESTIONS.length - 1
       $('#pm-survey-progress').attr 'value', currentProgress
 
-  createAnalysis = (successData) ->
-    markup = ""
-    Object.keys(successData).forEach (key) ->
-      if key.length == 1 && key != "h" # TODO only scales in result
+    createAnalysis = (successData) ->
+      markup = ""
+      statistics = successData.survey.statistics
+      delete successData.survey.statistics
+      survey = successData.survey
+
+      Object.keys(survey).forEach (key) ->
         markup += Mustache.render ANALYSIS_TEXT_TEMPLATE,
-          analysisText: ANALYSIS_TEXTS[key][ANALYSIS_TEXT_ASSIGNMENTS[successData[key]]]
+          analysisText: Mustache.render ANALYSIS_TEXTS[key][ANALYSIS_TEXT_ASSIGNMENTS[survey[key]]],
+            gender: ANALYSIS_GENDER[statistics.gender]
+            age: ANALYSIS_AGE[statistics.age]
 
-    markup
+      Mustache.render(ANALYSIS_TEMPLATE, {content: markup})
 
-  currentTimestamp = ->
-    Math.floor(new Date().getTime() / 1000)
+    currentTimestamp = ->
+      Math.floor(new Date().getTime() / 1000)
 
-  saveInCookie = (statusToSave) ->
-    statusToSave.updatedAt = currentTimestamp()
-    $.cookie 'pm_survey', JSON.stringify(statusToSave)
+    saveInCookie = (statusToSave) ->
+      statusToSave.updatedAt = currentTimestamp()
+      $.cookie 'pm_survey', JSON.stringify(statusToSave)
 
-  deleteCookie = ->
-    $.cookie 'pm_survey', null
+    deleteCookie = ->
+      $.cookie 'pm_survey', null
 
-  initStatus = ->
-    questionNumber: -1
-    results: []
-    updatedAt: Math.floor(new Date().getTime() / 1000)
+    initStatus = ->
+      questionNumber: -1
+      results: []
+      updatedAt: Math.floor(new Date().getTime() / 1000)
 
-  loadFromCookieOrInitStatus = ->
-    if rawStatusFromCookie = $.cookie 'pm_survey'
-      statusFromCookie = null
-      try
-        statusFromCookie = JSON.parse(rawStatusFromCookie)
-      catch e
-        # nothing
+    loadFromCookieOrInitStatus = ->
+      if rawStatusFromCookie = $.cookie 'pm_survey'
+        statusFromCookie = null
+        try
+          statusFromCookie = JSON.parse(rawStatusFromCookie)
+        catch e
+          # nothing
 
-      if  !statusFromCookie ||
-          !statusFromCookie.results ||
-          !statusFromCookie.questionNumber ||
-          !statusFromCookie.updatedAt ||
-          MAX_RESTART_SECONDS < currentTimestamp() - statusFromCookie.updatedAt
-        deleteCookie()
-        initStatus()
+        if  !statusFromCookie ||
+            !statusFromCookie.results ||
+            !statusFromCookie.questionNumber ||
+            !statusFromCookie.updatedAt ||
+            MAX_RESTART_SECONDS < currentTimestamp() - statusFromCookie.updatedAt
+          deleteCookie()
+          initStatus()
+        else
+          statusFromCookie
       else
-        statusFromCookie
-    else
-      initStatus()
+        initStatus()
 
 
-  # # #
-  # event handlers
+    # # #
+    # event handlers
 
-  $('#pm-survey').on 'submit', (e) ->
-    submitStep()
-    e.preventDefault()
-
-  $(document).on 'keypress', (e) ->
-    if e.which >= 49 && e.which <= 57
-      option = $("#pm-survey-options input[type=radio]")[e.which - 49]
-      if option
-        option.checked = "checked"
-    else if e.which == 13
-      $('#pm-survey').submit()
+    $('#pm-survey').on 'submit', (e) ->
+      submitStep()
       e.preventDefault()
 
+    $(document).on 'keypress', (e) ->
+      if e.which >= 49 && e.which <= 57
+        option = $("#pm-survey-options input[type=radio]")[e.which - 49]
+        if option
+          option.checked = "checked"
+      else if e.which == 13
+        $('#pm-survey').submit()
+        e.preventDefault()
 
-  # # #
-  # init
 
-  status = loadFromCookieOrInitStatus()
-  nextStep(status.questionNumber)
+    # # #
+    # init
+
+    status = loadFromCookieOrInitStatus()
+    # TODO research why addEventListener does not work
+    window.onbeforeunload = leavePageWarning
+    window.onunload = ->
+      window.onbeforeunload = null
+      window.onunload = null
+    nextStep(status.questionNumber)

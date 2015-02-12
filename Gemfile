@@ -9,6 +9,7 @@ gem 'bcrypt', '~> 3.1.9'
 gem "nested_form" # nested form support
 gem 'devise-i18n'
 gem 'jbuilder', '~> 1.2' # json apis https://github.com/rails/jbuilder
+gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers"
 
 gem 'devise' # user management
 gem 'devise_invitable' # user invitations
@@ -37,6 +38,7 @@ gem 'whiskey_disk', github: 'johnae/whiskey_disk', branch: 'develop'
 gem 'rake'
 gem 'foreman'
 gem "paperclip"
+
 
 group :development, :test do
   gem 'database_cleaner'

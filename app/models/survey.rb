@@ -10,5 +10,12 @@ class Survey < ActiveRecord::Base
     validates :"#{scale}_points", presence: true
   }
 
-  # TODO ActiveModelSerializers for json
+  serialize :statistics
+
+  def gender_and_age
+    {
+      "gender" => statistics["gender"],
+      "age" => statistics["age"]
+    }
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150208143528) do
+ActiveRecord::Schema.define(version: 20150211163117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 20150208143528) do
     t.integer  "mm_points"
     t.integer  "sm_points"
     t.integer  "h_points"
+    t.text     "statistics"
   end
 
   create_table "users", force: :cascade do |t|

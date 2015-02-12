@@ -56,20 +56,20 @@ class @Discussion
           @new_argument(argument)
         )
         $.each(json.discussion.visual_aids, (index, visual_aid) =>
-          if /image/i.test(visual_aid.media_type)
+          if /image/i.test(visual_aid.file_content_type)
             @visual_aids.push(new ImageAid(
               id = visual_aid.id,
               url = visual_aid.url,
-              name = visual_aid.name,
-              media_type = visual_aid.media_type
+              name = visual_aid.file_name,
+              media_type = visual_aid.file_content_type
               @
             ))
-          else if /video/i.test(visual_aid.media_type)
+          else if /video/i.test(visual_aid.file_content_type)
             @visual_aids.push(new VideoAid(
               id = visual_aid.id,
               url = visual_aid.url,
-              @name = visual_aid.name,
-              @media_type = visual_aid.media_type
+              name = visual_aid.file_name,
+              media_type = visual_aid.file_content_type,
               @
             ))
         )

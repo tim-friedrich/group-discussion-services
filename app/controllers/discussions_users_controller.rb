@@ -22,7 +22,7 @@ class DiscussionsUsersController < ApplicationController
     if @discussions_user.save
       @json = render_to_string( template: 'discussions_users/_user.json.jbuilder', locals: { discussions_user: @discussions_user })
       PrivatePub.publish_to "/discussion/"+@discussions_user.discussion.id.to_s+"/users/new", JSON.parse(@json)
-      redirect_to user_path current_user
+      redirect_to '/profile'
     else
       render nothing: true
     end

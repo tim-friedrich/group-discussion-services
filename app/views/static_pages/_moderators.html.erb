@@ -8,7 +8,11 @@
         <p>Wir sind stetig auf der Suche nach qualifizierten Moderatoren, denn nur mit den Besten an Board sind wir gut genug!
           So können wir unseren Partnern eine zielgerichtete Moderation auf höchstem Niveau bieten und beste Ergebnisse erzielen.
           Sie wollen Teil unseres Teams werden? Dann registrieren Sie sich noch heute.</p>
-        <%= link_to 'Jetzt Registrieren', '#', class: "btn btn-default btn-sm" %>
+        <% if Rails.env.production? %>
+          <%= link_to 'Kontakt', '/contact_us', class: "btn btn-default btn-sm" %>
+        <% else %>
+          <%= link_to 'Jetzt Registrieren', '#', class: "btn btn-default btn-sm" %>
+        <% end %>
       </div>
     </div>
   </div>

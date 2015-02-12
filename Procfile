@@ -1,3 +1,2 @@
 web: bundle exec rails server -p $PORT
-
-#web: rackup private_pub.ru -E production
+ws: bundle exec dotenv rackup private_pub.ru -E production

@@ -22,14 +22,15 @@ GDS::Application.routes.draw do
   devise_for :users, :controllers => { :invitations => 'users_invitations', :registration => "registration" }
   resources :users
 
-  root 'home#show'
+	root 'static_pages#home'
+
+  get '/imprint' => 'static_pages#imprint'
+  get '/contact_us' => 'static_pages#contact_us'
 
   get '/survey' => 'surveys#new'
   post '/survey' => 'surveys#create'
-
-  get '/contact_us' => 'contact_us#show'
   get '/profile' => 'users#profile'
-  post '/contact_us/send_mail' => 'contact_us#send_mail'
+  post '/contact_us/send_mail' => 'static_pages#send_contact_mail'
 
   post '/discussions/:id/leave' => 'discussions#leave'
   post '/discussions/:id/enter' => 'discussions#enter'
