@@ -19,7 +19,6 @@
     dataType:         'script',
     formData:         {'visual_aid[discussion_id]': discussion_id }
 
-
     progressall: (e, data) =>
       progress = parseInt(data.loaded / data.total * 100, 10);
       progressBar.css('width', progress + '%')

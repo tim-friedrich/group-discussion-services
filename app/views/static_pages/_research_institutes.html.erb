@@ -10,7 +10,11 @@
           Wir bieten Ihnen die Möglichkeit, ein innovatives Erhebungswerkzeug in Ihr Methodenrepertoire aufzunehmen
           und das ganz ohne finanzielles Risiko. Mit unserem Pay-per-Use-Prinzip sind Kosten und Leistungen jederzeit
           transparent. Profitieren auch Sie von den Vorteilen unserer Online-Gruppendiskussionen. </p>
-        <%= link_to 'Jetzt registrieren', new_research_institute_path, class: "btn btn-default btn-sm" %>
+        <% if Rails.env.production? %>
+          <%= link_to 'Kontakt', '/contact_us', class: "btn btn-default btn-sm" %>
+        <% else %>
+          <%= link_to 'Jetzt registrieren', new_research_institute_path, class: "btn btn-default btn-sm" %>
+        <% end %>
       </div>
     </div>
   </div>
