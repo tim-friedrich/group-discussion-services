@@ -8,6 +8,8 @@ Bundler.require(:default, Rails.env)
 
 module GDS
   class Application < Rails::Application
+    require 'survey_analyzer'
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -22,8 +24,11 @@ module GDS
     config.i18n.default_locale = :de
     config.middleware.use FayeRails::Middleware, mount: '/faye', :timeout => 25
     config.middleware.delete Rack::Lock
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
     Dir.glob("#{Rails.root}/app/assets/images/**").each do |path|
       config.assets.paths << path
     end
+
+
   end
 end

@@ -9,8 +9,8 @@ require 'spec_helper'
 
 describe Discussion do
   before do
-  	User.delete_all
-  	@discussion = FactoryGirl.build(:discussion)
+    User.delete_all
+    @discussion = FactoryGirl.build(:discussion)
   end
 
   subject { @discussion }
@@ -23,8 +23,8 @@ describe Discussion do
   it { should be_valid }
 
   describe "when due_date is not present" do
-  	before { @discussion.due_date = nil }
-  	it { should_not be_valid }
+    before { @discussion.due_date = nil }
+    it { should_not be_valid }
   end
 
   it "should return the new current question if a new question is created" do
@@ -33,12 +33,12 @@ describe Discussion do
   end
 
   it "should return the research institute that the discussion belongs to" do
-  	@research_institute = FactoryGirl.create(:research_institute)
-  	@moderator = FactoryGirl.create(:user, role: Role.where(name: 'moderator').first)
+    @research_institute = FactoryGirl.create(:research_institute)
+    @moderator = FactoryGirl.create(:user, role: Role.where(name: 'moderator').first)
     @discussion.save
-  	@moderator.research_institutes << @research_institute
-  	@discussion.moderator = @moderator
-  	@discussion.research_institute.should eq @research_institute
+    @moderator.research_institutes << @research_institute
+    @discussion.moderator = @moderator
+    @discussion.research_institute.should eq @research_institute
   end
 
 end

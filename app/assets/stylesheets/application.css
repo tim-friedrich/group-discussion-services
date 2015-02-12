@@ -11,5 +11,6 @@
  *= require_self
  *= require mediaelement_rails
  *= require bootstrap
+ *= require progress-polyfill
  *= require_tree .
  */

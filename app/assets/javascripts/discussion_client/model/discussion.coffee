@@ -1,12 +1,14 @@
 #= require discussion_client/view/moderator_view
 #= require discussion_client/view/proband_view
 
+
 class @Discussion
   constructor: () ->
     @arguments = []
     @users = []
     @visual_aids = []
     @load_discussion()
+    PrivatePub.fayeClient.setHeader('Authorization', 'Basic Z2RzOmthZmZlZQ==') # TODO remove when basic auth gone
 
   new_argument: (json) =>
     argument = new Argument(

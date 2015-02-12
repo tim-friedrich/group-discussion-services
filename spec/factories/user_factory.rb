@@ -11,7 +11,7 @@
 
 FactoryGirl.define do
   factory :user do
-	  sequence(:firstname)  { |n| "User #{n}" }
+    sequence(:firstname)  { |n| "User #{n}" }
     sequence(:username)  { |n| "User #{n}" }
     sequence(:lastname)  { |n| "the #{n} of his kind" }
     sequence(:email) { |n| "user_#{n}@example.com" }
@@ -19,5 +19,9 @@ FactoryGirl.define do
     password_confirmation "123456789"
     confirmed_at Date.yesterday
     role { Role.where(name:"moderator").first }
+
+    factory :user_with_survey do
+      survey
+    end
   end
 end

@@ -17,7 +17,7 @@
 </head>
 <body>
   <header class="center-block">
-		<nav role="navigation">
+    <nav role="navigation">
       <%= link_to image_tag("logo.png"), root_path, class: "navbar-brand" %>
 
         <ul class="nav navbar-nav navbar-right">
@@ -29,13 +29,13 @@
             <li><%= link_to "Anmelden", new_user_session_path %></li>
           <% end %>
         </ul>
-		</nav>
-	</header>
+    </nav>
+  </header>
 
-	<div class="content clearfix center-block ">
+  <div class="content clearfix center-block ">
     <%= render 'layouts/messages' %>
-		<%= yield %>
-	</div>
+    <%= yield %>
+  </div>
 
 
 </body>

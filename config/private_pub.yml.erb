@@ -1,0 +1,26 @@
+development:
+  server: '<%= ENV['WS_ENDPOINT'] %>'
+  secret_token: '<%= ENV['WS_SECRET_TOKEN'] %>'
+  signature_expiration: 3600 # one hour
+  ssl: false
+  rackup: private_pub.ru
+test:
+  server: "http://localhost:9292/faye"
+  secret_token: 'rV!z*9B{ZU(`_rsZ9qsA}|l*9ad4b(!_]/mXU2"hSBLy"kEAFdlozJS:3/_Bv!df'
+  signature_expiration: 3600 # one hour
+  ssl: false
+  rackup: private_pub.ru
+production:
+  server: '<%= ENV['WS_ENDPOINT'] %>'
+  secret_token: '<%= ENV['WS_SECRET_TOKEN'] %>'
+  signature_expiration: 3600 # one hour
+  ssl: false # done by nginx
+  rackup: private_pub.ru
+
+# production:
+#   server: "https://gdswebsocketserver.herokuapp.com/faye/faye"
+#   secret_token: "559c1806ca482ab39f941d5755cf38d44ce470ad9c0fe6db83dd20ac6262a0cb"
+#   signature_expiration: 3600 # one hour
+#   port: 4443
+#   ssl: true
+#   rackup: private_pub.ru

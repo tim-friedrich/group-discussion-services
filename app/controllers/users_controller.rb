@@ -23,10 +23,11 @@ class UsersController < ApplicationController
     @discussions_users = current_user.discussions_users.paginate(:page => params[:discussions_page], :per_page => 10)
 
     if current_user.research_institutes.first
-      @companies = current_user.research_institutes.first.companies.paginate(:page => params[:companies_page], :per_page => 10)
+      @companies = current_user.research_institutes.first.companies
     else
-      @companies = []
+      @companies = Company.where(:id => nil).where("id IS NOT ?", nil)
     end
+    @companies = @companies.paginate(:page => params[:companies_page], :per_page => 10)
 
     respond_to do |format|
       format.html {}
