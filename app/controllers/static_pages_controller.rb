@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
   end
 
   def home
-    if current_user
+    if current_user && current_user.has_survey?
       redirect_to '/profile'
     end
   end
@@ -16,8 +16,7 @@ class StaticPagesController < ApplicationController
 
   end
 
-  def impress
-
+  def imprint
   end
 
   def contact_us_params
