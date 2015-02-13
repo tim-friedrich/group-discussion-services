@@ -1,0 +1,5 @@
+en:
+  unauthorized:
+    default: "You are not allowed to continue this action!"
+    manage:
+      all: "In order to continue, you have to fill out the Persönlichkeitstest first!"
