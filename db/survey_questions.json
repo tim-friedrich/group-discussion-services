@@ -12,16 +12,6 @@
   },
   {
     "type": "statistic",
-    "id": "how_often",
-    "text": "Wie oft haben Sie schon an diesem Test teilgenommen?",
-    "options": [
-      "Das ist mein erstes Mal",
-      "Das ist mein zweites Mal",
-      "Mehr als zwei Mal"
-    ]
-  },
-  {
-    "type": "statistic",
     "id": "gender",
     "text": "Ihr Geschlecht?",
     "options": [
