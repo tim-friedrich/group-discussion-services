@@ -5,7 +5,7 @@ $ ->
     QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_questions.json")) %>'
     OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="answers" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
 
-    ANALYSIS_TEMPLATE = "Geschafft! Herzlichen Dank, dass Sie sich die Zeit genommen haben, den Persönlichkeitstest auszufüllen. Ihre Ergebnisse:<br/><br/>{{{content}}}<br/><br/>Sollten Sie noch Fragen zur Interpretation der Ergebnisse haben, oder wenn Sie einfach nur eine genauere Erläuterung wünschen, zögern Sie bitte nicht uns zu kontaktieren. Auf Wunsch vereinbaren wir gerne einen individuellen Telefontermin und erklären Ihnen ihre Testergebnisse Schritt für Schritt."
+    ANALYSIS_TEMPLATE = 'Geschafft! Herzlichen Dank, dass Sie sich die Zeit genommen haben, den Persönlichkeitstest auszufüllen. Ihre Ergebnisse:<br/><br/>{{{content}}}Sollten Sie noch Fragen zur Interpretation der Ergebnisse haben, oder wenn Sie einfach nur eine genauere Erläuterung wünschen, zögern Sie bitte nicht uns zu kontaktieren. Auf Wunsch vereinbaren wir gerne einen individuellen Telefontermin und erklären Ihnen ihre Testergebnisse Schritt für Schritt.<br/><br/><a href="/profile">Weiter zum Profil</a><br/><br/>'
     ANALYSIS_TEXTS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_analysis_texts.json")) %>'
     ANALYSIS_TEXT_ASSIGNMENTS =
       1: "low"
