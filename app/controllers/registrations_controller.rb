@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
+    sign_out
+    reset_session
     super
     flash.delete(:notice)
   end

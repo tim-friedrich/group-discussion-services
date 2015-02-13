@@ -37,6 +37,8 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    sign_out
+    reset_session
     @user = User.new
   end
 
