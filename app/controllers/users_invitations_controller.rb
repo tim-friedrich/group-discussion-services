@@ -21,7 +21,12 @@ class UsersInvitationsController < Devise::InvitationsController
           @discussions_user = @discussion.discussions_users.last()
           @discussions_user.role = Role.where(name: invite_params[:discussions_user_role]).first()
           puts @discussions_user.to_yaml
-          render 'discussions_users/create'
+          @proband_role =  Role.where(name: 'proband').first()
+          @observer_role =  Role.where(name: 'observer').first()
+          @probands = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
+          @observers = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
+
+          render 'discussions_users/update_lists'
         else
           render nothing: true
         end

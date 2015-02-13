@@ -30,10 +30,7 @@ class DiscussionsUsersController < ApplicationController
 
    def create
     if @discussions_user.save
-      @proband_role =  Role.where(name: 'proband').first()
-      @observer_role =  Role.where(name: 'observer').first()
-      @probands = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
-      @observers = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
+      set_update_list_params
       puts UserMailer.invitation_to_discussion(@discussions_user).deliver
       render 'discussions_users/update_lists'
     else
@@ -43,10 +40,7 @@ class DiscussionsUsersController < ApplicationController
 
   def destroy
     @discussions_user.destroy
-    @proband_role =  Role.where(name: 'proband').first()
-    @observer_role =  Role.where(name: 'observer').first()
-    @probands = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
-    @observers = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
+    set_update_list_params
     render 'discussions_users/update_lists'
   end
 
@@ -55,6 +49,14 @@ class DiscussionsUsersController < ApplicationController
     def set_discussions_user
       @discussions_user = DiscussionsUser.find(params[:id])
     end
+
+    def set_update_list_params
+      @proband_role =  Role.where(name: 'proband').first()
+      @observer_role =  Role.where(name: 'observer').first()
+      @probands = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
+      @observers = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
+    end
+
     def discussion_user_params
       params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user, :role_id)
     end
