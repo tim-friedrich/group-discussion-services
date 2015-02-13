@@ -2,8 +2,10 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   before_action :new_question
+
+
   load_and_authorize_resource
-  #check_authorization
+  skip_authorization_check # FIXME why?
 
   # POST /questions
   # POST /questions.json

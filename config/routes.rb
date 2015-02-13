@@ -19,7 +19,7 @@ GDS::Application.routes.draw do
   resources :discussions_users
   resource :visual_aids, only: [:create]
 
-  devise_for :users, :controllers => { :invitations => 'users_invitations', :registration => "registration" }
+  devise_for :users, :controllers => { :invitations => 'users_invitations', :registrations => "registrations" }
   resources :users
 
 	root 'static_pages#home'

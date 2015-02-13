@@ -8,6 +8,26 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
 
 
+  check_authorization :unless => :devise_controller?
+
+
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to '/404.html' # TODO use Rails4 error app
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    if current_user && current_user.is_proband? && !current_user.has_survey?
+      redirect_to survey_path, :alert => exception.message
+    else
+      redirect_to root_path, :alert => exception.message
+    end
+  end
+
+  rescue_from ActionController::InvalidAuthenticityToken do
+    redirect_to root_path, :alert => "Ihre Session ist abgelaufen, bitte probieren Sie es noch einmal!"
+  end
+
+
   protected
 
   def set_locale
@@ -20,5 +40,13 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :firstname
     devise_parameter_sanitizer.for(:sign_up) << :lastname
     devise_parameter_sanitizer.for(:sign_up) << :username
+  end
+
+  def after_sign_in_path_for(resource)
+    '/profile'
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
   end
 end

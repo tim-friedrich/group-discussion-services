@@ -2,14 +2,57 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user (not logged in)
+    # # #
+    # Anonymous
 
-    can :manage, User, id: user.id
     can [ :new, :create ], ResearchInstitute
     can [ :new, :create ], User
 
-    if user.is_moderator?
+    return unless user
 
+
+    # # #
+    # User has no survey, yet
+
+    if user.is_proband? && !user.has_survey?
+      cannot :manage, :all
+      can [ :new, :create ], Survey
+      return
+    end
+
+
+    # # #
+    # Every user
+
+    can :manage, User, id: user.id
+    cannot :index, User
+    cannot :index, ResearchInstitute
+
+    #TODO: improve rights for Contacts
+    can [ :manage ], Contact
+
+    can [ :create, :read ], Argument do | argument |
+      user.discussions.to_a.include? argument.discussion
+    end
+
+    can [ :leave, :show, ], Discussion do | discussion |
+      user.discussions.to_a.include? discussion
+    end
+    can :manage, DiscussionsUser do | discussion_user |
+      discussion_user.user.id == user.id
+    end
+
+    can [ :create ], Vote
+
+    can [ :manage ], ResearchInstitute do | research_institute |
+      research_institute.deputy = user
+    end
+
+
+    # # #
+    # Moderator
+
+    if user.is_moderator?
       can :manage, Discussion do | discussion |
         user.id == discussion.moderator.id
       end
@@ -28,31 +71,6 @@ class Ability
       can [ :manage ], Company
     end
 
-    if !user.is_guest?
-
-      #TODO: improve rights for Contacts
-      can [ :manage ], Contact
-
-      can [ :create, :read ], Argument do | argument |
-        user.discussions.to_a.include? argument.discussion
-      end
-
-      can [ :leave, :show, ], Discussion do | discussion |
-        user.discussions.to_a.include? discussion
-      end
-      can :manage, DiscussionsUser do | discussion_user |
-        discussion_user.user.id == user.id
-      end
-
-      can [ :create ], Vote
-
-      can [ :manage ], ResearchInstitute do | research_institute |
-        research_institute.deputy = user
-      end
-    end
-
-    cannot :index, User
-    cannot :index, ResearchInstitute
 
   end
 end

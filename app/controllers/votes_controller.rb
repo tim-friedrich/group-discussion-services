@@ -2,8 +2,11 @@ class VotesController < ApplicationController
   before_action :set_vote, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   before_action :new_vote, only: [ :create ]
-  #check_authorization
+
+
   load_and_authorize_resource
+  skip_authorization_check # FIXME why?
+
 
   # POST /votes
   # POST /votes.json

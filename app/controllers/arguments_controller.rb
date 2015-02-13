@@ -1,8 +1,10 @@
 class ArgumentsController < ApplicationController
   before_filter :authenticate_user!
   before_action :new_argument, only: :create
+
+
   load_and_authorize_resource
-  check_authorization
+
 
   def create
     if @argument.save
