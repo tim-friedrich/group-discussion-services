@@ -18,7 +18,7 @@ describe "User pages" do
       end
 
       it "should create a user" do
-        expect { click_button 'Benutzer erstellen' }.to change(User, :count).by(1)
+        expect { click_button 'Weiter' }.to change(User, :count).by(1)
       end
     end
   end
