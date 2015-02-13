@@ -1,12 +1,17 @@
-<h2>Resend confirmation instructions</h2>
+<h2>Bestätigungs Email erneut senden </h2>
 
-<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, class: "form-inline" }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <div class="form-group">
+    <%= f.label :email, class: "sr-only" %>
+    <%= f.email_field :email, :autofocus => true, class: "form-control", placeholder: "Email" %>
+  </div>
 
-  <div><%= f.submit "Bestätigungsemail erneut senden" %></div>
+  <%= f.submit "erneut senden", class: "btn btn-large btn-primary" %>
+
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+
