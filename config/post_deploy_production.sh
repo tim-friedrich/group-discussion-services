@@ -13,5 +13,7 @@ echo "## PRECOMPILE ASSETS ##"
 bundle exec dotenv rake assets:precompile
 echo "## MIGRATE DATABASE ##"
 bundle exec dotenv rake db:migrate
+echo "## SEED DATABASE ##"
+bundle exec dotenv rake db:seed
 echo "## RESTART SERVER ##"
 sudo /etc/init.d/thin-production restart
