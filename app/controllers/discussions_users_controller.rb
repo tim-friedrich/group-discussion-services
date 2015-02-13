@@ -30,18 +30,24 @@ class DiscussionsUsersController < ApplicationController
 
    def create
     if @discussions_user.save
+      @proband_role =  Role.where(name: 'proband').first()
+      @observer_role =  Role.where(name: 'observer').first()
+      @probands = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
+      @observers = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
       puts UserMailer.invitation_to_discussion(@discussions_user).deliver
+      render 'discussions_users/update_lists'
     else
       render nothing: true
     end
   end
 
   def destroy
-     @discussions_user.destroy
-      respond_to do |format|
-        format.html { render nothing: true }
-        format.json { render nothing: true }
-      end
+    @discussions_user.destroy
+    @proband_role =  Role.where(name: 'proband').first()
+    @observer_role =  Role.where(name: 'observer').first()
+    @probands = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
+    @observers = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
+    render 'discussions_users/update_lists'
   end
 
   private

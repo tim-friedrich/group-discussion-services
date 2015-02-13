@@ -7,7 +7,7 @@
   submitButton.removeClass('disabled');
   $('.fileinput-button').after(barContainer);
 
-  $('#probands, #observers').find('a').click((event) =>
+  $('.probands_list, .observers_list').find('a').click((event) =>
     $(event.target).parent().parent().remove()
   )
 
