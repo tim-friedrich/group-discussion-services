@@ -1,10 +1,11 @@
 class VisualAidsController < ApplicationController
-
   before_filter :authenticate_user!
   before_action :set_visual_aid, only: [ :open, :destroy, :close, :command ]
   before_action :new_visual_aid, only: [ :create ]
+
+
   load_and_authorize_resource
-  check_authorization
+
 
   def create
     respond_to do |format|

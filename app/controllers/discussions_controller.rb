@@ -3,7 +3,9 @@ class DiscussionsController < ApplicationController
   before_action :new_discussion, only: [ :create ]
   before_filter :authenticate_user!
 
+
   load_and_authorize_resource
+
 
   # GET /discussions/1
   # GET /discussions/1.json

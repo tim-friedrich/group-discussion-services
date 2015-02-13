@@ -3,7 +3,9 @@ class ResearchInstitutesController < ApplicationController
   before_filter :authenticate_user!, only: [:show, :edit, :update, :destroy]
   before_action :new_research_institute, only: :create
 
-  load_and_authorize_resource only: [ :edit, :delete ]
+
+  load_and_authorize_resource
+
 
   # GET /research_institutes
   # GET /research_institutes.json
@@ -79,7 +81,7 @@ class ResearchInstitutesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def research_institute_params
       params.require(:research_institute).permit(:name, :deputy,
-        deputy_attributes: [:username, :firstname, :lastname, :email, :password, :password_confirmation, :remember_token, :discussions], 
+        deputy_attributes: [:username, :firstname, :lastname, :email, :password, :password_confirmation, :remember_token, :discussions],
         contact_attributes: [:street, :postalcode, :town, :email, :telephone])
     end
 

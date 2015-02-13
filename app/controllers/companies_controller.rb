@@ -3,8 +3,9 @@ class CompaniesController < ApplicationController
   before_filter :authenticate_user!
   before_action :new_company, only: :create
 
+
   load_and_authorize_resource
-  check_authorization
+
 
   # GET /companies
   # GET /companies.json

@@ -2,4 +2,4 @@ de:
   unauthorized:
     default: "Diese Aktion dürfen sie nicht durchführen!"
     manage:
-      all: "Sie müssen erst den Persönlichkeitstest ausfüllen um fortzufahren!"
+      all: "Sie müssen erst den Persönlichkeitstest ausfüllen um fortzufahren zu können!"

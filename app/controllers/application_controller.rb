@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
 
 
+  check_authorization :unless => :devise_controller?
+
+
   rescue_from CanCan::AccessDenied do |exception|
     if current_user && current_user.is_proband? && !current_user.has_survey?
       redirect_to survey_path, :alert => exception.message

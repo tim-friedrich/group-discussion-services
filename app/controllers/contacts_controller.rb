@@ -2,8 +2,10 @@ class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   before_action :new_contact, only: :create
+
+
   load_and_authorize_resource
-  check_authorization
+
 
   # GET /contacts
   # GET /contacts.json

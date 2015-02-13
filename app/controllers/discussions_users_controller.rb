@@ -2,8 +2,9 @@ class DiscussionsUsersController < ApplicationController
   before_filter :authenticate_user!
   before_action :new_discussions_user, only: [ :create ]
   before_action :set_discussions_user, only: [:destroy, :confirm]
+
+
   load_and_authorize_resource
-  check_authorization
 
 
   def index_by_discussion
