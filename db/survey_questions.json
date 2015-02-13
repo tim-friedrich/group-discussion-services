@@ -2,8 +2,13 @@
 [
   {
     "type": "info",
+    "id": "intro",
+    "text": "Herzlichen Glükwunsch zur Registrierung als Proband! Schon bald profitieren Sie von attraktiven Prämien und können Einfluss auf die Marktforschung nehmen.<br/><br/>Bevor Sie an Diskussionen teilnehmen können, müssen Sie noch den Persönlichkeitstest ausfüllen. Durch ihre Antworten ermölichen Sie uns, Sie zu speziellen Themen einzuladen, welche für Sie interessant sind und zu denen Sie wertvolle Gesprächsbeiträge liefern können."
+  },
+  {
+    "type": "info",
     "id": "welcome",
-    "text": "Herzlich Willkommen zum „Big-Five“ Persönlichkeitstest! Der Test wird ca. 15 Minuten in Anspruch nehmen und wird lediglich einmalig ausgefüllt.<br/><br/>Die Ergebnisse bieten die Basis für die Auswahl von Probanden zu einzelnen Gesprächsthemen. Selbstverständlich geben wir ihre Daten nur in einer streng anonymisierten Form weiter — Datenschutz ist uns wichtig.<br/><br/>Sollten Sie noch weitere Fragen haben, zögern Sie bitte nicht, uns zu kontaktieren."
+    "text": "Der „Big-Five“ Persönlichkeitstest wird ca. 20 Minuten in Anspruch nehmen und wird lediglich einmalig ausgefüllt.<br/><br/>Die Ergebnisse bieten die Basis für die Auswahl von Probanden zu einzelnen Gesprächsthemen. Selbstverständlich geben wir ihre Daten nur in einer streng anonymisierten Form weiter — Datenschutz ist uns wichtig.<br/><br/>Sollten Sie noch weitere Fragen haben, zögern Sie bitte nicht, uns zu kontaktieren."
   },
   {
     "type": "statistic",

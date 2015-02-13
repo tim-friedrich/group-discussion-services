@@ -47,6 +47,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    byebug
     @user = User.new(user_params)
     @role = Role.where(name: 'user').first
 

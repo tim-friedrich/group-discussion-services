@@ -65,6 +65,10 @@ class User < ActiveRecord::Base
     self.role == Role.where(name: 'moderator').first
   end
 
+  def is_proband?
+    self.role == Role.where(name: 'proband').first
+  end
+
   def is_guest?
     self.role == nil
   end
