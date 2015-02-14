@@ -46,30 +46,12 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # POST /users
-  # POST /users.json
-  def create
-    byebug
-    @user = User.new(user_params)
-    @role = Role.where(name: 'user').first
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to '/profile', notice: 'Ihr Benutzer Konto wurde erfolgreich angelegt.' }
-        format.json { render action: 'show', status: :created, location: @user }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
-        sign_in(@user, :bypass=>true)
+        #sign_in(@user, :bypass=>true)
         format.html { redirect_to '/profile', notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
