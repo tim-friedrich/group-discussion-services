@@ -3,8 +3,7 @@ class SurveysController < ApplicationController
 
 
   before_filter :authenticate_user!
-  load_and_authorize_resource
-
+  skip_authorization_check
 
   def new
     if current_user.has_survey?

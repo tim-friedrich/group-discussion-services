@@ -1,5 +1,5 @@
 class ContactUsController < ApplicationController
-  skip_check_authorization
+  skip_authorization_check
 
 
   def show
