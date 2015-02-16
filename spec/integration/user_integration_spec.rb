@@ -29,7 +29,7 @@ describe 'User' do
   end
 
   describe 'log in' do
-    let!(:user){ create(:user) }
+    let!(:user){ create(:user_with_survey) }
 
     it 'shows the profile link' do
       visit '/users/sign_in'
@@ -52,29 +52,75 @@ describe 'User' do
       expect( current_path ).to eq "/profile"
     end
 
+    describe "user is proband" do
+      describe "profile page" do
+        it "should not have new discussion link" do
+          expect( page ).not_to have_link "neue Diskussion erstellen"
+        end
+        it "should not have new company link" do
+          expect( page ).not_to have_link "neuen Kunden anlegen"
+        end
+        describe "new Discussion" do
+          before do
+            @discussion = create(:discussion)
+            @discussion.users << user
+            visit "/profile"
+          end
+          it "should have confirm discussion link" do
+            expect( page ).to have_link("Zusagen")
+          end
+
+          it "should have join discussion link after accept discussion" do
+            click_link "Zusage"
+            expect( page ).to have_link( "Diskussion beitreten" )
+          end
+
+          it "should redirect to the discussion if link is clicked" do
+            click_link "Zusagen"
+            click_link "Diskussion beitreten"
+            expect( current_path ).to eq discussion_path(@discussion)
+          end
+        end
+      end
+    end
+
     describe "user is moderator" do
       before do
-        user.role = Role.find_by_name('moderator')
-        user.save
+        @moderator = create(:moderator)
+        login_as(@moderator, scope: :user)
       end
+      describe "profile page" do
+        before do
+          visit "/profile"
+        end
+        it "redirects to the new discussion page when link is clicked" do
+          click_link 'neue Diskussion erstellen'
+          expect( current_path ).to eq new_discussion_path
+        end
 
-      it "redirects to the new discussion page when link is clicked" do
-        visit root_path
-        click_link 'Profil'
-        click_link 'neue Diskussion erstellen'
-        expect( current_path ).to eq new_discussion_path
-      end
+        it "redirects to the new company page when link was clicked" do
+          click_link 'neuen Kunden anlegen'
+          expect( current_path ).to eq new_company_path
+        end
+        describe "new Discussion" do
+          before do
+            @discussion = create(:discussion, moderator: @moderator)
+            visit "/profile"
+          end
+          it "redirects to the edit discussion page when link was clicked" do
+            click_link "Bearbeiten"
+            expect( current_path ).to eq edit_discussion_path(@discussion)
+          end
+          it "should be possible to delete a discussion" do
+            expect{
+              click_link "Löschen"
+            }.to change(Discussion, :count).by(-1)
+          end
 
-      it "redirects to the new company page when link was clicked" do
-        visit root_path
-        click_link 'Profil'
-        click_link 'neuen Kunden anlegen'
-        expect( current_path ).to eq new_company_path
-      end
-
-      it "redirects to the edit discussion page when link was clicked" do
-        visit root_path
-
+          it "should not nessary to accept a discussion" do
+            expect( page ).to_not have_link("Zusagen")
+          end
+        end
       end
     end
   end

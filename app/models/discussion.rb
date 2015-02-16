@@ -31,6 +31,7 @@ class Discussion < ActiveRecord::Base
     discussions_user = discussions_users.select{ | obj | obj.user.id == user.id }.first
     #discussions_user.save
     discussions_user.role = Role.where(name: 'moderator').first()
+    discussions_user.confirmed = true
     discussions_user.save
   end
 

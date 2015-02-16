@@ -18,10 +18,14 @@ FactoryGirl.define do
     password "123456789"
     password_confirmation "123456789"
     confirmed_at Date.yesterday
-    role { Role.where(name:"moderator").first }
+    role { Role.where(name:"proband").first }
 
     factory :user_with_survey do
       survey
+    end
+
+    factory :moderator do
+      role { Role.where(name:'moderator').first }
     end
   end
 end

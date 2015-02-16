@@ -18,7 +18,7 @@
       <td><%= l discussions_user.discussion.due_date %></td>
       <% if discussions_user.confirmed %><td><%= link_to 'Diskussion beitreten', discussions_user.discussion, class: "btn btn-xs btn-primary" %></td>
       <% else %>
-        <td><%= link_to 'Zusagen', discussions_user, method: :confirm, class: "btn btn-xs btn-primary" %></td>
+        <td><%= link_to 'Zusagen', "discussions_users/#{discussions_user.id}/confirm", method: :post, class: "btn btn-xs btn-primary" %></td>
       <% end %>
       <% if can? :edit, discussions_user.discussion %><td><%= link_to 'Bearbeiten', edit_discussion_path(discussions_user.discussion), class: "btn btn-xs btn-primary" %></td><% end %>
       <% if can? :delete, discussions_user.discussion %><td><%= link_to 'Löschen', discussions_user.discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td><% end %>
