@@ -2,12 +2,12 @@ require 'spec_helper'
 
 
 RSpec.describe ContactsController, :type => :controller do
+  let(:user){ create(:user_with_survey) }
   let(:valid_attributes) { FactoryGirl.attributes_for(:contact) }
   let(:valid_session) { {} }
 
   before do
-    @user = FactoryGirl.create(:user)
-    sign_in @user
+    sign_in user
   end
 
 

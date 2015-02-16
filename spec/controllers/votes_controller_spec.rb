@@ -2,24 +2,24 @@ require 'spec_helper'
 
 
 RSpec.describe VotesController, :type => :controller do
-  before(:each) do
-      @user = FactoryGirl.create(:user)
-      sign_in @user
-      @discussion = FactoryGirl.create(:discussion)
-  end
+  let(:user){ create(:user_with_survey) }
+  let(:discussion){ create(:discussion) }
+  let(:question) { create(:question) }
 
-  let(:question) { FactoryGirl.create(:question) }
-  let(:valid_attributes) { FactoryGirl.attributes_for(:vote,
-                                argument_id: FactoryGirl.create(:argument,
-                                          question: Question.create(topic: "ASDasd",
-                                              discussion: @discussion),
-                                              discussion: @discussion).id,
-                                user_id: FactoryGirl.create(:user).id )}
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # VotesController. Be sure to keep this updated too.
+  let(:valid_attributes) {
+    FactoryGirl.attributes_for(:vote,
+      argument_id: create(:argument,
+        question: Question.create(topic: "ASDasd",
+          discussion: discussion),
+          discussion: discussion).id,
+      user_id: create(:user).id
+    )
+  }
   let(:valid_session) { {} }
+
+  before(:each) do
+    sign_in user
+  end
 
 
   describe "POST create" do
