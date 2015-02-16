@@ -1,6 +1,7 @@
 require "spec_helper"
 
-describe CompaniesController do
+
+RSpec.describe CompaniesController, :type => :routing do
   describe "routing" do
 
     it "routes to #index" do

@@ -1,6 +1,7 @@
 require "spec_helper"
 
-describe DiscussionsController do
+
+RSpec.describe DiscussionsController, :type => :routing do
   describe "routing" do
 
     it "routes to #new" do
