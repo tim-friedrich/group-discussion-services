@@ -19,7 +19,7 @@
       <br>
       <% if current_user.is_moderator? %>
         <%= link_to 'neue Diskussion erstellen', new_discussion_path, class: "btn btn-xs btn-primary" %>
-       
+
       <% end %>
     <% end %>
   </div>
@@ -35,7 +35,7 @@
 
   <div class="tab-pane fade" id="settings">
     <%= form_for(current_user, :html => { :multipart => true, class: "form-horizontal", role: "form" }) do |f| %>
-  
+
       <%= render 'shared/error_messages' %>
 
       <%= render 'form' %>
@@ -44,5 +44,5 @@
 </div>
 
 <%= javascript_tag do %>
-  $(window).load(function(){ register_paginations() });
+  $(document).ready(register_paginations);
 <% end %>
