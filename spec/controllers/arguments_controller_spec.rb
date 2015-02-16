@@ -2,6 +2,9 @@ require 'spec_helper'
 
 
 RSpec.describe ArgumentsController, :type => :controller do
+  render_views
+
+
   before do
     @argument = FactoryGirl.create(:argument)
     @discussion = FactoryGirl.create(:discussion)
@@ -14,6 +17,7 @@ RSpec.describe ArgumentsController, :type => :controller do
     sign_in @user
   end
   let(:valid_session) { }
+
 
   describe "POST create" do
     describe "with valid params" do
