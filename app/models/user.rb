@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
     !!survey
   end
 
+  def survey_required?
+    is_proband?
+  end
+
 	def is_staff?()
 		self.role == Role.where(name: 'deputy').first || self.role == Role.where(name: 'moderator').first
   end

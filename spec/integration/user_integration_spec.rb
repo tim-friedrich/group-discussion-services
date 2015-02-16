@@ -102,7 +102,7 @@ describe 'User' do
           click_link 'neuen Kunden anlegen'
           expect( current_path ).to eq new_company_path
         end
-        describe "new Discussion" do
+        describe "Discussion" do
           before do
             @discussion = create(:discussion, moderator: @moderator)
             visit "/profile"
@@ -119,6 +119,25 @@ describe 'User' do
 
           it "should not nessary to accept a discussion" do
             expect( page ).to_not have_link("Zusagen")
+          end
+        end
+
+        describe "Company" do
+          before do
+            @research_institute = create(:research_institute, deputy: @moderator)
+            @company = create(:company, research_institute: @research_institute)
+            @moderator.research_institutes << @research_institute
+            @moderator.save
+            visit "/profile"
+          end
+          it "redirects to the edit company page when link was clicked" do
+            click_link "Bearbeiten"
+            expect( current_path ).to eq edit_company_path(@company)
+          end
+          it "should be possible to delete a company" do
+            expect{
+              click_link "Löschen"
+            }.to change(Company, :count).by(-1)
           end
         end
       end
