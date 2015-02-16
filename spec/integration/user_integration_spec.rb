@@ -21,11 +21,23 @@ describe 'User' do
         user_sign_up
       }.to change(User, :count).by(1)
     end
+
+    it "should redirect to survey after sign_up" do
+      user_sign_up
+      current_path.should eq '/survey'
+    end
   end
 
   describe 'log in' do
     let!(:user){ create(:user) }
 
+    it 'shows the profile link' do
+      visit '/users/sign_in'
+      fill_in 'user_email', with: user.email
+      fill_in 'user_password', with: '123456789'
+      click_button "Anmelden"
+      expect( page ).to have_link "Profil"
+    end
   end
 
   context '[signed in]' do
