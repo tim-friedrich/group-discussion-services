@@ -3,9 +3,7 @@ $ ->
     MAX_RESTART_SECONDS = 10
     ENDPOINT = '/survey'
     QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_questions.json")) %>'
-    OPTION_TEMPLATE = '<div class="radio"><label class="pm-survey-label"><input type="radio" name="answers" value="{{value}}" tabindex="{{tabindex}}">{{description}}</label></div>'
-
-    ANALYSIS_TEMPLATE = 'Geschafft! Herzlichen Dank, dass Sie sich die Zeit genommen haben, den Persönlichkeitstest auszufüllen. Ihre Ergebnisse:<br/><br/>{{{content}}}Sollten Sie noch Fragen zur Interpretation der Ergebnisse haben, oder wenn Sie einfach nur eine genauere Erläuterung wünschen, zögern Sie bitte nicht uns zu kontaktieren. Auf Wunsch vereinbaren wir gerne einen individuellen Telefontermin und erklären Ihnen ihre Testergebnisse Schritt für Schritt.<br/><br/><a href="/profile">Weiter zum Profil</a><br/><br/>'
+    BIG5_OPTIONS = ["trifft gar nicht zu", "trifft eher nicht zu", "trifft eher zu", "trifft genau zu"]
     ANALYSIS_TEXTS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_analysis_texts.json")) %>'
     ANALYSIS_TEXT_ASSIGNMENTS =
       1: "low"
@@ -17,9 +15,22 @@ $ ->
       7: "high"
       8: "high"
       9: "high"
+    ANALYSIS_SHORT_ASSIGNMENTS =
+      1: "- - - -"
+      2: "- - -"
+      3: "- -"
+      4: "-"
+      5: "o"
+      6: "+"
+      7: "+ +"
+      8: "+ + +"
+      9: "+ + + +"
+    ANALYSIS_LEVELS =
+      low: "unterdurchschnittlichen"
+      medium: "durchschnittlichen"
+      high: "überdurchschnittlichen"
     ANALYSIS_GENDER = ["Frauen", "Männern"]
     ANALYSIS_AGE = ["unter 20", "20 - 50", "20 - 50", "20 - 50", "über 50"]
-    ANALYSIS_TEXT_TEMPLATE = '<div class="pm-survey-analysis-text">{{{analysisText}}}</div>'
 
     leavePageWarning = ->
       "Wenn Sie den Test jetzt verlassen, muss er wieder von Anfang an ausgefüllt werden!"
@@ -54,8 +65,11 @@ $ ->
 
     generateOptionMarkup = (options) ->
       markup = ""
+      optionTemplate = $('#pm-survey-option-template').html()
+      Mustache.parse(optionTemplate)
+
       options.forEach (option, index) ->
-        markup += Mustache.render OPTION_TEMPLATE,
+        markup += Mustache.render optionTemplate,
           value: index
           description: option
           tabindex: index + 1
@@ -63,7 +77,7 @@ $ ->
       markup
 
     generateBig5Markup = ->
-      generateOptionMarkup ["trifft gar nicht zu", "trifft eher nicht zu", "trifft eher zu", "trifft genau zu"]
+      generateOptionMarkup BIG5_OPTIONS
 
     submitSurveyToServer = ->
       $.ajax
@@ -87,7 +101,9 @@ $ ->
       clearMarkup()
       $('#pm-survey-button').hide()
       $('#pm-survey-progress').hide()
-      $('#pm-survey-text').html(createAnalysis(successData))
+      $('#pm-survey-analysis').html(createAnalysis(successData))
+      $('#pm-survey-heading').show()
+      $('#pm-survey-analysis').show()
 
     displayError = (errorText) ->
       $('#pm-survey-error').text(errorText).show()
@@ -126,18 +142,31 @@ $ ->
       $('#pm-survey-progress').attr 'value', currentProgress
 
     createAnalysis = (successData) ->
-      markup = ""
       statistics = successData.survey.statistics
       delete successData.survey.statistics
       survey = successData.survey
 
-      Object.keys(survey).forEach (key) ->
-        markup += Mustache.render ANALYSIS_TEXT_TEMPLATE,
-          analysisText: Mustache.render ANALYSIS_TEXTS[key][ANALYSIS_TEXT_ASSIGNMENTS[survey[key]]],
-            gender: ANALYSIS_GENDER[statistics.gender]
-            age: ANALYSIS_AGE[statistics.age]
+      analysisIntroTemplate = $('#pm-survey-analysis-intro-template').html()
+      analysisTextTemplate  = $('#pm-survey-analysis-text-template').html()
+      analysisOutroTemplate = $('#pm-survey-analysis-outro-template').html()
+      Mustache.parse(analysisIntroTemplate)
+      Mustache.parse(analysisTextTemplate)
+      Mustache.parse(analysisOutroTemplate)
 
-      Mustache.render(ANALYSIS_TEMPLATE, {content: markup})
+      markup = Mustache.render analysisIntroTemplate,
+        gender: ANALYSIS_GENDER[statistics.gender]
+        age: ANALYSIS_AGE[statistics.age]
+
+      Object.keys(survey).forEach (key) ->
+        assignment = ANALYSIS_TEXT_ASSIGNMENTS[survey[key]]
+        markup += Mustache.render analysisTextTemplate,
+          analysisShortLevel: ANALYSIS_SHORT_ASSIGNMENTS[survey[key]]
+          analysisTitle: ANALYSIS_TEXTS[key]["title"]
+          analysisExplanation: ANALYSIS_TEXTS[key]["explanation"]
+          analysisText: Mustache.render ANALYSIS_TEXTS[key][assignment]
+          analysisLevel: ANALYSIS_LEVELS[assignment]
+
+      markup + Mustache.render(analysisOutroTemplate)
 
     currentTimestamp = ->
       Math.floor(new Date().getTime() / 1000)

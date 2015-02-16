@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'integration/integration_helpers'
 
 
 describe 'Survey App', js: true do
@@ -116,9 +115,9 @@ describe 'Survey App', js: true do
       end
 
       it 'shows analysis page' do
-        expect( page ).not_to have_content 'Ihre Ergebnisse'
+        expect( page ).not_to have_content 'Herzlichen Dank'
         fill_out_completely
-        expect( page ).to have_content 'Ihre Ergebnisse'
+        expect( page ).to have_content 'Herzlichen Dank'
       end
     end
 
