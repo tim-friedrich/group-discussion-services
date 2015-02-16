@@ -23,12 +23,7 @@ describe Discussion do
   end
 
   it "should return the research institute that the discussion belongs to" do
-    research_institute = FactoryGirl.create(:research_institute)
-    moderator = create(:moderator)
-    discussion.save
-    moderator.research_institutes << research_institute
-    discussion.moderator = moderator
-    expect( discussion.research_institute ).to eq research_institute
+    expect( discussion.research_institute ).to eq discussion.moderator.research_institutes.first
   end
 
 end
