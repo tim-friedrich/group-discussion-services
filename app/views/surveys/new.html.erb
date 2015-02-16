@@ -4,6 +4,8 @@
     <%= render 'layouts/messages' %>
 
     <h2 id="pm-survey-heading"    class="pm-survey-heading">Persönlichkeitstest</h2>
+    <div style="clear:both"></div>
+    <progress id="pm-survey-progress" class="pm-survey-progress" max="100" value="0"></progress>
     <div id="pm-survey-text"      class="pm-survey-text"></div>
     <div id="pm-survey-error"     class="pm-survey-error"></div>
     <div id="pm-survey-options"   class="pm-survey-options"></div>
@@ -12,7 +14,6 @@
     </script>
 
     <button id="pm-survey-button" class="btn btn-default pm-survey-button" type="submit" autofocus>Weiter</button>
-    <progress id="pm-survey-progress" class="pm-survey-progress" max="100" value="0"></progress>
     <div id="pm-survey-analysis"></div>
 
     <script id="pm-survey-analysis-intro-template" type="x-tmpl-mustache">
@@ -29,7 +30,7 @@
     </script>
 
     <script id="pm-survey-analysis-outro-template" type="x-tmpl-mustache">
-      <h4>Fragen?</h4>
+      <h4>Noch Fragen?</h4>
       Sollten Sie noch Fragen zur Interpretation der Ergebnisse haben, oder wenn Sie einfach nur eine genauere Erläuterung wünschen, zögern Sie bitte nicht uns zu kontaktieren. Auf Wunsch vereinbaren wir gerne einen individuellen Telefontermin und erklären Ihnen ihre Testergebnisse Schritt für Schritt.
       <br/><br/>
       <a href="/profile" class="btn btn-success">Weiter zum Profil</a>

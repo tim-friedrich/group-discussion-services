@@ -49,6 +49,7 @@ $ ->
       $('#pm-survey-error').hide().text('')
       $('#pm-survey-text').text('')
       $('#pm-survey-options').text('')
+      $('#pm-survey-button').hide()
 
     extractAnswer = ->
       question = QUESTIONS[status.questionNumber]
@@ -114,7 +115,7 @@ $ ->
       status.questionNumber += 1
       question = QUESTIONS[status.questionNumber]
 
-      if status.questionNumber > 0
+      if status.questionNumber > 1
         updateProgress(status.questionNumber - 1)
 
       if question
@@ -126,6 +127,8 @@ $ ->
         else if question.type == 'statistic'
           $('#pm-survey-options').html generateOptionMarkup(question.options)
           question_text = "Für statistische Zwecke: " + question_text
+        else
+          $('#pm-survey-button').show()
 
         $('#pm-survey-text').html(question_text)
 
@@ -211,11 +214,20 @@ $ ->
       submitStep()
       e.preventDefault()
 
+    $(document).on 'change', '#pm-survey-options input[type=radio]', (e) ->
+      if $(e.target).is(':checked')
+        setTimeout ->
+          $('#pm-survey').submit()
+        , 200
+
     $(document).on 'keypress', (e) ->
       if e.which >= 49 && e.which <= 57
         option = $("#pm-survey-options input[type=radio]")[e.which - 49]
         if option
           option.checked = "checked"
+          setTimeout ->
+            $('#pm-survey').submit()
+          , 200
       else if e.which == 13
         $('#pm-survey').submit()
         e.preventDefault()
