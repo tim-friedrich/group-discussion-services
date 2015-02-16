@@ -2,10 +2,6 @@ require 'spec_helper'
 
 FactoryGirl.factories.map(&:name).each do |factory_name|
   describe "Factory <#{factory_name}>" do
-    before do
-      User.delete_all
-    end
-
     it 'is valid' do
       factory = FactoryGirl.build(factory_name)
 
@@ -16,9 +12,6 @@ FactoryGirl.factories.map(&:name).each do |factory_name|
   end
 
   describe 'with trait' do
-    before do
-      User.delete_all
-    end
     FactoryGirl.factories[factory_name].definition.defined_traits.map(&:name).each do |trait_name|
       it "is valid with trait #{trait_name}" do
         factory = FactoryGirl.build(factory_name, trait_name)

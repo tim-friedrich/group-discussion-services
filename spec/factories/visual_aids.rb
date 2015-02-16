@@ -1,8 +1,7 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :visual_aid do
-    discussion_id 1
-    url "MyString"
+    discussion
+    name "something"
+    file { File.new("#{Rails.root}/spec/fixtures/pixel.png") }
   end
 end

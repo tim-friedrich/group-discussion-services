@@ -1,24 +1,10 @@
 require 'spec_helper'
-'
-    t.string   "content"
-    t.integer  "user_id"
-    t.integer  "likes"
-    t.integer  "dislikes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "question_id"
-    t.integer  "argument_type_id"'
 
 describe Argument do
-  before(:each) do
-      User.delete_all
-      @argument = FactoryGirl.create(:argument)
-  end
+  let(:argument){ create(:argument) }
 
+  subject{ argument }
 
-
-  subject{ @argument }
- 
   it { should respond_to(:content) }
   it { should respond_to(:user) }
   it { should respond_to(:question) }
@@ -28,22 +14,22 @@ describe Argument do
 
 
   describe "when content not present" do
-    before { @argument.content = " " }
+    before { argument.content = " " }
     it { should_not be_valid }
   end
 
   describe "when user is not present" do
-    before { @argument.user = nil }
+    before { argument.user = nil }
     it { should_not be_valid }
   end
 
   describe "when question is not present" do
-    before { @argument.question = nil }
+    before { argument.question = nil }
     it { should_not be_valid }
   end
 
   describe "when argument type is not present" do
-    before { @argument.argument_type = nil }
+    before { argument.argument_type = nil }
     it { should_not be_valid }
-  end 
+  end
 end
