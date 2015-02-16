@@ -1,6 +1,7 @@
 # require 'rails_helper'
 require 'spec_helper'
 
+
 RSpec.describe SurveysController, :type => :controller do
   let(:user){ create(:user) }
   let(:user_with_survey){ create(:user_with_survey) }

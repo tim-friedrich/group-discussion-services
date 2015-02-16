@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe QuestionsController do
 
+RSpec.describe QuestionsController, :type => :controller do
   before do
       @user = FactoryGirl.create(:user)
       @user.role = Role.where(name: 'moderator').first
@@ -14,9 +14,9 @@ describe QuestionsController do
     let(:valid_attributes) { FactoryGirl.attributes_for(:question, user_id: @user.id, discussion_id: @discussion.id) }
 
     let(:valid_session) { {} }
-  
+
       describe "with valid params" do
-        
+
         it "creates a new Question" do
           expect {
             post :create, {:question => valid_attributes}}.to change(Question, :count).by(1)
@@ -27,7 +27,7 @@ describe QuestionsController do
           assigns(:question).should be_a(Question)
           assigns(:question).should be_persisted
         end
-      
+
     end
   end
 end
