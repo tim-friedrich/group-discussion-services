@@ -15,7 +15,6 @@ RSpec.describe SurveysController, :type => :controller do
       end
 
       it 'returns 400 status code if survey could not be created for some reason' do
-        pending 'double render error'
         sign_in user
         post :create, survey: { results: {} }
         expect( response ).to have_http_status(400)

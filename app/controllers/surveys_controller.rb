@@ -12,9 +12,9 @@ class SurveysController < ApplicationController
   end
 
   def create
-    render text: 'forbidden', status: 403 if current_user.has_survey?
-
-    if survey = create_survey_result(survey_params[:results], current_user)
+    if current_user.has_survey?
+      render text: 'forbidden', status: 403
+    elsif survey = create_survey_result(survey_params[:results], current_user)
       render json: survey, status: 201, serializer: SurveyForUserSerializer, root: "survey"
     else # TODO applicaton wide error handling/format
       render text: 'bad request', status: 400
