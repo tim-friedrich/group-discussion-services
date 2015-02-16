@@ -59,7 +59,11 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.new
     @users = User.all
     @proband = DiscussionsUser.new
-    @companies = current_user.research_institutes.first.companies
+    if current_user.research_institutes.first()
+      @companies = current_user.research_institutes.first.companies
+    else
+      @companies = []
+    end
   end
 
   # GET /discussions/1/edit

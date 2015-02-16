@@ -43,26 +43,8 @@ describe 'research institute' do
     end
 
     describe 'research institutes page' do
-      it "has a Profile link" do
-        visit root_path
-        click_link 'Profil'
-        expect( current_path ).to eq "/profile"
-      end
 
-      it "redirects to the new discussion page when link is clicked" do
-        create(:company)
-        visit root_path
-        click_link 'Profil'
-        click_link 'neue Diskussion erstellen'
-        expect( current_path ).to eq new_discussion_path
-      end
 
-      it "redirects to the new company page when link was clicked" do
-        visit root_path
-        click_link 'Profil'
-        click_link 'neuen Kunden anlegen'
-        expect( current_path ).to eq new_company_path
-      end
     end
   end
 end
