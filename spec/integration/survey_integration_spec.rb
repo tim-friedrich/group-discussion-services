@@ -84,7 +84,9 @@ describe 'Survey App', js: true do
 
       context '[reload]' do
         before do
-          page.driver.browser.accept_js_confirms
+          if Capybara.javascript_driver == :webkit
+            page.driver.browser.accept_js_confirms
+          end
         end
 
         # it 'will warn you if you try to navigate away' do

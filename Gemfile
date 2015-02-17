@@ -48,6 +48,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.1'
   gem 'capybara', '~> 2.4'
+  gem 'selenium-webdriver'
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'factory_girl_rails'
