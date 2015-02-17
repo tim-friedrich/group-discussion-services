@@ -5,6 +5,29 @@ describe 'Survey App', js: true do
   let(:user){ create(:user) }
   let(:user_with_survey){ create(:user_with_survey) }
 
+  def send_enter_key
+    page.execute_script('e = jQuery.Event("keypress"); e.which = 13; $("body").trigger(e);')
+  end
+
+  def go_to_first_questions_page
+    visit '/survey'
+    while page.find('#pm-survey-options').text.blank?
+      send_enter_key
+    end
+  end
+
+  def fill_out_completely
+    go_to_first_questions_page
+    while page.find('#pm-survey-progress', visible: false).visible?
+      unless page.find('#pm-survey-options').text.blank?
+        number_of_options = page.all('#pm-survey-options input[type=radio]').size
+        choose 'answers', option: rand(number_of_options).to_s
+      end
+      send_enter_key
+    end
+  rescue Capybara::Webkit::InvalidResponseError # TODO why?
+  end
+
   describe 'auth' do
     it 'must be an authed user who starts the test' do
       visit '/survey'
@@ -38,13 +61,6 @@ describe 'Survey App', js: true do
 
 
     describe 'filling out' do
-      def go_to_first_questions_page
-        visit '/survey'
-        while page.find('#pm-survey-options').text.blank?
-          page.find('#pm-survey-button').click
-        end
-      end
-
       it 'shows the progress bar' do
         go_to_first_questions_page
         element = page.find('#pm-survey-progress', visible: false)
@@ -55,7 +71,7 @@ describe 'Survey App', js: true do
         go_to_first_questions_page
         old_text = page.find('#pm-survey-text').text
         choose 'answers', option: '0'
-        page.find('#pm-survey-button').click
+        send_enter_key
         new_text = page.find('#pm-survey-text').text
 
         expect( new_text ).not_to eq old_text
@@ -64,7 +80,7 @@ describe 'Survey App', js: true do
       it 'shows error and stays on the same page when no anwser is selected' do
         go_to_first_questions_page
         old_text = page.find('#pm-survey-text').text
-        page.find('#pm-survey-button').click
+        send_enter_key
         new_text = page.find('#pm-survey-text').text
 
         expect( new_text ).to eq old_text
@@ -76,7 +92,7 @@ describe 'Survey App', js: true do
         go_to_first_questions_page
         old_progress = page.find('#pm-survey-progress').value
         choose 'answers', option: '0'
-        page.find('#pm-survey-button').click
+        send_enter_key
         new_progress = page.find('#pm-survey-progress').value
 
         expect( new_progress ).not_to eq old_progress
@@ -105,17 +121,6 @@ describe 'Survey App', js: true do
     end
 
     describe 'when finished' do
-      def fill_out_completely
-        visit '/survey'
-        while page.find('#pm-survey-button', visible: false).visible?
-          unless page.find('#pm-survey-options').text.blank?
-            number_of_options = page.all('#pm-survey-options input[type=radio]').size
-            choose 'answers', option: rand(number_of_options).to_s
-          end
-          page.find('#pm-survey-button').click
-        end
-      end
-
       it 'shows analysis page' do
         expect( page ).not_to have_content 'Herzlichen Dank'
         fill_out_completely
