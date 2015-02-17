@@ -30,7 +30,7 @@ class @View
 
     $("#new_argument_button").click( (event) =>
       event.preventDefault()
-      @submit_argument()
+      @submit_argument('proband')
       return false;
     )
 
@@ -42,7 +42,7 @@ class @View
 
     $('#argument_content').keydown( (event) =>
       if(event.keyCode == 13)
-        @submit_argument()
+        @submit_argument('argument')
         return false
 
       if(event.keyCode == 32)

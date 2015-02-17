@@ -24,7 +24,7 @@ class ArgumentsController < ApplicationController
 
   def new_argument
     @argument = Argument.new
-    @argument.content = CGI::escapeHTML(argument_params['content'])
+    @argument.content = CGI::escapeHTML(argument_params['content'].to_s)
     @argument.discussion_id = argument_params['discussion_id']
     @argument.argument_type_id = ArgumentType.where(name: argument_params['type']).first.id
     @argument.user = current_user

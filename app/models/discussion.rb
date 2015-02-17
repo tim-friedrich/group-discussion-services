@@ -27,6 +27,7 @@ class Discussion < ActiveRecord::Base
   end
 
   def moderator=(user)
+
     users << user
     discussions_user = discussions_users.select{ | obj | obj.user.id == user.id }.first
     #discussions_user.save
