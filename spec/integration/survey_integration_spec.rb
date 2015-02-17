@@ -46,6 +46,8 @@ describe 'Survey App', js: true do
   end
 
   context '[signed in]' do
+    use_before_unload_hack
+
     before do
       login_as(user, scope: :user)
     end
@@ -108,7 +110,7 @@ describe 'Survey App', js: true do
           confirmText = accept_confirm do
             visit '/survey'
           end
-          expect( confirmText ).to match /Anfang an/
+          expect( confirmText ).to match /Anfang an|confirm|bestätigen/
         end
 
         it 'can be continued to fill out at the last question' do

@@ -10,18 +10,11 @@ describe 'discussion', js: true do
 
     visit "/discussions/#{@discussion.id}"
   end
+
   describe "new argument" do
-    after do
-      # after each test navigate away before Capybara tries to so that we can appropriately handle the onbeforeunload dialog
-      if page.driver.browser
-        begin
-          page.driver.browser.navigate.to("about:blank")
-          page.driver.browser.switch_to.alert.accept
-          rescue Selenium::WebDriver::Error::NoAlertPresentError
-          # No alert was present. Don't need to do anything
-        end
-      end
-    end
+    use_before_unload_hack
+
+
     it "should post a new argument" do
 
         page.execute_script("
