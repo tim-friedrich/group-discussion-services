@@ -42,7 +42,7 @@ class @View
 
     $('#argument_content').keydown( (event) =>
       if(event.keyCode == 13)
-        @submit_argument('argument')
+        @submit_argument('proband')
         return false
 
       if(event.keyCode == 32)
