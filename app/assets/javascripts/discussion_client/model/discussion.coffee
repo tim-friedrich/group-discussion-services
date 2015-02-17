@@ -8,7 +8,6 @@ class @Discussion
     @users = []
     @visual_aids = []
     @load_discussion()
-    PrivatePub.fayeClient.setHeader('Authorization', 'Basic Z2RzOmthZmZlZQ==') # TODO remove when basic auth gone
 
   new_argument: (json) =>
     argument = new Argument(

@@ -12,5 +12,9 @@ FactoryGirl.define do
     due_date DateTime.new(2020,2,3)
     association :moderator
     association :company
+
+    after :create do |discussion, evaluator|
+      create_list(:question, 1, discussion: discussion)
+    end
   end
 end
