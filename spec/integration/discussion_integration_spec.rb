@@ -2,12 +2,13 @@ require 'spec_helper'
 require 'integration/integration_helpers'
 
 describe 'discussion', js: true do
-  let(:user){ create(:user_with_survey) }
   let(:discussion){ create(:discussion) }
   use_before_unload_hack
 
   before do
-    discussion.users << user
+    @confirmed_users = discussion.discussions_users.select{ | obj | obj.confirmed == true }
+    @unconfirmed_user = create(:user_with_survey)
+    discussion.users << @unconfirmed_user
   end
   def send_argument
     page.execute_script("
@@ -18,11 +19,9 @@ describe 'discussion', js: true do
   describe "as Proband" do
     describe "that is confirmed" do
       before do
-        discussions_user = discussion.discussions_users.select{ | obj | obj.user.id == user.id }.first
-        discussions_user.confirmed = true
-        discussions_user.save
-        login_as user
-        visit "/discussions/#{ discussion.id }"
+        @user = @confirmed_users.first.user
+        login_as @user
+        visit discussion_path(discussion)
       end
       describe "post new argument" do
         it "should post a new argument" do
@@ -39,8 +38,27 @@ describe 'discussion', js: true do
             expect( find('#argument_content') ).not_to have_content "test"
         end
       end
+      describe "user status" do
+
+        it "should list the confirmed user" do
+          expect( page.find('#users') ).to have_content @user.username
+        end
+        it "should be listed as online" do
+
+        end
+        it "should not list the unconfirmed user" do
+          expect( page.find('#users') ).not_to have_content @user.username
+        end
+      end
     end
     describe "that is not confirmed" do
+      before do
+        login_as @unconfirmed_user
+      end
+      it "should not possible to enter the discussion" do
+        visit discussion_path(discussion)
+        expect( current_path ).not_to eq discussion_path(discussion)
+      end
     end
   end
 
