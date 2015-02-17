@@ -4,17 +4,8 @@ require 'integration/integration_helpers'
 describe 'discussion', js: true do
   let(:user){ create(:user_with_survey) }
   let(:discussion){ create(:discussion) }
-  after do
-    # after each test navigate away before Capybara tries to so that we can appropriately handle the onbeforeunload dialog
-    if page.driver.browser
-      begin
-        page.driver.browser.navigate.to("about:blank")
-        page.driver.browser.switch_to.alert.accept
-      rescue Selenium::WebDriver::Error::NoAlertPresentError
-        # No alert was present. Don't need to do anything
-      end
-    end
-  end
+  use_before_unload_hack
+
   before do
     discussion.users << user
   end
@@ -50,7 +41,6 @@ describe 'discussion', js: true do
       end
     end
     describe "that is not confirmed" do
-
     end
   end
 

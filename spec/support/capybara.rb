@@ -6,16 +6,6 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   Capybara.default_wait_time = 5
 
-
-  # class ActionDispatch::IntegrationTest
-  #   include Capybara::DSL
-  #   def teardown
-  #     Capybara.reset_sessions!
-  #     Capybara.use_default_driver
-  #   end
-  # end
-
-
   # config.include Devise::TestHelpers, type: :feature
   config.include Warden::Test::Helpers
   Warden.test_mode!

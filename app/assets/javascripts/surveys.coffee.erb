@@ -105,14 +105,17 @@ $ ->
       $('#pm-survey-analysis').html(createAnalysis(successData))
       $('#pm-survey-heading').show()
       $('#pm-survey-analysis').show()
+      status.backButtonUsed = true
 
     displayError = (errorText) ->
       $('#pm-survey-error').text(errorText).show()
 
     nextStep = ->
+      history.pushState({questionNumber: status.questionNumber}, null)
       clearMarkup()
       saveInCookie(status)
       status.questionNumber += 1
+      status.backButtonUsed = false
       question = QUESTIONS[status.questionNumber]
 
       if status.questionNumber > 1
@@ -232,14 +235,24 @@ $ ->
         $('#pm-survey').submit()
         e.preventDefault()
 
+    window.addEventListener 'popstate', (e) ->
+      if status.backButtonUsed
+        history.pushState({questionNumber: status.questionNumber - 1}, null)
+      else
+        status.questionNumber = e.state.questionNumber
+        nextStep()
+        status.backButtonUsed = true
+
 
     # # #
     # init
 
     status = loadFromCookieOrInitStatus()
-    # TODO research why addEventListener does not work
+    status.backButtonUsed = true
+
     window.onbeforeunload = leavePageWarning
     window.onunload = ->
       window.onbeforeunload = null
       window.onunload = null
-    nextStep(status.questionNumber)
+
+    nextStep()

@@ -16,14 +16,18 @@ describe 'Survey App', js: true do
     end
   end
 
+  def fill_out_question
+    unless page.find('#pm-survey-options').text.blank?
+      number_of_options = page.all('#pm-survey-options input[type=radio]').size
+      choose 'answers', option: rand(number_of_options).to_s
+      send_enter_key
+    end
+  end
+
   def fill_out_completely
     go_to_first_questions_page
     while page.find('#pm-survey-progress', visible: false).visible?
-      unless page.find('#pm-survey-options').text.blank?
-        number_of_options = page.all('#pm-survey-options input[type=radio]').size
-        choose 'answers', option: rand(number_of_options).to_s
-      end
-      send_enter_key
+      fill_out_question
     end
   rescue Capybara::Webkit::InvalidResponseError # TODO why?
   end
@@ -42,6 +46,8 @@ describe 'Survey App', js: true do
   end
 
   context '[signed in]' do
+    use_before_unload_hack
+
     before do
       login_as(user, scope: :user)
     end
@@ -98,21 +104,47 @@ describe 'Survey App', js: true do
         expect( new_progress ).not_to eq old_progress
       end
 
-      context '[reload]' do
-        before do
-          if Capybara.javascript_driver == :webkit
-            page.driver.browser.accept_js_confirms
+      describe 'reload' do
+        it 'will warn you if you try to navigate away' do
+          visit '/survey'
+          confirmText = accept_confirm do
+            visit '/survey'
           end
+          expect( confirmText ).to match /Anfang an|confirm|bestätigen/
         end
-
-        # it 'will warn you if you try to navigate away' do
-        #   pending 'js confirm'
-        # end
 
         it 'can be continued to fill out at the last question' do
           go_to_first_questions_page
           old_text = page.find('#pm-survey-text').text
-          visit '/survey'
+          accept_confirm do
+            visit '/survey'
+          end
+          new_text = page.find('#pm-survey-text').text
+
+          expect( new_text ).to eq old_text
+        end
+      end
+
+      describe 'back button' do
+        before do
+          go_to_first_questions_page
+          fill_out_question
+          fill_out_question
+          fill_out_question
+        end
+
+        it 'goes back to previous question' do
+          old_text = page.find('#pm-survey-text').text
+          page.evaluate_script('window.history.back()')
+          new_text = page.find('#pm-survey-text').text
+
+          expect( new_text ).not_to eq old_text
+        end
+
+        it 'cannot go back to question before previous question' do
+          page.evaluate_script('window.history.back()')
+          old_text = page.find('#pm-survey-text').text
+          page.evaluate_script('window.history.back()')
           new_text = page.find('#pm-survey-text').text
 
           expect( new_text ).to eq old_text

@@ -19,6 +19,8 @@ class SurveysController < ApplicationController
     else # TODO applicaton wide error handling/format
       render text: 'bad request', status: 400
     end
+  rescue
+    render text: 'bad request', status: 400
   end
 
 
