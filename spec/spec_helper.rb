@@ -18,5 +18,6 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   config.include Rails.application.routes.url_helpers
+  config.filter_run_excluding broken: true
 end
 
