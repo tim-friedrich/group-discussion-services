@@ -2,7 +2,7 @@
   "n": {
     "title": "Neurotizismus",
     "explanation": "Eigenschaften, welche im Zusammenhang mit Neurotizismus genannt werden, sind beispielsweise Ängstlichkeit, Nervosität, aber auch Selbstzweifel und grüblerisches Verhalten.<br/><br/>",
-    "low": "Eine unterdurchschnittliche Ausprägung in dieser Kategorie weist auf ein starkes Selbstbewusstsein hin; sie haben nur wenig Selbstzweifel und trauen sich vieles zu.<br/>Grüblerisches Verhalten tritt bei Ihnen selten auf.",
+    "low": "Eine unterdurchschnittliche Ausprägung in dieser Kategorie weist auf ein starkes Selbstbewusstsein hin; sie haben nur wenig Selbstzweifel und trauen sich vieles zu. Grüblerisches Verhalten tritt bei Ihnen selten auf.",
     "medium": "Eine durchschnittliche Ausprägung in dieser Kategorie weist auf ein gutes Selbstbewusstsein hin; hin und wieder haben Sie jedoch Selbstzweifel und es kommt auch vor, dass Sie sich zu bestimmten Themen „den Kopf zerbrechen“. Den meisten Aufgaben fühlen Sie sich gewachsen; Sie sehen sich weder als übermäßig ängstlich; noch übermäßig mutig.",
     "high": "Eine überdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie sich oft ängstlich und nervös fühlen. Sie neigen zu Selbstzweifeln, trauen sich nicht übermäßig viel zu und grübeln oft. Außerdem besteht eine erhöhte Anfälligkeit für depressive Störungen."
   },
@@ -16,9 +16,9 @@
   "c": {
     "title": "Gewissenhaftigkeit",
     "explanation": "Eigenschaften, welche im Zusammenhang mit Gewissenhaftigkeit genannt werden, sind beispielsweise planvolles Vorbereiten sowie ein Gespür für Ordnung.<br/><br/>",
-    "low": "Eine unterdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie öfter wenig planvoll und weniger ordentlich arbeiten; auch kleinere Nachlässigkeiten stören Sie nicht.<br/>Im Bezug auf den Haushalt stört es Sie nicht, wenn Teile des Wohnraums unaufgeräumt sind.",
+    "low": "Eine unterdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie öfter wenig planvoll und weniger ordentlich arbeiten; auch kleinere Nachlässigkeiten stören Sie nicht. Im Bezug auf den Haushalt stört es Sie nicht, wenn Teile des Wohnraums unaufgeräumt sind.",
     "medium": "Eine durchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass ihr Verlangen nach Ordnung genauso hoch ausgeprägt ist, wie bei den meisten Ihrer Mitmenschen. Aufgaben erledigen Sie meistens ordentlich und planvoll; über kleinere Nachlässigkeiten können Sie jedoch meist hinweg sehen.",
-    "high": "Eine überdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie in aller Regel äußerst planvoll und ordentlich vorgehen, sowohl im privaten als auch im beruflichen Umfeld.<br/>Auch kleinere Nachlässigkeiten stören Sie; ihr Handeln ist überwiegend geprägt von Gewissenhaftigkeit."
+    "high": "Eine überdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie in aller Regel äußerst planvoll und ordentlich vorgehen, sowohl im privaten als auch im beruflichen Umfeld. Auch kleinere Nachlässigkeiten stören Sie; ihr Handeln ist überwiegend geprägt von Gewissenhaftigkeit."
   },
   "a": {
     "title": "Verträglichkeit",

@@ -53,6 +53,7 @@
       "Diplom",
       "Bachelor",
       "Master",
+      "Staatsexamen",
       "Promotion",
       "anderes"
     ]
@@ -87,7 +88,7 @@
   {
     "type": "info",
     "id": "intro_big5",
-    "text": "Inwieweit treffen die folgenden Aussagen auf Sie zu? Antworten Sie möglichst spontan. Es gibt keine richtigen oder falschen Antworten."
+    "text": "Inwieweit treffen die folgenden Aussagen auf Sie zu? Antworten Sie möglichst spontan. Es gibt keine richtigen oder falschen Antworten.<br/><br/>Wir speichern nur die Auswertung und nicht die einzelnen Antworten auf die Persönlichkeitsfragen."
   },
   {
     "type": "big5",
