@@ -15,8 +15,8 @@ gem 'devise' # user management
 gem 'devise_invitable' # user invitations
 gem 'cancan' # authorization
 
-gem "faye-rails" # websockets
 gem "private_pub"
+gem 'faye-rails' # necessary for faye.js in asset pipline
 
 gem 'sass-rails', '~> 4.0.5' # TODO
 gem 'bootstrap-sass', '3.1.1.0' # TODO (using css @import syntax)

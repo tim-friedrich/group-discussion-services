@@ -1,16 +1,17 @@
 require 'spec_helper'
 
-describe ResearchInstitutesController do
+RSpec.describe ResearchInstitutesController, :type => :controller do
+  let(:user){ FactoryGirl.create(:user) }
 
   before do
-    @user = FactoryGirl.create(:user)
-    sign_in @user
+    sign_in user
   end
+
   let(:valid_attributes) { FactoryGirl.attributes_for(:research_institute).merge(contact_attributes: FactoryGirl.attributes_for(:contact)).merge(
     deputy_attributes: FactoryGirl.attributes_for(:user)) }
-  let(:invalid_attributes) {  }  
-
+  let(:invalid_attributes) {  }
   let(:valid_session) { {} }
+
 
   describe "GET index" do
     it "assigns all research_institutes as @research_institutes" do
@@ -38,7 +39,7 @@ describe ResearchInstitutesController do
   describe "GET edit" do
     it "assigns the requested research_institute as @research_institute" do
       research_institute = ResearchInstitute.create! valid_attributes
-      research_institute.deputy = @user
+      research_institute.deputy = user
       get :edit, {:id => research_institute.to_param}, valid_session
       assigns(:research_institute).should eq(research_institute)
     end

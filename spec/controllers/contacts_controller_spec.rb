@@ -1,16 +1,15 @@
 require 'spec_helper'
 
 
-describe ContactsController do
-
+RSpec.describe ContactsController, :type => :controller do
+  let(:user){ create(:user_with_survey) }
   let(:valid_attributes) { FactoryGirl.attributes_for(:contact) }
-
   let(:valid_session) { {} }
-  before do
-    @user = FactoryGirl.create(:user)
-    sign_in @user
 
+  before do
+    sign_in user
   end
+
 
   describe "GET index" do
     it "assigns all contacts as @contacts" do
@@ -135,7 +134,7 @@ describe ContactsController do
     it "redirects to the contacts list" do
       contact = Contact.create! valid_attributes
       delete :destroy, {:id => contact.to_param}, valid_session
-      response.should redirect_to(contacts_url)
+      response.should redirect_to(contacts_path)
     end
   end
 

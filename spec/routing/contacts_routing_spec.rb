@@ -1,6 +1,7 @@
 require "spec_helper"
 
-describe ContactsController do
+
+RSpec.describe ContactsController, :type => :routing do
   describe "routing" do
 
     it "routes to #index" do

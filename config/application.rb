@@ -14,21 +14,16 @@ module GDS
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
+    I18n.config.enforce_available_locales = true
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.default_locale = :de
     config.time_zone = 'Berlin'
 
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
-    I18n.config.enforce_available_locales = true
-    config.i18n.default_locale = :de
-    config.middleware.use FayeRails::Middleware, mount: '/faye', :timeout => 25
     config.middleware.delete Rack::Lock
+
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
     Dir.glob("#{Rails.root}/app/assets/images/**").each do |path|
       config.assets.paths << path
     end
-
-
   end
 end

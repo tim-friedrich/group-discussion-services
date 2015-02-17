@@ -1,6 +1,7 @@
 require "spec_helper"
 
-describe ResearchInstitutesController do
+
+RSpec.describe ResearchInstitutesController, :type => :routing do
   describe "routing" do
 
     it "routes to #index" do

@@ -74,6 +74,6 @@
     <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/command" %>
 
     <script>
-        $(window).load(function(){ new Discussion() });
+        $(document).ready(function(){ new Discussion(); });
     </script>
  </div>

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
-describe DiscussionsController do
+
+RSpec.describe DiscussionsController, :type => :controller do
 
   let(:valid_session) {  }
   let(:valid_attributes) { FactoryGirl.attributes_for(:discussion,
@@ -17,8 +18,8 @@ describe DiscussionsController do
       @user.save
       sign_in @user
     end
-    
-    describe "GET" do  
+
+    describe "GET" do
 
       describe "show" do
         it "assigns the requested discussion as @discussion" do
@@ -57,7 +58,7 @@ describe DiscussionsController do
         end
       end
     end
-   
+
     describe "POST create" do
       describe "with valid params" do
         it "creates a new Discussion" do
@@ -72,9 +73,9 @@ describe DiscussionsController do
           assigns(:discussion).should be_persisted
         end
 
-        it "redirects to the users show page" do
+        it "redirects to the user profile" do
           post :create, {:discussion => valid_attributes}, valid_session
-          response.should redirect_to(@user)
+          response.should redirect_to profile_path
         end
       end
 
@@ -116,13 +117,13 @@ describe DiscussionsController do
           assigns(:discussion).should eq(discussion)
         end
 
-        it "redirects to the discussion" do
+        it "redirects to the user profile" do
           discussion = Discussion.create! valid_attributes
 
           discussion.moderator = @user
 
           put :update, {:id => discussion.to_param, :discussion => valid_attributes}, valid_session
-          response.should redirect_to(@user)
+          response.should redirect_to profile_path
         end
       end
 
