@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe ResearchInstitutesController, :type => :controller do
-  let(:user){ FactoryGirl.create(:user) }
+  let(:user){ FactoryGirl.create(:moderator) }
 
   before do
     sign_in user
