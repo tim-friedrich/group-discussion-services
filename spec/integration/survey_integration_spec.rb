@@ -103,18 +103,20 @@ describe 'Survey App', js: true do
       end
 
       describe 'reload' do
-        before do
-          accept_js_confirm(page)
+        it 'will warn you if you try to navigate away' do
+          visit '/survey'
+          confirmText = accept_confirm do
+            visit '/survey'
+          end
+          expect( confirmText ).to match /Anfang an/
         end
-
-        # it 'will warn you if you try to navigate away' do
-        #   pending 'js confirm'
-        # end
 
         it 'can be continued to fill out at the last question' do
           go_to_first_questions_page
           old_text = page.find('#pm-survey-text').text
-          visit '/survey'
+          accept_confirm do
+            visit '/survey'
+          end
           new_text = page.find('#pm-survey-text').text
 
           expect( new_text ).to eq old_text

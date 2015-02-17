@@ -18,11 +18,3 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
   Warden.test_mode!
 end
-
-def accept_js_confirm(page)
-  if page.driver.class == Capybara::Selenium::Driver
-    page.driver.browser.switch_to.alert.accept
-  elsif page.driver.class == Capybara::Webkit::Driver
-    page.driver.browser.accept_js_confirms
-  end
-end
