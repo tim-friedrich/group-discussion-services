@@ -13,5 +13,8 @@ FactoryGirl.define do
     argument_type { ArgumentType.where(name:'proband').first }
     association :user
     association :question
+    factory :observer_argument do
+      argument_type { ArgumentType.where(name:'observer').first }
+    end
   end
 end

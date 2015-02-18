@@ -8,12 +8,8 @@ RSpec.describe ArgumentsController, :type => :controller do
   before do
     @argument = FactoryGirl.create(:argument)
     @discussion = FactoryGirl.create(:discussion)
-    @valid_attributes = FactoryGirl.attributes_for(:argument)
-    @valid_attributes[:type] = 'proband'
-    @valid_attributes[:discussion_id] = @discussion.id
-    @user = FactoryGirl.create(:user)
-    @discussion.questions << FactoryGirl.create(:question)
-    @discussion.users << @user
+    @user = @discussion.users.last
+    @valid_attributes = { content: "test", discussion_id: @discussion.id, type: "proband" }
     sign_in @user
   end
   let(:valid_session) { }
@@ -22,7 +18,6 @@ RSpec.describe ArgumentsController, :type => :controller do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Argument" do
-        puts @valid_attributes
         expect {
           post :create, {:argument => @valid_attributes}, valid_session
         }.to change(Argument, :count).by(1)

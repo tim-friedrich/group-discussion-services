@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
   end
 
   def home
-    if current_user && (!current_user.survey_required? || !current_user.has_survey?)
+    if current_user
       redirect_to '/profile'
     end
   end

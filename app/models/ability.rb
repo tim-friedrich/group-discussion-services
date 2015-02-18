@@ -36,7 +36,7 @@ class Ability
     end
 
     can [ :leave, :show, ], Discussion do | discussion |
-      user.discussions.to_a.include? discussion
+      (user.discussions.to_a.include?(discussion) && discussion.discussions_users.where(user_id: user.id).first.confirmed)
     end
     can :manage, DiscussionsUser do | discussion_user |
       discussion_user.user.id == user.id
@@ -45,7 +45,7 @@ class Ability
     can [ :create ], Vote
 
     can [ :manage ], ResearchInstitute do | research_institute |
-      research_institute.deputy = user
+      research_institute.deputy == user
     end
 
 

@@ -79,16 +79,6 @@ RSpec.describe ResearchInstitutesController, :type => :controller do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested research_institute" do
-        research_institute = ResearchInstitute.create! valid_attributes
-        # Assuming there are no other research_institutes in the database, this
-        # specifies that the ResearchInstitute created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        ResearchInstitute.any_instance.should_receive(:update).with({ "name" => "" })
-        put :update, {:id => research_institute.to_param, :research_institute => { "name" => "" }}, valid_session
-      end
-
       it "assigns the requested research_institute as @research_institute" do
         research_institute = ResearchInstitute.create! valid_attributes
         put :update, {:id => research_institute.to_param, :research_institute => valid_attributes}, valid_session
@@ -104,24 +94,6 @@ RSpec.describe ResearchInstitutesController, :type => :controller do
         put :update, {:id => research_institute.to_param, :research_institute => { "name" => "invalid value" }}, valid_session
         assigns(:research_institute).should eq(research_institute)
       end
-
-      it "re-renders the 'edit' template" do
-        research_institute = ResearchInstitute.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        ResearchInstitute.any_instance.stub(:save).and_return(false)
-        put :update, {:id => research_institute.to_param, :research_institute => { "name" => "invalid value" }}, valid_session
-        response.should render_template("edit")
-      end
     end
   end
-
-  describe "DELETE destroy" do
-    it "destroys the requested research_institute" do
-      research_institute = ResearchInstitute.create! valid_attributes
-      expect {
-        delete :destroy, {:id => research_institute.to_param}, valid_session
-      }.to change(ResearchInstitute, :count).by(-1)
-    end
-  end
-
 end

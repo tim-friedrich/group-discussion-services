@@ -186,7 +186,7 @@ class @View
       proband_list = $(".proband-list")
       proband_list.append(
                                """
-            <li class="list-group-item">
+            <li class="list-group-item" id="#{ user.id }">
               <div style="width: 5px; height: 20px; background-color: #{ user.color }; float: left"></div>
               #{ user.name }
               <div class="proband-status"><img src="#{ image_path("offline.jpg") }"></img></div>
