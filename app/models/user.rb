@@ -22,7 +22,6 @@ class User < ActiveRecord::Base
   validates :firstname, presence: true, length: { maximum: 50 }
   validates :lastname, presence: true, length: { maximum: 50 }
   validates :gender, presence: true, length: { maximum: 50 }
-  validates :username, uniqueness: true
   #validates :email, uniqueness: true
   validates :birthday, presence: true
 
