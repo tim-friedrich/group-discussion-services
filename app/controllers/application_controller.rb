@@ -16,8 +16,8 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    if current_user && current_user.is_proband? && !current_user.has_survey?
-      redirect_to survey_path, :alert => exception.message
+    if current_user && current_user.survey_required? && !current_user.has_survey?
+      redirect_to survey_path, :alert => "Sie müssen erst den Persönlichkeitstest ausfüllen um fortzufahren zu können!"
     else
       redirect_to root_path, :alert => exception.message
     end
