@@ -247,12 +247,17 @@ $ ->
     # # #
     # init
 
-    status = loadFromCookieOrInitStatus()
-    status.backButtonUsed = true
+    if document.location.pathname == "/survey"
+      status = loadFromCookieOrInitStatus()
+      status.backButtonUsed = true
 
-    window.onbeforeunload = leavePageWarning
-    window.onunload = ->
-      window.onbeforeunload = null
-      window.onunload = null
+      window.onbeforeunload = leavePageWarning
+      window.onunload = ->
+        window.onbeforeunload = null
+        window.onunload = null
 
-    nextStep()
+      nextStep()
+    else if document.location.pathname == "/survey/result"
+      $('#pm-survey-analysis').html(createAnalysis(window.pmSurveyResultData))
+      $('#pm-survey-analysis').show()
+

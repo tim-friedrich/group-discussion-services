@@ -25,5 +25,7 @@ module GDS
     Dir.glob("#{Rails.root}/app/assets/images/**").each do |path|
       config.assets.paths << path
     end
+
+    ActiveSupport.escape_html_entities_in_json = true
   end
 end

@@ -11,6 +11,7 @@ describe 'User' do
       select 'weiblich', :from => 'user_gender'
       fill_in 'user_birthday', with: '31.12.1990'
       fill_in 'user_password', with: '123456789'
+      fill_in 'user_zipcode', with: '12345'
       fill_in 'user_password_confirmation', with: '123456789'
       click_on 'Weiter'
     end

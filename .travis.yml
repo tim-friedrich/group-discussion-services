@@ -1,4 +1,6 @@
 language: ruby
 
+script: "dotenv rspec"
+
 rvm:
 - 2.2.0

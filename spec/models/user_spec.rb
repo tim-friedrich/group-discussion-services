@@ -16,6 +16,7 @@ describe User do
   it { should respond_to(:role) }
   it { should respond_to(:gender) }
   it { should respond_to(:birthday) }
+  it { should respond_to(:zipcode) }
 
   it { should be_valid }
 
@@ -45,6 +46,14 @@ describe User do
     before { @user.birthday = nil }
     it { should_not be_valid }
   end
+  describe "zipcode is not present" do
+    before { @user.zipcode = nil }
+    it { should_not be_valid }
+  end
+
+
+  # # #
+
 
   it "should respond the username from the referenced discussion" do
     user_with_survey.save
@@ -54,8 +63,8 @@ describe User do
     discussions_user.save
     expect(discussions_user.name).to eq user_with_survey.username discussion
   end
-
-  #Tests max length of parameters
+  
+  # format / length validations
   describe "firstname is too long" do
     before { @user.firstname = "a"*51 }
     it { should_not be_valid }
@@ -76,7 +85,6 @@ describe User do
     it { should_not be_valid }
   end
 
-  #Tests the email validation
   describe "email format is valid" do
     it "should be invalid" do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo. ]
@@ -108,7 +116,6 @@ describe User do
     it { should_not be_valid }
   end
 
-  #tests for passwords
   describe "password is not present" do
     before { @user.password = @user.password_confirmation = " " }
     it { should_not be_valid }
@@ -122,6 +129,23 @@ describe User do
   describe "with a password that's too short" do
     before { @user.password = @user.password_confirmation = "a"*5 }
     it { should be_invalid }
+  end
+
+  describe "zipcode" do
+    it 'has not more than 5 chars' do
+      @user.zipcode = "34534532454"
+      expect( @user ).to be_invalid
+    end
+
+    it 'has not less than 5 chars' do
+      @user.zipcode = "3453"
+      expect( @user ).to be_invalid
+    end
+
+    it 'only has digits' do
+      @user.zipcode = "abcde"
+      expect( @user ).to be_invalid
+    end
   end
 
 

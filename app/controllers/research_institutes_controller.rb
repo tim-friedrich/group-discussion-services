@@ -81,7 +81,7 @@ class ResearchInstitutesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def research_institute_params
       params.require(:research_institute).permit(:name, :deputy,
-        deputy_attributes: [:firstname, :lastname, :email, :password, :password_confirmation, :remember_token, :discussions, :gender, :birthday],
+        deputy_attributes: [:firstname, :lastname, :email, :password, :password_confirmation, :remember_token, :discussions, :gender, :birthday, :zipcode],
         contact_attributes: [:street, :postalcode, :town, :email, :telephone])
     end
 

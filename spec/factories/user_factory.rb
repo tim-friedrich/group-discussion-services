@@ -18,6 +18,7 @@ FactoryGirl.define do
     password_confirmation "123456789"
     gender "female"
     birthday Date.today - 23.years
+    zipcode "10117"
     confirmed_at Date.yesterday
     role { Role.where(name:"proband").first }
 
