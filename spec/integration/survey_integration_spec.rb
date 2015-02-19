@@ -38,10 +38,10 @@ describe 'Survey App', js: true do
       expect( page ).to have_content 'anmelden oder registrieren'
     end
 
-    it 'is not allowed to start if it has been done before' do
-      login_as(user_with_survey, scope: :user)
-      visit '/survey'
-      expect( page ).to have_content 'bereits durchgeführt'
+    it 'will redirect /survey/result to /survey if it has not been done, yet' do
+      login_as(user, scope: :user)
+      visit '/survey/result'
+      expect( current_path ).to eq "/survey"
     end
   end
 
@@ -159,6 +159,23 @@ describe 'Survey App', js: true do
         expect( page ).to have_content 'Herzlichen Dank'
       end
     end
+  end
 
+  context '[already done]' do
+    before do
+      login_as(user_with_survey, scope: :user)
+    end
+
+    it 'will redirect to /survey/result' do
+      visit '/survey'
+      expect( current_path ).to eq "/survey/result"
+    end
+
+    describe 'results can be viewed later' do
+      it 'shows analysis page' do
+        visit '/survey'
+        expect( page ).to have_content 'Herzlichen Dank'
+      end
+    end
   end
 end

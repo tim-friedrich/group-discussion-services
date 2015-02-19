@@ -14,26 +14,8 @@
     </script>
 
     <button id="pm-survey-button" class="btn btn-default pm-survey-button" type="submit" autofocus>Weiter</button>
-    <div id="pm-survey-analysis"></div>
 
-    <script id="pm-survey-analysis-intro-template" type="x-tmpl-mustache">
-      <div class="pm-survey-analysis-intro">
-         Geschafft! Herzlichen Dank, dass Sie sich die Zeit genommen haben, den Persönlichkeitstest auszufüllen. Hier nun Ihre persönliche Auswertung. Die Einordnung Ihrer Ergebnisse bezieht sich immer auf den Vergleich mit anderen <em>{{gender}}</em> in der Alterskategorie <em>{{age}}</em>.
-      </div>
-    </script>
+    <%= render partial: 'analysis' %>
 
-    <script id="pm-survey-analysis-text-template" type="x-tmpl-mustache">
-      <h4 class="pm-survey-analysis-title">{{analysisTitle}} <span class="pm-survey-analysis-short-level">{{analysisShortLevel}}</span></h4>
-      <div class="pm-survey-analysis-text">
-        {{{analysisExplanation}}} Ihr Testwert in dieser Kategorie entspricht einer <strong>{{analysisLevel}} Ausprägung.</strong> {{{analysisText}}}
-      </div>
-    </script>
-
-    <script id="pm-survey-analysis-outro-template" type="x-tmpl-mustache">
-      <h4>Noch Fragen?</h4>
-      Sollten Sie noch Fragen zur Interpretation der Ergebnisse haben, oder wenn Sie einfach nur eine genauere Erläuterung wünschen, zögern Sie bitte nicht uns zu kontaktieren. Auf Wunsch vereinbaren wir gerne einen individuellen Telefontermin und erklären Ihnen ihre Testergebnisse Schritt für Schritt.
-      <br/><br/>
-      <a href="/profile" class="btn btn-success">Weiter zum Profil</a>
-    </script>
   </form>
 </div>

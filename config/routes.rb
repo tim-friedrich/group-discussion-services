@@ -21,6 +21,7 @@ GDS::Application.routes.draw do
 
   get '/survey' => 'surveys#new'
   post '/survey' => 'surveys#create'
+  get '/survey/result' => 'surveys#show', as: 'survey_result'
 
   get '/profile' => 'users#profile'
   post '/contact_us/send_mail' => 'static_pages#send_contact_mail'

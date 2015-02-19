@@ -5,9 +5,20 @@ class SurveysController < ApplicationController
   before_filter :authenticate_user!
   skip_authorization_check
 
+  # /survey
   def new
     if current_user.has_survey?
-      redirect_to root_path, flash: { error: 'Sie haben den Persönlichkeitstest bereits durchgeführt.' }
+      redirect_to survey_result_path
+    end
+  end
+
+  # /survey/result
+  def show
+    if !current_user.has_survey?
+      redirect_to survey_path
+    else
+      @result_data = render_to_string json: current_user.survey, serializer: SurveyForUserSerializer, root: "survey"
+      response.headers['Content-Type'] = 'text/html' # ensure normal rendering
     end
   end
 
