@@ -20,8 +20,6 @@
 
     <p>Laden Sie Probanden, die sich noch nicht registriert haben zu dieser Diskussion ein</p>
 
-    <%= render partial: "discussions_users/invite", locals: { discussions_user: @proband, role: @proband_role.id, users: @users, discussion_id: @discussion.id } %>
-
     <p>Wählen Sie einen bereits von Ihnen eingeladenen Probanden aus</p>
 
     <div class="probands_list">
@@ -32,9 +30,6 @@
 
     <%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "observer" } %>
     <p>Laden Sie Probanden, die sich noch nicht registriert haben zu dieser Diskussion ein</p>
-
-
-    <%= render partial: "discussions_users/invite", locals: { discussions_user: @proband, role: @observer_role.id, users: @users, discussion_id:@discussion.id } %>
 
     <div class="observers_list">
       <%= render partial: "discussions_users/list_users", locals: { discussions_users: @observers, id: "observers", page_name: "observers_page" } %>
