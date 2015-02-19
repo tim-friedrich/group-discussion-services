@@ -19,7 +19,7 @@
         <% end %>
       </td>
       <td>
-        <%= visual_aid.name %>
+        <%= visual_aid.file_file_name %>
       </td>
       <td>
       <td><%= link_to 'Löschen', visual_aids_path+"/"+visual_aid.id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary delete_file" %></td>

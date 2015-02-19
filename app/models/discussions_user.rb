@@ -50,10 +50,8 @@ class DiscussionsUser < ActiveRecord::Base
   end
 
   def set_name
-    puts "A"*40
-    puts self.role.name
     if self.role.name == 'moderator'
-      self.name == 'moderator'
+      self.name = 'moderator'
     else
       male_names = ['Till', 'Ben', 'Paul', 'Karl', 'Leon', 'Felix', 'Max', 'Jan', 'Tom', 'Emil', 'Alex', 'Noah', 'Luis', 'Nick']
       female_names = ['Lena', 'Mira', 'Jana', 'Anna', 'Marie', 'Pia', 'Tina', 'Nele', 'Klara', 'Sofia', 'Zoe', 'Greta', 'Viki', 'Julia']

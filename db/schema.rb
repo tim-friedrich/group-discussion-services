@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20150219134736) do
   enable_extension "plpgsql"
 
   create_table "argument_types", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150219134736) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",                  limit: 255
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -41,11 +41,11 @@ ActiveRecord::Schema.define(version: 20150219134736) do
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string   "street"
-    t.string   "postalcode"
-    t.string   "town"
-    t.string   "email"
-    t.string   "telephone"
+    t.string   "street",     limit: 255
+    t.string   "postalcode", limit: 255
+    t.string   "town",       limit: 255
+    t.string   "email",      limit: 255
+    t.string   "telephone",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20150219134736) do
   end
 
   create_table "discussions", force: :cascade do |t|
-    t.string   "topic"
+    t.string   "topic",      limit: 255
     t.datetime "due_date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -71,21 +71,21 @@ ActiveRecord::Schema.define(version: 20150219134736) do
     t.integer  "discussion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "color"
+    t.string   "color",         limit: 255
     t.integer  "role_id"
-    t.boolean  "confirmed",     default: false
+    t.boolean  "confirmed",                 default: false
     t.string   "name"
   end
 
   create_table "questions", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "topic"
+    t.string   "topic",         limit: 255
     t.integer  "discussion_id"
   end
 
   create_table "research_institutes", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20150219134736) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.integer  "level"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -133,33 +133,33 @@ ActiveRecord::Schema.define(version: 20150219134736) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "firstname"
-    t.string   "lastname"
-    t.string   "email"
+    t.string   "firstname",              limit: 255
+    t.string   "lastname",               limit: 255
+    t.string   "email",                  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "role_id"
-    t.string   "encrypted_password",     default: ""
-    t.string   "reset_password_token"
+    t.string   "encrypted_password",     limit: 255, default: ""
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "confirmation_token",     limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.string   "invitation_token"
+    t.string   "unconfirmed_email",      limit: 255
+    t.string   "invitation_token",       limit: 255
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
+    t.string   "invited_by_type",        limit: 255
+    t.integer  "invitations_count",                  default: 0
     t.string   "gender"
     t.date     "birthday"
   end
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 20150219134736) do
     t.integer  "discussion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "name",              limit: 255
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
