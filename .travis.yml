@@ -1,6 +1,6 @@
 language: ruby
 
-script: "dotenv rspec"
+script: "bundle exec dotenv rspec"
 
 rvm:
 - 2.2.0
