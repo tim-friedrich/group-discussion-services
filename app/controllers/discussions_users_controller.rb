@@ -30,9 +30,13 @@ class DiscussionsUsersController < ApplicationController
   end
 
    def create
+     if @discussions_user.role == Role.find_by_name('moderator') || @discussions_user.role == Role.find_by_name('observer')
+       @discussions_user.confirmed = true
+     end
+
     if @discussions_user.save
       set_update_list_params
-      puts UserMailer.invitation_to_discussion(@discussions_user).deliver
+      UserMailer.invitation_to_discussion(@discussions_user).deliver
       render 'discussions_users/update_lists'
     else
       render nothing: true
