@@ -8,7 +8,7 @@ describe 'User' do
       fill_in 'user_firstname', with: 'test_firstname'
       fill_in 'user_lastname', with: 'test_lastname'
       fill_in 'user_email', with: 'test@test.test'
-      fill_in 'user_gender', with: 'female'
+      select 'weiblich', :from => 'user_gender'
       fill_in 'user_birthday', with: '31.12.1990'
       fill_in 'user_password', with: '123456789'
       fill_in 'user_password_confirmation', with: '123456789'
