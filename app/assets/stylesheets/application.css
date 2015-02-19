@@ -12,5 +12,6 @@
  *= require mediaelement_rails
  *= require bootstrap
  *= require progress-polyfill
+ *= require bootstrap-datepicker
  *= require_tree .
  */

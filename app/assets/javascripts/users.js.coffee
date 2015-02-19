@@ -9,3 +9,7 @@
     )
     return false
   )
+
+
+$ ->
+  $('.datepicker').datepicker()

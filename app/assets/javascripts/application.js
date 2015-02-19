@@ -30,6 +30,7 @@
 //= require mediaelement_rails
 
 //= require mustache
+//= require bootstrap-datepicker
 
 //= require progress-polyfill
 

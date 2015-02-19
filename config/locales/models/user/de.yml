@@ -9,3 +9,5 @@ de:
         email: E-Mail
         password: Passwort
         remember_me: Eingeloggt bleiben
+        gender: Geschlecht
+        birthday: Geburtstag
