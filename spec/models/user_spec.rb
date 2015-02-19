@@ -63,7 +63,7 @@ describe User do
     discussions_user.save
     expect(discussions_user.name).to eq user_with_survey.username discussion
   end
-  
+
   # format / length validations
   describe "firstname is too long" do
     before { @user.firstname = "a"*51 }

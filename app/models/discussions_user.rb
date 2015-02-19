@@ -60,8 +60,10 @@ class DiscussionsUser < ActiveRecord::Base
         self.name = select_name_from(male_names)
       elsif user.gender == "female"
         self.name = select_name_from(female_names)
-      else
+      elsif user.gender == "other"
         self.name = select_name_from(other_gender)
+      else
+        self.name = "Unbekannt"
       end
     end
     self.save
