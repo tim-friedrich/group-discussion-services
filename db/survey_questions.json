@@ -12,27 +12,6 @@
   },
   {
     "type": "statistic",
-    "id": "gender",
-    "text": "Ihr Geschlecht?",
-    "options": [
-      "weiblich",
-      "männlich"
-    ]
-  },
-  {
-    "type": "statistic",
-    "id": "age",
-    "text": "Wie alt sind Sie?",
-    "options": [
-      "jünger als 20 Jahre",
-      "20 bis 30 Jahre",
-      "31 bis 40 Jahre",
-      "41 bis 50 Jahre",
-      "älter als 50 Jahre"
-    ]
-  },
-  {
-    "type": "statistic",
     "id": "school",
     "text": "Welches ist Ihr höchster Schulabschluss?",
     "options": [

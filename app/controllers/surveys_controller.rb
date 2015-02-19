@@ -28,7 +28,7 @@ class SurveysController < ApplicationController
 
   def create_survey_result(results, user)
     survey = current_user.build_survey
-    analyzed_results = SurveyAnalyzer.new(results).parse!
+    analyzed_results = SurveyAnalyzer.new(results, current_user.gender, current_user.age_category).parse!
     if analyzed_results
       survey.update_attributes!(analyzed_results.survey_data)
       survey

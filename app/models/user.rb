@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
@@ -22,10 +21,32 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 50 }
   validates :firstname, presence: true, length: { maximum: 50 }
   validates :lastname, presence: true, length: { maximum: 50 }
+  validates :gender, presence: true, length: { maximum: 50 }
+  validates :username, uniqueness: true
   #validates :email, uniqueness: true
+  validates :birthday, presence: true
 
   accepts_nested_attributes_for :discussions
 
+
+  def age
+    now = Time.now.utc.to_date
+    now.year - birthday.year - ((
+       now.month > birthday.month ||
+       (now.month == birthday.month && now.day >= birthday.day)
+    ) ? 0 : 1)
+  end
+
+  def age_category
+    case age
+    when 0..20
+      "child"
+    when 20..50
+      "young"
+    else
+      "old"
+    end
+  end
 
   def full_name
     "#{firstname} #{lastname}"

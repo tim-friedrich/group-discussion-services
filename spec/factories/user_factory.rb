@@ -16,6 +16,8 @@ FactoryGirl.define do
     sequence(:email) { |n| "user_#{n}@example.com" }
     password "123456789"
     password_confirmation "123456789"
+    gender "female"
+    birthday Date.today - 23.years
     confirmed_at Date.yesterday
     role { Role.where(name:"proband").first }
 

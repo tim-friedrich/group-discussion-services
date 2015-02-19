@@ -1,5 +1,6 @@
 require 'survey_analyzer'
 
+
 class Survey < ActiveRecord::Base
   belongs_to :user
 
@@ -10,12 +11,16 @@ class Survey < ActiveRecord::Base
     validates :"#{scale}_points", presence: true
   }
 
-  serialize :statistics
+  SurveyAnalyzer::STATISTICS.each{ |stat|
+    define_method :"#{stat}_value" do
+      SurveyAnalyzer::QUESTIONS.find{ |q| q["id"] == stat.to_s }["options"][public_send(stat.to_sym)]
+    end
+  }
 
   def gender_and_age
     {
-      "gender" => statistics["gender"],
-      "age" => statistics["age"]
+      "gender" => user.gender,
+      "age" => user.age_category,
     }
   end
 end

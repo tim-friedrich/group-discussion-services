@@ -8,6 +8,8 @@ describe 'User' do
       fill_in 'user_firstname', with: 'test_firstname'
       fill_in 'user_lastname', with: 'test_lastname'
       fill_in 'user_email', with: 'test@test.test'
+      fill_in 'user_gender', with: 'female'
+      fill_in 'user_birthday', with: '1990-12-31'
       fill_in 'user_password', with: '123456789'
       fill_in 'user_password_confirmation', with: '123456789'
       click_on 'Weiter'

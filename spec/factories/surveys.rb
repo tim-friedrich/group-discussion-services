@@ -19,7 +19,10 @@ FactoryGirl.define do
     mm_points 15
     sm_points 15
     h_points 15
-    statistics({ "some" => "stats" })
+    school 0
+    degree 1
+    personal_status 2
+    income 3
   end
 
 end

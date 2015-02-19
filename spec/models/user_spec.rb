@@ -14,6 +14,8 @@ describe User do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:role) }
+  it { should respond_to(:gender) }
+  it { should respond_to(:birthday) }
 
   it { should be_valid }
 
@@ -35,18 +37,33 @@ describe User do
     before { @user.email = " " }
     it { should_not be_valid }
   end
+  describe "gender is not present" do
+    before { @user.gender = " " }
+    it { should_not be_valid }
+  end
+  describe "birthday is not present" do
+    before { @user.birthday = nil }
+    it { should_not be_valid }
+  end
 
   #Tests max length of parameters
-  describe "the firstname is to long" do
+  describe "firstname is too long" do
     before { @user.firstname = "a"*51 }
     it { should_not be_valid }
   end
-  describe "the surname is to long" do
+
+  describe "surname is too long" do
     before { @user.lastname = "a"*51 }
     it { should_not be_valid }
   end
-  describe "the email is to long" do
+
+  describe "email is too long" do
     before { @user.email = "a"*45+"@a.com" }
+    it { should_not be_valid }
+  end
+
+  describe "gender is too long" do
+    before { @user.gender = "a"*51 }
     it { should_not be_valid }
   end
 
@@ -88,17 +105,20 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "password doesn´t match confirmation" do
+  describe "password doesn't match confirmation" do
     before { @user.password_confirmation = "mismatch" }
     it { should_not be_valid }
   end
 
-  describe "with a password that´s to short" do
+  describe "with a password that's too short" do
     before { @user.password = @user.password_confirmation = "a"*5 }
     it { should be_invalid }
   end
 
+
+  # # #
   # misc
+
   describe "#has_survey?" do
     it 'returns false if user has no related survey' do
       expect( @user.has_survey? ).to be false
@@ -108,6 +128,35 @@ describe User do
       expect( user_with_survey.has_survey? ).to be true
     end
   end
+
+  describe '#age' do
+    it 'returns an integer' do
+      expect( @user.age ).to be_a Integer
+    end
+
+    it 'returns the age, calculated from birthday' do
+      @user.birthday = Date.today - 23.years
+      expect( @user.age ).to eq 23
+    end
+  end
+
+  describe '#age_category' do
+    it 'is "child" for users < 20' do
+      @user.birthday = Date.parse "2014-12-31"
+      expect( @user.age_category ).to eq "child"
+    end
+
+    it 'is "young" for users >= 20 and < 50' do
+      @user.birthday = Date.parse "1990-12-31"
+      expect( @user.age_category ).to eq "young"
+    end
+
+    it 'is "old" for users > 50' do
+      @user.birthday = Date.parse "1950-12-31"
+      expect( @user.age_category ).to eq "old"
+    end
+  end
+
 
   #tests for discussion functionalities
   describe "user was added to discussion" do
