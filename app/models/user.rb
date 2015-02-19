@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   validates :gender, presence: true, length: { maximum: 50 }
   #validates :email, uniqueness: true
   validates :birthday, presence: true
+  validates :zipcode, presence: true, format: { with: /\A\d{5}\z/, message: "muss aus fünf Ziffern bestehen" }
 
   accepts_nested_attributes_for :discussions
 
