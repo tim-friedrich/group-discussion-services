@@ -35,11 +35,10 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:accept_invitation).concat [:firstname, :lastname, :username, :discussion_id]
+    devise_parameter_sanitizer.for(:accept_invitation).concat [:firstname, :lastname, :discussion_id]
     devise_parameter_sanitizer.for(:invite).concat [:email, :discussion_id, :discussions_user_role]
     devise_parameter_sanitizer.for(:sign_up) << :firstname
     devise_parameter_sanitizer.for(:sign_up) << :lastname
-    devise_parameter_sanitizer.for(:sign_up) << :username
   end
 
   def after_sign_in_path_for(resource)

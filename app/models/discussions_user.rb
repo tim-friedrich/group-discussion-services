@@ -5,8 +5,7 @@ class DiscussionsUser < ActiveRecord::Base
   belongs_to :role
 
   validates :user, uniqueness: { scope: :discussion }
-  after_create :set_color
-  after_initialize :set_default_role
+  after_create :set_defaults
   
 
     def set_color
@@ -48,5 +47,21 @@ class DiscussionsUser < ActiveRecord::Base
 
   def set_default_role
     self.role ||= Role.where(name: 'proband').first
+  end
+
+  def set_name
+    if self.role.name == 'moderator'
+      self.name == 'moderator'
+    else
+      male_names = ['Till', 'Ben', 'Paul', 'Karl', 'Leon', 'Felix', 'Max', 'Jan', 'Tom', 'Emil', 'Alex', 'Noah', 'Luis', 'Nick']
+      female_names = ['Lena', 'Mira', 'Jana', 'Anna', 'Marie', 'Pia', 'Tina', 'Nele', 'Klara', 'Sofia', 'Zoe', 'Greta', 'Viki', 'Julia']
+      self.name = male_names[Random.rand(male_names.length)]
+    end
+    self.save
+  end
+  def set_defaults
+    set_color
+    set_default_role
+    set_name
   end
 end

@@ -9,6 +9,8 @@ describe 'discussion', js: true do
     @confirmed_users = discussion.discussions_users.all.select{ | obj | (obj.confirmed && obj.role.name == "proband") }
     @unconfirmed_user = create(:user_with_survey)
     discussion.users << @unconfirmed_user
+    @unconfirmed_user_discussion = discussion.discussions_users.where(user_id: @unconfirmed_user.id).first
+
     @observer = create(:user_with_survey)
     discussion.users << @observer
     observer_discussion = discussion.discussions_users.where(user_id: @observer.id).first
@@ -51,7 +53,7 @@ describe 'discussion', js: true do
       end
       describe "user status" do
         it "should list the confirmed user" do
-          expect( page.find('#users') ).to have_content @user.username
+          expect( page.find('#users') ).to have_element '##{@unconfirmed_user.id}'
         end
         it "should be listed as online when one is in discussion" do
           page.find_by_id("#{ @user.id }").find("img")['src'].should eq "/assets/online.jpg"
@@ -60,7 +62,9 @@ describe 'discussion', js: true do
           page.find_by_id("#{ @confirmed_users[3].user.id }").find("img")['src'].should eq "/assets/offline.jpg"
         end
         it "should not list the unconfirmed user" do
-          expect( page.find('#users') ).not_to have_content @unconfirmed_user.username
+          id = "#{@unconfirmed_user.id}"
+          page.should have_no_selector(id)
+          #expect( page.find('#users') ).not_to have_selector('#'+@unconfirmed_user.id.to_s)
         end
       end
 

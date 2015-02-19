@@ -20,10 +20,8 @@ class User < ActiveRecord::Base
   belongs_to :role
 
   validates :email, presence: true, length: { maximum: 50 }
-  validates :username, presence: true, length: { maximum: 50 }
   validates :firstname, presence: true, length: { maximum: 50 }
   validates :lastname, presence: true, length: { maximum: 50 }
-  validates :username, uniqueness: true
   #validates :email, uniqueness: true
 
   accepts_nested_attributes_for :discussions

@@ -5,7 +5,6 @@ describe 'User' do
   def user_sign_up
     visit '/users/sign_up'
     within '#new_user' do
-      fill_in 'user_username', with: 'test_username'
       fill_in 'user_firstname', with: 'test_firstname'
       fill_in 'user_lastname', with: 'test_lastname'
       fill_in 'user_email', with: 'test@test.test'

@@ -17,7 +17,7 @@ prawn_document() do |pdf|
       pdf.font_size(h2){ pdf.text "Probanden" }
       pdf.move_down 30
       probands = [ ["Benutzername"] ]
-      probands += @discussion.users.collect{ | user | [user.username ]}
+      probands += @discussion.discussions_users.collect{ | user | [user.name ]}
       pdf.table(probands, :header => true)
     end
 
@@ -34,7 +34,7 @@ prawn_document() do |pdf|
         pdf.move_down 10
         pdf.stroke_horizontal_rule
         question.arguments.each do | argument |
-          pdf.pad(5){ pdf.text argument.user.username+": "+argument.content }
+          pdf.pad(5){ pdf.text argument.user.firstname+"(name Ändern!!!!): "+argument.content }
           pdf.stroke_horizontal_rule
         end
       end

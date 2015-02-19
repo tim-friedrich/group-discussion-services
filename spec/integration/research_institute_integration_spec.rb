@@ -10,7 +10,6 @@ describe 'research institute' do
       fill_in 'research_institute_contact_attributes_postalcode', with: '12344'
       fill_in 'research_institute_contact_attributes_town', with: 'Berlin'
       fill_in 'research_institute_contact_attributes_telephone', with: '021142158'
-      fill_in 'research_institute_deputy_attributes_username', with: 'test_username'
       fill_in 'research_institute_deputy_attributes_firstname', with: 'test_firstname'
       fill_in 'research_institute_deputy_attributes_lastname', with: 'test_lastname'
       fill_in 'research_institute_deputy_attributes_email', with: 'test@test.test'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211163117) do
+ActiveRecord::Schema.define(version: 20150219134736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150211163117) do
     t.string   "color",         limit: 255
     t.integer  "role_id"
     t.boolean  "confirmed",                 default: false
+    t.string   "name"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -144,7 +145,6 @@ ActiveRecord::Schema.define(version: 20150211163117) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.string   "username",               limit: 255
     t.string   "confirmation_token",     limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -165,7 +165,6 @@ ActiveRecord::Schema.define(version: 20150211163117) do
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "visual_aids", force: :cascade do |t|
     t.integer  "discussion_id"
