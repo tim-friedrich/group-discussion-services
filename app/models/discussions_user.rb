@@ -55,9 +55,28 @@ class DiscussionsUser < ActiveRecord::Base
     else
       male_names = ['Till', 'Ben', 'Paul', 'Karl', 'Leon', 'Felix', 'Max', 'Jan', 'Tom', 'Emil', 'Alex', 'Noah', 'Luis', 'Nick']
       female_names = ['Lena', 'Mira', 'Jana', 'Anna', 'Marie', 'Pia', 'Tina', 'Nele', 'Klara', 'Sofia', 'Zoe', 'Greta', 'Viki', 'Julia']
-      self.name = male_names[Random.rand(male_names.length)]
+      other_gender = male_names + female_names
+      if user.gender == "male"
+        self.name = select_name_from(male_names)
+      elsif user.gender == "female"
+        self.name = select_name_from(female_names)
+      else
+        self.name = select_name_from(other_gender)
+      end
     end
     self.save
+  end
+
+  def select_name_from(names)
+    while !names.empty?
+      name = names[Random.rand(names.length)]
+      if !discussion.discussions_users.where(name: name).first.nil?
+        names.delete(name)
+      else
+        return name
+      end
+    end
+    return names[Random.rand(names.length)]
   end
   def set_defaults
     set_color

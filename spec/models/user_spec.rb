@@ -46,6 +46,15 @@ describe User do
     it { should_not be_valid }
   end
 
+  it "should respond the username from the referenced discussion" do
+    user_with_survey.save
+    discussion = create(:discussion)
+    discussion.users << user_with_survey
+    discussions_user = discussion.discussions_users.where(user_id: user_with_survey.id).first
+    discussions_user.save
+    expect(discussions_user.name).to eq user_with_survey.username discussion
+  end
+
   #Tests max length of parameters
   describe "firstname is too long" do
     before { @user.firstname = "a"*51 }

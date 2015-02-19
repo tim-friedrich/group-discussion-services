@@ -1,8 +1,10 @@
 <table class="table">
   <thead>
   <tr>
-    <th>Benutzername</th>
-    <th>Email</th>
+    <th>Name</th>
+    <th>Geschlecht</th>
+    <th>Alter</th>
+    <th>Wohnort</th>
     <th></th>
   </tr>
   </thead>
@@ -12,7 +14,9 @@
   <% discussions_users.each do |discussions_user| %>
     <tr <% if discussions_user.confirmed %>class="bg-success"<% else %>class="bg-danger" <% end %>  >
       <td><%= discussions_user.name %></td>
-      <td><%= discussions_user.user.email %></td>
+      <td><%= discussions_user.user.gender %></td>
+      <td><%= discussions_user.user.age %></td>
+      <td>tbd</td>
       <td><%= link_to 'Löschen', discussions_users_path+'/'+discussions_user.id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
     </tr>
   <% end %>

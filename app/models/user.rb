@@ -29,11 +29,19 @@ class User < ActiveRecord::Base
 
 
   def age
-    now = Time.now.utc.to_date
-    now.year - birthday.year - ((
-       now.month > birthday.month ||
-       (now.month == birthday.month && now.day >= birthday.day)
-    ) ? 0 : 1)
+    if birthday
+      now = Time.now.utc.to_date
+      now.year - birthday.year - ((
+         now.month > birthday.month ||
+         (now.month == birthday.month && now.day >= birthday.day)
+      ) ? 0 : 1)
+    else
+      return 0
+    end
+  end
+
+  def username(discussion)
+    discussion.discussions_users.where(user_id: self.id).first.name
   end
 
   def age_category
