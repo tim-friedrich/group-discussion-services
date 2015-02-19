@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20150219134736) do
     t.datetime "updated_at"
     t.string   "color"
     t.integer  "role_id"
-    t.boolean  "confirmed",                 default: false
+    t.boolean  "confirmed",     default: false
     t.string   "name"
   end
 
