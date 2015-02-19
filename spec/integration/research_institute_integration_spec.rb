@@ -13,6 +13,8 @@ describe 'research institute' do
       fill_in 'research_institute_deputy_attributes_firstname', with: 'test_firstname'
       fill_in 'research_institute_deputy_attributes_lastname', with: 'test_lastname'
       fill_in 'research_institute_deputy_attributes_email', with: 'test@test.test'
+      fill_in 'research_institute_deputy_attributes_birthday', with: '05.05.1980'
+      select 'männlich', from: 'research_institute_deputy_attributes_gender'
       fill_in 'research_institute_deputy_attributes_password', with: '123456789'
       fill_in 'research_institute_deputy_attributes_password_confirmation', with: '123456789'
       click_on 'Anmelden'
