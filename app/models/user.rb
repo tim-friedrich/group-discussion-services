@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   after_initialize :set_default_role
-  after_create :test
 
   has_many :discussions_users
   has_many :arguments
@@ -29,9 +28,6 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :discussions
 
-  def test
-    puts "A"*500
-  end
 
   def age
     if birthday

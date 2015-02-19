@@ -61,7 +61,6 @@ class VisualAidsController < ApplicationController
   end
 
   def new_visual_aid
-    puts visual_aid_params.to_yaml
     @visual_aid = VisualAid.new(visual_aid_params)
   end
 
