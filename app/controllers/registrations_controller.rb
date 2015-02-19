@@ -4,6 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
     reset_session
     super
     flash.delete(:notice)
+  rescue
   end
 
 

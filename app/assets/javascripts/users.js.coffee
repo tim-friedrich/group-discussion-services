@@ -12,4 +12,5 @@
 
 
 $ ->
-  $('.datepicker').datepicker()
+  $('.datepicker').datepicker
+    startView: 2
