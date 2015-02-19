@@ -50,6 +50,8 @@ class DiscussionsUser < ActiveRecord::Base
   end
 
   def set_name
+    puts "A"*40
+    puts self.role.name
     if self.role.name == 'moderator'
       self.name == 'moderator'
     else
