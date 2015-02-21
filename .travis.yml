@@ -1,6 +1,13 @@
 language: ruby
 
-script: "dotenv rspec"
-
 rvm:
 - 2.2.0
+
+addons:
+  postgresql: "9.3"
+
+before_script:
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+
+script: "bundle exec dotenv rspec"
