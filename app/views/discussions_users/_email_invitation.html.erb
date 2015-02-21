@@ -1,4 +1,4 @@
-<%= form_for discussions_users, :url => invitation_path(@user), html: { class: "form-horizontal", method: :post, remote: true } do |f| %>
+<%= form_for discussions_users, :url => invitation_path(@user), html: { class: "form-horizontal", method: :post, remote: true, id: "new_#{ role }" } do |f| %>
   <% User.invite_key_fields.each do |field| -%>
     <div class="row">
       <div class="col-lg-6">
@@ -7,7 +7,7 @@
           <%= f.hidden_field :discussion_id, value: @discussion.id %>
           <%= f.hidden_field :discussions_user_role, value: role %>
           <span class="input-group-btn">
-            <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-default" %>
+            <%= f.submit t("devise.invitations.new.submit_button"), id: "submit_new_#{ role }", class: "btn btn-default" %>
           </span>
         </div>
       </div>

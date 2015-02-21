@@ -43,17 +43,17 @@ describe 'discussion', js: true do
         end
 
         it "should clear the argument form after submit" do
-            send_argument
-            page.execute_script("
+          send_argument
+          page.execute_script("
               $('#argument_content').text('test')
             ")
-            page.find('#new_argument_button').click
-            expect( find('#argument_content') ).not_to have_content "test"
+          page.find('#new_argument_button').click
+          expect( find('#argument_content') ).not_to have_content "test"
         end
       end
       describe "user status" do
         it "should list the confirmed user" do
-          expect( page.find('#users') ).to have_element '##{@unconfirmed_user.id}'
+          expect( find('#users') ).to have_content @user.username(discussion)
         end
         it "should be listed as online when one is in discussion" do
           page.find_by_id("#{ @user.id }").find("img")['src'].should eq "/assets/online.jpg"
@@ -62,9 +62,7 @@ describe 'discussion', js: true do
           page.find_by_id("#{ @confirmed_users[3].user.id }").find("img")['src'].should eq "/assets/offline.jpg"
         end
         it "should not list the unconfirmed user" do
-          id = "#{@unconfirmed_user.id}"
-          page.should have_no_selector(id)
-          #expect( page.find('#users') ).not_to have_selector('#'+@unconfirmed_user.id.to_s)
+          expect( find('#users') ).not_to have_content @unconfirmed_user.username(discussion)
         end
       end
 
@@ -122,7 +120,6 @@ describe 'discussion', js: true do
 
   describe "as Observer" do
     before do
-
       login_as @observer
       visit discussion_path(discussion)
     end
@@ -132,5 +129,55 @@ describe 'discussion', js: true do
         expect( page.find("#discussion_chat") ).to have_content('test')
       end
     end
+  end
+
+  describe "discussion edit" do
+
+    before do
+      login_as discussion.moderator
+      @user = FactoryGirl.attributes_for(:user)
+    end
+
+    def invite_proband
+      visit edit_discussion_path(discussion)
+      click_link 'Teilnehmer'
+      page.execute_script("
+            $('#user_email').val('#{ "@user[:email]" }')
+          ")
+      page.find('#submit_new_proband').click
+    end
+=begin
+    describe "user invitations" do
+      it "should create a new discussions_user" do
+        expect { invite_proband() }.to change(DiscussionsUser, :count).by(1)
+      end
+
+      it "have the DiscussionsUser name Unbekannt for new users" do
+        invite_proband
+        user2 = User.where(email: @user[:email]).first
+        discussions_user = discussion.discussions_users.where(user_id: user2.id).first
+        expect ( discussions_user.name ).to eq "Unbekannt"
+      end
+
+      it "should change the DiscussionsUser name after registration" do
+        invite_proband
+        click_link "Abmelden"
+        user2 = User.where(email: @user[:email]).first
+        visit accept_user_invitation_url(:invitation_token => user2.raw_invitation_token)
+        within '#edit_user' do
+          fill_in 'user_firstname', with: 'test_firstname'
+          fill_in 'user_lastname', with: 'test_lastname'
+          select 'weiblich', :from => 'user_gender'
+          fill_in 'user_birthday', with: '31.12.1990'
+          fill_in 'user_password', with: '123456789'
+          fill_in 'user_zipcode', with: '12345'
+          fill_in 'user_password_confirmation', with: '123456789'
+          click_on 'Weiter'
+        end
+        discussions_user = discussion.discussions_users.where(user_id: user2.id).first
+        expect( discussion_user.name ).not_to eq "Unbekannt"
+      end
+    end
+=end
   end
 end

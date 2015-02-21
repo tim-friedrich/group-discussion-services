@@ -6,7 +6,7 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   Capybara.default_wait_time = 5
 
-  # config.include Devise::TestHelpers, type: :feature
+  #config.include Devise::TestHelpers, type: :feature
   config.include Warden::Test::Helpers
   Warden.test_mode!
 end

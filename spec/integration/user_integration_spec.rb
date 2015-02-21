@@ -29,23 +29,52 @@ describe 'User' do
       current_path.should eq '/survey'
     end
 
-    it "should be possible to signup as invited user" do
-      user = User.invite!(email: 'test@example.com') do |u|
-        u.skip_invitation = true
+    describe "invitations" do
+      before do
+        
       end
-      visit accept_user_invitation_url(:invitation_token => user.raw_invitation_token)
-      within '#edit_user' do
-        fill_in 'user_firstname', with: 'test_firstname'
-        fill_in 'user_lastname', with: 'test_lastname'
-        select 'weiblich', :from => 'user_gender'
-        fill_in 'user_birthday', with: '31.12.1990'
-        fill_in 'user_password', with: '123456789'
-        fill_in 'user_zipcode', with: '12345'
-        fill_in 'user_password_confirmation', with: '123456789'
-        click_on 'Weiter'
+
+      it "should be possible to signup as invited user" do
+        @user = User.invite!(email: 'test@example.com') do |u|
+          u.skip_invitation = true
+        end
+        visit accept_user_invitation_url(:invitation_token => @user.raw_invitation_token)
+        within '#edit_user' do
+          fill_in 'user_firstname', with: 'test_firstname'
+          fill_in 'user_lastname', with: 'test_lastname'
+          select 'weiblich', :from => 'user_gender'
+          fill_in 'user_birthday', with: '31.12.1990'
+          fill_in 'user_password', with: '123456789'
+          fill_in 'user_zipcode', with: '12345'
+          fill_in 'user_password_confirmation', with: '123456789'
+          click_on 'Weiter'
+        end
+        expect( current_path ).to eq '/survey'
       end
-      expect( current_path ).to eq '/survey'
+      it "should have an other DiscussionsUser name than Unbekannt" do
+        discussion = create(:discussion)
+        @user = User.invite!(email: 'test@example.com') do |u|
+          u.skip_invitation = true
+        end
+        discussion.users << @user
+        discussion.save
+        visit accept_user_invitation_url(:invitation_token => @user.raw_invitation_token)
+        within '#edit_user' do
+          fill_in 'user_firstname', with: 'test_firstname'
+          fill_in 'user_lastname', with: 'test_lastname'
+          select 'weiblich', :from => 'user_gender'
+          fill_in 'user_birthday', with: '31.12.1990'
+          fill_in 'user_password', with: '123456789'
+          fill_in 'user_zipcode', with: '12345'
+          fill_in 'user_password_confirmation', with: '123456789'
+          click_on 'Weiter'
+        end
+        discussions_user = @user.discussions_users.first
+        expect( discussions_user.name ).not_to eq "Unbekannt"
+      end
     end
+    
+
   end
 
   describe 'log in' do

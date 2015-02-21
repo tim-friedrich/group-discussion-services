@@ -14,31 +14,30 @@ require 'spec_helper'
 describe UsersHelper do
   include UsersHelper
 
-    let(:user) { create(:user) }
-    describe "Role helpers with valid params" do
-      describe "Role is user" do
-        it "should respond that it is an user" do
-          user.role = Role.where(name:'user').first
-          user.save
-          is_user?(user).should be_truthy
-        end
+  let(:user) { create(:user) }
+  describe "Role helpers with valid params" do
+    describe "Role is user" do
+      it "should respond that it is an user" do
+        user.role = Role.where(name:'user').first
+        user.save
+        is_user?(user).should be_truthy
+      end
     end
 
     describe "Role is staff" do
-        it "should respond that it is staff" do
-          user.role = Role.where(name:'staff').first
-          user.save
-          is_staff?(user).should be_truthy
-        end
+      it "should respond that it is staff" do
+        user.role = Role.where(name:'staff').first
+        user.save
+        is_staff?(user).should be_truthy
+      end
     end
 
     describe "Role is admin" do
-        it "should respond that it is an admin" do
-
-          user.role = Role.where(name:'admin').first
-          user.save
-          is_admin?(user).should be_truthy
-        end
+      it "should respond that it is an admin" do
+        user.role = Role.where(name:'admin').first
+        user.save
+        is_admin?(user).should be_truthy
+      end
     end
   end
 

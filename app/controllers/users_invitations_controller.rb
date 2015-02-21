@@ -1,4 +1,12 @@
 class UsersInvitationsController < Devise::InvitationsController
+  
+  def update 
+    super
+    for discussions_user in User.find_by_email(invite_params[:email]).discussions_users do
+      discussions_user.set_name
+    end
+  end
+
   def invite_resource
 
   end
