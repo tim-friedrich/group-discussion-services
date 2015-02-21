@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        #sign_in(@user, :bypass=>true)
+        sign_in(@user, :bypass=>true)
         format.html { redirect_to '/profile', notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
