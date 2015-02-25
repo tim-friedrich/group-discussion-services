@@ -24,7 +24,7 @@ class @View
             topic: @argument_input.text()
             discussion_id:  @discussion.id
       })
-      $('#argument_content').text("")
+      $('#new_argument_content').text("")
     )
 
     $("#new_argument_button").click( (event) =>
@@ -122,7 +122,10 @@ class @View
     if scroll
       @scroll_down(@chat)
 
-    argument.dom_element.click( () =>
+    argument.dom_element.find('.argument_content').click( () =>
+      @add_user_reference_to_input(argument.user)
+    )
+    argument.dom_element.find('.user').click( () =>
       @add_user_reference_to_input(argument.user)
     )
 
@@ -149,28 +152,6 @@ class @View
       $(this).tab('show')
     )
 
-  draw_probands_toolbox: () =>
-    template =
-    """
-        <div class="tab-pane active" id="users">
-          <div class="panel panel-default probands">
-
-            <ul class="list-group proband-list">
-
-            </ul>
-          </div>
-        </div>
-      """
-
-    $(".toolbox").find(".tab-content").append(template)
-
-    $(".toolbox").find(".nav-tabs").append(
-                                          """
-        <li class="active"><a href="#users" role="tab" data-toggle="tab">Teilnehmer</a></li>
-      """)
-
-    @draw_probands_list
-
   draw_probands_list: () =>
     $.each(@discussion.users, (index, user) =>
       @draw_proband(user)
@@ -181,7 +162,7 @@ class @View
       proband_list = $("#probands-list")
       proband_list.append(
           """
-            <li id="#{ user.id }" class="">
+            <li id="#{ user.id }" class="offline">
               <div class="proband-name">#{ user.name }</div>
               <div class="proband-color" style=" background-color: #{ user.color }"></div>
             </li>
@@ -200,7 +181,7 @@ class @View
 
 
   change_user_status: (online=true, user) =>
-    proband = $(".proband-list").find("##{ user.id }")
+    proband = $("#probands-list").find("##{ user.id }")
 
     if online
       proband.removeClass("offline")
@@ -211,7 +192,13 @@ class @View
     return ( elem.outerHeight() + 5 > elem[0].scrollHeight - elem.scrollTop() > elem.outerHeight() - 5)
 
   resize: () =>
-    chat_height = $(window).height()-($('.moderator').height()+50)-($('#new_argument').height()+30)-60;
+    if $('#visual_aid_container').length
+      chat_height = $(window).height()-($('#new_argument').height()+30)-($('#visual_aid_container').height());
+    else
+      chat_height = $(window).height()-($('.moderator').height()+50)-($('#new_argument').height()+30)-60;
+    if chat_height < 130
+      chat_height = 130
+    
 
     if chat_height < 130
       chat_height = 130

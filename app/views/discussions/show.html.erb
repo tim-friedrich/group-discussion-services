@@ -1,13 +1,7 @@
 <%= javascript_include_tag "private_pub" %>
 
 <div id="discussion">
-  <!-- <div class="toolbox">
-
-    <ul class="nav nav-tabs" role="tablist">
-    </ul>
-    <div class="tab-content">
-    </div>
-  </div>-->
+  
   <div class="toolbox"></div>
 
   <div id="moderator">
@@ -23,12 +17,13 @@
       <div id="arguments"></div>
     </div>
 
-    <%= form_for Argument.new , html: {class: ""} , role: "form", remote: true do |f| %>
+    <%= form_for Argument.new, role: "form", remote: true do |f| %>
       <div class="form-group">
-        <div contentEditable="true" class="form-control" id="new_argument_content"></div>
-        <div class="emoticon_picker"><span class="emoticon emoticon-smile" title="Smiley hinzufügen">:)</span>
+    	<div class="emoticon_picker"><span class="emoticon emoticon-smile" title="Smiley hinzufügen">:)</span>
           <div class="emoticon_prev" ></div>
         </div>
+        <div contentEditable="true" class="form-control" id="new_argument_content"></div>
+        
       </div>
       <%= f.hidden_field :discussion_id, value: @discussion.id %>
       <div id="submit_buttons">

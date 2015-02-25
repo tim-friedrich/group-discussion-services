@@ -6,7 +6,7 @@ class @ImageAid extends VisualAid
     @visual_aid =
     """
         <div id="visual_aid_container">
-          <img src="#{ @url }" alt="#{ @name }"/>
+          <img class="center-block" src="#{ @url }" alt="#{ @name }"/>
         </div>
       """
 

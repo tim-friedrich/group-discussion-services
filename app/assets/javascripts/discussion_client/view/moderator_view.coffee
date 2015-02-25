@@ -8,7 +8,7 @@ class @ModeratorView extends View
         <span class="vote_count badge like_badge">#{ argument.num_likes() }</span>
         <span class="vote_count badge dislike_badge" >#{ argument.num_dislikes() }</span>
       """
-    $(argument.dom_element).find(".right_argument").prepend(dom_element)
+    $(argument.dom_element).find(".right-argument").find('.voting').append(dom_element)
 
   draw_argument: () =>
     super
@@ -61,7 +61,8 @@ class @ModeratorView extends View
     content_dom =
       """
         <div class="tab-pane" id="participation">
-          <h3>Beteiligung</h3>
+          <h2>Beteiligung</h2>
+          <hr>
           <canvas id="chart" width="180" height="180"></canvas>
         </div>
       """
@@ -94,4 +95,38 @@ class @ModeratorView extends View
       segment.value = user.argument_count()
     )
     @participation_chart.update()
+
+  draw_probands_toolbox: () =>
+    template =
+      """
+        <div class="tab-pane active" id="users">
+          <div>
+            <h2>Teilnehmer</h2>
+            <hr>
+            <div id="probands-list"></div>
+          </div>
+        </div>
+      """
+
+    $(".toolbox").find(".tab-content").append(template)
+
+    $(".toolbox").find(".nav-tabs").append(
+      """
+        <li class="active"><a href="#users" role="tab" data-toggle="tab">Teilnehmer</a></li>
+      """)
+
+    @draw_probands_list()
+    @draw_participation()
+
+  draw_toolbox: () =>
+    template = 
+
+      """
+        <ul class="nav nav-tabs" role="tablist"></ul>
+        <div class="tab-content"></div>
+      """
+    $(".toolbox").append(template)
+
+    @draw_probands_toolbox()
+    @draw_visual_aids_tab()
 

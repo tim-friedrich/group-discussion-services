@@ -15,7 +15,7 @@ class @ProbandView extends View
           <i class='glyphicon glyphicon-thumbs-down' ></i>
         </div>
       """
-    $(argument.dom_element).find(".argument_content").append(voting_template)
+    $(argument.dom_element).find(".voting").append(voting_template)
     $like_button = $(argument.dom_element).find("#like_button")
     $dislike_button = $(argument.dom_element).find("#dislike_button")
 

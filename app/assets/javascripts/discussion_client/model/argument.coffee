@@ -23,21 +23,39 @@ class @Argument
     @discussion.view.update_voting(@)
 
   generate_dom: () =>
-    @dom_element =
-    """
-      <div class="argument">
-        <div class="user">
-          <div class="name">#{ @user.name }:</div>
-          <div class="color" style='background-color: #{ @user.color }'></div>
+    if @type == 'proband'
+      @dom_element =
+      """
+        <div class="argument">
+          <div class="user">
+            <div class="name">#{ @user.name }:</div>
+            <div class="color" style='background-color: #{ @user.color }'></div>
+          </div>
+          <div class="arrow">
+            <img src="#{image_path('discussion/argument_arrow.png')}" />
+          </div>
+          <div class="right-argument">
+            <div class="argument_content">
+              #{ $.emoticons.replace(@content) }
+            </div>
+            <div class="voting"></div>
+          </div>
         </div>
-        <div class="arrow">
-          <img src="#{image_path('discussion/argument_arrow.png')}" />
+      """
+    else if @type == 'moderator'
+      @dom_element =
+      """
+      <div class="argument moderator_argument">
+          <div class="user">
+            <img src="#{image_path('Unknown-person.gif')}" />
+          </div>
+          <div class="right-argument">
+            <div class="argument_content">
+              #{ $.emoticons.replace(@content) }
+            </div>
+          </div>
         </div>
-        <div class="argument_content">
-          #{ $.emoticons.replace(@content) }
-        </div>
-      </div>
-    """
+      """
     if @type == 'observer'
       @dom_element = $(@dom_element).addClass('observer_argument')
 
