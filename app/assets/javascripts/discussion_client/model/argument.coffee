@@ -25,14 +25,16 @@ class @Argument
   generate_dom: () =>
     @dom_element =
     """
-      <div class="list-group-item argument-panel clearfix">
-        <div class="left_argument">
-          <div class="color" style='background-color: #{ @user.color }'></div>
+      <div class="argument">
+        <div class="user">
           <div class="name">#{ @user.name }:</div>
-          <div class="argument"></span> #{ $.emoticons.replace(@content) }</div>
+          <div class="color" style='background-color: #{ @user.color }'></div>
         </div>
-        <div class="right_argument pull-right">
-          <span class = "time_stamp">#{ @timestamp.toString("HH:mm") }</span>
+        <div class="arrow">
+          <img src="#{image_path('discussion/argument_arrow.png')}" />
+        </div>
+        <div class="argument_content">
+          #{ $.emoticons.replace(@content) }
         </div>
       </div>
     """

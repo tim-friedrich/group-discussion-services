@@ -98,7 +98,7 @@ class DiscussionsController < ApplicationController
       if @discussion.save
         @discussion.moderator = current_user
         @question.save
-        format.html { redirect_to '/profile', notice: 'Eine neue Diskussion wurde erfolgreich erstellt.' }
+        format.html { redirect_to edit_discussion_path(@discussion) }
         format.json { render action: 'show', status: :created, location: @discussion }
       else
         format.html { render action: 'new' }

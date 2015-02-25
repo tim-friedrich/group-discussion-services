@@ -5,9 +5,8 @@ class @View
   constructor: (@discussion) ->
     @register_events()
     @is_question = false
-    @proband_chat = $("#discussion_chat")
-    @moderator_chat = $("#moderator_chat")
-    @argument_input = $('#argument_content')
+    @chat = $("#arguments")
+    @argument_input = $('#new_argument_content')
 
   scroll_down: (div) =>
     div.stop().animate({
@@ -40,16 +39,17 @@ class @View
       return false
     )
 
-    $('#argument_content').keydown( (event) =>
+    $('#new_argument_content').keydown( (event) =>
+      content_div = $('#new_argument_content')
       if(event.keyCode == 13)
         @submit_argument(@discussion.current_user.role)
         return false
 
       if(event.keyCode == 32)
-        caret = $('#argument_content').caret('pos')
-        $('#argument_content').html($.emoticons.replace($("#argument_content").text()))
-        $('#argument_content .emoticon').attr("contenteditable", "false")
-        window.set_caret(document.getElementById("argument_content"), caret)
+        caret = content_div.caret('pos')
+        content_div.html($.emoticons.replace($("#new_argument_content").text()))
+        content_div.find('.emoticon').attr("contenteditable", "false")
+        window.set_caret(document.getElementById("new_argument_content"), caret)
     )
     $('#new_argument').submit((event)=>
       return false
@@ -64,13 +64,13 @@ class @View
     )
 
     $('.emoticon_prev').on('click', 'input', (event) =>
-      $argument = $('#argument_content')
+      $argument = $('#new_argument_content')
       caret = $argument.caret('pos')
       post = $argument.text()
       post = post.substr(0, caret)+""+$(event.target).attr('data-type')+post.substr(caret, post.length)
       $argument.html($.emoticons.replace(post))
-      $('#argument_content .emoticon').attr("contenteditable", "false")
-      window.set_caret(document.getElementById("argument_content"), caret+$(event.target).attr('data-type').length)
+      $('#new_argument_content .emoticon').attr("contenteditable", "false")
+      window.set_caret(document.getElementById("new_argument_content"), caret+$(event.target).attr('data-type').length)
     )
 
     $(window).resize(() =>
@@ -96,8 +96,7 @@ class @View
     $('header').hide()
     @init_emoticons()
     @draw_arguments()
-    @scroll_down(@moderator_chat)
-    @scroll_down(@proband_chat)
+    @scroll_down(@chat)
     @update_question(@discussion.questions[..].pop())
     @draw_toolbox()
     @draw_emoticon_prev()
@@ -112,23 +111,16 @@ class @View
   draw_argument: (argument) =>
     argument.generate_dom()
 
-    if argument.type == 'moderator'
-      if @scrolled_down(@moderator_chat)
-        scroll = true
-      @moderator_chat.append(argument.dom_element).children().last()
-      if scroll
-        @scroll_down(@moderator_chat)
-
-    if @scrolled_down(@proband_chat)
+    if @scrolled_down(@chat)
       scroll = true
 
-    argument.dom_element = @proband_chat.append(argument.dom_element).children().last()
+    argument.dom_element = @chat.append(argument.dom_element).children().last()
 
     if argument.type == 'proband'
       @draw_voting(argument)
 
     if scroll
-      @scroll_down(@proband_chat)
+      @scroll_down(@chat)
 
     argument.dom_element.click( () =>
       @add_user_reference_to_input(argument.user)
@@ -137,7 +129,7 @@ class @View
   add_user_reference_to_input: (user) =>
     @argument_input.text(@argument_input.text()+"@"+user.name+": ")
     @argument_input.focus()
-    window.set_caret(document.getElementById("argument_content"), @argument_input.text().length)
+    window.set_caret(document.getElementById("new_argument_content"), @argument_input.text().length)
 
 
   draw_voting: (argument) =>
@@ -177,20 +169,23 @@ class @View
         <li class="active"><a href="#users" role="tab" data-toggle="tab">Teilnehmer</a></li>
       """)
 
+    @draw_probands_list
+
+  draw_probands_list: () =>
     $.each(@discussion.users, (index, user) =>
       @draw_proband(user)
     )
 
   draw_proband: (user) =>
     if user.role == 'proband'
-      proband_list = $(".proband-list")
+      proband_list = $("#probands-list")
       proband_list.append(
-                               """
-            <li class="list-group-item" id="#{ user.id }">
-              <div style="width: 5px; height: 20px; background-color: #{ user.color }; float: left"></div>
-              #{ user.name }
-              <div class="proband-status"><img src="#{ image_path("offline.jpg") }"></img></div>
+          """
+            <li id="#{ user.id }" class="">
+              <div class="proband-name">#{ user.name }</div>
+              <div class="proband-color" style=" background-color: #{ user.color }"></div>
             </li>
+
           """
       )
       if user.is_present
@@ -205,26 +200,24 @@ class @View
 
 
   change_user_status: (online=true, user) =>
-    images = $(".proband-list").children()
-    img = $((image for image in images when image.textContent.trim() == user.name)).find("img")
+    proband = $(".proband-list").find("##{ user.id }")
 
     if online
-      img.attr("src", image_path("online.jpg"))
+      proband.removeClass("offline")
     else
-      img.attr("src", image_path("offline.jpg"))
+      proband.addClass("offline")
 
   scrolled_down: (elem) =>
     return ( elem.outerHeight() + 5 > elem[0].scrollHeight - elem.scrollTop() > elem.outerHeight() - 5)
 
   resize: () =>
-    chat_height = $(window).height()-$('.chat').find('.top').height()-$('.chat').find('form').height();
+    chat_height = $(window).height()-($('.moderator').height()+50)-($('#new_argument').height()+30)-60;
 
     if chat_height < 130
       chat_height = 130
 
-    $('#discussion_panel').css('height', chat_height+'px')
-    @scroll_down(@proband_chat)
-    @scroll_down(@moderator_chat)
+    $('#chat').css('height', chat_height+'px')
+    @scroll_down(@chat)
 
   init_emoticons: () =>
     @emoticons =

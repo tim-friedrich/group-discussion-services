@@ -1,79 +1,71 @@
 <%= javascript_include_tag "private_pub" %>
 
 <div id="discussion">
-    <div class="toolbox">
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist">
-      </ul>
-      <!-- Tab panes -->
-      <div class="tab-content">
-      </div>
+  <!-- <div class="toolbox">
+
+    <ul class="nav nav-tabs" role="tablist">
+    </ul>
+    <div class="tab-content">
+    </div>
+  </div>-->
+  <div class="toolbox"></div>
+
+  <div id="moderator">
+    <div id="question"></div>
+    <div id="moderator_show">
+      <%= image_tag('Unknown-person.gif', size: "80x80", alt: "Bild des Moderators") %>
+    </div>
+  </div>
+
+  <div class="chat_container">
+
+    <div id="chat">
+      <div id="arguments"></div>
     </div>
 
-
-    <div class="chat">
-      <div class="clearfix top">
-            <div id="moderator_show">
-              <h5><%= @discussion.moderator.firstname+" "+@discussion.moderator.lastname %></h5>
-              <%= image_tag('Unknown-person.gif', size: "80x80", alt: "Bild des Moderators") %>
-            </div>
-          <div class="panel panel-default" id="moderator_panel">
-            <div class="panel-heading">
-              <h3 class="panel-title" id="question"></h3>
-            </div>
-            <ul class="list-group" id="moderator_chat">
+    <%= form_for Argument.new , html: {class: ""} , role: "form", remote: true do |f| %>
+      <div class="form-group">
+        <div contentEditable="true" class="form-control" id="new_argument_content"></div>
+        <div class="emoticon_picker"><span class="emoticon emoticon-smile" title="Smiley hinzufügen">:)</span>
+          <div class="emoticon_prev" ></div>
+        </div>
+      </div>
+      <%= f.hidden_field :discussion_id, value: @discussion.id %>
+      <div id="submit_buttons">
+        <% if @discussion.moderator == current_user %>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" id="new_argument_button">Senden</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="javascript:void(0);" id="new_question_button">Neue Frage</a></li>
+              <li><a href="javascript:void(0);" id="new_observer_argument_button">An Beobachter senden</a></li>
             </ul>
           </div>
+        <% else %>
+          <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
+        <% end %>
       </div>
+    <% end %>
+  </div>
 
-      <div class="panel panel-default" id="discussion_panel">
-        <ul class="list-group" id="discussion_chat">
-        </ul>
-      </div>
-
-      <%= form_for Argument.new , class: "form-inline", role: "form", remote: true do |f| %>
-        <div class="form-group">
-          <div contentEditable="true" class="form-control" id="argument_content"></div>
-          <div class="emoticon_picker"><span class="emoticon emoticon-smile" title="Smiley hinzufügen">:)</span>
-            <div class="emoticon_prev" ></div>
-          </div>
-        </div>
-        <%= f.hidden_field :discussion_id, value: @discussion.id %>
-          <div id="submit_buttons">
-            <% if @discussion.moderator == current_user %>
-              <div class="btn-group">
-                <button type="button" class="btn btn-default" id="new_argument_button">Nachricht Senden</button>
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="javascript:void(0);" id="new_question_button">Neue Frage</a></li>
-                  <li><a href="javascript:void(0);" id="new_observer_argument_button">An Beobachter senden</a></li>
-                </ul>
-              </div>
-            <% else %>
-                <%= f.submit "Senden" , class: "btn btn-success", id: "new_argument_button" %>
-            <% end %>
-          </div>
-      <% end %>
-    </div>
-
-    <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/arguments/new" %>
+  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/arguments/new" %>
 
 
   <% if current_user == @discussion.moderator || @discussion_user.role.name == 'observer' %>
-      <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/observer/arguments/new" %>
-    <% end %>
-    <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/questions/new" %>
-    <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/open" %>
-    <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/close" %>
-    <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/votes/new" %>
-    <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/users/new" %>
-    <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/users/enter" %>
-    <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/users/leave" %>
-    <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/command" %>
+  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/observer/arguments/new" %>
+  <% end %>
+  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/questions/new" %>
+  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/open" %>
+  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/close" %>
+  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/votes/new" %>
+  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/users/new" %>
+  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/users/enter" %>
+  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/users/leave" %>
+  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/command" %>
 
-    <script>
-        $(document).ready(function(){ new Discussion(); });
-    </script>
- </div>
+  <script>
+    $(document).ready(function(){ new Discussion(); });
+  </script>
+</div>

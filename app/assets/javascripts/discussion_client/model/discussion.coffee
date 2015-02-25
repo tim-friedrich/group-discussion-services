@@ -36,7 +36,7 @@ class @Discussion
 
   bind_new_question: () =>
     PrivatePub.subscribe("/discussion/"+@id+"/questions/new", (data) ->
-      $("#question").text("Frage: "+data.topic)
+      $("#question").text(data.topic)
     )
 
   load_discussion: () =>

@@ -15,7 +15,7 @@ class @ProbandView extends View
           <i class='glyphicon glyphicon-thumbs-down' ></i>
         </div>
       """
-    $(argument.dom_element).find(".right_argument").prepend(voting_template)
+    $(argument.dom_element).find(".argument_content").append(voting_template)
     $like_button = $(argument.dom_element).find("#like_button")
     $dislike_button = $(argument.dom_element).find("#dislike_button")
 
@@ -33,3 +33,21 @@ class @ProbandView extends View
         $like_button.addClass("disabled")
         $dislike_button.addClass("disabled")
       )
+
+  draw_toolbox: () =>
+    template = 
+      """
+        <img id="welcome_slogan" src="#{ image_path('discussion/welcome.png') }">
+        <div>
+          <h2>Thema</h2>
+          <hr>
+          <p>#{ @discussion.topic }</p>
+          <h2>Teilnehmer</h2>
+          <hr>
+          <div id="probands-list"></div>
+        </div>
+      """
+    $(".toolbox").append(template)
+
+    @draw_probands_list()
+
