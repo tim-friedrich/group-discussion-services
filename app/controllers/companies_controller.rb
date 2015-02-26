@@ -7,12 +7,6 @@ class CompaniesController < ApplicationController
   load_and_authorize_resource
 
 
-  # GET /companies
-  # GET /companies.json
-  def index
-    @companies = Company.all
-  end
-
   # GET /companies/1
   # GET /companies/1.json
   def show
@@ -31,7 +25,6 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-
     respond_to do |format|
       if @company.save
         format.html { redirect_to '/profile', notice: 'Das Unternehmen wurde erfolgreich angelegt.' }
@@ -67,19 +60,19 @@ class CompaniesController < ApplicationController
     end
   end
 
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_company
-      @company = Company.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def company_params
-      params.require(:company).permit(:name, contact_attributes: [:street, :postalcode, :town, :email, :telephone])
-    end
+  def set_company
+    @company = Company.find(params[:id])
+  end
 
-    def new_company
-      @company = Company.new(company_params)
-      @company.research_institute = current_user.research_institutes.first
-    end
+  def company_params
+    params.require(:company).permit(:name, contact_attributes: [:street, :postalcode, :town, :email, :telephone])
+  end
+
+  def new_company
+    @company = Company.new(company_params)
+    @company.research_institute = current_user.research_institutes.first
+  end
 end

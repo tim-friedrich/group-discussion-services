@@ -13,14 +13,6 @@ RSpec.describe ResearchInstitutesController, :type => :controller do
   let(:valid_session) { {} }
 
 
-  describe "GET index" do
-    it "assigns all research_institutes as @research_institutes" do
-      research_institute = ResearchInstitute.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:research_institutes).should eq([research_institute])
-    end
-  end
-
   describe "GET show" do
     it "assigns the requested research_institute as @research_institute" do
       research_institute = ResearchInstitute.create! valid_attributes

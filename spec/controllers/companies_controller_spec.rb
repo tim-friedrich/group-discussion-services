@@ -19,14 +19,6 @@ RSpec.describe CompaniesController, :type => :controller do
   # CompaniesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all companies as @companies" do
-      company = Company.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:companies).should eq([company])
-    end
-  end
-
   describe "GET show" do
     it "assigns the requested company as @company" do
       company = Company.create! valid_attributes
