@@ -1,7 +1,6 @@
 GDS::Application.routes.draw do
   resources :companies
   resources :research_institutes
-  resources :contacts
   resources :votes, only: [:create]
   resources :dislikes, only: [:create]
   resources :likes, only: [:create]
