@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Group Discussion Services</title>
+  <title><%= yield(:title).presence || SETTINGS[:default_title] %></title>
   <meta charset="UTF-8">
 
   <%= stylesheet_link_tag    "application", media: "all" %>
