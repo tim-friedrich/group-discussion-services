@@ -46,7 +46,7 @@ class @VideoAid extends VisualAid
 
         mediaElement.addEventListener('pause', (e) =>
           @send_command('pause') if @can_control
-          @player.play() if @can_start
+          @player.play() if @can_start && !@can_control
         )
         mediaElement.addEventListener('timeupdate', (e) =>
           if @can_control

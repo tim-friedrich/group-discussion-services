@@ -41,4 +41,4 @@ class @VisualAid
     )
 
   run_command: (command, params) =>
-    @commands[command](params)
+    @commands[command](params) 
