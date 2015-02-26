@@ -10,13 +10,13 @@
 //= require date
 //= require date/de-DE
 //= require date/extras
+//= require mediaelement_rails
 
 // BOWER
 //= require jquery.cookie/jquery.cookie
 //= require mustache
 //= require bootstrap-datepicker
 //= require Chart.js/Chart.js
-//= require mediaelement
 
 // VENDOR
 //= require jquery.caret

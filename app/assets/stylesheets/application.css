@@ -1,9 +1,9 @@
 /*
  * ASSET GEMS
  *= require bootstrap
+ *= require mediaelement_rails
  *
  * BOWER
- *= require mediaelement
  *= require bootstrap-datepicker
  *
  * VENDOR

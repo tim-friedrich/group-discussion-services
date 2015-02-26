@@ -55,6 +55,7 @@ gem 'jquery-ui-rails'
 gem 'jquery.fileupload-rails'
 gem "nested_form" # jquery
 gem 'datejs-rails'  # syntactic sugar for JavaScript Date
+gem 'mediaelement_rails' # js music and video player
 
 
 # # #
