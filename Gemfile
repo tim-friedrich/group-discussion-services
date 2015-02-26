@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.2.0'
 
+# # #
+# GENERAL
+
 gem 'rails', '4.2.0'
 gem "thin" # webserver
 gem 'pg'
@@ -10,33 +13,60 @@ gem "nested_form" # nested form support
 gem 'devise-i18n'
 gem 'jbuilder', '~> 1.2' # json apis https://github.com/rails/jbuilder
 gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers"
+gem 'rake'
+gem 'dotenv'
+gem "paperclip"
+gem 'will_paginate-bootstrap'
+gem 'will-paginate-i18n'
+gem 'prawn-rails'        # pdf generation
+gem 'sdoc', group: 'doc', require: false
+# gem 'therubyracer', platforms: :ruby
+
+# # #
+# AUTH
 
 gem 'devise' # user management
 gem 'devise_invitable' # user invitations
 gem 'cancan' # authorization
 
+
+# # #
+# WEBSOCKETS
+
 gem "private_pub"
 gem 'faye-rails' # necessary for faye.js in asset pipline
 
+
+# # #
+# ASSETS
+
 gem 'sass-rails', '~> 4.0.5' # TODO
 gem 'bootstrap-sass', '3.1.1.0' # TODO (using css @import syntax)
-gem 'will_paginate-bootstrap'
-gem 'will-paginate-i18n'
-
 gem 'coffee-rails', '~> 4.1.0'
-gem 'jquery-rails'
 gem 'uglifier', '~> 2.7.0'
 
+
+# # #
+# JAVASCRIPT
+
+gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery.fileupload-rails'
-gem 'datejs-rails'       # syntactic sugar for JavaScript Date
-gem 'prawn-rails'        # pdf generation
+gem 'datejs-rails'  # syntactic sugar for JavaScript Date
+
+
+# # #
+# DEPLOYMENT
 
 gem 'whiskey_disk', github: 'johnae/whiskey_disk', branch: 'develop'
-gem 'rake'
-gem 'foreman'
-gem "paperclip"
 
+group :production do
+  gem 'rails_12factor' # heroku
+  # gem 'newrelic_rpm' # performance monitoring
+end
+
+# # #
+# DEVELOMPENT / TEST
 
 group :development, :test do
   gem 'database_cleaner'
@@ -57,14 +87,3 @@ group :test do
   gem 'libnotify', '0.8.0'
   # gem 'simplecov', require: false # test coverage report
 end
-
-group :doc do
-  gem 'sdoc', require: false
-end
-
-group :production do
-  gem 'rails_12factor' # gem for heroku
-end
-
-# gem 'newrelic_rpm' # performance monitoring
-# gem 'therubyracer', platforms: :ruby
