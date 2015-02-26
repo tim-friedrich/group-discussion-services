@@ -1,5 +1,4 @@
 @init_edit_discussion = (discussion_id) ->
-
   @fileInput   = $('#fileupload');
   submitButton = $('.fileinput-button');
   progressBar  = $("<div class='bar'></div>");
@@ -71,4 +70,6 @@
     return false
   )
 
-
+$ ->
+  $('.datepicker').datepicker
+    startView: 2

@@ -1,4 +1,3 @@
-
 @initHome = () =>
   @$teasers = $($(".teaser").find('.teaser-div'))
   @$arrows = $(".separate-arrow")

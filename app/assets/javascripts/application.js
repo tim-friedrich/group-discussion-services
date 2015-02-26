@@ -24,6 +24,9 @@
 //= require progress-polyfill
 
 // APP
-//= require_tree .
+//= require forms
+//= require home
+//= require surveys
+//= require_tree discussion_client
 
 
