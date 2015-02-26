@@ -17,6 +17,7 @@ GDS::Application.routes.draw do
   root 'static_pages#home'
 
   get '/imprint' => 'static_pages#imprint'
+  get '/globalsign.html' => 'static_pages#globalsign'
   get '/contact_us' => 'static_pages#contact_us'
 
   get '/survey' => 'surveys#new'
