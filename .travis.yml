@@ -9,5 +9,6 @@ addons:
 before_script:
 - cp config/database.yml.travis config/database.yml
 - psql -c 'create database travis_ci_test;' -U postgres
+- bundle exec dotenv rake db:test:prepare
 
 script: "bundle exec dotenv rspec"
