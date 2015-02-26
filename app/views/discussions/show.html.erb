@@ -1,7 +1,8 @@
+<% title 'Diskussion' %>
 <%= javascript_include_tag "private_pub" %>
 
 <div id="discussion">
-  
+
   <div class="toolbox"></div>
 
   <div id="moderator">
@@ -23,7 +24,7 @@
           <div class="emoticon_prev" ></div>
         </div>
         <div contentEditable="true" class="form-control" id="new_argument_content"></div>
-        
+
       </div>
       <%= f.hidden_field :discussion_id, value: @discussion.id %>
       <div id="submit_buttons">

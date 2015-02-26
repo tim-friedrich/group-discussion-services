@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'integration/integration_helpers'
+
 
 describe 'discussion', js: true do
   let(:discussion){ create(:discussion) }

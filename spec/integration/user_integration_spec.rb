@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'integration/integration_helpers'
+
 
 describe 'User' do
   def user_sign_up
@@ -31,7 +31,7 @@ describe 'User' do
 
     describe "invitations" do
       before do
-        
+
       end
 
       it "should be possible to signup as invited user" do
@@ -73,7 +73,7 @@ describe 'User' do
         expect( discussions_user.name ).not_to eq "Unbekannt"
       end
     end
-    
+
 
   end
 

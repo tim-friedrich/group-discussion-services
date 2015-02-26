@@ -3,11 +3,6 @@ require "spec_helper"
 
 RSpec.describe ResearchInstitutesController, :type => :routing do
   describe "routing" do
-
-    it "routes to #index" do
-      get("/research_institutes").should route_to("research_institutes#index")
-    end
-
     it "routes to #new" do
       get("/research_institutes/new").should route_to("research_institutes#new")
     end

@@ -1,6 +1,4 @@
 GDS::Application.configure do
-
-
   config.action_mailer.default_url_options = { :host => ENV['DOMAIN'] }
   Paperclip.options[:command_path] = '/opt/local/bin'
 

@@ -1,0 +1,130 @@
+.teaser{
+  background-color: #e1e1e1;
+  padding: 20px 0px 0px 0px;
+  height: 420px;
+  #teaser-container {
+    width: 1024px;
+    height: 360px;
+    margin-bottom: 16px;
+
+    .underlay{
+      height: 360px;
+      width: 62px;
+      float: left;
+      #nav-left, #nav-right{
+        width: 63px;
+        height: 360px;
+        margin: 0px ! important;
+      }
+    }
+    .underlay:hover{
+      background-color: #7eb11c;
+      opacity: 0.6;
+    }
+    #nav-left{
+      background-image: image_url('home/arrow_left.png');
+    }
+    #nav-right{
+      background-image: image_url('home/arrow_right.png');
+    }
+    .disabled:hover{
+      background-color: transparent !important;
+    }
+    #nav-left{
+      float: left;
+    }
+    #nav-right{
+      float: right;
+    }
+    .teaser-div {
+      width: 0px;
+      height: 360px;
+      float: left;
+      overflow: hidden;
+
+      .teaser-width{
+        width: 900px;
+      }
+      background-color: #fbfbfb;
+
+      img {
+        padding: 0px;
+        height: 360px;
+        width: 540px;
+        float: left;
+      }
+      .teaser-description {
+        padding: 20px;
+        width: 354px;
+        height: 340px;
+        float: right;
+      }
+      .teaser-left, .teaser-right{
+        width: 450px;
+        height: 360px;
+        float: left;
+        padding: 10px 30px 30px 30px;
+      }
+      .teaser-description, .teaser-right, .teaser-left{
+        background-color: #fbfbfb !important;
+      }
+    }
+  }
+}
+
+#separation-arrow-container{
+  height: 16px;
+  width: 1024px;
+
+}
+
+.prev-images{
+  height: 130px;
+  width: 820px;
+  p{
+    letter-spacing: 0.16em;
+  }
+  div{
+    float: left;
+    margin: 10px 17px;
+    p{
+      text-align: center;
+    }
+  }
+
+  #image-overlay{
+    background-color: #7eb11c;
+    width: 130px;
+    height: 130px;
+    opacity: 0;
+    margin: 0px ! important;
+  }
+  .prev-image{
+    width: 130px;
+    margin: 0px ! important;
+    height: 130px;
+  }
+  .company-prev{
+    background: transparent image_url("home/companies_prev.jpg") no-repeat;
+    background-size: contain;
+  }
+  .our-service-prev{
+    background: transparent image_url("home/our_service_prev.jpg") no-repeat;
+    background-size: contain;
+  }
+  .research-institute-prev{
+    background: transparent image_url("home/research_institutes_prev.jpg") no-repeat;
+    background-size: contain;
+  }
+  .moderator-prev{
+    background: transparent image_url("home/moderators_prev.jpg") no-repeat;
+    background-size: contain;
+  }
+  .proband-prev{
+    background: transparent image_url("home/probands_prev.jpg") no-repeat;
+    background-size: contain;
+  }
+  .prev-image:hover #image-overlay{
+    opacity: 0.6;
+  }
+}

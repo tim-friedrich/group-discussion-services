@@ -1,7 +1,6 @@
 GDS::Application.routes.draw do
-  resources :companies
-  resources :research_institutes
-  resources :contacts
+  resources :companies, only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :research_institutes, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :votes, only: [:create]
   resources :dislikes, only: [:create]
   resources :likes, only: [:create]
@@ -12,9 +11,10 @@ GDS::Application.routes.draw do
   resource :visual_aids, only: [:create]
 
   devise_for :users, :controllers => { :invitations => 'users_invitations', :registrations => "registrations" }
-  resources :users
+  resources :users, only: [:new, :create, :show, :update, :destroy]
+  get '/profile' => 'users#profile'
 
-	root 'static_pages#home'
+  root 'static_pages#home'
 
   get '/imprint' => 'static_pages#imprint'
   get '/contact_us' => 'static_pages#contact_us'
@@ -23,7 +23,6 @@ GDS::Application.routes.draw do
   post '/survey' => 'surveys#create'
   get '/survey/result' => 'surveys#show', as: 'survey_result'
 
-  get '/profile' => 'users#profile'
   post '/contact_us/send_mail' => 'static_pages#send_contact_mail'
 
   post '/discussions/:id/leave' => 'discussions#leave'

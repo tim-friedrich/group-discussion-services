@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'integration/integration_helpers'
+
 
 describe 'research institute' do
   def register_research_institute

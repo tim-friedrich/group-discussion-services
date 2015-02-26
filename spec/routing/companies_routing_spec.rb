@@ -3,11 +3,6 @@ require "spec_helper"
 
 RSpec.describe CompaniesController, :type => :routing do
   describe "routing" do
-
-    it "routes to #index" do
-      get("/companies").should route_to("companies#index")
-    end
-
     it "routes to #new" do
       get("/companies/new").should route_to("companies#new")
     end

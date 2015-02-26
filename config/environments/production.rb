@@ -92,5 +92,12 @@ GDS::Application.configure do
       :authentication       => 'plain'
   }
 
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[Exception] ",
+      :sender_address => %{"GDS" <exception@group-discussion-services.de>},
+      :exception_recipients => ["friedrich@psychomatix.de"],
+    }
+
   Paperclip.options[:command_path] = "/usr/local/bin/" # TODO: Production image Magic path
 end
