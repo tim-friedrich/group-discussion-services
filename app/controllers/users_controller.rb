@@ -1,21 +1,14 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, only: [:show, :edit, :update, :destroy, :index]
+  before_action :set_user, only: [:show, :update, :destroy]
+  before_filter :authenticate_user!, except: [:new]
 
 
   load_and_authorize_resource
 
 
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-  end
-
   # GET /users/1
   # GET /users/1.json
   def show
-
   end
 
   def profile
@@ -40,10 +33,6 @@ class UsersController < ApplicationController
     sign_out
     reset_session
     @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
   end
 
   # PATCH/PUT /users/1
