@@ -12,7 +12,7 @@ class @VideoAid extends VisualAid
     @visual_aid =
       """
         <div id="visual_aid_container">
-          <video src="#{ @url }" id="visual_aid_video" class="mejs-player"></video>
+          <video src="#{ @url }" id="visual_aid_video" class="mejs-player center-block"></video>
         </div>
       """
     @can_control = @discussion.current_user.is_moderator()

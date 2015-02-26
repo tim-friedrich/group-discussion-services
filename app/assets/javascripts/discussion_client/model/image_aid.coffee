@@ -18,7 +18,6 @@ class @ImageAid extends VisualAid
 
     image = @container.find('img')
 
-    image.css('max-height', @container.height()+'px')
     image.css('max-width', @container.width()+'px')
 
     image.load(() =>
