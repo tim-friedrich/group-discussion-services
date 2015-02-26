@@ -31,7 +31,7 @@
 
 //= require mustache
 //= require bootstrap-datepicker
-
+//= require emoticons
 //= require progress-polyfill
 
 //= require_tree .
