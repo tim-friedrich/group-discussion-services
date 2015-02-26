@@ -72,11 +72,6 @@ RSpec.describe DiscussionsController, :type => :controller do
           assigns(:discussion).should be_a(Discussion)
           assigns(:discussion).should be_persisted
         end
-
-        it "redirects to the user profile" do
-          post :create, {:discussion => valid_attributes}, valid_session
-          response.should redirect_to profile_path
-        end
       end
 
       describe "with invalid params" do
