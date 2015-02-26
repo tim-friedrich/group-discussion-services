@@ -25,8 +25,6 @@ class Ability
     # Every user
 
     can :manage, User, id: user.id
-    cannot :index, User
-    cannot :index, ResearchInstitute
 
     #TODO: improve rights for Contacts
     can [ :manage ], Contact
