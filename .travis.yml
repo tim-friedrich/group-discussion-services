@@ -11,4 +11,4 @@ before_script:
 - psql -c 'create database travis_ci_test;' -U postgres
 - bundle exec dotenv rake db:test:prepare
 
-script: "bundle exec dotenv rspec"
+script: "xvfb-run bundle exec dotenv rspec"
