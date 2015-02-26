@@ -8,8 +8,9 @@ class @VisualAid
   open: () =>
     $('#discussion').find('#moderator').hide()
     $('#visual_aid_container').remove()
-    $('.chat_container').prepend(@visual_aid)
     
+    $('.chat_container').prepend(@visual_aid)
+    @container = $('#visual_aid_container')
 
     if @discussion.current_user.is_moderator()
       $('#visual_aid_container').prepend('<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>')
