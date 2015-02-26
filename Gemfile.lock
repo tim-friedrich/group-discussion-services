@@ -406,6 +406,7 @@ DEPENDENCIES
   libnotify (= 0.8.0)
   mediaelement_rails
   nested_form
+  nokogiri
   paperclip
   pg
   prawn-rails

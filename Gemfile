@@ -19,6 +19,7 @@ gem "paperclip"
 gem 'will_paginate-bootstrap'
 gem 'will-paginate-i18n'
 gem 'prawn-rails'        # pdf generation
+gem 'nokogiri'
 gem 'sdoc', group: 'doc', require: false
 # gem 'therubyracer', platforms: :ruby
 

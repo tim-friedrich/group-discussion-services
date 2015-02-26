@@ -1,0 +1,8 @@
+form {
+  .error.clearfix:before, .error.clearfix:after {
+      display: inline;
+    }
+  .error .help-inline {
+    color: #ee0000;
+  }
+}
