@@ -15,7 +15,7 @@
 //= require jquery.cookie/jquery.cookie
 //= require mustache
 //= require bootstrap-datepicker
-//= require Chart
+//= require Chart.js/Chart.js
 //= require mediaelement
 
 // VENDOR
@@ -27,6 +27,6 @@
 //= require forms
 //= require home
 //= require surveys
-//= require_tree discussion_client
+//= require_tree ./discussion_client
 
 
