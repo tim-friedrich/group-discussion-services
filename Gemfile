@@ -59,14 +59,16 @@ gem 'mediaelement_rails' # js music and video player
 
 
 # # #
-# DEPLOYMENT
+# DEPLOYMENT / PRODUCTION
 
 gem 'whiskey_disk', github: 'johnae/whiskey_disk', branch: 'develop'
+gem 'exception_notification'
 
 group :production do
   gem 'rails_12factor' # heroku
   # gem 'newrelic_rpm' # performance monitoring
 end
+
 
 # # #
 # DEVELOMPENT / TEST
