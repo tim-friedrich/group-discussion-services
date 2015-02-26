@@ -1,6 +1,6 @@
 GDS::Application.routes.draw do
   resources :companies
-  resources :research_institutes
+  resources :research_institutes, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :votes, only: [:create]
   resources :dislikes, only: [:create]
   resources :likes, only: [:create]

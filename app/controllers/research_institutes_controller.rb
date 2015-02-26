@@ -7,12 +7,6 @@ class ResearchInstitutesController < ApplicationController
   load_and_authorize_resource
 
 
-  # GET /research_institutes
-  # GET /research_institutes.json
-  def index
-    @research_institutes = ResearchInstitute.all
-  end
-
   # GET /research_institutes/1
   # GET /research_institutes/1.json
   def show
@@ -24,7 +18,6 @@ class ResearchInstitutesController < ApplicationController
     @research_institute.contact = Contact.new
     @deputy = User.new
     @research_institute.deputy = @deputy
-
   end
 
   # GET /research_institutes/1/edit
@@ -34,8 +27,6 @@ class ResearchInstitutesController < ApplicationController
   # POST /research_institutes
   # POST /research_institutes.json
   def create
-
-
     respond_to do |format|
       if @research_institute.save
         sign_in @research_institute.deputy
@@ -72,22 +63,22 @@ class ResearchInstitutesController < ApplicationController
     end
   end
 
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_research_institute
-      @research_institute = ResearchInstitute.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def research_institute_params
-      params.require(:research_institute).permit(:name, :deputy,
-        deputy_attributes: [:firstname, :lastname, :email, :password, :password_confirmation, :remember_token, :discussions, :gender, :birthday, :zipcode],
-        contact_attributes: [:street, :postalcode, :town, :email, :telephone])
-    end
+  def set_research_institute
+    @research_institute = ResearchInstitute.find(params[:id])
+  end
 
-    def new_research_institute
-      @research_institute = ResearchInstitute.new(research_institute_params)
-      @research_institute.users << @research_institute.deputy
-      @research_institute.deputy.role = Role.where(name: "moderator").first
-    end
+  def research_institute_params
+    params.require(:research_institute).permit(:name, :deputy,
+      deputy_attributes: [:firstname, :lastname, :email, :password, :password_confirmation, :remember_token, :discussions, :gender, :birthday, :zipcode],
+      contact_attributes: [:street, :postalcode, :town, :email, :telephone])
+  end
+
+  def new_research_institute
+    @research_institute = ResearchInstitute.new(research_institute_params)
+    @research_institute.users << @research_institute.deputy
+    @research_institute.deputy.role = Role.where(name: "moderator").first
+  end
 end
