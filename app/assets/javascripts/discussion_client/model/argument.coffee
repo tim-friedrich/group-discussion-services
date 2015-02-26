@@ -57,7 +57,19 @@ class @Argument
         </div>
       """
     if @type == 'observer'
-      @dom_element = $(@dom_element).addClass('observer_argument')
+      @dom_element =
+      """
+      <div class="argument moderator_argument">
+          <div class="user">
+            <div class="name">#{ @user.name }:</div>
+          </div>
+          <div class="right-argument">
+            <div class="argument_content">
+              #{ $.emoticons.replace(@content) }
+            </div>
+          </div>
+        </div>
+      """
 
   is_voted: () =>
     return @votes.filter((vote) => vote.user_id == @discussion.current_user.id)?.length >= 1

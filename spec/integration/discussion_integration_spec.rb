@@ -20,7 +20,7 @@ describe 'discussion', js: true do
   end
   def send_argument
     page.execute_script("
-            $('#argument_content').text('test')
+            $('#new_argument_content').text('test')
           ")
     page.find('#new_argument_button').click
   end
@@ -39,7 +39,7 @@ describe 'discussion', js: true do
       describe "post new argument" do
         it "should post a new argument" do
           send_argument
-          expect( page ).to have_content "test"
+          expect( find('#arguments') ).to have_content "test"
         end
 
         it "should clear the argument form after submit" do
@@ -48,21 +48,23 @@ describe 'discussion', js: true do
               $('#argument_content').text('test')
             ")
           page.find('#new_argument_button').click
-          expect( find('#argument_content') ).not_to have_content "test"
+          expect( find('#new_argument_content') ).not_to have_content "test"
         end
       end
       describe "user status" do
         it "should list the confirmed user" do
-          expect( find('#users') ).to have_content @user.username(discussion)
+          expect( find('#probands-list') ).to have_content @user.username(discussion)
         end
         it "should be listed as online when one is in discussion" do
-          page.find_by_id("#{ @user.id }").find("img")['src'].should eq "/assets/online.jpg"
+          page.find_by_id(@user.id).should_not have_css(".offline")
+          expect( page.find_by_id(@user.id)[:class].include?("offline")).to eq false
         end
         it "should be listed as offline when one is in discussion" do
-          page.find_by_id("#{ @confirmed_users[3].user.id }").find("img")['src'].should eq "/assets/offline.jpg"
+          expect( page.find_by_id(@confirmed_users[3].user.id)[:class].include?("offline")).to eq true
+          #page.find_by_id(@confirmed_users[3].user.id).should have_css(".offline")
         end
         it "should not list the unconfirmed user" do
-          expect( find('#users') ).not_to have_content @unconfirmed_user.username(discussion)
+          expect( find('#probands-list') ).not_to have_content @unconfirmed_user.username(discussion)
         end
       end
 
@@ -73,7 +75,7 @@ describe 'discussion', js: true do
       it "should not possible to see observer arguments" do
         argument = create(:observer_argument, discussion: discussion)
         visit discussion_path(discussion)
-        expect( page.find("#discussion_chat") ).not_to have_content(argument.content)
+        expect( page.find("#arguments") ).not_to have_content(argument.content)
       end
     end
 
@@ -98,7 +100,7 @@ describe 'discussion', js: true do
 
     it "should post a new question" do
       page.execute_script("
-            $('#argument_content').text('important question')
+            $('#new_argument_content').text('important question')
           ")
       page.find('.dropdown-toggle').click
       element = page.find('#new_question_button', :visible=>false)
@@ -112,7 +114,7 @@ describe 'discussion', js: true do
     it "should be possible to see observer arguments" do
       argument = create(:observer_argument, discussion: discussion, user: @observer )
       visit discussion_path(discussion)
-      expect( page.find("#discussion_chat") ).to have_content(argument.content)
+      expect( page.find("#arguments") ).to have_content(argument.content)
     end
 
     # TODO Visual aid tests
@@ -126,7 +128,7 @@ describe 'discussion', js: true do
     describe "new argument" do
       it "should be visible" do
         send_argument
-        expect( page.find("#discussion_chat") ).to have_content('test')
+        expect( page.find("#arguments") ).to have_content('test')
       end
     end
   end
