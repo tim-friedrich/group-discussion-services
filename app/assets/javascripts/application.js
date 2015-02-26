@@ -1,9 +1,15 @@
-// JQUERY
+// ASSET GEMS
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require jquery.fileupload
-//= require jquery-ui
+//= require bootstrap
+//= require faye
+//= require private_pub
+//= require date
+//= require date/de-DE
+//= require date/extras
 
 // BOWER
 //= require jquery.cookie/jquery.cookie
@@ -11,14 +17,6 @@
 //= require bootstrap-datepicker
 //= require Chart
 //= require mediaelement
-
-// GEMS
-//= require bootstrap
-//= require faye
-//= require private_pub
-//= require date
-//= require date/de-DE
-//= require date/extras
 
 // VENDOR
 //= require jquery.caret
