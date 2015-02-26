@@ -14,12 +14,12 @@
 //= require date
 //= require date/de-DE
 //= require date/extras
-//= require mediaelement_rails
 
 // BOWER
 //= require mustache
 //= require bootstrap-datepicker
 //= require Chart
+//= require mediaelement
 
 // VENDOR
 //= require emoticons

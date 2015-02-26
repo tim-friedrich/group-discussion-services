@@ -216,9 +216,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mediaelement_rails (0.8.0)
-      jquery-rails (>= 1.0)
-      railties (>= 3.1)
     method_locator (0.0.4)
     method_source (0.8.2)
     methodfinder (2.0.0)
@@ -403,7 +400,6 @@ DEPENDENCIES
   jquery-ui-rails
   jquery.fileupload-rails
   libnotify (= 0.8.0)
-  mediaelement_rails
   nested_form
   paperclip
   pg
