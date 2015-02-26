@@ -2,10 +2,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery_nested_form
-//= require jquery.caret
 //= require jquery.fileupload
 //= require jquery-ui
+
+// BOWER
 //= require jquery.cookie/jquery.cookie
+//= require mustache
+//= require bootstrap-datepicker
+//= require Chart
+//= require mediaelement
 
 // GEMS
 //= require bootstrap
@@ -15,13 +20,8 @@
 //= require date/de-DE
 //= require date/extras
 
-// BOWER
-//= require mustache
-//= require bootstrap-datepicker
-//= require Chart
-//= require mediaelement
-
 // VENDOR
+//= require jquery.caret
 //= require emoticons
 //= require progress-polyfill
 
