@@ -60,6 +60,11 @@ class User < ActiveRecord::Base
     "#{firstname} #{lastname}"
   end
 
+  def moderated_discussions
+    # TODO do things like this on SQL level
+    is_moderator? ? discussions.select{ |d| d.moderator == self } : []
+  end
+
   def enter_discussion(discussion)
     DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.enter_discussion
   end
