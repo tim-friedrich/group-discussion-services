@@ -10,5 +10,6 @@ before_script:
 - cp config/database.yml.travis config/database.yml
 - psql -c 'create database travis_ci_test;' -U postgres
 - bundle exec dotenv rake db:test:prepare
+- bundle exec dotenv rackup private_pub.ru -E production
 
 script: "xvfb-run bundle exec dotenv rspec"
