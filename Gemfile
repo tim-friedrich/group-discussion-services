@@ -30,7 +30,6 @@ gem 'uglifier', '~> 2.7.0'
 gem 'jquery-ui-rails'
 gem 'jquery.fileupload-rails'
 gem 'datejs-rails'       # syntactic sugar for JavaScript Date
-gem 'chart-js-rails'     # js charts api
 gem 'mediaelement_rails' # js music and video player
 gem 'prawn-rails'        # pdf generation
 
