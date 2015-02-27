@@ -25,8 +25,6 @@ class Ability
     # Every user
 
     can :manage, User, id: user.id
-    cannot :index, User
-    cannot :index, ResearchInstitute
 
     #TODO: improve rights for Contacts
     can [ :manage ], Contact
@@ -69,8 +67,11 @@ class Ability
         visual_aid.discussion.moderator.id == user.id
       end
       can [ :manage ], Company
-    end
 
+      can [ :show ], User do |other_user|
+        user.moderated_discussions.map(&:users).flatten.include? other_user
+      end
+    end
 
   end
 end
