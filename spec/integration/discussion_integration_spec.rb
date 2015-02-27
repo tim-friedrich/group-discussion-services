@@ -132,10 +132,14 @@ describe 'discussion', js: true do
       end
     end
   end
-
+=begin
   describe "discussion edit" do
 
     before do
+      @research_institute = create(:research_institute)
+      @research_institute.deputy = discussion.moderator
+      discussion.moderator.research_institutes << @research_institute
+      @research_institute.save()
       login_as discussion.moderator
       @user = FactoryGirl.attributes_for(:user)
     end
@@ -143,15 +147,24 @@ describe 'discussion', js: true do
     def invite_proband
       visit edit_discussion_path(discussion)
       click_link 'Teilnehmer'
+      click_link 'Probanden Einladen'
       page.execute_script("
-            $('#user_email').val('#{ "@user[:email]" }')
+            $('#user_email').val('#{ @user[:email] }');
+            $('#new_proband').submit();
           ")
-      page.find('#submit_new_proband').click
+      click_link('Einladung senden')
     end
-=begin
+
     describe "user invitations" do
       it "should create a new discussions_user" do
         expect { invite_proband() }.to change(DiscussionsUser, :count).by(1)
+      end
+      it "should create a new user" do
+        expect { invite_proband() }.to change(User, :count).by(1)
+      end
+      it "should have the research_institute under the new users research_institutes" do
+        invite_proband
+        expect( User.where(email: @user[:email]).first.research_institutes.count ).to eq 1
       end
 
       it "have the DiscussionsUser name Unbekannt for new users" do
@@ -180,6 +193,6 @@ describe 'discussion', js: true do
         expect( discussion_user.name ).not_to eq "Unbekannt"
       end
     end
-=end
   end
+=end
 end

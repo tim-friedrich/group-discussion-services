@@ -89,7 +89,17 @@ class User < ActiveRecord::Base
   end
 
   def is_deputy?
-    self.role == Role.where(name: 'deputy').first
+    for research_institute in self.research_institutes
+      return true if deputy_institute
+    end
+    return false
+  end
+
+  def deputy_institute
+    for research_institute in self.research_institutes
+      return research_institute if research_institute.deputy.id == self.id
+    end
+    return false
   end
 
   def is_moderator?

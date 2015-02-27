@@ -20,6 +20,9 @@ class UsersInvitationsController < Devise::InvitationsController
     respond_to do |format|
       format.js do
         if invite_params['discussion_id']
+          if current_user.is_deputy?
+            user.research_institutes << current_user.deputy_institute()
+          end
           @discussion = Discussion.find(invite_params[:discussion_id])
           @discussion.users << user
           @discussions_user = @discussion.discussions_users.last()

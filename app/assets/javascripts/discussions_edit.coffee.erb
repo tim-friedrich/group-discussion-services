@@ -10,6 +10,40 @@
     $(event.target).parent().parent().remove()
   )
 
+  $('#users > div').hide()
+  $('#users > div:first').show()
+  $('#probands_nav').find('li').click( (event) =>
+    event.preventDefault()
+    $('#probands_nav').find('.active').removeClass('active')
+    $(event.target).parent().addClass('active')
+    $('#users > div').hide()
+    $('#users > div').removeClass('active')
+    $("##{ $(event.target).data('id') }").show()
+    $("##{ $(event.target).data('id') }").addClass('active')
+  )
+
+  $(document).on "ajax:success", "form", (xhr, data, response) ->
+    if event.target.responseURL == "http://localhost:5000/users/invitation"  
+      $('.alert').remove()
+      $('.active').find('.active').find('.message').prepend(
+        """
+          <div class="alert alert-success" role="alert">Der Proband wurde erfolgreich zur Diskussion eingeladen.</div>
+        """)
+
+  $(document).on "ajax:error", "form", (xhr, data, response) ->
+    message = "Leider ist etwas schief gegangen. Bitte versuchen sie es später nocheinmal oder kontaktieren den Support. (#{ data.statusText })"
+    $('.alert').remove()
+    if event.target.responseURL == "http://localhost:5000/users/invitation"      
+      if data.status == 422
+        message = "Der Benutzer wurde bereits zur Diskussion hinzugefügt."
+
+    $('.active').find('.active').find('.message').prepend (
+      """
+        <div class="alert alert-danger" role="alert"> 
+          #{message}
+          </div>
+      """)
+
   @fileInput.fileupload(
     url:             '/visual_aids',
     type:            'POST',

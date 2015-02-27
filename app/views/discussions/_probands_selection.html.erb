@@ -1,0 +1,38 @@
+
+<ul class="nav nav-pills nav-stacked" id="probands_nav">
+  <li role="presentation" class="active"><a data-id="users_overview" href="#">Übersicht</a></li>
+  <li role="presentation"><a data-id="invite_probands" href="#">Probanden Einladen</a></li>
+  <li role="presentation"><a data-id="invite_observers" href="#">Beobachter einladen</a></li>
+</ul>
+
+<div id="users_overview">
+	<h2>Teilnehmer</h2>
+	<div class="message"></div>
+
+	<div class="probands_list">
+	  <%= render partial: "discussions_users/list_users", locals: { discussions_users: @probands, id: "probands", page_name: "probands_page" } %>
+	</div>
+
+	<h2>Beobachter</h2>
+
+	<div class="observers_list">
+	  <%= render partial: "discussions_users/list_users", locals: { discussions_users: @observers, id: "observers", page_name: "observers_page" } %>
+	</div>
+</div>
+
+<div id="invite_probands">
+	<div class="message"></div>
+
+	<h2>Einladen über Email Adresse</h2>
+	<p>Laden Sie Probanden über deren Email Adresse ein. Sie können auch Probanden die sich noch nicht registriert haben einladen.</p>
+
+	<%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "proband" } %>
+</div>
+
+<div id="invite_observers">
+	<div class="message"></div>
+	<h2>Einladen über Email Adresse</h2>
+	<p>Laden Sie Beobachter über deren Email Adresse ein. Sie können auch Beobachter die sich noch nicht registriert haben einladen.</p>
+	<%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "observer" } %>
+	
+</div>

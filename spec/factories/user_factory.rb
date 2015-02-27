@@ -28,6 +28,7 @@ FactoryGirl.define do
 
     factory :moderator do
       role { Role.where(name:'moderator').first }
+      
     end
   end
 end

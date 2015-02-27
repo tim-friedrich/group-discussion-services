@@ -86,7 +86,9 @@ class DiscussionsController < ApplicationController
         @user = User.new
       end
       format.js do
-
+        if @discussion.errors
+          render json: @discussion.errors
+        end
       end
     end
   end

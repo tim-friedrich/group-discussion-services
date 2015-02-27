@@ -15,26 +15,7 @@
   </div>
 
   <div class="tab-pane fade" id="users">
-    <h2>Teilnehmer</h2>
-
-    <%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "proband" } %>
-
-    <p>Laden Sie Probanden, die sich noch nicht registriert haben zu dieser Diskussion ein</p>
-
-    <p>Wählen Sie einen bereits von Ihnen eingeladenen Probanden aus</p>
-
-    <div class="probands_list">
-      <%= render partial: "discussions_users/list_users", locals: { discussions_users: @probands, id: "probands", page_name: "probands_page" } %>
-    </div>
-
-    <h2>Beobachter</h2>
-
-    <%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "observer" } %>
-    <p>Laden Sie Probanden, die sich noch nicht registriert haben zu dieser Diskussion ein</p>
-
-    <div class="observers_list">
-      <%= render partial: "discussions_users/list_users", locals: { discussions_users: @observers, id: "observers", page_name: "observers_page" } %>
-    </div>
+    <%= render 'probands_selection' %>
   </div>
 
 
@@ -57,9 +38,6 @@
     </div>
   </div>
 </div>
-
-
-<%= link_to 'Zurück', "/profile" %>
 
 
 <%= javascript_tag do %>
