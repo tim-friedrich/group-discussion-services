@@ -47,6 +47,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    respond_to do |format|
+      format.json do
+        if current_user.is_deputy?
+          @users = current_user.deputy_institute.users
+          puts current_user.deputy_institute.users.to_yaml
+        end
+      end
+    end
+
+  end
+
 
   private
 

@@ -17,9 +17,12 @@
 //= require mustache
 //= require bootstrap-datepicker
 //= require Chart.js/Chart.js
+
 //= require d3
 //= require nvd3
 //= require jquery-stickytabs
+//= require angularjs
+//= require ng-table
 
 // VENDOR
 //= require jquery.caret
@@ -33,4 +36,5 @@
 //= require_tree ./charts
 //= require_tree ./discussion_client
 //= require init
-
+//= require discussion_edit/app
+//= require_tree ./discussion_edit

@@ -12,6 +12,7 @@ GDS::Application.routes.draw do
   resource :visual_aids, only: [:create]
 
   devise_for :users, :controllers => { :invitations => 'users_invitations', :registrations => "registrations" }
+
   resources :users, only: [:create, :show, :update, :destroy]
   get '/profile' => 'users#profile'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

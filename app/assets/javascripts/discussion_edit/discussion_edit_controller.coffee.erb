@@ -1,0 +1,46 @@
+angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope", "$http", "ngTableParams", ($scope, $http, ngTableParams) ->
+
+  $http.get("/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
+    $scope.users = data
+
+    $scope.tableParams = new ngTableParams({
+      page: 1,            # show first page
+      count: 10           # count per page
+    }, {
+        total: $scope.users.length, # length of data
+        getData: ($defer, params) =>
+            $defer.resolve($scope.users.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+    })
+
+  ).error((data, status, headers, config) ->
+    prompt("Beim Laden der Seite ist ein fehler aufgetreten, bitte versuchen sie es später nocheinmal oder Kontaktieren Sie den technischen Support.")
+  )
+
+  
+  ###
+  usersApi = $resource('/users');
+    
+  $scope.tableParams = new ngTableParams({
+        page: 1,            # show first page
+        count: 10,          # count per page
+        sorting: {
+            name: 'asc'     # initial sorting
+        }
+    }, {
+        total: 0,           # length of data
+        getData: ($defer, params) ->
+            # ajax request to api
+            usersApi.get(params.url(), (data) ->
+                $timeout(() ->
+                    # update table params
+                    params.total(data.total);
+                    # set new data
+                    $defer.resolve(data.result);
+                , 500)
+            )
+        }
+    )###
+  
+  $scope.addProband = () ->
+    $scope.probands.push name: prompt()
+]
