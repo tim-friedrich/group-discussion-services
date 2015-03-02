@@ -11,7 +11,7 @@ GDS::Application.routes.draw do
   resource :visual_aids, only: [:create]
 
   devise_for :users, :controllers => { :invitations => 'users_invitations', :registrations => "registrations" }
-  resources :users, only: [:new, :create, :show, :update, :destroy]
+  resources :users, only: [:new, :create, :show, :update, :destroy, :index]
   get '/profile' => 'users#profile'
 
   root 'static_pages#home'

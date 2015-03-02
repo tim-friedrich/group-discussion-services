@@ -17,6 +17,8 @@
 //= require mustache
 //= require bootstrap-datepicker
 //= require Chart.js/Chart.js
+//= require angularjs
+//= require ng-table
 
 // VENDOR
 //= require jquery.caret
@@ -28,5 +30,5 @@
 //= require home
 //= require surveys
 //= require_tree ./discussion_client
-
-
+//= require discussion_edit/app
+//= require_tree ./discussion_edit

@@ -1,45 +1,46 @@
 <% title 'Diskussion bearbeiten' %>
-<h1>Diskussion bearbeiten</h1>
+<div ng-app="discussionEdit" ng-controller="DiscussionEditController">
+  <h1>Diskussion bearbeiten</h1>
 
-<!-- Nav tabs -->
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#general_informations" data-toggle="tab">Allgemeine Informationen</a></li>
-  <li><a href="#invite_users" data-toggle="tab">Teilnehmer</a></li>
-  <li><a href="#visual_aids" data-toggle="tab">Anschauungsmaterial</a></li>
-</ul>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#general_informations" data-toggle="tab">Allgemeine Informationen</a></li>
+    <li><a href="#invite_users" data-toggle="tab">Teilnehmer</a></li>
+    <li><a href="#visual_aids" data-toggle="tab">Anschauungsmaterial</a></li>
+  </ul>
 
-<!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane fade in active" id="general_informations">
-    <%= render 'form' %>
-  </div>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane fade in active" id="general_informations">
+      <%= render 'form' %>
+    </div>
 
-  <div class="tab-pane fade" id="invite_users">
-    <%= render 'probands_selection' %>
-  </div>
+    <div class="tab-pane fade" id="invite_users">
+      <%= render 'probands_selection' %>
+    </div>
 
 
-  <div class="tab-pane fade" id="visual_aids">
+    <div class="tab-pane fade" id="visual_aids">
 
-    <h2>Anschauungsmaterial</h2>
+      <h2>Anschauungsmaterial</h2>
 
-    <span class="btn btn-success fileinput-button disabled">
-      <i class="glyphicon glyphicon-plus"></i>
-      <span>Select files...</span>
-      <input id="fileupload" type="file" name="files[]" multiple="">
-      <input id="visual_aid_discussion_id" name="visual_aid[discussion_id]" type="hidden" value="<%= @discussion.id %>">
-    </span>
+      <span class="btn btn-success fileinput-button disabled">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Select files...</span>
+        <input id="fileupload" type="file" name="files[]" multiple="">
+        <input id="visual_aid_discussion_id" name="visual_aid[discussion_id]" type="hidden" value="<%= @discussion.id %>">
+      </span>
 
-    <div class="alert alert-danger hidden" id="not-supported-file" role="alert">Die der von Ihnen ausgewählte Dateityp wird nicht unterstützt. Bitte wählen sie eine Bilddatei oder Videodatei.</div>
-    <div class="visual_aids_list">
-      <% if @visual_aids != [] %>
-        <%= render partial: "visual_aids/list", locals: { visual_aids: @visual_aids } %>
-      <% end %>
+      <div class="alert alert-danger hidden" id="not-supported-file" role="alert">Die der von Ihnen ausgewählte Dateityp wird nicht unterstützt. Bitte wählen sie eine Bilddatei oder Videodatei.</div>
+      <div class="visual_aids_list">
+        <% if @visual_aids != [] %>
+          <%= render partial: "visual_aids/list", locals: { visual_aids: @visual_aids } %>
+        <% end %>
+      </div>
     </div>
   </div>
+
 </div>
-
-
 <%= javascript_tag do %>
   $(document).ready(function(){ init_edit_discussion(<%= @discussion.id %>) });
 <% end %>
