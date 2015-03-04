@@ -1,5 +1,12 @@
 <% title 'Profil' %>
-
+<% if current_user.is_proband? %>
+  <div class="panel panel-success">
+    <div class="panel-body">
+      <h2>Und Jetzt?</h2>
+      <p>Jetzt heißt es nur noch warten. Nachdem Sie die Registrierung nun erfolgreich abgeschlossen haben, werden wir Sie auf Basis der von Ihnen eingegebenen Daten zu ausgewählten Diskussionsrunden einladen. Damit Sie keine Diskussion verpassen werden wir sie über Einladungen per Email informiert. Für jede Diskussion an der Sie erfolgreich teilgenommen haben erhalten sie eine Aufwandsentschädigung in Höhe von 10 Euro.</p>
+    </div>
+  </div>
+<% end %>
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
   <li class="active"><a href="#discussions" data-toggle="tab">Diskussionen</a></li>
