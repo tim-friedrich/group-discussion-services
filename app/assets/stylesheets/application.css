@@ -10,8 +10,16 @@
  * BOWER
  *= require bootstrap-datepicker
  *= require nvd3
+ *= require ng-table
+ *= require nouislider
  *
  * APP
  *= require ./scaffolds
+
+ 
+ * VENDOR
+ *= require progress-polyfill
+ *
+ * APP # TODO switch to explicit @import syntax?
  *= require_tree .
  */

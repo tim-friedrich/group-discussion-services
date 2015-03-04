@@ -1,1 +1,1 @@
-angular.module('discussionEdit', ['ngTable'])
+angular.module('discussionEdit', ['ngTable', 'nouislider'])

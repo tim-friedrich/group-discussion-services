@@ -27,16 +27,24 @@
 	<p>Laden Sie Probanden über deren Email Adresse ein. Sie können auch Probanden die sich noch nicht registriert haben einladen.</p>
 
 	<%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "proband" } %>
+
+	<h2>Eigene Probanden Datenbank durchsuchen</h2>
+	<div class="panel panel-default">
+	  <div class="panel-body">
+	  <p><strong>Filter:</strong> {{tableParams.filter()|json}}
+		<div slider ng-from="ageSelection.from" ng-to="ageSelection.to" start=1 end=100 step=1  ></div>
+	  </div>
+	</div>
 	<button ng-click="addProband()">Auswahl zur Diskussion einladen</button>
 
-	<table ng-table="tableParams" class="table">
+	<table ng-table="tableParams" show-filter="true" class="table">
 	    <tr ng-repeat="user in $data">
-	      <td data-title="'Vorname'" sortable="firstname">{{ user.firstname }}</td>
-	      <td data-title="'Nachname'" sortable="lastname">{{ user.lastname }}</td>
-	      <td data-title="'Email'" sortable="email">{{ user.email }}</td>
-	      <td data-title="'Geschlecht'" sortable="gender">{{ user.gender }}</td>
-	      <td data-title="'Alter'" sortable="age">{{ user.age }}</td>
-	      <td data-title="'Postleitzahl'" sortable="zipcode">{{ user.zipcode }}</td>
+	      <td data-title="'Vorname'" sortable="'firstname'" filter="{ 'firstname': 'text' }">{{ user.firstname }}</td>
+	      <td data-title="'Nachname'" sortable="'lastname'">{{ user.lastname }}</td>
+	      <td data-title="'Email'" sortable="'email'">{{ user.email }}</td>
+	      <td data-title="'Geschlecht'" sortable="'gender'">{{ user.gender }}</td>
+	      <td data-title="'Alter'" sortable="'age'" >{{ user.age }}</td>
+	      <td data-title="'Postleitzahl'" sortable="'zipcode'">{{ user.zipcode }}</td>
 	    </tr>
 	</table>
 </div>
