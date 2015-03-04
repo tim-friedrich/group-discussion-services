@@ -7,8 +7,6 @@ class DiscussionsController < ApplicationController
   load_and_authorize_resource
 
 
-  # GET /discussions/1
-  # GET /discussions/1.json
   def show
     respond_to do | format |
       if !current_user and !current_user.is_part_of_discussion?(@discussion)
@@ -54,7 +52,6 @@ class DiscussionsController < ApplicationController
     render nothing: true
   end
 
-  # GET /discussions/new
   def new
     @discussion = Discussion.new
     @users = User.all
@@ -66,7 +63,6 @@ class DiscussionsController < ApplicationController
     end
   end
 
-  # GET /discussions/1/edit
   def edit
     @proband_role =  Role.where(name: 'proband').first()
     @observer_role =  Role.where(name: 'observer').first()
@@ -93,8 +89,6 @@ class DiscussionsController < ApplicationController
     end
   end
 
-  # POST /discussions
-  # POST /discussions.json
   def create
     respond_to do |format|
       if @discussion.save
@@ -109,8 +103,6 @@ class DiscussionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /discussions/1
-  # PATCH/PUT /discussions/1.json
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
@@ -123,8 +115,6 @@ class DiscussionsController < ApplicationController
     end
   end
 
-  # DELETE /discussions/1
-  # DELETE /discussions/1.json
   def destroy
     DiscussionsUser.where(discussion_id: @discussion.id).delete_all
     @discussion.destroy
@@ -134,11 +124,12 @@ class DiscussionsController < ApplicationController
     end
   end
 
-  # GET /discussions/1/evaluate
   def evaluate
-    respond_to do | format |
-      format.html{ }
-      format.pdf{ }
+    respond_to do |format|
+      format.html{}
+      format.pdf{
+        ensure_user_chart_images!
+      }
     end
   end
 
@@ -149,21 +140,25 @@ class DiscussionsController < ApplicationController
     end
   end
 
+
   private
-    # Use callbacks to share common setup or constraints between actions.
 
-    def set_discussion
-      @discussion = Discussion.find(params[:id])
-    end
+  def set_discussion
+    @discussion = Discussion.find(params[:id])
+  end
 
-    def new_discussion
-      @discussion = Discussion.new(discussion_params)
-      @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
-    end
+  def new_discussion
+    @discussion = Discussion.new(discussion_params)
+    @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def discussion_params
-      params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id, :company, :visual_aids, :summary)
-    end
+  def discussion_params
+    params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id, :company, :visual_aids, :summary)
+  end
 
+  def ensure_user_chart_images!
+    @discussion.users.each{ |user|
+      user.ensure_chart_image!
+    }
+  end
 end

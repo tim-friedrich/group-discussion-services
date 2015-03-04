@@ -12,3 +12,8 @@
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
+
+<% if @user.has_survey? %>
+  <h3>Persönlichkeit</h3>
+  <%= render partial: 'shared/charts/user', locals: { data: @user.survey.scale_values } %>
+<% end %>

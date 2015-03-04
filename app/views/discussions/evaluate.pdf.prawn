@@ -1,5 +1,5 @@
 
-prawn_document() do |pdf|
+prawn_document do |pdf|
   h1 = 25
   h2 = 20
   h3 = 15
@@ -13,12 +13,24 @@ prawn_document() do |pdf|
     pdf.text @discussion.summary
     pdf.start_new_page
 
-    if !@discussion.users.empty?
+    unless @discussion.users.empty?
       pdf.font_size(h2){ pdf.text "Probanden" }
       pdf.move_down 30
       probands = [ ["Benutzername", "Geschlecht", "Alter", "Postleitzahl"] ]
-      probands += @discussion.discussions_users.collect{ | user | [user.name , user.user.gender, user.user.age.to_s, user.user.zipcode]}
+      probands += @discussion.discussions_users.map{ |discussion_user|
+        [
+          discussion_user.name,
+          discussion_user.user.gender,
+          discussion_user.user.age.to_s,
+          discussion_user.user.zipcode
+        ]
+      }
       pdf.table(probands, :header => true)
+      @discussion.discussions_users.each{ |discussion_user|
+        if discussion_user.user.has_survey?
+          pdf.image "data/charts/user/#{discussion_user.user.id}.png", :scale => 0.4
+        end
+      }
     end
 
     pdf.start_new_page

@@ -5,6 +5,7 @@
  *
  * BOWER
  *= require bootstrap-datepicker
+ *= require nvd3
  *
  * VENDOR
  *= require progress-polyfill
