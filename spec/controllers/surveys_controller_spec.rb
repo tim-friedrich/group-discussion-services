@@ -62,6 +62,13 @@ RSpec.describe SurveysController, :type => :controller do
         expect( json['survey']['statistics'] ).to have_key 'gender'
         expect( json['survey']['statistics'] ).to have_key 'age'
       end
+
+      it 'generates a survey chart for the user' do
+        FileUtils.rm_rf Rails.root.join('data', 'test', 'charts', 'user')
+        FileUtils.mkdir_p Rails.root.join('data', 'test', 'charts', 'user')
+        post :create, survey: { results: SurveyResult.new.results }
+        expect( User.last.has_chart_image? ).to be true
+      end
     end
   end
 end

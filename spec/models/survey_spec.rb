@@ -71,4 +71,12 @@ RSpec.describe Survey, :type => :model do
       expect( survey.gender_and_age.size ).to eq 2
     end
   end
+
+  describe '#scale_values' do
+    it 'returns an array of all scale in the order of SCALES' do
+      expect( survey.scale_values ).to be_a Array
+      expect( survey.scale_values.size ).to eq 9
+      expect( survey.scale_values[0] ).to be_a Integer
+    end
+  end
 end

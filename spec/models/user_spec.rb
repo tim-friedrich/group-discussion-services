@@ -247,4 +247,63 @@ describe User do
       @user.is_staff?.should be_falsey
     end
   end
+
+
+  # # #
+  # charts
+
+  describe "charts methods" do
+    before do
+      FileUtils.rm_rf Rails.root.join('data', 'test', 'charts', 'user')
+      FileUtils.mkdir_p Rails.root.join('data', 'test', 'charts', 'user')
+    end
+
+    after :all do
+      FileUtils.rm_rf Rails.root.join('data', 'test', 'charts', 'user')
+    end
+
+    describe '#has_chart_image?' do
+      it 'checks if chart image exists by calling ChartImage with the user' do
+        expect( ChartImage ).to receive(:exists?).with(user_with_survey, "test")
+        user_with_survey.has_chart_image?
+      end
+    end
+
+    describe '#chart_image_path' do
+      it 'returns the file system path to the image by calling ChartImage with the user' do
+        expect( ChartImage ).to receive(:path_for).with(user_with_survey, "test")
+        user_with_survey.chart_image_path
+      end
+    end
+
+    describe '#generate_chart_image!' do
+      it 'generates a new chart image png by creating a ChartImage instance with the user and calling #generate! on it' do
+        expect( ChartImage ).to receive(:new).with(user_with_survey, "test").and_call_original
+        expect_any_instance_of( ChartImage ).to receive(:generate!)
+        user_with_survey.generate_chart_image!
+      end
+    end
+
+    describe '#ensure_chart_image!' do
+      before do
+        user_with_survey.save!
+      end
+
+      it 'does nothing if chart image is present' do
+        user_with_survey.generate_chart_image!
+        expect( user_with_survey ).not_to receive(:generate_chart_image!)
+        user_with_survey.ensure_chart_image!
+      end
+
+      it 'does nothing if user has no survey' do
+        expect( @user ).not_to receive(:generate_chart_image!)
+        @user.ensure_chart_image!
+      end
+
+      it 'calls #generate_chart_image! in all other cases' do
+        expect( user_with_survey ).to receive(:generate_chart_image!)
+        user_with_survey.ensure_chart_image!
+      end
+    end
+  end
 end

@@ -123,4 +123,23 @@ class User < ActiveRecord::Base
     self.role ||= Role.where(name: 'proband').first
     #save
   end
+
+
+  def has_chart_image?
+    ChartImage.exists?(self, Rails.env.test? && 'test')
+  end
+
+  def chart_image_path
+    ChartImage.path_for(self, Rails.env.test? && 'test')
+  end
+
+  def ensure_chart_image!
+    if !has_chart_image? && has_survey?
+      generate_chart_image!
+    end
+  end
+
+  def generate_chart_image!
+    ChartImage.new(self, Rails.env.test? && 'test').generate!
+  end
 end
