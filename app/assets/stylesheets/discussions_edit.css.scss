@@ -1,10 +1,10 @@
 #invite_users{
-	div{
-		width: 800px;
-        float: right;
-	}
 	.nav-stacked{
         margin-top: 60px;
         float: left;
     }
 }
+#invite_users > div{
+        width: 800px;
+        float: right;
+    }
