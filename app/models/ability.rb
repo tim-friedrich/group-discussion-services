@@ -5,6 +5,8 @@ class Ability
     # # #
     # Anonymous
 
+    
+  
     can [ :new, :create ], ResearchInstitute
     can [ :new, :create ], User
 
@@ -20,6 +22,14 @@ class Ability
       return
     end
 
+    # # #
+    # User is admin
+    if user.is_admin?
+      can :access, :rails_admin   # grant access to rails_admin
+      can :dashboard    
+      can :manage, :all
+      return
+    end
 
     # # #
     # Every user
@@ -72,6 +82,9 @@ class Ability
         user.moderated_discussions.map(&:users).flatten.include? other_user
       end
     end
+
+
+
 
   end
 end

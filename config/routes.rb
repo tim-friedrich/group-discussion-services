@@ -1,4 +1,5 @@
 GDS::Application.routes.draw do
+  
   resources :companies, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :research_institutes, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :votes, only: [:create]
@@ -13,7 +14,7 @@ GDS::Application.routes.draw do
   devise_for :users, :controllers => { :invitations => 'users_invitations', :registrations => "registrations" }
   resources :users, only: [:new, :create, :show, :update, :destroy]
   get '/profile' => 'users#profile'
-
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'static_pages#home'
 
   get '/imprint' => 'static_pages#imprint'

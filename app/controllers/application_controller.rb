@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
 
-
-  check_authorization :unless => :devise_controller?
-
+  if (!:devise_controller? || !:rails_admin_controller?)
+    check_authorization
+  end
 
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to '/404.html' # TODO use Rails4 error app
@@ -19,14 +19,17 @@ class ApplicationController < ActionController::Base
     if current_user && current_user.survey_required? && !current_user.has_survey?
       redirect_to survey_path, :alert => "Sie müssen erst den Persönlichkeitstest ausfüllen um fortzufahren zu können!"
     else
-      redirect_to root_path, :alert => exception.message
+      redirect_to main_app.root_path, :alert => exception.message
     end
   end
 
   rescue_from ActionController::InvalidAuthenticityToken do
     redirect_to root_path, :alert => "Ihre Session ist abgelaufen, bitte probieren Sie es noch einmal!"
   end
-
+  
+  rescue_from ActionController::InvalidAuthenticityToken do
+    redirect_to root_path, :alert => "Ihre Session ist abgelaufen, bitte probieren Sie es noch einmal!"
+  end
 
   protected
 

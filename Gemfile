@@ -20,6 +20,8 @@ gem 'will_paginate-bootstrap'
 gem 'will-paginate-i18n'
 gem 'prawn-rails'        # pdf generation
 gem 'sdoc', group: 'doc', require: false
+gem 'rails_admin'
+
 # gem 'therubyracer', platforms: :ruby
 
 

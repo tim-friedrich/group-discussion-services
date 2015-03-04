@@ -5,11 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   after_initialize :set_default_role
-
+  has_many :votes
   has_many :discussions_users
   has_many :arguments
-  has_many :likes
-  has_many :dislikes
   has_many :discussions, through: :discussions_users
   has_and_belongs_to_many :research_institutes
 
@@ -89,6 +87,10 @@ class User < ActiveRecord::Base
     is_proband?
   end
 
+  def is_admin?
+    self.role == Role.where(name: 'admin').first
+  end
+
 	def is_staff?()
 		self.role == Role.where(name: 'deputy').first || self.role == Role.where(name: 'moderator').first
   end
@@ -123,4 +125,7 @@ class User < ActiveRecord::Base
     self.role ||= Role.where(name: 'proband').first
     #save
   end
+
+  
+
 end
