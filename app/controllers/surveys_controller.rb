@@ -26,6 +26,7 @@ class SurveysController < ApplicationController
     if current_user.has_survey?
       render text: 'forbidden', status: 403
     elsif survey = create_survey_result(survey_params[:results], current_user)
+      current_user.generate_chart_image!
       render json: survey, status: 201, serializer: SurveyForUserSerializer, root: "survey"
     else # TODO applicaton wide error handling/format
       render text: 'bad request', status: 400

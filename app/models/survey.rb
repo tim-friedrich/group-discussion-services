@@ -23,4 +23,10 @@ class Survey < ActiveRecord::Base
       "age" => user.age_category,
     }
   end
+
+  def scale_values
+    SurveyAnalyzer::SCALES.map{ |scale|
+      public_send scale.to_sym
+    }
+  end
 end

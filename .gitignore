@@ -12,22 +12,17 @@
 /tmp
 bundler_stubs/
 
-#ignore coverage reports
+# ignore coverage reports
 /coverage
 
+# app
 public/system/visual_aids/
-
 db/schema.rb
-
-coverage
-
 /.idea
-
 /.env
 /config/private_pub.yml
-
-# rails
 /public/assets/
+/data
 
 # backup files
 *~
