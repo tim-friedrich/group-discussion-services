@@ -29,7 +29,7 @@ prawn_document do |pdf|
           pdf.text "Persönlichkeit:"
           pdf.image "data/charts/user/#{discussion_user.user.id}.png", :scale => 0.4
 
-          pdf.bounding_box([0, pdf.cursor + 15], :width => pdf.bounds.right, height: 140) do
+          pdf.bounding_box([0, pdf.cursor + 4], :width => pdf.bounds.right, height: 140) do
             SurveyAnalyzer::SCALE_NAMES.each.with_index{ |scale_name, index|
               short_scale_name = scale_name
                 .gsub("Bedürfnis nach", "")

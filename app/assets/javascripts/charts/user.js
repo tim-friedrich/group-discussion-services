@@ -1,7 +1,6 @@
 // This script is used for both: Interactive client code and image generation
 
 var formatData = function(scaleValues){
-  console.log(scaleValues)
   var normalizedValues = scaleValues.map(function(v){
     return parseInt(v) - 5;
   })
@@ -25,6 +24,10 @@ var formatData = function(scaleValues){
 }
 
 window.generateChart_user = function(domid, isDynamic, scaleValues, cb) {
+  if(!isDynamic){
+    nv.fontHack = 27;
+  }
+
   nv.addGraph(function() {
     var svg = '#' + domid + ' svg'
 
