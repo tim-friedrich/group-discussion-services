@@ -22,7 +22,7 @@
 //= require nvd3
 //= require jquery-stickytabs
 //= require angularjs
-//= require ng-table
+//= require angular-smart-table
 //= require angular-nouislider
 //= require nouislider
 

@@ -37,22 +37,38 @@
 	</div>
 	<button ng-click="addProband()">Auswahl zur Diskussion einladen</button>
 
-	<table ng-table="tableParams" show-filter="true" class="table">
-	    <tr ng-repeat="user in $data">
-	      <td data-title="'Vorname'" sortable="'firstname'" filter="{ 'firstname': 'text' }">{{ user.firstname }}</td>
-	      <td data-title="'Nachname'" sortable="'lastname'">{{ user.lastname }}</td>
-	      <td data-title="'Email'" sortable="'email'">{{ user.email }}</td>
-	      <td data-title="'Geschlecht'" sortable="'gender'">{{ user.gender }}</td>
-	      <td data-title="'Alter'" sortable="'age'" filter="{ 'age': 'age' }" >{{ user.age }}</td>
-	      <td data-title="'Postleitzahl'" sortable="'zipcode'">{{ user.zipcode }}</td>
-	    </tr>
-	</table>
-</div>
-<script type="text/ng-template" id="ng-table/filters/age.html">
-        <input type="radio" ng-model="params.filter()[name]" name="filter-age" value="" /> None
-        <br />
-        <input type="radio" ng-model="params.filter()[name]" name="filter-age" value="<50" /> 50 years
-</script>
+
+<table st-table="users" class="table table-striped">
+	<thead>
+	<tr>
+		<th>Vorname</th>
+		<th>Nachname</th>
+		<th>Alter</th>
+		<th>Geschlecht</th>
+		<th>Postleitzahl</th>
+	</tr>
+	<tr>
+		<th>
+			<input st-search="'firstname'" placeholder="search for firstname" class="input-sm form-control" type="search"/>
+		</th>
+		<th colspan="3">
+			<input st-search placeholder="global search" class="input-sm form-control" type="search"/>
+		</th>
+		<th>
+			<input st-search="selectedPredicate" placeholder="bound predicate" class="input-sm form-control" type="search"/>
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="user in users">
+		<td>{{user.firstname}}</td>
+		<td>{{user.lastname}}</td>
+		<td>{{user.age}}</td>
+		<td>{{user.gender}}</td>
+		<td>{{user.zipcode}}</td>
+	</tr>
+	</tbody>
+</table>
 
 <div id="invite_observers">
 	<div class="message"></div>
