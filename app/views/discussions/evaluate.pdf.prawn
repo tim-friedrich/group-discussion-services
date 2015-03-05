@@ -1,3 +1,5 @@
+require 'survey_analyzer'
+
 prawn_document do |pdf|
   h1 = 25
   h2 = 20
@@ -26,6 +28,15 @@ prawn_document do |pdf|
         if discussion_user.user.has_survey?
           pdf.text "Persönlichkeit:"
           pdf.image "data/charts/user/#{discussion_user.user.id}.png", :scale => 0.4
+
+          pdf.bounding_box([0, pdf.cursor + 15], :width => pdf.bounds.right, height: 140) do
+            SurveyAnalyzer::SCALE_NAMES.each.with_index{ |scale_name, index|
+              short_scale_name = scale_name
+                .gsub("Bedürfnis nach", "")
+                .gsub(" und ", " / ")
+              pdf.draw_text short_scale_name, at: [pdf.bounds.left + 50*(index+1), pdf.bounds.top], rotate: 270
+            }
+          end
         end
       }
     end

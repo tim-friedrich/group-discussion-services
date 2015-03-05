@@ -1,5 +1,16 @@
 class SurveyAnalyzer
   SCALES = %w[n e c a o lm mm sm h]
+  SCALE_NAMES = [
+    "Neurotizismus",
+    "Extraversion",
+    "Gewissenhaftigkeit",
+    "Verträglichkeit",
+    "Offenheit für Neues",
+    "Bedürfnis nach Anerkennung und Leistung",
+    "Bedürfnis nach Macht und Einfluss",
+    "Bedürfnis nach Sicherheit und Ruhe",
+    "Ehrlichkeit",
+  ]
   STATISTICS = %w[school degree personal_status income]
   NORM_TABLES = JSON.load File.read Rails.root.join('db', 'survey_norm_tables.json')
   QUESTIONS = JSON.load File.read Rails.root.join('db', 'survey_questions.json')

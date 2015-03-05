@@ -10,15 +10,15 @@ var formatData = function(scaleValues){
     {
       key: "Scale",
       values: [
-        { "value": normalizedValues[0], "label": "N" },
-        { "value": normalizedValues[1], "label": "E" },
-        { "value": normalizedValues[2], "label": "C" },
-        { "value": normalizedValues[3], "label": "A" },
-        { "value": normalizedValues[4], "label": "O" },
-        { "value": normalizedValues[5], "label": "LM" },
-        { "value": normalizedValues[6], "label": "MM" },
-        { "value": normalizedValues[7], "label": "SM" },
-        { "value": normalizedValues[8], "label": "H" }
+        { "value": normalizedValues[0], "label": "N",  "desc": "Neurotizismus" },
+        { "value": normalizedValues[1], "label": "E",  "desc": "Extraversion" },
+        { "value": normalizedValues[2], "label": "C",  "desc": "Gewissenhaftigkeit" },
+        { "value": normalizedValues[3], "label": "A",  "desc": "Verträglichkeit" },
+        { "value": normalizedValues[4], "label": "O",  "desc": "Offenheit für Neues" },
+        { "value": normalizedValues[5], "label": "LM", "desc": "Bedürfnis nach Anerkennung und Leistung" },
+        { "value": normalizedValues[6], "label": "MM", "desc": "Bedürfnis nach Macht und Einfluss" },
+        { "value": normalizedValues[7], "label": "SM", "desc": "Bedürfnis nach Sicherheit und Ruhe" },
+        { "value": normalizedValues[8], "label": "H",  "desc": "Ehrlichkeit" }
       ]
     }
   ]
@@ -38,8 +38,15 @@ window.generateChart_user = function(domid, isDynamic, scaleValues, cb) {
       .y(function(d){ return d.value })
       .showYAxis(false)
       .valueFormat(function(value){ return value + 5 })
-      .tooltips(false)
+      .tooltips(true)
       .showValues(true)
+
+    // register tooltips
+    diagram
+      .tooltipContent(function(key, y, e, graph){
+        return '<p>' + graph.point.desc + '</p>'
+      })
+      .tooltips(true)
 
     // insert data
     d3.select(svg)
