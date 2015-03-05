@@ -1,59 +1,12 @@
-angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope", "$http", "ngTableParams", "$filter", ($scope, $http, ngTableParams, $filter) ->
-  
+angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope", "$http", "$filter", ($scope, $http, $filter) ->
+  $scope.predicates = ['firstname', 'lastname', 'age', 'gender', 'zipcode'];
+  $scope.selectedPredicate = $scope.predicates[0];
   $http.get("/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
     $scope.users = data
-    
-
-    $scope.tableParams = new ngTableParams({
-      page: 1,            # show first page
-      count: 10,           # count per page
-      sorting:
-        lastname: 'asc'     # initial sorting
-      filter:
-        age:
-          from: 0
-          to: 100
-        firstname: ''       # initial filter
-    }, {
-      total: $scope.users.length, # length of data
-      getData: ($defer, params) =>
-        filteredData = if params.filter() then $filter('filter')($scope.users, params.filter()) else $scope.users
-        orderedData = if params.sorting() then $filter('orderBy')(filteredData, params.orderBy()) else filteredData
-        params.total(orderedData.length); # set total for recalc pagination
-        console.log("A")
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-
-        
-        #$defer.resolve($scope.users);
-        #$($0).scope().tableParams.reload()
-    })
-    
-    #console.log(newVal)
-    #)
 
   ).error((data, status, headers, config) ->
     prompt("Beim Laden der Seite ist ein fehler aufgetreten, bitte versuchen sie es später nocheinmal oder Kontaktieren Sie den technischen Support.")
   )
-
-  #$scope.filterAge() = () ->
-
-  ###
-  angular.module('discussionEdit').filter('ageFilter', () ->
-    return ( items, rangeInfo ) ->
-      filtered = [];
-      min = parseInt(rangeInfo.userMin);
-      max = parseInt(rangeInfo.userMax);
-      # If time is with the range
-      angular.forEach(items, function(item) ->
-        if( item.age >= min && item.age <= max ) 
-          filtered.push(item);   
-      )
-      return filtered;
-  )###
-
-  #$scope.filterAge = () ->
-  #  console.log("Aaaaaaa")
-    #console.log($scope.test.to)
 
   $scope.addProband = () ->
     $scope.tableParams.filter.firstname = "Tim"

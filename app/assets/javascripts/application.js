@@ -18,7 +18,7 @@
 //= require bootstrap-datepicker
 //= require Chart.js/Chart.js
 //= require angularjs
-//= require ng-table
+//= require angular-smart-table
 //= require angular-nouislider
 //= require nouislider
 
