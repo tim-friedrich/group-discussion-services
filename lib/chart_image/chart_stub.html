@@ -3,6 +3,21 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="{{css_path}}"></link>
+  <style>
+    #chart svg{
+      width: 1200px;
+      height: 300px;
+    }
+    #chart svg text{
+      font-size: 14pt;
+    }
+    #chart svg .tick text{
+      visibility: hidden;
+    }
+    #chart svg .tick:not(.zero) {
+      opacity: 0 !important;
+    }
+  </style>
 </head>
 <body>
  <div id="chart"><svg></svg></div>
