@@ -1,1 +1,1 @@
-angular.module('discussionEdit', ['nouislider', 'smart-table'])
+angular.module('discussionEdit', ['smart-table', 'ui.slider'])

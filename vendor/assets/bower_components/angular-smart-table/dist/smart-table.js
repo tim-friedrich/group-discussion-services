@@ -245,7 +245,6 @@ ng.module('smart-table')
             }
         };
     }]);
-
 ng.module('smart-table')
   .directive('stSelectRow', function () {
     return {

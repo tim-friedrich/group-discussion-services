@@ -1,13 +1,19 @@
 angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope", "$http", "$filter", ($scope, $http, $filter) ->
-  $scope.predicates = ['firstname', 'lastname', 'age', 'gender', 'zipcode'];
-  $scope.selectedPredicate = $scope.predicates[0];
+  $scope.users = []
+  $scope.displayedUsers = []
+  $scope.test = ""
+  $scope.minAge = 0
+  $scope.maxAge = 100
+  $scope.itemsByPage=15;
+  #$('#age-slider').noUiSlider_pips({
+  #  mode: 'values',
+  #  values: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+  #  density: 4
+  #});
   $http.get("/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
     $scope.users = data
-
+    $scope.displayedUsers = [].concat($scope.users)
   ).error((data, status, headers, config) ->
     prompt("Beim Laden der Seite ist ein fehler aufgetreten, bitte versuchen sie es später nocheinmal oder Kontaktieren Sie den technischen Support.")
   )
-
-  $scope.addProband = () ->
-    $scope.tableParams.filter.firstname = "Tim"
 ]

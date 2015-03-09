@@ -23,8 +23,7 @@
 //= require jquery-stickytabs
 //= require angularjs
 //= require angular-smart-table
-//= require angular-nouislider
-//= require nouislider
+//= require angular-slider
 
 // VENDOR
 //= require jquery.caret

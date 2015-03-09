@@ -1,12 +1,22 @@
 angular.module('discussionEdit').filter 'filterWithRange', ['$filter', ($filter) ->
   (collection, predicateObject) ->
-    if fromTo = predicateObject.age
-      delete predicateObject.age
+    
+
+    if predicateObject.range
+      from = predicateObject.range.min || 0
+      to = predicateObject.range.max || 100
+      console.log from
+      console.log to
+      
+      predicate = angular.copy(predicateObject)
+      delete predicate.range
+    
       output = []
       for record in collection
-        if record.age && record.age >= fromTo.from && record.age <= fromTo.to
+        if !record[predicateObject.range.modelAttr]
+          record[predicateObject.range.modelAttr] = 0
+        if record[predicateObject.range.modelAttr] >= from && record[predicateObject.range.modelAttr] <= to
           output.push record
-    else
-      output = collection
-    $filter('filter')(output, predicateObject)
+
+    $filter('filter')(output, predicate)
 ]

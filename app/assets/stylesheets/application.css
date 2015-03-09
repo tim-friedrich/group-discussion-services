@@ -16,6 +16,7 @@
  * APP
  *= require ./scaffolds
 
+ *= require slider
  
  * VENDOR
  *= require progress-polyfill
