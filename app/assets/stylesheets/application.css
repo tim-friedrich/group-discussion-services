@@ -5,7 +5,7 @@
  *
  * BOWER
  *= require bootstrap-datepicker
- *= require nouislider
+ *= require slider
  
  * VENDOR
  *= require progress-polyfill
