@@ -1,8 +1,8 @@
 angular.module('discussionEdit').filter 'filterWithRange', ['$filter', ($filter) ->
   (collection, predicateObject) ->
     if predicateObject.age
-      from = predicateObject.age[0] || 0
-      to = predicateObject.age[1] || 100
+      from = predicateObject.age[0]
+      to = predicateObject.age[1]
     else
       from = 0
       to = 100
