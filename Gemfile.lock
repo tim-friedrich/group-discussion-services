@@ -102,6 +102,11 @@ GEM
     colored (1.2)
     columnize (0.9.0)
     cookiejar (0.3.2)
+    countries (0.9.3)
+      currencies (~> 0.4.2)
+    country_select (2.1.1)
+      countries (>= 0.9.3, < 0.10.0)
+    currencies (0.4.2)
     daemons (1.1.9)
     database_cleaner (1.4.0)
     datejs-rails (2.0.1)
@@ -418,6 +423,7 @@ DEPENDENCIES
   capybara-webkit
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
+  country_select
   database_cleaner
   datejs-rails
   devise

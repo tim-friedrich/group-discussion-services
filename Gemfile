@@ -22,6 +22,7 @@ gem 'prawn-rails'        # pdf generation
 gem 'sdoc', group: 'doc', require: false
 gem 'rails_admin'
 gem 'phantomjs'
+gem 'country_select'
 # gem 'therubyracer', platforms: :ruby
 
 
