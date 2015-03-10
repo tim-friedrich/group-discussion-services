@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
   has_many :discussions, through: :discussions_users
   has_and_belongs_to_many :research_institutes
 
-  has_one :research_institute
   has_one :survey
 
   belongs_to :role
