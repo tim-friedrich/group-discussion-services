@@ -14,7 +14,7 @@ gem 'devise-i18n'
 gem 'jbuilder', '~> 1.2' # json apis https://github.com/rails/jbuilder
 gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers"
 gem 'rake'
-gem 'dotenv'
+gem 'dotenv-rails'
 gem "paperclip"
 gem 'will_paginate-bootstrap'
 gem 'will-paginate-i18n'
