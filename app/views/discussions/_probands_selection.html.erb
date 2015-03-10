@@ -33,11 +33,12 @@
 <div st-table="displayedUsers" st-safe-src="users" st-set-filter="filterWithRange">
 
 <div class="panel panel-default">
+
 	<div class="panel-body" id="probands-selection-panel">
 		<form class="form-inline">
 		  <div class="form-group">
-		    <label for="firstname">Vorname</label>
-		    <input id="firstname" st-search="'firstname'" ng-model="test" class="form-control" type="text"/>
+		    <label for="firstname">Vorname:</label>
+		    <input id="firstname" st-search="'firstname'" class="form-control" type="text"/>
 		  </div>
 		  <div class="form-group">
 		    <label for="lastname" for="exampleInputEmail2">Nachname</label>
@@ -45,9 +46,8 @@
 		  </div><br>
 		  <div class="form-group age-filter">
 		    <label for="age">Alter:</label>
-		
-			<slider st-range-search="age" floor="0" ceiling="100" ng-model-low="minAge" ng-model-high="maxAge"></slider>
-		</div>
+				<slider id="age" st-range-search="'age'" ng-model="ageSlider" range="true" min="0" max="100"></slider>
+			</div>
 		</form>
 	</div>
 </div>

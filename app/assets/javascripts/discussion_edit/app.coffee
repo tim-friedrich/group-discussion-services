@@ -1,1 +1,1 @@
-angular.module('discussionEdit', ['smart-table', 'ui.slider'])
+angular.module('discussionEdit', ['smart-table', 'ui.bootstrap-slider'])
