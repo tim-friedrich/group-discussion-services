@@ -1,72 +1,74 @@
 <div class="form-group clearfix">
-  <%= user.label :firstname, class: "col-sm-2 control-label" %>
+  <%= user.label :firstname, "Vorname*", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.text_field :firstname, class: "form-control", placeholder: "Vorname", :autofocus => true %>
+    <%= user.text_field :firstname, class: "form-control", placeholder: "z.B. Maria", autofocus: true, required: true %>
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :lastname, class: "col-sm-2 control-label" %>
+  <%= user.label :lastname, "Nachname*", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.text_field :lastname, class: "form-control", placeholder: "Nachname" %>
+    <%= user.text_field :lastname, class: "form-control", placeholder: "z.B. Mustermann", required: true %>
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :email, class: "col-sm-2 control-label" %>
+  <%= user.label :email, "E-Mail*", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.text_field :email, class: "form-control", placeholder: "Email-Adresse" %>
+    <%= user.text_field :email, class: "form-control", placeholder: "z.B. max.mustermann@example.com", required: true %>
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :gender, class: "col-sm-2 control-label" %>
+  <%= user.label :gender, "Geschlecht*", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.select "gender", [["Geschlecht", ""], ["männlich", "male"], ["weiblich", "female"], ["anderes", "other"]], {}, class: "form-control" %>
+    <%= user.select "gender", [["Bitte auswählen", ""], ["männlich", "male"], ["weiblich", "female"], ["anderes", "other"]], {}, class: "form-control" %>
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :birthday, class: "col-sm-2 control-label" %>
+  <%= user.label :birthday, "Geburtstag*", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.text_field :birthday, class: "form-control datepicker", placeholder: "Geburtstag", :"data-date-format" => "dd.mm.yyyy", :"data-alt-date-format" => "yyyy-mm-dd" %>
+    <%= user.text_field :birthday, class: "form-control datepicker", placeholder: "z.B. 1.1.1970", :"data-date-format" => "dd.mm.yyyy", :"data-alt-date-format" => "yyyy-mm-dd", required: true %>
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :zipcode, class: "col-sm-2 control-label" %>
+  <%= user.label :zipcode, "Postleitzahl*", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.text_field :zipcode, class: "form-control", placeholder: "Postleitzahl" %>
+    <%= user.text_field :zipcode, class: "form-control", placeholder: "z.B. 10117", required: true %>
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :city, class: "col-sm-2 control-label" %>
+  <%= user.label :city, "Stadt/Region*", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.text_field :city, class: "form-control", placeholder: "Stadt" %>
+    <%= user.text_field :city, class: "form-control", placeholder: "z.B. Potsdam", required: true %>
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :country, class: "col-sm-2 control-label" %>
+  <%= user.label :country, "Land*", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
     <%= user.country_select :country, { priority_countries: ["DE", "AT", "CH"] },  class: "form-control" %>
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :phone, class: "col-sm-2 control-label" %>
+  <%= user.label :phone, "Telefonnummer", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.text_field :phone, class: "form-control", placeholder: "Telefonnummer" %>
+    <%= user.text_field :phone, class: "form-control", placeholder: "z.B. 1234567890" %>
+    <!-- <p class="help-block">...</p> -->
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :industry, class: "col-sm-2 control-label" %>
+  <%= user.label :industry, "Branche", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.text_field :industry, class: "form-control", placeholder: "Branche" %>
+    <%= user.text_field :industry, class: "form-control", placeholder: "z.B. Pflege" %>
+    <!-- <p class="help-block">...</p> -->
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :password, class: "col-sm-2 control-label" %>
+  <%= user.label :password, "Passwort*", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.password_field :password, class: "form-control", placeholder: "Passwort" %>
+    <%= user.password_field :password, class: "form-control", required: true %>
   </div>
 </div>
 <div class="form-group clearfix">
-  <%= user.label :password_confirmation, "Passwort bestätigen", class: "col-sm-2 control-label" %>
+  <%= user.label :password_confirmation, "Passwort bestätigen*", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= user.password_field :password_confirmation, class: "form-control", placeholder: "Passwort bestätigen" %>
+    <%= user.password_field :password_confirmation, class: "form-control", required: true %>
   </div>
 </div>
