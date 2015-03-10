@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219155846) do
+ActiveRecord::Schema.define(version: 20150310145304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,11 @@ ActiveRecord::Schema.define(version: 20150219155846) do
     t.integer  "discussion_id"
   end
 
+  add_index "arguments", ["argument_type_id"], name: "index_arguments_on_argument_type_id", using: :btree
+  add_index "arguments", ["discussion_id"], name: "index_arguments_on_discussion_id", using: :btree
+  add_index "arguments", ["question_id"], name: "index_arguments_on_question_id", using: :btree
+  add_index "arguments", ["user_id"], name: "index_arguments_on_user_id", using: :btree
+
   create_table "companies", force: :cascade do |t|
     t.string   "name",                  limit: 255
     t.integer  "contact_id"
@@ -39,6 +44,9 @@ ActiveRecord::Schema.define(version: 20150219155846) do
     t.datetime "updated_at"
     t.integer  "research_institute_id"
   end
+
+  add_index "companies", ["contact_id"], name: "index_companies_on_contact_id", using: :btree
+  add_index "companies", ["research_institute_id"], name: "index_companies_on_research_institute_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "street",     limit: 255
@@ -57,6 +65,8 @@ ActiveRecord::Schema.define(version: 20150219155846) do
     t.datetime "updated_at"
   end
 
+  add_index "discussion_presences", ["discussions_user_id"], name: "index_discussion_presences_on_discussions_user_id", using: :btree
+
   create_table "discussions", force: :cascade do |t|
     t.string   "topic",      limit: 255
     t.datetime "due_date"
@@ -65,6 +75,8 @@ ActiveRecord::Schema.define(version: 20150219155846) do
     t.integer  "company_id"
     t.text     "summary"
   end
+
+  add_index "discussions", ["company_id"], name: "index_discussions_on_company_id", using: :btree
 
   create_table "discussions_users", force: :cascade do |t|
     t.integer  "user_id"
@@ -77,12 +89,18 @@ ActiveRecord::Schema.define(version: 20150219155846) do
     t.string   "name"
   end
 
+  add_index "discussions_users", ["discussion_id"], name: "index_discussions_users_on_discussion_id", using: :btree
+  add_index "discussions_users", ["role_id"], name: "index_discussions_users_on_role_id", using: :btree
+  add_index "discussions_users", ["user_id"], name: "index_discussions_users_on_user_id", using: :btree
+
   create_table "questions", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "topic",         limit: 255
     t.integer  "discussion_id"
   end
+
+  add_index "questions", ["discussion_id"], name: "index_questions_on_discussion_id", using: :btree
 
   create_table "research_institutes", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -92,10 +110,16 @@ ActiveRecord::Schema.define(version: 20150219155846) do
     t.integer  "deputy_id"
   end
 
+  add_index "research_institutes", ["contact_id"], name: "index_research_institutes_on_contact_id", using: :btree
+  add_index "research_institutes", ["deputy_id"], name: "index_research_institutes_on_deputy_id", using: :btree
+
   create_table "research_institutes_users", force: :cascade do |t|
     t.integer "research_institute_id"
     t.integer "user_id"
   end
+
+  add_index "research_institutes_users", ["research_institute_id"], name: "index_research_institutes_users_on_research_institute_id", using: :btree
+  add_index "research_institutes_users", ["user_id"], name: "index_research_institutes_users_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -131,6 +155,8 @@ ActiveRecord::Schema.define(version: 20150219155846) do
     t.integer  "personal_status"
     t.integer  "income"
   end
+
+  add_index "surveys", ["user_id"], name: "index_surveys_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "firstname",              limit: 255
@@ -171,6 +197,7 @@ ActiveRecord::Schema.define(version: 20150219155846) do
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
   create_table "visual_aids", force: :cascade do |t|
     t.integer  "discussion_id"
@@ -183,12 +210,16 @@ ActiveRecord::Schema.define(version: 20150219155846) do
     t.datetime "file_updated_at"
   end
 
+  add_index "visual_aids", ["discussion_id"], name: "index_visual_aids_on_discussion_id", using: :btree
+
   create_table "visual_aids_logs", force: :cascade do |t|
     t.integer  "visual_aid_id"
     t.boolean  "open"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "visual_aids_logs", ["visual_aid_id"], name: "index_visual_aids_logs_on_visual_aid_id", using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.integer  "argument_id"
@@ -197,5 +228,8 @@ ActiveRecord::Schema.define(version: 20150219155846) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "votes", ["argument_id"], name: "index_votes_on_argument_id", using: :btree
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
 
 end
