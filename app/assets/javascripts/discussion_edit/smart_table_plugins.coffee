@@ -6,7 +6,7 @@ angular.module('smart-table').directive('stRangeSearch', [ ->
     #   predicate: '=?stRangeSearch'
     # ,
     link: (scope, element, attr, tableController) ->
-      predicate = attr.stRangeSearch
+      predicate = scope.$eval(attr.stRangeSearch)
 
       scope.$watch(attr.ngModel, (newValue, oldValue) ->
         if (newValue != oldValue)
