@@ -19,6 +19,7 @@
 //= require Chart.js/Chart.js
 //= require d3
 //= require nvd3
+//= require jquery-stickytabs
 
 // VENDOR
 //= require jquery.caret
@@ -31,5 +32,5 @@
 //= require surveys
 //= require_tree ./charts
 //= require_tree ./discussion_client
-
+//= require init
 

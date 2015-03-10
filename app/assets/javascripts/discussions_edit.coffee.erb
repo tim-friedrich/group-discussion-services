@@ -23,7 +23,7 @@
   )
 
   $(document).on "ajax:success", "form", (xhr, data, response) ->
-    if event.target.responseURL == "http://localhost:5000/users/invitation"  
+    if event.target.responseURL == "http://localhost:5000/users/invitation"
       $('.alert').remove()
       $('.active').find('.active').find('.message').prepend(
         """
@@ -33,13 +33,13 @@
   $(document).on "ajax:error", "form", (xhr, data, response) ->
     message = "Leider ist etwas schief gegangen. Bitte versuchen sie es später nocheinmal oder kontaktieren den Support. (#{ data.statusText })"
     $('.alert').remove()
-    if event.target.responseURL == "http://localhost:5000/users/invitation"      
+    if event.target.responseURL == "http://localhost:5000/users/invitation"
       if data.status == 422
         message = "Der Benutzer wurde bereits zur Diskussion hinzugefügt."
 
     $('.active').find('.active').find('.message').prepend (
       """
-        <div class="alert alert-danger" role="alert"> 
+        <div class="alert alert-danger" role="alert">
           #{message}
           </div>
       """)
@@ -103,7 +103,3 @@
     )
     return false
   )
-
-$ ->
-  $('.datepicker').datepicker
-    startView: 2
