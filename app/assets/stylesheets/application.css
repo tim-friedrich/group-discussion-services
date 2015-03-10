@@ -17,7 +17,6 @@
  *= require ./scaffolds
 
  *= require seiyria-bootstrap-slider
- *= require slider
  
  * VENDOR
  *= require progress-polyfill

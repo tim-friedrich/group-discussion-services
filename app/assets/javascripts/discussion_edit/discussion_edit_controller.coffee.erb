@@ -5,6 +5,8 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
   $scope.minAge = 0
   $scope.maxAge = 100
   $scope.itemsByPage=15;
+  gender = ""
+  genders = ['male', 'female', 'other']
   ageSlider = {}
   ageSliderOptions = 
     min: 0,

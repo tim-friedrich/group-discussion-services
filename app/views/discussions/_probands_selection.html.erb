@@ -35,19 +35,87 @@
 <div class="panel panel-default">
 
 	<div class="panel-body" id="probands-selection-panel">
-		<form class="form-inline">
+		<form class="form-horizontal">
 		  <div class="form-group">
-		    <label for="firstname">Vorname:</label>
-		    <input id="firstname" st-search="'firstname'" class="form-control" type="text"/>
+		    <label class="col-sm-2 control-label" for="gender-filter">Geschlecht:</label>
+		    <div class="col-sm-4">
+		      <select id="gender-filter" class="form-control" st-search="'gender'" >
+				  	<option value="" selected>Egal</option>
+				  	<option value="male">Männlich</option>
+				  	<option value="female">Weiblich</option>
+				  	<option value="other">Andere</option>
+			  	</select>
+		    </div>
+		    <label class="col-sm-2 control-label" for="age">Alter:</label>
+		    <div class="col-sm-4">
+		      <slider id="age" st-range-search="'age'" ng-model="ageSlider" range="true" min="0" max="100"></slider>
+		    </div>
+		  </div>
+
+		   <div class="form-group">
+		    <label class="col-sm-2 control-label" for="school-filter">Schulabschluss:</label>
+		    <div class="col-sm-4">
+		      <select id="school-filter" class="form-control" st-search="'school'" >
+				  	<option value="" selected>Egal</option>
+				  	<option>Hauptschule</option>
+				  	<option>Realschule</option>
+				  	<option>Fachabitur</option>
+				  	<option>Abitur</option>
+				  	<option>anderes</option>
+			  	</select>
+		    </div>
+		    <label class="col-sm-2 control-label" for="degree-filter">Abschluss:</label>
+		    <div class="col-sm-4">
+		      <select id="degree-filter" class="form-control" st-search="'degree'" >
+				  	<option value="" selected>Egal</option>
+				  	<option>Lehre</option>
+				  	<option>Meister</option>
+				  	<option>Diplom</option>
+				  	<option>Bachelor</option>
+				  	<option>Master</option>
+				  	<option>Staatsexamen</option>
+				  	<option>Promotion</option>
+				  	<option>anderes</option>
+			  	</select>
+		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="lastname" for="exampleInputEmail2">Nachname</label>
-		    <input id="lastname" st-search="'lastname'" class="form-control" type="text"/>
-		  </div><br>
-		  <div class="form-group age-filter">
-		    <label for="age">Alter:</label>
-				<slider id="age" st-range-search="'age'" ng-model="ageSlider" range="true" min="0" max="100"></slider>
-			</div>
+		    <label class="col-sm-2 control-label" for="status-filter">Status: </label>
+		    <div class="col-sm-4">
+		      <select id="status-filter" class="form-control" st-search="'personal_status'" >
+				  	<option value="" selected>Egal</option>
+				  	<option>Student</option>
+				  	<option>Arbeiter</option>
+				  	<option>Angestellter</option>
+				  	<option>Beamter</option>
+				  	<option>selbständig</option>
+				  	<option>arbeitslos</option>
+				  	<option>anderes</option>
+			  	</select>
+		    </div>
+		    <label class="col-sm-2 control-label" for="income-filter">Einkommen: </label>
+		    <div class="col-sm-4">
+		      <select id="income-filter" class="form-control" st-search="'income'" >
+				  	<option value="" selected>Egal</option>
+				  	<option>< 1000 EURO</option>
+				  	<option>1000 - 3000 EURO</option>
+				  	<option>3000 - 5000 EURO</option>
+				  	<option>5000 - 7000 EURO</option>
+				  	<option>7000 - 9000 EURO</option>
+				  	<option>> 9000 EURO</option>
+			  	</select>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label" for="income-filter">Neurotizismus:</label>
+		    <div class="col-sm-4">
+		      <slider id="n" type="text" ng-model="nSlider" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5"></slider>
+		    </div>
+		    <label class="col-sm-2 control-label" for="degree-filter">Abschluss:</label>
+		    <div class="col-sm-4">
+		      <slider id="n" type="text" ng-model="nSlider" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5"></slider>
+		    </div>
+		  </div>
 		</form>
 	</div>
 </div>
@@ -55,11 +123,14 @@
 <table  class="table table-striped">
 	<thead>
 	<tr>
-		<th>Vorname</th>
-		<th>Nachname</th>
-		<th>Alter</th>
 		<th>Geschlecht</th>
+		<th>Alter</th>
+		<th>Schulabschluss</th>
+		<th>Abschluss</th>
+		<th>Einkommen</th>
+		<th>Status</th>
 		<th>Postleitzahl</th>
+		<th></th>
 	</tr>
 	<tr>
 		<th colspan="5"></th>
@@ -67,11 +138,14 @@
 	</thead>
 	<tbody>
 	<tr ng-repeat="user in displayedUsers">
-		<td>{{user.firstname}}</td>
-		<td>{{user.lastname}}</td>
-		<td>{{user.age}}</td>
 		<td>{{user.gender}}</td>
+		<td>{{user.age}}</td>
+		<td>{{user.school}}</td>
+		<td>{{user.degree}}</td>
+		<td>{{user.income}}</td>
+		<td>{{user.personal_status}}</td>
 		<td>{{user.zipcode}}</td>
+		<td></td>
 	</tr>
 	</tbody>
 	<tfoot>
