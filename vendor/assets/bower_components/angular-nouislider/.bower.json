@@ -30,6 +30,5 @@
   },
   "_source": "git://github.com/vasyabigi/angular-nouislider.git",
   "_target": "~0.3.1",
-  "_originalSource": "angular-nouislider",
-  "_direct": true
+  "_originalSource": "angular-nouislider"
 }

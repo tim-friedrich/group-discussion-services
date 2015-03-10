@@ -16,6 +16,7 @@
  * APP
  *= require ./scaffolds
 
+ *= require seiyria-bootstrap-slider
  *= require slider
  
  * VENDOR
