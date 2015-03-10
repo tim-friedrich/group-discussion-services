@@ -15,13 +15,18 @@ class User < ActiveRecord::Base
 
   belongs_to :role
 
-  validates :email, presence: true, length: { maximum: 50 }
-  validates :firstname, presence: true, length: { maximum: 50 }
-  validates :lastname, presence: true, length: { maximum: 50 }
-  validates :gender, presence: true, length: { maximum: 50 }
+  validates :email, presence: true, length: { maximum: 100 }
+  validates :firstname, presence: true, length: { maximum: 100 }
+  validates :lastname, presence: true, length: { maximum: 100 }
+  validates :gender, presence: true, length: { maximum: 10 }
+  validates :country, presence: true, length: { maximum: 100 }
+  validates :city, presence: true, length: { maximum: 100 }
+  validates :phone, length: { maximum: 100 }
+  validates :industry, length: { maximum: 100 }
   #validates :email, uniqueness: true
   validates :birthday, presence: true
-  validates :zipcode, presence: true, format: { with: /\A\d{5}\z/, message: "muss aus fünf Ziffern bestehen" }
+  validates :zipcode, presence: true, length: { maximum: 10 }
+  validates :pseudonym_policy, presence: true
 
   accepts_nested_attributes_for :discussions
 

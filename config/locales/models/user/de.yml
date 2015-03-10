@@ -12,3 +12,7 @@ de:
         gender: Geschlecht
         birthday: Geburtstag
         zipcode: Postleitzahl
+        country: Land
+        city: Stadt / Region
+        industry: Branche
+        phone: Telefonnummer

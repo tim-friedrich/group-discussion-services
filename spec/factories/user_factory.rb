@@ -1,14 +1,3 @@
-#    t.string   "firstname"
-#    t.string   "lastname"
-#    t.string   "email"
-#    t.string   "password_digest"
-#    t.datetime "created_at"
-#    t.datetime "updated_at"
-#    t.string   "remember_token"
-#    t.integer  "role_id"
-
-# TODO different roles
-
 FactoryGirl.define do
   factory :user do
     sequence(:firstname)  { |n| "User #{n}" }
@@ -19,7 +8,11 @@ FactoryGirl.define do
     gender "female"
     birthday Date.today - 23.years
     zipcode "10117"
+    country "Internet"
+    city "Postamt"
+    pseudonym_policy true
     confirmed_at Date.yesterday
+
     role { Role.where(name:"proband").first }
 
     factory :user_with_survey do
@@ -28,7 +21,6 @@ FactoryGirl.define do
 
     factory :moderator do
       role { Role.where(name:'moderator').first }
-      
     end
   end
 end
