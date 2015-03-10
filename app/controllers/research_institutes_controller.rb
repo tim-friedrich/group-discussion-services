@@ -72,7 +72,7 @@ class ResearchInstitutesController < ApplicationController
 
   def research_institute_params
     params.require(:research_institute).permit(:name, :deputy,
-      deputy_attributes: [:firstname, :lastname, :email, :password, :password_confirmation, :remember_token, :discussions, :gender, :birthday, :zipcode],
+      deputy_attributes: SETTINGS[:good_user_params],
       contact_attributes: [:street, :postalcode, :town, :email, :telephone])
   end
 

@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::InvalidAuthenticityToken do
     redirect_to root_path, :alert => "Ihre Session ist abgelaufen, bitte probieren Sie es noch einmal!"
   end
-  
+
   rescue_from ActionController::InvalidAuthenticityToken do
     redirect_to root_path, :alert => "Ihre Session ist abgelaufen, bitte probieren Sie es noch einmal!"
   end
@@ -38,9 +38,9 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:accept_invitation).concat [:firstname, :lastname, :discussion_id, :gender, :birthday, :zipcode]
+    devise_parameter_sanitizer.for(:accept_invitation).concat SETTINGS[:good_user_params]
     devise_parameter_sanitizer.for(:invite).concat [:email, :discussion_id, :discussions_user_role]
-    devise_parameter_sanitizer.for(:sign_up).concat [:firstname, :lastname, :gender, :birthday, :zipcode]
+    devise_parameter_sanitizer.for(:sign_up).concat SETTINGS[:good_user_params]
   end
 
   def after_sign_in_path_for(resource)
