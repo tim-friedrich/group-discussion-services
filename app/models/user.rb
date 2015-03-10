@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   #validates :email, uniqueness: true
   validates :birthday, presence: true
   validates :zipcode, presence: true, length: { maximum: 10 }
-  validates :pseudonym_policy, presence: true
+  # validates :pseudonym_policy, presence: true
 
   accepts_nested_attributes_for :discussions
 
