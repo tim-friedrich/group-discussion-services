@@ -96,10 +96,10 @@ describe 'User' do
     describe "user is proband" do
       describe "profile page" do
         it "should not have new discussion link" do
-          expect( page ).not_to have_link "neue Diskussion erstellen"
+          expect( page ).not_to have_link "Neue Diskussion erstellen"
         end
         it "should not have new company link" do
-          expect( page ).not_to have_link "neuen Kunden anlegen"
+          expect( page ).not_to have_link "Neuen Kunden anlegen"
         end
         describe "new Discussion" do
           before do

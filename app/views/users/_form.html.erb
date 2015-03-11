@@ -1,6 +1,6 @@
 <%= form_for(@user, html: { class: 'form-horizontal' }) do |f| %>
 
-  <%= render 'shared/error_messages', locals: { resource: @user } %>
+  <%= render partial: 'shared/error_messages', locals: { resource: @user } %>
 
   <%= render partial: 'users/fields', locals: { user: f } %>
 

@@ -12,15 +12,6 @@ RSpec.describe ResearchInstitutesController, :type => :controller do
   let(:invalid_attributes) {  }
   let(:valid_session) { {} }
 
-
-  describe "GET show" do
-    it "assigns the requested research_institute as @research_institute" do
-      research_institute = ResearchInstitute.create! valid_attributes
-      get :show, {:id => research_institute.to_param}, valid_session
-      assigns(:research_institute).should eq(research_institute)
-    end
-  end
-
   describe "GET new" do
     it "assigns a new research_institute as @research_institute" do
       get :new, {}, valid_session
