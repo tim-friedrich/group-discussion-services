@@ -7,10 +7,6 @@ RSpec.describe CompaniesController, :type => :routing do
       get("/companies/new").should route_to("companies#new")
     end
 
-    it "routes to #show" do
-      get("/companies/1").should route_to("companies#show", :id => "1")
-    end
-
     it "routes to #edit" do
       get("/companies/1/edit").should route_to("companies#edit", :id => "1")
     end

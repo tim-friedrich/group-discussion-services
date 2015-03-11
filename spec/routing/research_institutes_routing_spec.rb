@@ -7,10 +7,6 @@ RSpec.describe ResearchInstitutesController, :type => :routing do
       get("/research_institutes/new").should route_to("research_institutes#new")
     end
 
-    it "routes to #show" do
-      get("/research_institutes/1").should route_to("research_institutes#show", :id => "1")
-    end
-
     it "routes to #edit" do
       get("/research_institutes/1/edit").should route_to("research_institutes#edit", :id => "1")
     end
