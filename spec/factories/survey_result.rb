@@ -1,5 +1,5 @@
 class SurveyResult
-  QUESTIONS = JSON.load(Rails.root.join "db", "survey_questions.json")
+  QUESTIONS = JSON.load(Rails.root.join "db", "survey_questions.json") unless defined? QUESTIONS
 
   def initialize
     @results = {}

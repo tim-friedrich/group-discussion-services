@@ -86,6 +86,8 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'factory_girl_rails'
+  gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'libnotify', '0.8.0'
 end
 
