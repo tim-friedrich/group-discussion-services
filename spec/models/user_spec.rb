@@ -76,7 +76,7 @@ describe User do
   end
 
   describe "pseudonym_policy is not present" do
-    pending
+    before { pending }
     before { user.pseudonym_policy = false }
     it { should_not be_valid }
   end
