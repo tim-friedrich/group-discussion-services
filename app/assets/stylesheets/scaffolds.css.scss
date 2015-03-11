@@ -74,6 +74,11 @@ input, textarea, select{
   margin-top: 3em;
 }
 
+.datepicker-old select{
+  border: 1px solid #ccc;
+  background: transparent;
+}
+
 /* sections */
 
 header{
