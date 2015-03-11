@@ -1,15 +1,5 @@
 <%= nested_form_for(@research_institute, html: { class: 'form-horizontal' }) do |f| %>
-  <% if @research_institute.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@research_institute.errors.count, "error") %> prohibited this research_institute from being saved:</h2>
-
-      <ul>
-      <% @research_institute.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: "shared/error_messages", locals: { resource: @research_institute } %>
 
   <div class="form-group">
     <div class="field">

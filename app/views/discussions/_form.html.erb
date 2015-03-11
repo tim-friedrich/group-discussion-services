@@ -1,16 +1,6 @@
 <%= form_for(@discussion, html: { multipart: true, class: "form-horizontal", role: "form"  }) do |f| %>
 
-  <% if @discussion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@discussion.errors.count, "error") %> prohibited this discussion from being saved:</h2>
-
-      <ul>
-      <% @discussion.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: "shared/error_messages", locals: { resource: @discussion } %>
 
   <div class="form-group">
     <%= f.label :topic, class: "col-sm-2 control-label" %>
