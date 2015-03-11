@@ -23,7 +23,6 @@ gem 'sdoc', group: 'doc', require: false
 gem 'rails_admin'
 gem 'phantomjs'
 gem 'country_select'
-# gem 'therubyracer', platforms: :ruby
 
 
 # # #
@@ -69,7 +68,6 @@ gem 'exception_notification'
 
 group :production do
   gem 'rails_12factor' # heroku
-  # gem 'newrelic_rpm' # performance monitoring
 end
 
 
@@ -88,10 +86,10 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'factory_girl_rails'
-  gem 'codeclimate-test-reporter', require: nil
+  gem 'libnotify', '0.8.0'
 end
 
-group :test do
-  gem 'libnotify', '0.8.0'
-  # gem 'simplecov', require: false # test coverage report
-end
+# # #
+# If node is not installed
+
+# gem 'therubyracer', platforms: :ruby
