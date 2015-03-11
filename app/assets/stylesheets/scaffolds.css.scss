@@ -1,8 +1,11 @@
 @import 'bootstrap';
 
+/* hacks */
+
 .field_with_errors {
    @extend .has-error;
 }
+
 
 /* universal */
 
@@ -37,7 +40,7 @@ body {
   }
   .content{
     width: 1024px;
-    
+
   }
 }
 
@@ -51,6 +54,18 @@ a{
 a:hover{
   color: #7eb11c;
 }
+
+/* forms */
+
+label{
+  font-size: 13px;
+}
+
+input, textarea, select{
+  font-size: 13px;
+}
+
+/* sections */
 
 header{
   padding-bottom: 70px;
