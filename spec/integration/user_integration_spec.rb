@@ -135,12 +135,12 @@ describe 'User' do
           visit "/profile"
         end
         it "redirects to the new discussion page when link is clicked" do
-          click_link 'neue Diskussion erstellen'
+          click_link 'Neue Diskussion erstellen'
           expect( current_path ).to eq new_discussion_path
         end
 
         it "redirects to the new company page when link was clicked" do
-          click_link 'neuen Kunden anlegen'
+          click_link 'Neuen Kunden anlegen'
           expect( current_path ).to eq new_company_path
         end
         describe "Discussion" do
