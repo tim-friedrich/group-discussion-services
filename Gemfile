@@ -18,7 +18,8 @@ gem 'dotenv-rails'
 gem "paperclip"
 gem 'will_paginate-bootstrap'
 gem 'will-paginate-i18n'
-gem 'prawn-rails'        # pdf generation
+gem 'prawn-rails'     # pdf generation
+gem 'prawn', '~> 1.0' # TODO remove when 2.0 works
 gem 'sdoc', group: 'doc', require: false
 gem 'rails_admin'
 gem 'phantomjs'
