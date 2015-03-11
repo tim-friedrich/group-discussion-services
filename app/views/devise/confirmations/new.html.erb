@@ -1,15 +1,21 @@
 <% title "Bestätigungs Email erneut senden" %>
 <h2>Bestätigungs Email erneut senden </h2>
 
-<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, class: "form-inline" }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, class: "form-horizontal" }) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="form-group">
-    <%= f.label :email, class: "sr-only" %>
-    <%= f.email_field :email, :autofocus => true, class: "form-control", placeholder: "Email" %>
+    <%= f.label :email, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "E-Mail" %>
+    </div>
   </div>
 
-  <%= f.submit "erneut senden", class: "btn btn-large btn-primary" %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit "Erneut senden", class: "btn btn-large btn-primary" %>
+    </div>
+  </div>
 
 <% end %>
 

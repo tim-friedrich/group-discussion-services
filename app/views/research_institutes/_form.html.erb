@@ -1,4 +1,4 @@
-<%= nested_form_for(@research_institute) do |f| %>
+<%= nested_form_for(@research_institute, html: { class: 'form-horizontal' }) do |f| %>
   <% if @research_institute.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@research_institute.errors.count, "error") %> prohibited this research_institute from being saved:</h2>
@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+
   <div class="form-group">
     <div class="field">
       <%= f.label :name, class: "col-sm-2 control-label"  %>
@@ -18,12 +19,12 @@
       </div>
     </div>
   </div>
-  
+
   <%= f.fields_for :contact, @research_institute.contact  do |task_form| %>
     <%= render partial: 'contacts/fields', locals: { f: task_form } %>
   <% end %>
 
-  
+
   <h3>Moderator</h3>
   <%= f.fields_for :deputy, @research_institute.deputy do | deputy | %>
     <%= render partial: 'users/fields', locals: { user: deputy } %>
