@@ -23,7 +23,6 @@ body {
     color: #7eb11c;
     font-size: 18px;
     margin-bottom: 22px;
-    margin-left: 8px;
   }
   h2{
     color: #7eb11c;
@@ -41,8 +40,8 @@ body {
     min-height: 100%;
   }
   .content{
-    width: 1024px;
-
+    max-width: 1024px;
+    padding: 0 20px;
   }
 }
 
@@ -82,7 +81,6 @@ input, textarea, select{
 }
 
 .error-explanation{
-  margin-left: 8px;
   margin-bottom: 26px;
 }
 

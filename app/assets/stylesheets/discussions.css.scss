@@ -1,6 +1,8 @@
 $chat_background: #bfbfbf;
 
 #discussion{
+  width: 1024px;
+
   #moderator{
     float: right;
     width: 582px;
@@ -117,7 +119,7 @@ $chat_background: #bfbfbf;
               margin-left: 3px;
               margin-right: 3px;
             }
-            
+
             .color{
               margin-top: 16px;
               border-radius:11px;
