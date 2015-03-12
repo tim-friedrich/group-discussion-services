@@ -1,15 +1,17 @@
 /*
+ * TODO switch to explicit @import for everything
+ *
  * ASSET GEMS
- *= require bootstrap
  *= require mediaelement_rails
  *
+ * SASS IMPORTS
+ *= require _imports
+  *
  * BOWER
  *= require bootstrap-datepicker
  *= require nvd3
  *
- * VENDOR
- *= require progress-polyfill
- *
- * APP # TODO switch to explicit @import syntax?
+ * APP
+ *= require ./scaffolds
  *= require_tree .
  */

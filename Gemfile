@@ -44,8 +44,8 @@ gem 'faye-rails' # necessary for faye.js in asset pipline
 # # #
 # ASSETS
 
-gem 'sass-rails', '~> 4.0.5' # TODO
-gem 'bootstrap-sass', '3.1.1.0' # TODO (using css @import syntax)
+gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass', '~> 3.3.3'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'uglifier', '~> 2.7.0'
 
