@@ -53,12 +53,11 @@ body {
   text-align: center;
 }
 
-
 a{
   color: #7eb11c;
-}
-a:hover{
-  color: #7eb11c;
+  &:hover, &:active, &:focus {
+    color: #7eb11c
+  }
 }
 
 /* forms */
