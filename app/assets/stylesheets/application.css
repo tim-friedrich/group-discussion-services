@@ -3,6 +3,7 @@
  *
  * ASSET GEMS
  *= require mediaelement_rails
+ *= bootstrap-sprockets
  *
  * SASS IMPORTS
  *= require _imports
