@@ -31,7 +31,7 @@ gem 'country_select'
 
 gem 'devise' # user management
 gem 'devise_invitable' # user invitations
-gem 'cancan' # authorization
+gem 'cancancan' # authorization
 
 
 # # #
