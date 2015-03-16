@@ -1,31 +1,12 @@
 angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope", "$http", "$filter", ($scope, $http, $filter) ->
   $scope.users = []
   $scope.displayedUsers = []
-  $scope.test = ""
   $scope.minAge = 0
   $scope.maxAge = 100
-  $scope.itemsByPage=15;
-  gender = ""
-  genders = ['male', 'female', 'other']
-  ageSlider = {}
-  ageSliderOptions = 
-    min: 0,
-    max: 120
-  cCheck = false
-  sliders = {sliderValue:{}} 
+  $scope.itemsByPage = 15
+  $scope.ageSlider = [0, 100]
+  $scope.genders = ['male', 'female', 'other']
 
-  # $(".slider-disabled").each((slider)->
-  #   $(slider).slider()
-  #   $(slider).slider("disable"))
-  
-  # $(".toogleSlider").click(() ->
-  #   if(this.checked)
-      
-  #     $($(this).data("slider-toogle")).slider("enable")
-  #   else 
-  #     $($(this).data("slider-toogle")).slider("disable");
-  # );
-  
   $http.get("/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
     $scope.users = data
     $scope.displayedUsers = [].concat($scope.users)
@@ -33,19 +14,3 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
     prompt("Beim Laden der Seite ist ein fehler aufgetreten, bitte versuchen sie es später nocheinmal oder Kontaktieren Sie den technischen Support.")
   )
 ]
-
-# angular.module('discussionEdit').directive('sliderDisableTarget', [ ->
-#   return {
-#     require: '',
-#     restrict: 'A',
-#     link: (scope, element, attr) ->
-#       predicate = scope.$eval(attr.sliderDisableTarget)
-#       console.log predicate
-#       console.log element
-#       console.log scope
-#       # scope.$watch(attr.ngModel, (newValue, oldValue) ->
-#       #   if (newValue != oldValue)
-#       #     tableController.tableState().search ||= {};
-#       #     tableController.search(newValue, predicate)
-#       # )
-#   }])
