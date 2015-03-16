@@ -12,7 +12,6 @@ Rails.application.routes.default_url_options[:host] = 'localhost:5000'
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
-  config.active_record.raise_in_transactional_callbacks = true
   config.infer_base_class_for_anonymous_controllers = false
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller

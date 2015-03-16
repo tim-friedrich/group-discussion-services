@@ -5,25 +5,27 @@ ruby '2.2.1'
 # # #
 # GENERAL
 
-gem 'rails', '4.2.0'
-gem "thin" # webserver
-gem 'pg'
-gem 'rails-i18n', '~> 4.0.3'
-gem 'bcrypt', '~> 3.1.9'
-gem 'devise-i18n'
-gem 'jbuilder', '~> 1.2' # json apis https://github.com/rails/jbuilder
-gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers"
-gem 'rake'
+gem 'rails', '4.2.1.rc4'
 gem 'dotenv-rails'
+gem 'rake'
+gem 'thin'
+gem 'pg'
+gem 'rails-i18n'
+gem 'bcrypt', '~> 3.1.10'
+gem 'devise-i18n'
 gem "paperclip"
 gem 'will_paginate-bootstrap'
 gem 'will-paginate-i18n'
-gem 'prawn-rails'     # pdf generation
+gem 'prawn-rails'
 gem 'prawn', '~> 1.0' # TODO remove when 2.0 works
-gem 'sdoc', group: 'doc', require: false
-gem 'rails_admin'
 gem 'phantomjs'
 gem 'country_select'
+
+
+# # #
+# ADMIN
+
+gem 'rails_admin'
 
 
 # # #
@@ -42,12 +44,19 @@ gem 'faye-rails' # necessary for faye.js in asset pipline
 
 
 # # #
+# JSON
+
+gem 'jbuilder', '~> 2.2'
+gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers"
+
+
+# # #
 # ASSETS
 
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.3'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'uglifier', '~> 2.7.0'
+gem 'coffee-rails', '~> 4.1'
+gem 'uglifier', '~> 2.7'
 
 
 # # #
@@ -68,7 +77,7 @@ gem 'whiskey_disk', github: 'johnae/whiskey_disk', branch: 'develop'
 gem 'exception_notification'
 
 group :production do
-  gem 'rails_12factor' # heroku
+  gem 'rails_12factor'
 end
 
 
@@ -78,10 +87,10 @@ end
 group :development, :test do
   gem 'database_cleaner'
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
+  # gem 'web-console', '~> 2.0'
   gem 'irbtools', require: 'binding.repl'
 
-  gem 'rspec-rails', '~> 3.1'
+  gem 'rspec-rails', '~> 3.2'
   gem 'capybara', '~> 2.4'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
@@ -89,8 +98,10 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'libnotify', '0.8.0'
+  gem 'libnotify'
+  gem 'quiet_assets'
 end
+
 
 # # #
 # If node is not installed
