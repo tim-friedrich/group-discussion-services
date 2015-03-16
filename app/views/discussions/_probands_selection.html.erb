@@ -123,17 +123,28 @@
 		  <div class="form-group">
 		    <label class="col-sm-2 control-label" for="income-filter">Gewissenhaftigkeit:</label>
 		    <div class="col-sm-4">
-			    <input data-slider-toogle="#c" ng-model="cCheck" class="toogleSlider" type="checkbox"/>
-		      <slider gds-slider enable="cCheck" class="personality-slider" id="c" type="text" st-slider-search="'c'" ng-model="nSlider" min="1" max="8" step="1" value="5"></slider>
+			    <input ng-model="cCheck" class="toogleSlider" type="checkbox"/>
+		      <input gds-slider
+		        type="text"
+		        id="c"
+		        class="personality-slider"
+		        ng-model="nSlider"
+		        gds-slider-enable="cCheck"
+		        st-slider-search="'c'"
+		        data-slider-min="1"
+		        data-slider-max="9"
+		        data-slider-step="1"
+		        data-slider-value="5"
+		      ></input>
 		    </div>
-		    <label class="col-sm-2 control-label" for="income-filter">Verträglichkeit:</label>
+<!-- 		    <label class="col-sm-2 control-label" for="income-filter">Verträglichkeit:</label>
 		    <div class="col-sm-4">
 			    <input data-slider-toogle="#a" class="toogleSlider"type="checkbox"/>
 		      <slider class="personality-slider" id="a" type="text" st-slider-search="'a'" ng-model="nSlider" min="1" max="8" step="1" slider-value="5"></slider>
 		    </div>
-		  </div>
+		  </div>-->
 		  <!-- <div class="form-group">
-		  
+
 		    <label class="col-sm-2 control-label" for="income-filter">Extraversion:</label>
 		    <div class="col-sm-4">
 			    <input ng-model="eCheckBox" ng-change="toogleSlider(eCheckBox, '#e')" data-slider-toogle="#e" class="toogleSlider" type="checkbox"/>
@@ -155,8 +166,8 @@
 		</form>
 	</div>
 </div>
-<input slider ng-model="a" id="ex7" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/>
-<input id="ex7-enabled" type="checkbox"/> Enabled
+<!-- <input slider ng-model="a" id="ex7" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/>
+<input id="ex7-enabled" type="checkbox"/> Enabled -->
 <table  class="table table-striped">
 	<thead>
 	<tr>
