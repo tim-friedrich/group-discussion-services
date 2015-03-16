@@ -1,5 +1,6 @@
 angular.module('discussionEdit').directive 'gdsSlider', ->
   restrict: 'A'
+  replace: true
 
   link: (scope, element, attrs) ->
     # init slider
@@ -21,3 +22,7 @@ angular.module('discussionEdit').directive 'gdsSlider', ->
       else if (newValue != undefined)
         element.slider("disable")
         scope[attrs.ngModel] = null
+
+  template: '''
+    <input type="text"></input>
+  '''

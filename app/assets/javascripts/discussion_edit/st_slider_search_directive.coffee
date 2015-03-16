@@ -5,7 +5,6 @@ angular.module('smart-table').directive 'stSliderSearch', ->
     predicate = scope.$eval(attr.stSliderSearch)
 
     scope.$watch attr.ngModel, (newValue, oldValue) ->
-      console.log "a", attr.ngModel, newValue
       if (newValue != oldValue)
         tableController.tableState().search ||= {};
         tableController.search(newValue, predicate)
