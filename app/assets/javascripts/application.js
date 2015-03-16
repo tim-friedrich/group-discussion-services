@@ -24,7 +24,6 @@
 //= require angularjs
 //= require angular-smart-table
 //= require seiyria-bootstrap-slider
-//= require angular-bootstrap-slider
 
 // VENDOR
 //= require jquery.caret
