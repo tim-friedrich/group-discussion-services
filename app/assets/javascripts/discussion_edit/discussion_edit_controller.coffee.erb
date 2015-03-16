@@ -11,17 +11,41 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
   ageSliderOptions = 
     min: 0,
     max: 120
+  cCheck = false
   sliders = {sliderValue:{}} 
-  #$('#age-slider').noUiSlider_pips({
-  #  mode: 'values',
-  #  values: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-  #  density: 4
-  #});
+
+  # $(".slider-disabled").each((slider)->
+  #   $(slider).slider()
+  #   $(slider).slider("disable"))
+  
+  # $(".toogleSlider").click(() ->
+  #   if(this.checked)
+      
+  #     $($(this).data("slider-toogle")).slider("enable")
+  #   else 
+  #     $($(this).data("slider-toogle")).slider("disable");
+  # );
+  
   $http.get("/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
     $scope.users = data
     $scope.displayedUsers = [].concat($scope.users)
   ).error((data, status, headers, config) ->
     prompt("Beim Laden der Seite ist ein fehler aufgetreten, bitte versuchen sie es später nocheinmal oder Kontaktieren Sie den technischen Support.")
   )
-    
 ]
+
+# angular.module('discussionEdit').directive('sliderDisableTarget', [ ->
+#   return {
+#     require: '',
+#     restrict: 'A',
+#     link: (scope, element, attr) ->
+#       predicate = scope.$eval(attr.sliderDisableTarget)
+#       console.log predicate
+#       console.log element
+#       console.log scope
+#       # scope.$watch(attr.ngModel, (newValue, oldValue) ->
+#       #   if (newValue != oldValue)
+#       #     tableController.tableState().search ||= {};
+#       #     tableController.search(newValue, predicate)
+#       # )
+#   }])

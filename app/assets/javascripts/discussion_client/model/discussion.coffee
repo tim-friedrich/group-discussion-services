@@ -106,7 +106,7 @@ class @Discussion
     @bind_open_visual_aid()
     @bind_close_visual_aid()
     @bind_visual_aid_command()
-    window.onbeforeunload = () => "asd"#@current_user.leave()
+    window.onbeforeunload = () => ""#@current_user.leave()
 
 
   bind_user_leaved: () =>

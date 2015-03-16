@@ -1,5 +1,6 @@
 angular.module('discussionEdit').filter 'filterWithRange', ['$filter', ($filter) ->
   (collection, predicateObject) ->
+    console.log predicateObject
     if predicateObject.age
       from = predicateObject.age[0]
       to = predicateObject.age[1]

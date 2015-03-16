@@ -23,7 +23,9 @@ angular.module('ui.bootstrap-slider', [])
 
                 initSlider();
 
+
                 function initSlider() {
+                    
                     var options = {};
 
                     function setOption(key, value, defaultValue) {
@@ -169,6 +171,7 @@ angular.module('ui.bootstrap-slider', [])
                         ngModelDeregisterFn = $scope.$watch( 'ngModel', function ( value ) {
                             slider.slider( 'setValue', value );
                         } );
+
                     }
                 }
 

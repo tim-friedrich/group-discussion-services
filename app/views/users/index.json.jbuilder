@@ -6,6 +6,7 @@
     json.zipcode user.zipcode
     if user.has_survey?
       json.e user.survey.e
+      json.n user.survey.n
       json.c user.survey.c
       json.a user.survey.a
       json.o user.survey.o
