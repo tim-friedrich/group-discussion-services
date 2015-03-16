@@ -5,6 +5,7 @@
 * Postgres
 * .env file containing the secret tokens
 * bower (via npm)
+* direnv installed for binstubs/spring
 
 === Start
 
@@ -15,9 +16,9 @@ Dev server will spin up at http://localhost:5000
 
 === Test Suite
 
-    $ dotenv rspec
+    $ rspec
 
-You have to prefix every command with `dotenv` so that the necessary ENV variables get loaded.
+The test suite currently requires having a websocket server started (e.g. through forman start)
 
 
 === Deployment
