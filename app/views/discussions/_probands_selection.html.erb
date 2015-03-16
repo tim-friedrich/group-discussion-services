@@ -48,7 +48,14 @@
 		    </div>
 		    <label class="col-sm-2 control-label" for="age">Alter:</label>
 		    <div class="col-sm-4">
-		      <slider id="age" st-slider-search="'age'" ng-model="ageSlider" range="true" min="0" max="100"></slider>
+		      <slider gds-slider
+		        id="age"
+		        ng-model="ageSlider"
+		        st-slider-search="'age'"
+		        data-slider-min="0"
+		        data-slider-max="100"
+		        data-slider-value="[0, 100]"
+		      ></slider>
 		    </div>
 		  </div>
 

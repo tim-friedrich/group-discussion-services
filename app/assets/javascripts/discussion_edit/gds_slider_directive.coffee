@@ -1,15 +1,15 @@
-angular.module('discussionEdit').directive 'gdsSlider', ->
+angular.module('discussionEdit').directive 'gdsSlider', [ ->
   restrict: 'A'
   replace: true
 
   link: (scope, element, attrs) ->
     # init slider
     element.slider
-      enabled: !!scope.$eval(attrs.gdsSliderEnable)
+      enabled: !attrs.gdsSliderEnable || !!scope.$eval(attrs.gdsSliderEnable)
 
     # update scope when slider is slidden
     # TODO use change event when working upstream
-    element.slider().on "slide", (event) ->
+    element.on "slide", (event) ->
       scope.$apply ->
         scope[attrs.ngModel] = event.value
 
@@ -26,3 +26,4 @@ angular.module('discussionEdit').directive 'gdsSlider', ->
   template: '''
     <input type="text"></input>
   '''
+]
