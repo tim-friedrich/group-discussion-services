@@ -1,0 +1,8 @@
+en:
+  survey:
+    school:
+      0: "Hauptschule"
+      1: "Realschule"
+      2: "Fachabitur"
+      3: "Abitur"
+      4: "anderes"
