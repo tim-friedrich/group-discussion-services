@@ -6,6 +6,23 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
   $scope.itemsByPage = 15
   $scope.ageSlider = [0, 100]
   $scope.genders = ['male', 'female', 'other']
+  $('[data-toggle="popover"]').popover()
+  $('[data-toggle="popover"]').mouseenter((event)->
+    $(event.target).popover('show')
+  )
+  $('[data-toggle="popover"]').mouseleave((event)->
+    $(event.target).popover('hide')
+  )
+
+  $scope.postNewProband = (id) ->
+    $.ajax(
+      type: "POST",
+      url: "/discussions_users",
+      data:
+        discussions_user:
+          user_id: id
+          discussion_id: 2 
+      )
 
   $http.get("/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
     $scope.users = data

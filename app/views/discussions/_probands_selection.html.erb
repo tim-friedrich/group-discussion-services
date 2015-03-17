@@ -6,216 +6,386 @@
 </ul>
 
 <div id="users_overview">
-	<h2>Teilnehmer</h2>
-	<div class="message"></div>
+  <h2>Teilnehmer</h2>
+  <div class="message"></div>
 
-	<div class="probands_list">
-	  <%= render partial: "discussions_users/list_users", locals: { discussions_users: @probands, id: "probands", page_name: "probands_page" } %>
-	</div>
+  <div class="probands_list">
+    <%= render partial: "discussions_users/list_users", locals: { discussions_users: @probands, id: "probands", page_name: "probands_page" } %>
+  </div>
 
-	<h2>Beobachter</h2>
+  <h2>Beobachter</h2>
 
-	<div class="observers_list">
-	  <%= render partial: "discussions_users/list_users", locals: { discussions_users: @observers, id: "observers", page_name: "observers_page" } %>
-	</div>
+  <div class="observers_list">
+    <%= render partial: "discussions_users/list_users", locals: { discussions_users: @observers, id: "observers", page_name: "observers_page" } %>
+  </div>
 </div>
 
 <div id="invite_probands">
-	<div class="message"></div>
+  <div class="message"></div>
 
-	<h2>Einladen über Email Adresse</h2>
-	<p>Laden Sie Probanden über deren Email Adresse ein. Sie können auch Probanden die sich noch nicht registriert haben einladen.</p>
+  <h2>Einladen über Email Adresse</h2>
+  <p>Laden Sie Probanden über deren Email Adresse ein. Sie können auch Probanden die sich noch nicht registriert haben einladen.</p>
 
-	<%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "proband" } %>
+  <%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "proband" } %>
 
-	<h2>Eigene Probanden Datenbank durchsuchen</h2>
+  <h2>Eigene Probanden Datenbank durchsuchen</h2>
 
-<div st-table="displayedUsers" st-safe-src="users" st-set-filter="filterWithRange">
+  <div st-table="displayedUsers" st-safe-src="users" st-set-filter="filterWithRange">
 
-<div class="panel panel-default">
+    <div class="panel panel-default">
 
-	<div class="panel-body" id="probands-selection-panel">
-		<form class="form-horizontal">
-		  <div class="form-group">
-		    <label class="col-sm-2 control-label" for="gender-filter">Geschlecht:</label>
-		    <div class="col-sm-4">
-		      <select id="gender-filter" class="form-control" st-search="'gender'" >
-				  	<option value="" selected>Egal</option>
-				  	<option value="male">Männlich</option>
-				  	<option value="female">Weiblich</option>
-				  	<option value="other">Andere</option>
-			  	</select>
-		    </div>
-		    <label class="col-sm-2 control-label" for="age">Alter:</label>
-		    <div class="col-sm-4">
-		      <slider gds-slider
-		        id="age"
-		        ng-model="ageSlider"
-		        st-slider-search="'age'"
-		        data-slider-min="0"
-		        data-slider-max="100"
-		        data-slider-value="[0, 100]"
-		      ></slider>
-		    </div>
-		  </div>
+      <div class="panel-body" id="probands-selection-panel">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="gender-filter">Geschlecht:</label>
+            <div class="col-sm-4">
+              <select id="gender-filter" class="form-control" st-search="'gender'" >
+                <option value="" selected>Egal</option>
+                <option value="male">Männlich</option>
+                <option value="female">Weiblich</option>
+                <option value="other">Andere</option>
+              </select>
+            </div>
+            <label class="col-sm-2 control-label" for="age">Alter:</label>
+            <div class="col-sm-4 slider-wraper">
+              <slider gds-slider
+              id="age"
+              ng-model="ageSlider"
+              st-slider-search="'age'"
+              data-slider-min="0"
+              data-slider-max="100"
+              data-slider-value="[0, 100]"
+              ></slider>
+            </div>
+          </div>
 
-		   <div class="form-group">
-		    <label class="col-sm-2 control-label" for="school-filter">Schulabschluss:</label>
-		    <div class="col-sm-4">
-		      <select id="school-filter" class="form-control" st-search="'school'" >
-				  	<option value="" selected>Egal</option>
-				  	<option>Hauptschule</option>
-				  	<option>Realschule</option>
-				  	<option>Fachabitur</option>
-				  	<option>Abitur</option>
-				  	<option>anderes</option>
-			  	</select>
-		    </div>
-		    <label class="col-sm-2 control-label" for="degree-filter">Abschluss:</label>
-		    <div class="col-sm-4">
-		      <select id="degree-filter" class="form-control" st-search="'degree'" >
-				  	<option value="" selected>Egal</option>
-				  	<option>Lehre</option>
-				  	<option>Meister</option>
-				  	<option>Diplom</option>
-				  	<option>Bachelor</option>
-				  	<option>Master</option>
-				  	<option>Staatsexamen</option>
-				  	<option>Promotion</option>
-				  	<option>anderes</option>
-			  	</select>
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label class="col-sm-2 control-label" for="status-filter">Status: </label>
-		    <div class="col-sm-4">
-		      <select id="status-filter" class="form-control" st-search="'personal_status'" >
-				  	<option value="" selected>Egal</option>
-				  	<option>Student</option>
-				  	<option>Arbeiter</option>
-				  	<option>Angestellter</option>
-				  	<option>Beamter</option>
-				  	<option>selbständig</option>
-				  	<option>arbeitslos</option>
-				  	<option>anderes</option>
-			  	</select>
-		    </div>
-		    <label class="col-sm-2 control-label" for="income-filter">Einkommen: </label>
-		    <div class="col-sm-4">
-		      <select id="income-filter" class="form-control" st-search="'income'" >
-				  	<option value="" selected>Egal</option>
-				  	<option>< 1000 EURO</option>
-				  	<option>1000 - 3000 EURO</option>
-				  	<option>3000 - 5000 EURO</option>
-				  	<option>5000 - 7000 EURO</option>
-				  	<option>7000 - 9000 EURO</option>
-				  	<option>> 9000 EURO</option>
-			  	</select>
-		    </div>
-		  </div>
-<!-- 		  <div class="form-group">
-		    <label class="col-sm-2 control-label" for="income-filter">Neurotizismus:</label>
-		    <div class="col-sm-4">
-			  <input data-slider-toogle="#n" class="toogleSlider" ng-model="nCheck" type="checkbox"/>
-		      <input id="n" gds-slider enable="nCheck" class="slider" data-slider-id='ex1Slider' type="text" data-slider-min="1" data-slider-max="8" data-slider-step="1" data-slider-value="5" st-slider-search="'n'" ng-model="nSlider" />
-		    </div>
-		  </div> -->
-		  <!-- <div class="form-group">
-		    <label class="col-sm-2 control-label" for="income-filter">Extraversion:</label>
-		    <div class="col-sm-4">
-			  <input data-slider-toogle="#e" class="toogleSlider" ng-change="toogleSlider(eCheck, '#e')" ng-model="eCheck" type="checkbox"/>
-		      <input id="e" class="slider" data-slider-id='ex1Slider' type="text" data-slider-min="1" data-slider-max="8" data-slider-step="1" data-slider-value="5" st-slider-search="'e'"/>
-		    </div>
-		  </div> -->
-		  <div class="form-group">
-		    <label class="col-sm-2 control-label" for="income-filter">Gewissenhaftigkeit:</label>
-		    <div class="col-sm-4">
-			    <input ng-model="cCheck" class="toogleSlider" type="checkbox"/>
-		      <slider gds-slider
-		        id="c"
-		        class="personality-slider"
-		        ng-model="nSlider"
-		        gds-slider-enable="cCheck"
-		        st-slider-search="'c'"
-		        data-slider-min="1"
-		        data-slider-max="9"
-		        data-slider-step="1"
-		        data-slider-value="5"
-		      ></slider>
-		    </div>
-<!-- 		    <label class="col-sm-2 control-label" for="income-filter">Verträglichkeit:</label>
-		    <div class="col-sm-4">
-			    <input data-slider-toogle="#a" class="toogleSlider"type="checkbox"/>
-		      <slider class="personality-slider" id="a" type="text" st-slider-search="'a'" ng-model="nSlider" min="1" max="8" step="1" slider-value="5"></slider>
-		    </div>
-		  </div>-->
-		  <!-- <div class="form-group">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="school-filter">Schulabschluss:</label>
+            <div class="col-sm-4">
+              <select id="school-filter" class="form-control" st-search="'school'" >
+                <option value="" selected>Egal</option>
+                <option>Hauptschule</option>
+                <option>Realschule</option>
+                <option>Fachabitur</option>
+                <option>Abitur</option>
+                <option>anderes</option>
+              </select>
+            </div>
+            <label class="col-sm-2 control-label" for="degree-filter">Abschluss:</label>
+            <div class="col-sm-4">
+              <select id="degree-filter" class="form-control" st-search="'degree'" >
+                <option value="" selected>Egal</option>
+                <option>Lehre</option>
+                <option>Meister</option>
+                <option>Diplom</option>
+                <option>Bachelor</option>
+                <option>Master</option>
+                <option>Staatsexamen</option>
+                <option>Promotion</option>
+                <option>anderes</option>
+              </select>
+            </div>
+          </div>
 
-		    <label class="col-sm-2 control-label" for="income-filter">Extraversion:</label>
-		    <div class="col-sm-4">
-			    <input ng-model="eCheckBox" ng-change="toogleSlider(eCheckBox, '#e')" data-slider-toogle="#e" class="toogleSlider" type="checkbox"/>
-		      <slider class="personality-slider"  id="e" type="text" st-slider-search="'e'" ng-model="nSlider" min="1" max="8" step="1" value="5" enabled="false"></slider>
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label class="col-sm-2 control-label" for="income-filter">Gewissenhaftigkeit:</label>
-		    <div class="col-sm-4">
-			    <input data-slider-toogle="#c" class="toogleSlider" type="checkbox"/>
-		      <slider class="personality-slider" id="c" type="text" st-slider-search="'c'" ng-model="nSlider" min="1" max="8" step="1" slider-value="5"></slider>
-		    </div>
-		    <label class="col-sm-2 control-label" for="income-filter">Verträglichkeit:</label>
-		    <div class="col-sm-4">
-			    <input data-slider-toogle="#a" class="toogleSlider"type="checkbox"/>
-		      <slider class="personality-slider" id="a" type="text" st-slider-search="'a'" ng-model="nSlider" min="1" max="8" step="1" slider-value="5"></slider>
-		    </div>
-		  </div> -->
-		</form>
-	</div>
-</div>
-<!-- <input slider ng-model="a" id="ex7" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/>
-<input id="ex7-enabled" type="checkbox"/> Enabled -->
-<table  class="table table-striped">
-	<thead>
-	<tr>
-		<th>Geschlecht</th>
-		<th>Alter</th>
-		<th>Schulabschluss</th>
-		<th>Abschluss</th>
-		<th>Einkommen</th>
-		<th>Status</th>
-		<th>Postleitzahl</th>
-		<th>n</th>
-	</tr>
-	<tr>
-		<th colspan="5"></th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr ng-repeat="user in displayedUsers">
-		<td>{{user.gender}}</td>
-		<td>{{user.age}}</td>
-		<td>{{user.school}}</td>
-		<td>{{user.degree}}</td>
-		<td>{{user.income}}</td>
-		<td>{{user.personal_status}}</td>
-		<td>{{user.zipcode}}</td>
-		<td>{{user.n}}</td>
-	</tr>
-	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="5" class="text-center">
-				<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
-			</td>
-		</tr>
-	</tfoot>
-</table>
-</div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="status-filter">Status: </label>
+            <div class="col-sm-4">
+              <select id="status-filter" class="form-control" st-search="'personal_status'" >
+                <option value="" selected>Egal</option>
+                <option>Student</option>
+                <option>Arbeiter</option>
+                <option>Angestellter</option>
+                <option>Beamter</option>
+                <option>selbständig</option>
+                <option>arbeitslos</option>
+                <option>anderes</option>
+              </select>
+            </div>
+            <label class="col-sm-2 control-label" for="income-filter">Einkommen: </label>
+            <div class="col-sm-4">
+              <select id="income-filter" class="form-control" st-search="'income'" >
+                <option value="" selected>Egal</option>
+                <option>< 1000 EURO</option>
+                <option>1000 - 3000 EURO</option>
+                <option>3000 - 5000 EURO</option>
+                <option>5000 - 7000 EURO</option>
+                <option>7000 - 9000 EURO</option>
+                <option>> 9000 EURO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" 
+                  class="collapsed" 
+                  data-parent="#accordion" 
+                  href="#selectPersonality" 
+                  aria-expanded="true" 
+                  aria-controls="selectPersonality">
+                    Nach Persönlichkeitsmerkmalen filtern
+                  </a>
+                </h4>
+              </div>
+              <div id="selectPersonality" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" 
+                    for="income-filter" 
+                    data-container="body" 
+                    data-toggle="popover" 
+                    title="Gewissenhaftigkeit"
+                    data-placement="right" 
+                    data-content="<%= survey_texts["c"]["explanation"] %>">
+                    Gewissenhaftigkeit:</label>
+                    <div class="col-sm-4 slider-wraper">
+                      <input ng-model="cCheck" class="toogleSlider" type="checkbox"/>
+                      <slider gds-slider
+                      id="c"
+                      class="personality-slider"
+                      ng-model="cSlider"
+                      gds-slider-enable="cCheck"
+                      st-slider-search="'c'"
+                      data-slider-min="1"
+                      data-slider-max="9"
+                      data-slider-step="1"
+                      data-slider-value="5"
+                      ></slider>
+                    </div>
+                    <label class="col-sm-2 control-label" 
+                    for="income-filter"
+                    data-container="body" 
+                    data-toggle="popover" 
+                    title="Neurotizismus"
+                    data-placement="right" 
+                    data-content="<%= survey_texts["n"]["explanation"] %>">
+                    Neurotizismus:</label>
+                    <div class="col-sm-4 slider-wraper">
+                      <input ng-model="nCheck" class="toogleSlider" type="checkbox"/>
+                      <slider gds-slider
+                      id="n"
+                      class="personality-slider"
+                      ng-model="nSlider"
+                      gds-slider-enable="nCheck"
+                      st-slider-search="'n'"
+                      data-slider-min="1"
+                      data-slider-max="9"
+                      data-slider-step="1"
+                      data-slider-value="5"
+                      ></slider>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" 
+                    for="income-filter"
+                    data-container="body" 
+                    data-toggle="popover" 
+                    title="Extraversion"
+                    data-placement="right" 
+                    data-content="<%= survey_texts["e"]["explanation"] %>">
+                    Extraversion:</label>
+                    <div class="col-sm-4 slider-wraper">
+                      <input ng-model="eCheck" class="toogleSlider" type="checkbox"/>
+                      <slider gds-slider
+                      id="e"
+                      class="personality-slider"
+                      ng-model="eSlider"
+                      gds-slider-enable="eCheck"
+                      st-slider-search="'e'"
+                      data-slider-min="1"
+                      data-slider-max="9"
+                      data-slider-step="1"
+                      data-slider-value="5"
+                      ></slider>
+                    </div>
+                    <label class="col-sm-2 control-label" 
+                    for="income-filter"
+                    data-container="body" 
+                    data-toggle="popover" 
+                    title="Verträglichkeit"
+                    data-placement="right" 
+                    data-content="<%= survey_texts["a"]["explanation"] %>">
+                    Verträglichkeit:</label>
+                    <div class="col-sm-4 slider-wraper">
+                      <input ng-model="aCheck" class="toogleSlider" type="checkbox"/>
+                      <slider gds-slider
+                      id="a"
+                      class="personality-slider"
+                      ng-model="aSlider"
+                      gds-slider-enable="aCheck"
+                      st-slider-search="'a'"
+                      data-slider-min="1"
+                      data-slider-max="9"
+                      data-slider-step="1"
+                      data-slider-value="5"
+                      ></slider>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" 
+                    for="income-filter"
+                    data-container="body" 
+                    data-toggle="popover" 
+                    title="Offenheit für neues"
+                    data-placement="right" 
+                    data-content="<%= survey_texts["o"]["explanation"] %>">
+                    Offenheit:</label>
+                    <div class="col-sm-4 slider-wraper">
+                      <input ng-model="oCheck" class="toogleSlider" type="checkbox"/>
+                      <slider gds-slider
+                      id="o"
+                      class="personality-slider"
+                      ng-model="oSlider"
+                      gds-slider-enable="oCheck"
+                      st-slider-search="'o'"
+                      data-slider-min="1"
+                      data-slider-max="9"
+                      data-slider-step="1"
+                      data-slider-value="5"
+                      ></slider>
+                    </div>
+                    <label class="col-sm-2 control-label" 
+                    for="income-filter"
+                    data-container="body" 
+                    data-toggle="popover" 
+                    title="Ehrlichkeit bei der Beantwortung der Fragen"
+                    data-placement="right" 
+                    data-content="<%= survey_texts["h"]["explanation"] %>">
+                    Ehrlichkeit:</label>
+                    <div class="col-sm-4 slider-wraper">
+                      <input ng-model="hCheck" class="toogleSlider" type="checkbox"/>
+                      <slider gds-slider
+                      id="h"
+                      class="personality-slider"
+                      ng-model="hSlider"
+                      gds-slider-enable="hCheck"
+                      st-slider-search="'h'"
+                      data-slider-min="1"
+                      data-slider-max="9"
+                      data-slider-step="1"
+                      data-slider-value="5"
+                      ></slider>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" 
+                    for="income-filter"
+                    data-container="body" 
+                    data-toggle="popover" 
+                    title="Bedürfnis nach Macht und Einfluss"
+                    data-placement="right" 
+                    data-content="<%= survey_texts["sm"]["explanation"] %>">
+                    Macht und Einfluss:</label>
+                    <div class="col-sm-4 slider-wraper">
+                      <input ng-model="smCheck" class="toogleSlider" type="checkbox"/>
+                      <slider gds-slider
+                      id="sm"
+                      class="personality-slider"
+                      ng-model="smSlider"
+                      gds-slider-enable="smCheck"
+                      st-slider-search="'sm'"
+                      data-slider-min="1"
+                      data-slider-max="9"
+                      data-slider-step="1"
+                      data-slider-value="5"
+                      ></slider>
+                    </div>
+                    <label class="col-sm-2 control-label" 
+                    for="income-filter"
+                    data-container="body" 
+                    data-toggle="popover" 
+                    title="Bedürfnis nach Sicherheit und Ruhe"
+                    data-placement="right" 
+                    data-content="<%= survey_texts["mm"]["explanation"] %>">
+                    Sicherheit und Ruhe:</label>
+                    <div class="col-sm-4 slider-wraper">
+                      <input ng-model="mmCheck" class="toogleSlider" type="checkbox"/>
+                      <slider gds-slider
+                      id="mm"
+                      class="personality-slider"
+                      ng-model="mmSlider"
+                      gds-slider-enable="mmCheck"
+                      st-slider-search="'mm'"
+                      data-slider-min="1"
+                      data-slider-max="9"
+                      data-slider-step="1"
+                      data-slider-value="5"
+                      ></slider>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" 
+                    for="income-filter"
+                    data-container="body" 
+                    data-toggle="popover" 
+                    title="Bedürfnis nach Anerkennung und Leistung"
+                    data-placement="right" 
+                    data-content="<%= survey_texts["lm"]["explanation"] %>">
+                    Anerkennung und Leistung:</label>
+                    <div class="col-sm-4 slider-wraper">
+                      <input ng-model="lmCheck" class="toogleSlider" type="checkbox"/>
+                      <slider gds-slider
+                      id="lm"
+                      class="personality-slider"
+                      ng-model="lmSlider"
+                      gds-slider-enable="lmCheck"
+                      st-slider-search="'lm'"
+                      data-slider-min="1"
+                      data-slider-max="9"
+                      data-slider-step="1"
+                      data-slider-value="5"
+                      ></slider>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <table  class="table table-striped">
+      <thead>
+        <tr>
+          <th>Geschlecht</th>
+          <th>Alter</th>
+          <th>Schulabschluss</th>
+          <th>Abschluss</th>
+          <th>Einkommen</th>
+          <th>Status</th>
+          <th>Postleitzahl</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in displayedUsers">
+          <td>{{user.gender}}</td>
+          <td>{{user.age}}</td>
+          <td>{{user.school}}</td>
+          <td>{{user.degree}}</td>
+          <td>{{user.income}}</td>
+          <td>{{user.personal_status}}</td>
+          <td>{{user.zipcode}}</td>
+          <td><%= link_to "/discussions_users", class: "btn btn-xs btn-primary" %></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="text-center">
+            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 </div>
 <div id="invite_observers">
-	<div class="message"></div>
-	<h2>Einladen über Email Adresse</h2>
-	<p>Laden Sie Beobachter über deren Email Adresse ein. Sie können auch Beobachter die sich noch nicht registriert haben einladen.</p>
-	<%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "observer" } %>
+  <div class="message"></div>
+  <h2>Einladen über Email Adresse</h2>
+  <p>Laden Sie Beobachter über deren Email Adresse ein. Sie können auch Beobachter die sich noch nicht registriert haben einladen.</p>
+  <%= render partial: "discussions_users/email_invitation", locals: { discussions_users: @user, role: "observer" } %>
 
 </div>

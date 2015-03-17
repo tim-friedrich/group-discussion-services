@@ -72,6 +72,9 @@ class DiscussionsController < ApplicationController
       format.html do
         if current_user.research_institutes.first()
           @companies = current_user.research_institutes.first.companies
+          @survey_texts = JSON.load(Rails.root.join 'db/survey_analysis_texts.json')
+          puts "A"*20
+          puts @survey_texts
         else
           @companies = []
         end

@@ -1,5 +1,5 @@
 <% title 'Diskussion bearbeiten' %>
-<div ng-app="discussionEdit" ng-controller="DiscussionEditController">
+<div ng-app="discussionEdit" ng-controller="DiscussionEditController" data-discussion-id="<%= @discussion.id %>">
   <h1>Diskussion bearbeiten</h1>
 
   <!-- Nav tabs -->
@@ -16,7 +16,7 @@
     </div>
 
     <div class="tab-pane fade" id="invite_users">
-      <%= render 'probands_selection' %>
+      <%= render partial: 'probands_selection', locals: { survey_texts: @survey_texts  } %>
     </div>
 
 

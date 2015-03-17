@@ -36,18 +36,28 @@
   },
   "lm": {
     "title": "Bedürfnis nach Anerkennung und Leistung",
+    "explanation": "TODO",
     "low": "Ihr Testergebnis deutet darauf hin, dass Sie ein nur schwach ausgeprägtes Leistungsmotiv besitzen; ihre eigenen Leistungen zu steigern interessiert sie nur wenig.",
     "medium": "Ihr Testergebnis deutet darauf hin, dass Sie ein durchschnittlich ausgeprägtes Leistungsmotiv besitzen; ihre eigene Leistung zu steigern interessiert Sie in einem gewissen Rahmen. Auch freuen Sie sich über Anerkennung, machen sich jedoch nicht davon abhängig.",
     "high": "Ihr Testergebnis deutet darauf hin, dass Sie ein stark ausgeprägtes Leistungsmotiv besitzen; ihre eigene Leistung zu steigern ist Ihnen sehr wichtig, ebenso wie Anerkennung für die erbrachten Leistungen zu erhalten."
   },
   "sm": {
     "title": "Bedürfnis nach Macht und Einfluss",
+    "explanation": "TODO",
     "low": "Ihr Testergebnis deutet auf ein schwach ausgeprägtes Machtmotiv hin; Macht und Einfluss sind Ihnen nicht wichtig und sie streben nicht danach, Verantwortung zu übernehmen und Dinge nach ihrem Willen umzugestalten.",
     "medium": "Ihr Testergebnis deutet auf ein mittleres Machtmotiv hin; Sie möchten gerne Dinge gestalten und Verantwortung übernehmen, allerdings nur bis zu einem gewissen Rahmen. Sie verspüren nur wenig Verlangen danach, ein hochrangiges Amt wie bspw. „Präsident“ zu bekleiden.",
     "high": "Ihr Testergebnis deutet auf ein stark ausgeprägtes Machtmotiv hin; Sie möchten gerne Dinge gestalten, Verantwortung übernehmen sowie wichtige Entscheidungen treffen können."
   },
   "mm": {
     "title": "Bedürfnis nach Sicherheit und Ruhe",
+    "explanation": "TODO",
+    "low": "Ihr Testergebnis deutet auf ein nur wenig ausgeprägtes Sicherheitsmotiv hin; Sie verspüren nur ein geringes Verlangen nach Sicherheit und Ruhe. Überraschungen und Risiken sehen Sie gelassen entgegen.",
+    "medium": "Ihr Testergebnis deutet auf ein mittleres Verlangen nach Sicherheit und Ruhe hin; Risiken oder Überraschungen werden von Ihnen weder besonders begrüßt, noch setzen diese Sie übermäßig unter Druck.",
+    "high": "Ihr Testergebnis deutet auf ein stark ausgeprägtes Sicherheitsmotiv hin; Sie verspüren ein starkes Verlangen nach Sicherheit, Ruhe und Geborgenheit. Risiken oder Überraschungen werden von Ihnen als unangenehm empfunden."
+  },
+  "h": {
+    "title": "Ehrlichkeit bei der Beantwortung der Fragen",
+    "explanation": "Diese Skala gibt Ihnen eine Übersicht über die Ehrlichkeit, mit der Probanden ihre Persönlichkeitstests beantwortet haben. Je höher der angegebene Wert, desto ehrlicher waren die Probanden und desto zuverlässiger können die Persönlichkeitswerte zu Interpretationszwecken herangezogen werden.",
     "low": "Ihr Testergebnis deutet auf ein nur wenig ausgeprägtes Sicherheitsmotiv hin; Sie verspüren nur ein geringes Verlangen nach Sicherheit und Ruhe. Überraschungen und Risiken sehen Sie gelassen entgegen.",
     "medium": "Ihr Testergebnis deutet auf ein mittleres Verlangen nach Sicherheit und Ruhe hin; Risiken oder Überraschungen werden von Ihnen weder besonders begrüßt, noch setzen diese Sie übermäßig unter Druck.",
     "high": "Ihr Testergebnis deutet auf ein stark ausgeprägtes Sicherheitsmotiv hin; Sie verspüren ein starkes Verlangen nach Sicherheit, Ruhe und Geborgenheit. Risiken oder Überraschungen werden von Ihnen als unangenehm empfunden."
