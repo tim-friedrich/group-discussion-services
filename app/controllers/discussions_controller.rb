@@ -52,8 +52,7 @@ class DiscussionsController < ApplicationController
   end
 
   def new
-    @discussion = Discussion.new(discussion_params)
-    @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
+    @discussion = Discussion.new
     @users = User.all
     @proband = DiscussionsUser.new
     if current_user.research_institutes.first
@@ -90,6 +89,9 @@ class DiscussionsController < ApplicationController
   end
 
   def create
+    @discussion = Discussion.new(discussion_params)
+    @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
+
     respond_to do |format|
       if @discussion.save
         @discussion.moderator = current_user
