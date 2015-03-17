@@ -1,3 +1,19 @@
 .chart-format-normal{
   width: 50%;
 }
+
+.chart-format-mini{
+  svg{
+    width: 150px;
+    height: 110px;
+  }
+  // svg text{
+  //   font-size: 24pt;
+  // }
+  svg text{
+    display: none;
+  }
+  svg .tick:not(.zero) {
+    opacity: 0 !important;
+  }
+}

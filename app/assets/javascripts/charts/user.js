@@ -1,7 +1,7 @@
 // This script is used for both: Interactive client code and image generation
 
-var formatData = function(scaleValues){
-  var normalizedValues = scaleValues.map(function(v){
+var formatData = function(data){
+  var normalizedValues = data.map(function(v){
     return parseInt(v) - 5;
   })
 
@@ -23,7 +23,7 @@ var formatData = function(scaleValues){
   ]
 }
 
-window.generateChart_user = function(domid, isDynamic, scaleValues, cb) {
+window.generateChart_user = function(domid, data, isDynamic, options, cb) {
   if(!isDynamic){
     nv.fontHack = 27;
   }
@@ -41,19 +41,25 @@ window.generateChart_user = function(domid, isDynamic, scaleValues, cb) {
       .y(function(d){ return d.value })
       .showYAxis(false)
       .valueFormat(function(value){ return value + 5 })
-      .tooltips(true)
+      .tooltips(false)
       .showValues(true)
 
-    // register tooltips
-    diagram
-      .tooltipContent(function(key, y, e, graph){
-        return '<p>' + graph.point.desc + '</p>'
-      })
-      .tooltips(true)
+    // size (easier via css for svg)
+    // if(options.height){ diagram.height(options.height) }
+    // if(options.width){ diagram.width(options.width) }
+
+    // tooltips
+    if(options.tooltips){
+      diagram
+        .tooltipContent(function(key, y, e, graph){
+          return '<p>' + graph.point.desc + '</p>'
+        })
+        .tooltips(true)
+    }
 
     // insert data
     d3.select(svg)
-      .datum(formatData(scaleValues))
+      .datum(formatData(data))
       .call(diagram)
 
     // resize diagram if window gets resized

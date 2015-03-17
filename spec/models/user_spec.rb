@@ -319,23 +319,23 @@ describe User do
 
 
     describe '#has_chart_image?' do
-      it 'checks if chart image exists by calling ChartImage with the user' do
-        expect( ChartImage ).to receive(:exists?).with(user_with_survey, "test")
+      it 'checks if chart image exists by calling UserChartImage with the user' do
+        expect( UserChartImage ).to receive(:exists?).with(user_with_survey, "test")
         user_with_survey.has_chart_image?
       end
     end
 
     describe '#chart_image_path' do
-      it 'returns the file system path to the image by calling ChartImage with the user' do
-        expect( ChartImage ).to receive(:path_for).with(user_with_survey, "test")
+      it 'returns the file system path to the image by calling UserChartImage with the user' do
+        expect( UserChartImage ).to receive(:path_for).with(user_with_survey, "test")
         user_with_survey.chart_image_path
       end
     end
 
     describe '#generate_chart_image!' do
-      it 'generates a new chart image png by creating a ChartImage instance with the user and calling #generate! on it' do
-        expect( ChartImage ).to receive(:new).with(user_with_survey, "test").and_call_original
-        expect_any_instance_of( ChartImage ).to receive(:generate!)
+      it 'generates a new chart image png by creating a UserChartImage instance with the user and calling #generate! on it' do
+        expect( UserChartImage ).to receive(:new).with(user_with_survey, "test").and_call_original
+        expect_any_instance_of( UserChartImage ).to receive(:generate!)
         user_with_survey.generate_chart_image!
       end
     end
