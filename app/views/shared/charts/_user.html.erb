@@ -1,3 +1,4 @@
 <% fmt = defined?(fmt) && fmt %>
 <% tooltips = fmt == 'mini' ? false : true %>
-<%= generate_interactive_chart type: 'user', domid: chart_id, data: data, fmt: fmt, js: { tooltips: tooltips } %>
+<% duration = fmt == 'mini' ? 0 : nil # nil: default %>
+<%= generate_interactive_chart type: 'user', domid: chart_id, data: data, fmt: fmt, js: { tooltips: tooltips, duration: duration } %>

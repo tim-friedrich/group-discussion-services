@@ -36,13 +36,26 @@ window.generateChart_user = function(domid, data, isDynamic, options, cb) {
 
     // create bar diagram
     var diagram = nv.models.discreteBarChart()
-      .duration(isDynamic ? 250 : 0)
       .x(function(d){ return d.label })
       .y(function(d){ return d.value })
       .showYAxis(false)
       .valueFormat(function(value){ return value + 5 })
       .tooltips(false)
       .showValues(true)
+
+    // differences between dynamic and static version
+    if(isDynamic){
+      diagram
+        .margin({left: 0, top: 0, right: 0, bottom: 0})
+        .duration(250)
+    } else {
+      diagram
+        .duration(0)
+    }
+
+    if(options.duration != undefined){
+      diagram.duration(options.duration)
+    }
 
     // size (easier via css for svg)
     // if(options.height){ diagram.height(options.height) }
