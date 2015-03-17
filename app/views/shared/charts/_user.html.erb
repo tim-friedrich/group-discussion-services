@@ -1,2 +1,3 @@
-<div id="user_chart" style="width: 50%"><svg></svg></div>
-<script>$(function(){ generateChart_user("user_chart", true, <%= data.to_json %>) })</script>
+<% format = 'normal' unless format %>
+<div id="<%= chart_id %>" class="chart-format-<%= format %>"><svg></svg></div>
+<script>$(function(){ generateChart_user("<%= chart_id %>", true, <%= data.to_json %>) })</script>

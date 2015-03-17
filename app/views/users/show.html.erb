@@ -15,5 +15,5 @@
 
 <% if @user.has_survey? %>
   <h3>Persönlichkeit</h3>
-  <%= render partial: 'shared/charts/user', locals: { data: @user.survey.scale_values } %>
+  <%= render partial: 'shared/charts/user', locals: { chart_id: "user-chart", data: @user.survey.scale_values } %>
 <% end %>
