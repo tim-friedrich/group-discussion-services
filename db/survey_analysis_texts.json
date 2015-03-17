@@ -1,35 +1,35 @@
 {
   "n": {
     "title": "Neurotizismus",
-    "explanation": "Eigenschaften, welche im Zusammenhang mit Neurotizismus genannt werden, sind beispielsweise Ängstlichkeit, Nervosität, aber auch Selbstzweifel und grüblerisches Verhalten.<br/><br/>",
+    "explanation": "Eigenschaften, welche im Zusammenhang mit Neurotizismus genannt werden, sind beispielsweise Ängstlichkeit, Nervosität, aber auch Selbstzweifel und grüblerisches Verhalten.",
     "low": "Eine unterdurchschnittliche Ausprägung in dieser Kategorie weist auf ein starkes Selbstbewusstsein hin; sie haben nur wenig Selbstzweifel und trauen sich vieles zu. Grüblerisches Verhalten tritt bei Ihnen selten auf.",
     "medium": "Eine durchschnittliche Ausprägung in dieser Kategorie weist auf ein gutes Selbstbewusstsein hin; hin und wieder haben Sie jedoch Selbstzweifel und es kommt auch vor, dass Sie sich zu bestimmten Themen „den Kopf zerbrechen“. Den meisten Aufgaben fühlen Sie sich gewachsen; Sie sehen sich weder als übermäßig ängstlich; noch übermäßig mutig.",
     "high": "Eine überdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie sich oft ängstlich und nervös fühlen. Sie neigen zu Selbstzweifeln, trauen sich nicht übermäßig viel zu und grübeln oft. Außerdem besteht eine erhöhte Anfälligkeit für depressive Störungen."
   },
   "e": {
     "title": "Extraversion",
-    "explanation": "Eigenschaften, welche im Zusammenhang mit Extraversion genannt werden, sind beispielsweise Kontaktfreudigkeit, Geselligkeit, sowie die Suche nach Abwechslungen und äußeren Anregungen.<br/><br/>",
+    "explanation": "Eigenschaften, welche im Zusammenhang mit Extraversion genannt werden, sind beispielsweise Kontaktfreudigkeit, Geselligkeit, sowie die Suche nach Abwechslungen und äußeren Anregungen.",
     "low": "Eine unterdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie eine eher stille Person ist, welche oft in sich gekehrt ist. Sie sind zumeist weniger Kontaktfreudig.",
     "medium": "Eine durchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie generell eine offene und kommunikative Persönlichkeit haben; gelegentlich aber auch Zeit für sich brauchen und währenddessen weniger Kontaktfreudig sind.",
     "high": "Eine überdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie generell über eine ausgeprägt kommunikative Persönlichkeit verfügen. Sie suchen oft nach neuen Anregungen und Abwechslung. Wenn Sie neue Menschen treffen, zeigen Sie sich überdurchschnittlich gesellig und kontaktfreudig."
   },
   "c": {
     "title": "Gewissenhaftigkeit",
-    "explanation": "Eigenschaften, welche im Zusammenhang mit Gewissenhaftigkeit genannt werden, sind beispielsweise planvolles Vorbereiten sowie ein Gespür für Ordnung.<br/><br/>",
+    "explanation": "Eigenschaften, welche im Zusammenhang mit Gewissenhaftigkeit genannt werden, sind beispielsweise planvolles Vorbereiten sowie ein Gespür für Ordnung.",
     "low": "Eine unterdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie öfter wenig planvoll und weniger ordentlich arbeiten; auch kleinere Nachlässigkeiten stören Sie nicht. Im Bezug auf den Haushalt stört es Sie nicht, wenn Teile des Wohnraums unaufgeräumt sind.",
     "medium": "Eine durchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass ihr Verlangen nach Ordnung genauso hoch ausgeprägt ist, wie bei den meisten Ihrer Mitmenschen. Aufgaben erledigen Sie meistens ordentlich und planvoll; über kleinere Nachlässigkeiten können Sie jedoch meist hinweg sehen.",
     "high": "Eine überdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie in aller Regel äußerst planvoll und ordentlich vorgehen, sowohl im privaten als auch im beruflichen Umfeld. Auch kleinere Nachlässigkeiten stören Sie; ihr Handeln ist überwiegend geprägt von Gewissenhaftigkeit."
   },
   "a": {
     "title": "Verträglichkeit",
-    "explanation": "Eigenschaften, welche im Zusammenhang mit Verträglichkeit genannt werden, sind beispielsweise Höflichkeit, zuvorkommendes Verhalten gegenüber anderen und streitvermeidendes Auftreten.<br/><br/>",
+    "explanation": "Eigenschaften, welche im Zusammenhang mit Verträglichkeit genannt werden, sind beispielsweise Höflichkeit, zuvorkommendes Verhalten gegenüber anderen und streitvermeidendes Auftreten.",
     "low": "Eine unterdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie oftmals wenig höflich auftreten und gelegentlich in Streit mit anderen geraten. In Diskussionen bestehen sie häufig auf Ihrer Meinung; Kompromisse einzugehen fällt Ihnen teilweise schwer.",
     "medium": "Eine durchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie in aller Regel höflich und zuvorkommend sind. Gelegentlich geraten Sie in Streit mit anderen, sind aber generell bereit, sich auf Kompromisse einzulassen.",
     "high": "Eine überdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie stets bemüht sind, höflich und zuvorkommend aufzutreten. Sie sind allgemein beliebt und setzen sich auch für andere ein."
   },
   "o": {
     "title": "Offenheit für Neues",
-    "explanation": "Eigenschaften, welche im Zusammenhang mit Offenheit für Neues genannt werden, sind beispielsweise Toleranz, Neugier, Wissbegierigkeit.<br/><br/>",
+    "explanation": "Eigenschaften, welche im Zusammenhang mit Offenheit für Neues genannt werden, sind beispielsweise Toleranz, Neugier, Wissbegierigkeit.",
     "low": "Eine unterdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie weniger tolerant und offen für Neues sind. Meistens ist es Ihnen am liebsten, wenn die Dinge so bleiben, wie sie sind.",
     "medium": "Eine durchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie in der Regel offen für neue Erfahrungen und Eindrücke sind. Sie sind recht tolerant und stehen Veränderungen bis zu einer gewissen Grenze positiv gegenüber.",
     "high": "Eine überdurchschnittliche Ausprägung in dieser Kategorie weist darauf hin, dass Sie neugierig, wissbegierig und fantasievoll sind. Sie interessieren sich für Kunst, Musik und Literatur. Gegenüber Veränderungen sind Sie positiv eingestellt."
