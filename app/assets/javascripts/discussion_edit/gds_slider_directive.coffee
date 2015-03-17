@@ -3,6 +3,7 @@ angular.module('discussionEdit').directive 'gdsSlider', [ ->
   replace: true
 
   link: (scope, element, attrs) ->
+    
     # init slider
     element.slider
       enabled: !attrs.gdsSliderEnable || !!scope.$eval(attrs.gdsSliderEnable)
