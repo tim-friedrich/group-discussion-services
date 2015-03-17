@@ -1,6 +1,6 @@
 $ ->
   if $('#pm-survey').length
-    MAX_RESTART_SECONDS = 10
+    MAX_RESTART_SECONDS = 60
     ENDPOINT = '/survey'
     QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_questions.json")) %>'
     BIG5_OPTIONS = ["trifft gar nicht zu", "trifft eher nicht zu", "trifft eher zu", "trifft genau zu"]
