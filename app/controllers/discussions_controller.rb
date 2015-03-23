@@ -1,6 +1,5 @@
 class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:leave, :show, :edit, :update, :destroy, :evaluate, :arguments]
-  before_action :new_discussion, only: [ :create ]
   before_filter :authenticate_user!
 
 
@@ -56,7 +55,7 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.new
     @users = User.all
     @proband = DiscussionsUser.new
-    if current_user.research_institutes.first()
+    if current_user.research_institutes.first
       @companies = current_user.research_institutes.first.companies
     else
       @companies = []
@@ -90,6 +89,9 @@ class DiscussionsController < ApplicationController
   end
 
   def create
+    @discussion = Discussion.new(discussion_params)
+    @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
+
     respond_to do |format|
       if @discussion.save
         @discussion.moderator = current_user
@@ -145,11 +147,6 @@ class DiscussionsController < ApplicationController
 
   def set_discussion
     @discussion = Discussion.find(params[:id])
-  end
-
-  def new_discussion
-    @discussion = Discussion.new(discussion_params)
-    @question = Question.create(topic: "Herzlich Willkommen", discussion: @discussion)
   end
 
   def discussion_params

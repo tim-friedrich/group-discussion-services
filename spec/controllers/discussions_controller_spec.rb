@@ -178,11 +178,6 @@ RSpec.describe DiscussionsController, :type => :controller do
     end
     context "should be redirected to the signin page" do
       describe "get" do
-        it "index" do
-          get :index, {}, valid_session
-          puts new_user_session_url
-          response.should redirect_to(new_user_session_url)
-        end
         it "show" do
           get :show, {:id => @discussion.to_param}
           response.should redirect_to(new_user_session_url)

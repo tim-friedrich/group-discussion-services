@@ -5,7 +5,7 @@ GDS::Application.routes.draw do
   resources :votes, only: [:create]
   resources :dislikes, only: [:create]
   resources :likes, only: [:create]
-  resources :discussions
+  resources :discussions, except: [:index]
   resources :questions, only: [:create]
   resources :arguments, only: [:create]
   resources :discussions_users

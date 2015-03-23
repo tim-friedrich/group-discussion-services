@@ -132,11 +132,11 @@ class User < ActiveRecord::Base
 
 
   def has_chart_image?
-    ChartImage.exists?(self, Rails.env.test? && 'test')
+    UserChartImage.exists?(self, Rails.env.test? && 'test')
   end
 
   def chart_image_path
-    ChartImage.path_for(self, Rails.env.test? && 'test')
+    UserChartImage.path_for(self, Rails.env.test? && 'test')
   end
 
   def ensure_chart_image!
@@ -146,6 +146,6 @@ class User < ActiveRecord::Base
   end
 
   def generate_chart_image!
-    ChartImage.new(self, Rails.env.test? && 'test').generate!
+    UserChartImage.new(self, Rails.env.test? && 'test').generate!
   end
 end

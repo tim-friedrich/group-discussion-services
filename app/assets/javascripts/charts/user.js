@@ -1,7 +1,7 @@
 // This script is used for both: Interactive client code and image generation
 
-var formatData = function(scaleValues){
-  var normalizedValues = scaleValues.map(function(v){
+var formatData = function(data){
+  var normalizedValues = data.map(function(v){
     return parseInt(v) - 5;
   })
 
@@ -23,7 +23,7 @@ var formatData = function(scaleValues){
   ]
 }
 
-window.generateChart_user = function(domid, isDynamic, scaleValues, cb) {
+window.generateChart_user = function(domid, data, isDynamic, options, cb) {
   if(!isDynamic){
     nv.fontHack = 27;
   }
@@ -36,24 +36,43 @@ window.generateChart_user = function(domid, isDynamic, scaleValues, cb) {
 
     // create bar diagram
     var diagram = nv.models.discreteBarChart()
-      .duration(isDynamic ? 250 : 0)
       .x(function(d){ return d.label })
       .y(function(d){ return d.value })
       .showYAxis(false)
       .valueFormat(function(value){ return value + 5 })
-      .tooltips(true)
+      .tooltips(false)
       .showValues(true)
 
-    // register tooltips
-    diagram
-      .tooltipContent(function(key, y, e, graph){
-        return '<p>' + graph.point.desc + '</p>'
-      })
-      .tooltips(true)
+    // differences between dynamic and static version
+    if(isDynamic){
+      diagram
+        .margin({left: 0, top: 0, right: 0, bottom: 0})
+        .duration(250)
+    } else {
+      diagram
+        .duration(0)
+    }
+
+    if(options.duration != undefined){
+      diagram.duration(options.duration)
+    }
+
+    // size (easier via css for svg)
+    // if(options.height){ diagram.height(options.height) }
+    // if(options.width){ diagram.width(options.width) }
+
+    // tooltips
+    if(options.tooltips){
+      diagram
+        .tooltipContent(function(key, y, e, graph){
+          return '<p>' + graph.point.desc + '</p>'
+        })
+        .tooltips(true)
+    }
 
     // insert data
     d3.select(svg)
-      .datum(formatData(scaleValues))
+      .datum(formatData(data))
       .call(diagram)
 
     // resize diagram if window gets resized

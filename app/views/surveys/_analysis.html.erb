@@ -7,9 +7,19 @@
 </script>
 
 <script id="pm-survey-analysis-text-template" type="x-tmpl-mustache">
-  <h4 class="pm-survey-analysis-title">{{analysisTitle}} <span class="pm-survey-analysis-short-level">{{analysisShortLevel}}</span></h4>
+  <h4 class="pm-survey-analysis-title">
+    {{analysisTitle}} <span class="pm-survey-analysis-short-level"
+      title="Ihr Ergebnis: {{analysisPoints}} Punkte"
+      data-toggle="popover"
+      data-container="body"
+      data-placement="right"
+      data-html="true"
+      data-content="1-3 Punkte: Unter Durchschnitt<br/>4-6 Punkte: Durchschnitt<br/>7-9 Punkte: Über Durchschnitt"
+    >{{analysisShortLevel}}</span>
+  </h4>
+  <div class="pm-survey-analysis-explanation">{{analysisExplanation}}</div>
   <div class="pm-survey-analysis-text">
-    {{{analysisExplanation}}} Ihr Testwert in dieser Kategorie entspricht einer <strong>{{analysisLevel}} Ausprägung.</strong> {{{analysisText}}}
+    Ihr Testwert in dieser Kategorie entspricht einer <strong>{{analysisLevel}} Ausprägung.</strong> {{analysisText}}
   </div>
 </script>
 

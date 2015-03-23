@@ -60,6 +60,7 @@
         <th>Alter</th>
         <th>Geschlecht</th>
         <th>Postleitzahl</th>
+        <th>Persönlichkeit</th>
         <th></th>
       </tr>
       </thead>
@@ -72,6 +73,7 @@
           <td><%= proband.user.age %></td>
           <td><%= proband.user.gender %></td>
           <td><%= proband.user.zipcode %></td>
+          <td><%= render partial: 'shared/charts/user', locals: { chart_id: "proband-#{proband.user.id}", data: proband.user.survey.scale_values, fmt: 'mini' } if proband.user.has_survey? %></td>
           <td><%= link_to 'Details', proband.user, class: "btn btn-xs btn-primary" %></td>
         </tr>
       <% end %>

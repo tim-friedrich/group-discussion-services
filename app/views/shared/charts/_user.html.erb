@@ -1,2 +1,4 @@
-<div id="user_chart" style="width: 50%"><svg></svg></div>
-<script>$(function(){ generateChart_user("user_chart", true, <%= data.to_json %>) })</script>
+<% fmt = defined?(fmt) && fmt %>
+<% tooltips = fmt == 'mini' ? false : true %>
+<% duration = fmt == 'mini' ? 0 : nil # nil: default %>
+<%= generate_interactive_chart type: 'user', domid: chart_id, data: data, fmt: fmt, js: { tooltips: tooltips, duration: duration } %>

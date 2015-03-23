@@ -1,6 +1,6 @@
 $ ->
   if $('#pm-survey').length
-    MAX_RESTART_SECONDS = 10
+    MAX_RESTART_SECONDS = 60
     ENDPOINT = '/survey'
     QUESTIONS = JSON.parse '<%= JSON.dump(JSON.load(Rails.root.join "db", "survey_questions.json")) %>'
     BIG5_OPTIONS = ["trifft gar nicht zu", "trifft eher nicht zu", "trifft eher zu", "trifft genau zu"]
@@ -16,15 +16,15 @@ $ ->
       8: "high"
       9: "high"
     ANALYSIS_SHORT_ASSIGNMENTS =
-      1: "- - - -"
-      2: "- - -"
-      3: "- -"
-      4: "-"
-      5: "o"
-      6: "+"
-      7: "+ +"
-      8: "+ + +"
-      9: "+ + + +"
+      1: "•"
+      2: "• •"
+      3: "• • •"
+      4: "• • • •"
+      5: "• • • • •"
+      6: "• • • • • •"
+      7: "• • • • • • •"
+      8: "• • • • • • • •"
+      9: "• • • • • • • • •"
     ANALYSIS_LEVELS =
       low: "unterdurchschnittlichen"
       medium: "durchschnittlichen"
@@ -166,6 +166,7 @@ $ ->
       Object.keys(survey).forEach (key) ->
         assignment = ANALYSIS_TEXT_ASSIGNMENTS[survey[key]]
         markup += Mustache.render analysisTextTemplate,
+          analysisPoints: survey[key]
           analysisShortLevel: ANALYSIS_SHORT_ASSIGNMENTS[survey[key]]
           analysisTitle: ANALYSIS_TEXTS[key]["title"]
           analysisExplanation: ANALYSIS_TEXTS[key]["explanation"]

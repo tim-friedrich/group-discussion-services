@@ -1,26 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= yield(:title).presence || SETTINGS[:default_title] %></title>
-  <meta charset="UTF-8">
 
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
+<%= render 'layouts/head' %>
 
-  <%= csrf_meta_tags %>
-
-  <!--[if IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-</head>
 <body class="pm-survey-body">
   <div class="clearfix">
     <%= yield %>
   </div>
-  <hr/>
-  <footer>
-    <%= link_to 'Kontakt', '/contact_us' %> | <%= link_to 'Impressum', '/imprint' %> | Unterstützt durch: <%= image_tag 'HPV_logo.jpg', class: "hpv_logo" %>
-  </footer>
+
+  <%= render 'shared/footer' %>
 </body>
 </html>
 
