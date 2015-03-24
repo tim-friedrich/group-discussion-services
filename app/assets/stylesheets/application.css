@@ -6,18 +6,18 @@
  *
  * SASS IMPORTS
  *= require _imports
-  *
+ *
  * BOWER
  *= require bootstrap-datepicker
  *= require nvd3
  *= require ng-table
  *= require nouislider
  *
+ *
  * APP
  *= require ./scaffolds
-
  *= require seiyria-bootstrap-slider
- 
+ *
  * VENDOR
  *= require progress-polyfill
  *
