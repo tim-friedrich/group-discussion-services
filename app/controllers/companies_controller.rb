@@ -2,28 +2,19 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   before_action :new_company, only: :create
-
-
   load_and_authorize_resource
 
 
-  # GET /companies/1
-  # GET /companies/1.json
   def show
   end
 
-  # GET /companies/new
   def new
-    @company = Company.new
-    @company.contact = Contact.new
+    @company = Company.new contact: Contact.new
   end
 
-  # GET /companies/1/edit
   def edit
   end
 
-  # POST /companies
-  # POST /companies.json
   def create
     respond_to do |format|
       if @company.save
@@ -36,8 +27,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /companies/1
-  # PATCH/PUT /companies/1.json
   def update
     respond_to do |format|
       if @company.update(company_params)
@@ -50,8 +39,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # DELETE /companies/1
-  # DELETE /companies/1.json
   def destroy
     @company.destroy
     respond_to do |format|
@@ -73,6 +60,6 @@ class CompaniesController < ApplicationController
 
   def new_company
     @company = Company.new(company_params)
-    @company.research_institute = current_user.research_institutes.first
+    @company.research_institute = current_user.preferred_research_institute
   end
 end

@@ -1,4 +1,5 @@
 <% title 'Profil' %>
+
 <% if current_user.is_proband? %>
   <div class="panel panel-success">
     <div class="panel-body">
@@ -7,6 +8,7 @@
     </div>
   </div>
 <% end %>
+
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
   <li class="active"><a href="#discussions" data-toggle="tab">Diskussionen</a></li>
@@ -20,14 +22,13 @@
 <div class="tab-content">
   <div class="tab-pane fade in active" id="discussions">
     <h2>Meine Diskussionen</h2>
-    <% if !@discussions_users.nil? %>
+    <% if @discussions_users %>
       <div class="discussions_list">
         <%= render partial: 'discussions_users/list_discussions', locals: { discussions_users: @discussions_users } %>
       </div>
       <br>
       <% if current_user.is_moderator? %>
         <%= link_to 'Neue Diskussion erstellen', new_discussion_path, class: "btn btn-xs btn-primary" %>
-
       <% end %>
     <% end %>
   </div>
@@ -46,7 +47,7 @@
 
       <%= render partial: 'shared/error_messages', locals: { resource: current_user } %>
 
-      <%= render 'form' %>
+      <%= render 'users/form' %>
     <% end %>
   </div>
 </div>

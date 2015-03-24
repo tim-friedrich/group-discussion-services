@@ -1,0 +1,2 @@
+$('#discussion-toggle-button-<%= @discussion.id %>').html('<%= escape_javascript render partial: 'toggle_state_button', locals: { discussion: @discussion } %>')
+$('#discussion-join-button-<%= @discussion.id %> a').css('display', '<%= @discussion.closed? ? "none" : "inline-block" %>')

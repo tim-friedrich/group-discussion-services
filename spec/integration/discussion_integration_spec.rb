@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 
-describe 'discussion', js: true do
+describe 'Discussion', js: true do
   let(:discussion){ create(:discussion) }
   use_before_unload_hack
 
@@ -51,20 +51,24 @@ describe 'discussion', js: true do
           expect( find('#new_argument_content') ).not_to have_content "test"
         end
       end
+
       describe "user status" do
         it "should list the confirmed user" do
-          expect( find('#probands-list') ).to have_content @user.username(discussion)
+          expect( find('#probands-list') ).to have_content @user.username_in(discussion)
         end
+
         it "should be listed as online when one is in discussion" do
           page.find_by_id(@user.id).should_not have_css(".offline")
           expect( page.find_by_id(@user.id)[:class].include?("offline")).to eq false
         end
+
         it "should be listed as offline when one is in discussion" do
           expect( page.find_by_id(@confirmed_users[3].user.id)[:class].include?("offline")).to eq true
           #page.find_by_id(@confirmed_users[3].user.id).should have_css(".offline")
         end
+
         it "should not list the unconfirmed user" do
-          expect( find('#probands-list') ).not_to have_content @unconfirmed_user.username(discussion)
+          expect( find('#probands-list') ).not_to have_content @unconfirmed_user.username_in(discussion)
         end
       end
 

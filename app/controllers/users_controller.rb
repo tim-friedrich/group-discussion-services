@@ -1,29 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
-  before_filter :authenticate_user!, except: [:new]
-
-
+  before_action :set_user
+  before_filter :authenticate_user!
   load_and_authorize_resource
 
 
   def show
-  end
-
-  def profile
-    @user = current_user
-    @discussions_users = current_user.discussions_users.paginate(:page => params[:discussions_page], :per_page => 10)
-
-    if current_user.research_institutes.first
-      @companies = current_user.research_institutes.first.companies
-    else
-      @companies = Company.where(:id => nil).where("id IS NOT ?", nil)
-    end
-    @companies = @companies.paginate(:page => params[:companies_page], :per_page => 10)
-
-    respond_to do |format|
-      format.html {}
-      format.js {}
-    end
   end
 
   def update

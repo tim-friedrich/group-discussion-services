@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310150103) do
+ActiveRecord::Schema.define(version: 20150318182453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,12 +58,14 @@ ActiveRecord::Schema.define(version: 20150310150103) do
   end
 
   create_table "discussions", force: :cascade do |t|
-    t.string   "topic",      limit: 255
+    t.string   "topic",         limit: 255
     t.datetime "due_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
     t.text     "summary"
+    t.string   "state",                     default: "closed"
+    t.text     "state_message",             default: "Die Diskussion ist geschlossen."
   end
 
   create_table "discussions_users", force: :cascade do |t|

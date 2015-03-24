@@ -47,13 +47,13 @@ prawn_document do |pdf|
       pdf.font_size(h2){ pdf.text "Transkript" }
       pdf.move_down 10
 
-      @discussion.questions.each do | question |
+      @discussion.questions.each do |question|
         pdf.move_down 10
-        pdf.font_size(h3){ pdf.text "Frage: "+question.topic }
+        pdf.font_size(h3){ pdf.text "Frage: " + question.topic }
         pdf.move_down 10
         pdf.stroke_horizontal_rule
-        question.arguments.each do | argument |
-          pdf.pad(5){ pdf.text argument.user.username(@discussion)+": "+argument.content }
+        question.arguments.includes(:user).each do |argument|
+          pdf.pad(5){ pdf.text argument.user.username_in(@discussion) + ": " + argument.content }
           pdf.stroke_horizontal_rule
         end
       end

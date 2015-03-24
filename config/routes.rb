@@ -1,4 +1,5 @@
 GDS::Application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   resources :companies, only: [:new, :create, :edit, :update, :destroy]
   resources :research_institutes, only: [:new, :create, :edit, :update, :destroy]
@@ -10,12 +11,13 @@ GDS::Application.routes.draw do
   resources :arguments, only: [:create]
   resources :discussions_users
   resource :visual_aids, only: [:create]
+  resources :discussion_state, only: [:update]
 
   devise_for :users, :controllers => { :invitations => 'users_invitations', :registrations => "registrations" }
 
   resources :users, only: [:create, :show, :update, :destroy]
-  get '/profile' => 'users#profile'
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  get '/profile' => 'dashboard#show'
+  get '/discussions' => redirect('/profile')
   root 'static_pages#home'
 
   get '/imprint' => 'static_pages#imprint'

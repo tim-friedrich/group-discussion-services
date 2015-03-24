@@ -200,7 +200,7 @@ describe User do
     discussion.users << user_with_survey
     discussions_user = discussion.discussions_users.where(user_id: user_with_survey.id).first
     discussions_user.save
-    expect(discussions_user.name).to eq user_with_survey.username discussion
+    expect(user_with_survey.username_in(discussion)).to eq discussions_user.name
   end
 
   describe "#has_survey?" do

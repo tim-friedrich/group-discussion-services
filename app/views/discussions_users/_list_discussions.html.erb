@@ -4,6 +4,7 @@
     <th>Thema</th>
     <th>Moderator</th>
     <th>Datum</th>
+    <% if can? :manage, Discussion %><th></th><% end %>
     <th></th>
     <% if can? :edit, Discussion %><th></th><% end %>
     <% if can? :delete, Discussion %><th></th><% end %>
@@ -12,19 +13,55 @@
   </thead>
   <tbody>
   <% discussions_users.each do |discussions_user| %>
-    <tr <% if discussions_user.confirmed %>class="bg-success"<% else %>class="bg-danger" <% end %>>
+    <tr class="<% if discussions_user.confirmed %>bg-success<% else %>bg-danger<% end %>">
       <td><%= discussions_user.discussion.topic %></td>
       <td><%= discussions_user.discussion.moderator.firstname %> <%= discussions_user.discussion.moderator.lastname %></td>
       <td><%= l discussions_user.discussion.due_date %></td>
-      <% if discussions_user.confirmed %><td><%= link_to 'Diskussion beitreten', discussions_user.discussion, class: "btn btn-xs btn-primary" %></td>
+
+      <% if current_user.can_manage_discussion? discussions_user.discussion %>
+        <td id="discussion-toggle-button-<%= discussions_user.discussion.id %>">
+          <%= render partial: 'discussion_state/toggle_state_button', locals: { discussion: discussions_user.discussion } %>
+        </td>
+      <% end %>
+      <% if discussions_user.confirmed %>
+        <td id="discussion-join-button-<%= discussions_user.discussion.id %>">
+          <%= link_to 'Beitreten', discussions_user.discussion, class: "btn btn-xs btn-primary", style: "display: #{discussions_user.discussion.closed? ? 'none' : 'inline-block'}" %>
+        </td>
       <% else %>
         <td><%= link_to 'Zusagen', "discussions_users/#{discussions_user.id}/confirm", method: :post, class: "btn btn-xs btn-primary" %></td>
       <% end %>
-      <% if can? :edit, discussions_user.discussion %><td><%= link_to 'Bearbeiten', edit_discussion_path(discussions_user.discussion), class: "btn btn-xs btn-primary" %></td><% end %>
-      <% if can? :delete, discussions_user.discussion %><td><%= link_to 'Löschen', discussions_user.discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td><% end %>
-      <% if can? :evaluate, discussions_user.discussion %><td><%= link_to 'Evaluation', '/discussions/'+discussions_user.discussion.id.to_s+"/evaluate", class: "btn btn-xs btn-primary" %></td><% end %>
+
+      <% if can? :edit, discussions_user.discussion %>
+        <td><%= link_to 'Bearbeiten', edit_discussion_path(discussions_user.discussion), class: "btn btn-xs btn-primary" %></td>
+      <% end %>
+      <% if can? :delete, discussions_user.discussion %>
+        <td><%= link_to 'Löschen', discussions_user.discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+      <% end %>
+      <% if can? :evaluate, discussions_user.discussion %>
+        <td><%= link_to 'Evaluation', "/discussions/#{discussions_user.discussion.id}/evaluate", class: "btn btn-xs btn-primary" %></td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>
 </table>
 <%= will_paginate discussions_users, renderer: BootstrapPagination::Rails, param_name: 'discussions_page' %>
+
+<%#
+<div id="discussion_state" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Bitte geben Sie</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+%>

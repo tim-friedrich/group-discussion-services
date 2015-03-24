@@ -2,6 +2,7 @@ describe("Keyboard Support Tests", function() {
   var testSlider,
       handle1,
       handle2,
+      keyboardEvent,
       initialMinVal = 0,
       initialMaxVal = 10,
       initialStepVal = 1,
@@ -55,13 +56,13 @@ describe("Keyboard Support Tests", function() {
       handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
 
       // Check for hidden tooltip before focus
-      var tooltipIsHidden = $("#testSlider1").siblings("div.tooltip").hasClass("hide");
+      var tooltipIsHidden = $("#testSlider").children("div.tooltip").hasClass("hide");
       expect(tooltipIsHidden).toBeTruthy();
       
       handle1.focus();
 
       // Tooltip should remain hidden after focus
-      tooltipIsHidden = $("#testSlider1").siblings("div.tooltip").hasClass("hide");
+      tooltipIsHidden = $("#testSlider").children("div.tooltip").hasClass("hide");
       expect(tooltipIsHidden).toBeTruthy();
     });
 
@@ -71,15 +72,16 @@ describe("Keyboard Support Tests", function() {
         tooltip: 'always'
       });
       handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+      var $tooltip = $("#testSlider").children("div.tooltip");
 
       // Check for shown tooltip before focus
-      var tooltipIsShown = $("#testSlider1").siblings("div.tooltip").hasClass("in");
+      var tooltipIsShown = $tooltip.hasClass("in");
       expect(tooltipIsShown).toBeTruthy();
       
       handle1.focus();
 
       // Tooltip should remain present after focus
-      tooltipIsShown = $("#testSlider1").siblings("div.tooltip").hasClass("in");
+      tooltipIsShown = $tooltip.hasClass("in");
       expect(tooltipIsShown).toBeTruthy();
     });
   });
@@ -98,34 +100,36 @@ describe("Keyboard Support Tests", function() {
         value: initialSliderVal
       });
       // Focus on handle1
-      handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+      handle1 = $("#testSlider .min-slider-handle");
       handle1.focus();
+
+      // Create keyboard event
+      keyboardEvent = document.createEvent("Events");
+      keyboardEvent.initEvent("keydown", true, true);
     });
 
     it("moves to the left by the 'step' value when the LEFT arrow key is pressed", function() {
       handle1.on("keydown", function() {
-        var sliderValue = testSlider.slider('getValue');
+        var sliderValue = $("#testSlider1").slider('getValue');
         var expectedSliderValue = initialSliderVal - initialStepVal;
         
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var leftArrowKeyDownEvent = $.Event('keydown');
-      leftArrowKeyDownEvent.which = 37;
-      handle1.trigger(leftArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 37;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
 
     it("moves to the right by the 'step' value when the RIGHT arrow key is pressed", function() {
       handle1.on("keydown", function() {
-        var sliderValue = testSlider.slider('getValue');
+        var sliderValue = $("#testSlider1").slider('getValue');
         var expectedSliderValue = initialSliderVal + initialStepVal;
         
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var rightArrowKeyDownEvent = $.Event('keydown');
-      rightArrowKeyDownEvent.which = 39;
-      handle1.trigger(rightArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 39;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
 
     it("moves to the left by the 'step' value when the DOWN arrow key is pressed", function() {
@@ -136,9 +140,8 @@ describe("Keyboard Support Tests", function() {
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var downArrowKeyDownEvent = $.Event('keydown');
-      downArrowKeyDownEvent.which = 40;
-      handle1.trigger(downArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 40;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
 
     it("moves to the right by the 'step' value when the UP arrow key is pressed", function() {
@@ -149,9 +152,8 @@ describe("Keyboard Support Tests", function() {
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var upArrowKeyDownEvent = $.Event('keydown');
-      upArrowKeyDownEvent.which = 38;
-      handle1.trigger(upArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 38;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
   });
 
@@ -181,9 +183,8 @@ describe("Keyboard Support Tests", function() {
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var leftArrowKeyDownEvent = $.Event('keydown');
-      leftArrowKeyDownEvent.which = 37;
-      handle1.trigger(leftArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 37;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
 
     it("moves up by the 'step' value when the RIGHT arrow key is pressed", function() {
@@ -194,9 +195,8 @@ describe("Keyboard Support Tests", function() {
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var rightArrowKeyDownEvent = $.Event('keydown');
-      rightArrowKeyDownEvent.which = 39;
-      handle1.trigger(rightArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 39;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
 
     it("moves down by the 'step' value when the DOWN arrow key is pressed", function() {
@@ -207,9 +207,8 @@ describe("Keyboard Support Tests", function() {
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var downArrowKeyDownEvent = $.Event('keydown');
-      downArrowKeyDownEvent.which = 40;
-      handle1.trigger(downArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 40;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
 
     it("moves up by the 'step' value when the UP arrow key is pressed", function() {
@@ -220,9 +219,8 @@ describe("Keyboard Support Tests", function() {
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var upArrowKeyDownEvent = $.Event('keydown');
-      upArrowKeyDownEvent.which = 38;
-      handle1.trigger(upArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 38;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
   });
 
@@ -252,9 +250,8 @@ describe("Keyboard Support Tests", function() {
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var leftArrowKeyDownEvent = $.Event('keydown');
-      leftArrowKeyDownEvent.which = 37;
-      handle1.trigger(leftArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 37;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
 
     it("moves to the right by the 'step' value when the RIGHT arrow key is pressed", function() {
@@ -265,9 +262,8 @@ describe("Keyboard Support Tests", function() {
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var rightArrowKeyDownEvent = $.Event('keydown');
-      rightArrowKeyDownEvent.which = 39;
-      handle1.trigger(rightArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 39;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
 
     it("moves to the left by the 'step' value when the DOWN arrow key is pressed", function() {
@@ -278,9 +274,8 @@ describe("Keyboard Support Tests", function() {
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var downArrowKeyDownEvent = $.Event('keydown');
-      downArrowKeyDownEvent.which = 40;
-      handle1.trigger(downArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 40;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
 
     it("moves to the right by the 'step' value when the UP arrow key is pressed", function() {
@@ -291,9 +286,8 @@ describe("Keyboard Support Tests", function() {
         expect(sliderValue).toBe(expectedSliderValue);
       });
 
-      var upArrowKeyDownEvent = $.Event('keydown');
-      upArrowKeyDownEvent.which = 38;
-      handle1.trigger(upArrowKeyDownEvent);
+      keyboardEvent.keyCode = keyboardEvent.which = 38;
+      handle1[0].dispatchEvent(keyboardEvent);
     });
   });
 
@@ -325,9 +319,8 @@ describe("Keyboard Support Tests", function() {
           expect(sliderValue[1]).toBe(expectedSliderValue);
         });
 
-        var rightArrowKeyDownEvent = $.Event('keydown');
-        rightArrowKeyDownEvent.which = 39;
-        handle1.trigger(rightArrowKeyDownEvent);
+        keyboardEvent.keyCode = keyboardEvent.which = 39;
+        handle1[0].dispatchEvent(keyboardEvent);
       });
 
       it("handle1's value remains unchanged", function() {
@@ -337,9 +330,8 @@ describe("Keyboard Support Tests", function() {
           expect(sliderValue[0]).toBe(initialSliderVal);
         });
 
-        var rightArrowKeyDownEvent = $.Event('keydown');
-        rightArrowKeyDownEvent.which = 39;
-        handle1.trigger(rightArrowKeyDownEvent);
+        keyboardEvent.keyCode = keyboardEvent.which = 39;
+        handle1[0].dispatchEvent(keyboardEvent);
       });
     });
 
@@ -357,9 +349,8 @@ describe("Keyboard Support Tests", function() {
           expect(sliderValue[0]).toBe(expectedSliderValue);
         });
 
-        var leftArrowKeyDownEvent = $.Event('keydown');
-        leftArrowKeyDownEvent.which = 37;
-        handle2.trigger(leftArrowKeyDownEvent);
+        keyboardEvent.keyCode = keyboardEvent.which = 37;
+        handle1[0].dispatchEvent(keyboardEvent);
       });
 
       it("handle2's value remains unchanged", function() {
@@ -369,13 +360,95 @@ describe("Keyboard Support Tests", function() {
           expect(sliderValue[1]).toBe(initialSliderVal);
         });
 
-        var leftArrowKeyDownEvent = $.Event('keydown');
-        leftArrowKeyDownEvent.which = 37;
-        handle2.trigger(leftArrowKeyDownEvent);
+        keyboardEvent.keyCode = keyboardEvent.which = 37;
+        handle1[0].dispatchEvent(keyboardEvent);
       });
     });
   });
 
+  describe("For the natural arrow keys", function() {
+    var testCases = [{
+      reversed: false,
+      keyEvent: 37,
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'horizontal',
+      key: 'left'
+    }, {
+      reversed: true,
+      keyEvent: 37,
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'horizontal',
+      key: 'left'
+    }, {
+      reversed: false,
+      keyEvent: 39,
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'horizontal',
+      key: 'right'
+    }, {
+      reversed: true,
+      keyEvent: 39,
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'horizontal',
+      key: 'right'
+    }, {
+      reversed: false,
+      keyEvent: 38,
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'vertical',
+      key: 'up'
+    }, {
+      reversed: true,
+      keyEvent: 38,
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'vertical',
+      key: 'up'
+    }, {
+      reversed: false,
+      keyEvent: 40,
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'vertical',
+      key: 'down'
+    }, {
+      reversed: true,
+      keyEvent: 40,
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'vertical',
+      key: 'down'
+    }];
+    testCases.forEach(function(testCase) {
+      describe("A"+((testCase.reversed)? " reversed" : "")+testCase.orientation+" slider is used for the arrow keys", function() {
+        beforeEach(function() {
+          // Initialize the slider
+          testSlider = $("#testSlider1").slider({
+            id: 'testSlider',
+            min: initialMinVal,
+            max: initialMaxVal,
+            step: initialStepVal,
+            value: initialSliderVal,
+            natural_arrow_keys: true,
+            reversed: testCase.reversed,
+            orientation: testCase.orientation
+          });
+          handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+          handle1.focus();
+        });
+
+        it("moves to the "+testCase.key+" by the 'step' value when the "+testCase.key+" arrow key is pressed", function() {
+          handle1.on("keydown", function() {
+            var sliderValue = testSlider.slider('getValue');
+            var expectedSliderValue = testCase.expectedSliderValue;
+
+            expect(sliderValue).toBe(expectedSliderValue);
+          });
+
+          
+          keyboardEvent.keyCode = keyboardEvent.which = testCase.keyEvent;
+          handle1[0].dispatchEvent(keyboardEvent);
+        });
+      });
+    });
+  });
   afterEach(function() {
     if(testSlider) { testSlider.slider('destroy'); }
   });
