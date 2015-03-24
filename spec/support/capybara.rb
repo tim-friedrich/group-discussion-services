@@ -9,4 +9,5 @@ RSpec.configure do |config|
   #config.include Devise::TestHelpers, type: :feature
   config.include Warden::Test::Helpers
   Warden.test_mode!
+  Capybara::Screenshot.prune_strategy = { keep: 50 }
 end
