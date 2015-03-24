@@ -2,30 +2,21 @@ class ResearchInstitutesController < ApplicationController
   before_action :set_research_institute, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only: [:show, :edit, :update, :destroy]
   before_action :new_research_institute, only: :create
-
-
   load_and_authorize_resource
 
 
-  # GET /research_institutes/1
-  # GET /research_institutes/1.json
   def show
   end
 
-  # GET /research_institutes/new
   def new
-    @research_institute = ResearchInstitute.new
-    @research_institute.contact = Contact.new
-    @deputy = User.new
-    @research_institute.deputy = @deputy
+    @research_institute = ResearchInstitute.new contact: Contact.new, deputy: User.new
+    # @deputy = User.new
+    # @research_institute.deputy = @deputy
   end
 
-  # GET /research_institutes/1/edit
   def edit
   end
 
-  # POST /research_institutes
-  # POST /research_institutes.json
   def create
     respond_to do |format|
       if @research_institute.save
@@ -39,8 +30,6 @@ class ResearchInstitutesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /research_institutes/1
-  # PATCH/PUT /research_institutes/1.json
   def update
     respond_to do |format|
       if @research_institute.update(research_institute_params)
@@ -53,8 +42,6 @@ class ResearchInstitutesController < ApplicationController
     end
   end
 
-  # DELETE /research_institutes/1
-  # DELETE /research_institutes/1.json
   def destroy
     @research_institute.destroy
     respond_to do |format|
@@ -79,6 +66,6 @@ class ResearchInstitutesController < ApplicationController
   def new_research_institute
     @research_institute = ResearchInstitute.new(research_institute_params)
     @research_institute.users << @research_institute.deputy
-    @research_institute.deputy.role = Role.where(name: "moderator").first
+    @research_institute.deputy.role = Role.find_by_name("moderator")
   end
 end

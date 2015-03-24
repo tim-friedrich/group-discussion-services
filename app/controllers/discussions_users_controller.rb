@@ -2,8 +2,6 @@ class DiscussionsUsersController < ApplicationController
   before_filter :authenticate_user!
   before_action :new_discussions_user, only: [ :create ]
   before_action :set_discussions_user, only: [:destroy, :confirm]
-
-
   load_and_authorize_resource
 
 
@@ -22,7 +20,7 @@ class DiscussionsUsersController < ApplicationController
     @discussions_user.confirmed = true
     if @discussions_user.save
       @json = render_to_string( template: 'discussions_users/_user.json.jbuilder', locals: { discussions_user: @discussions_user })
-      PrivatePub.publish_to "/discussion/"+@discussions_user.discussion.id.to_s+"/users/new", JSON.parse(@json)
+      PrivatePub.publish_to "/discussion/#{@discussions_user.discussion.id}/users/new", JSON.parse(@json)
       redirect_to '/profile'
     else
       render nothing: true
@@ -49,24 +47,25 @@ class DiscussionsUsersController < ApplicationController
     render 'discussions_users/update_lists'
   end
 
+
   private
 
-    def set_discussions_user
-      @discussions_user = DiscussionsUser.find(params[:id])
-    end
+  def set_discussions_user
+    @discussions_user = DiscussionsUser.find(params[:id])
+  end
 
-    def set_update_list_params
-      @proband_role =  Role.where(name: 'proband').first()
-      @observer_role =  Role.where(name: 'observer').first()
-      @probands = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
-      @observers = DiscussionsUser.where(discussion_id: @discussions_user.discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
-    end
+  def set_update_list_params
+    @proband_role  = Role.find_by(name: 'proband')
+    @observer_role = Role.find_by(name: 'observer')
+    @probands  = DiscussionsUser.where(discussion: @discussions_user.discussion, role: @proband_role).paginate(:page => params[:probands_page], :per_page => 10)
+    @observers = DiscussionsUser.where(discussion: @discussions_user.discussion, role: @observer_role).paginate(:page => params[:observers_page], :per_page => 10)
+  end
 
-    def discussion_user_params
-      params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user, :role_id)
-    end
+  def discussion_user_params
+    params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user, :role_id)
+  end
 
-    def new_discussions_user
-      @discussions_user = DiscussionsUser.new(discussion_user_params)
-    end
+  def new_discussions_user
+    @discussions_user = DiscussionsUser.new(discussion_user_params)
+  end
 end

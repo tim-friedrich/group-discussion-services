@@ -5,8 +5,6 @@ class Ability
     # # #
     # Anonymous
 
-    
-  
     can [ :new, :create ], ResearchInstitute
     can [ :new, :create ], User
 
@@ -22,14 +20,17 @@ class Ability
       return
     end
 
+
     # # #
     # User is admin
+
     if user.is_admin?
       can :access, :rails_admin   # grant access to rails_admin
-      can :dashboard    
+      can :dashboard
       can :manage, :all
       return
     end
+
 
     # # #
     # Every user
@@ -39,20 +40,23 @@ class Ability
     #TODO: improve rights for Contacts
     can [ :manage ], Contact
 
-    can [ :create, :read ], Argument do | argument |
+    can [ :create, :read ], Argument do |argument|
       user.discussions.to_a.include? argument.discussion
     end
 
-    can [ :leave, :show, ], Discussion do | discussion |
-      (user.discussions.to_a.include?(discussion) && discussion.discussions_users.where(user_id: user.id).first.confirmed)
+    cannot :manage, Discussion
+
+    can [ :leave, :show, ], Discussion do |discussion|
+      user.discussions.to_a.include?(discussion) && discussion.discussions_user_for(user).confirmed
     end
-    can :manage, DiscussionsUser do | discussion_user |
+
+    can :manage, DiscussionsUser do |discussion_user|
       discussion_user.user.id == user.id
     end
 
     can [ :create ], Vote
 
-    can [ :manage ], ResearchInstitute do | research_institute |
+    can [ :manage ], ResearchInstitute do |research_institute|
       research_institute.deputy == user
     end
 
@@ -61,19 +65,19 @@ class Ability
     # Moderator
 
     if user.is_moderator?
-      can :manage, Discussion do | discussion |
+      can :manage, Discussion do |discussion|
         user.id == discussion.moderator.id
       end
 
       can [ :new, :create ], Discussion
 
-      can :manage, DiscussionsUser do | discussion_user |
+      can :manage, DiscussionsUser do |discussion_user|
         discussion_user.discussion.moderator.id == user.id
       end
 
       can :create, Question
 
-      can :manage, VisualAid do | visual_aid |
+      can :manage, VisualAid do |visual_aid|
         visual_aid.discussion.moderator.id == user.id
       end
       can [ :manage ], Company
@@ -82,9 +86,6 @@ class Ability
         user.moderated_discussions.map(&:users).flatten.include? other_user
       end
     end
-
-
-
 
   end
 end

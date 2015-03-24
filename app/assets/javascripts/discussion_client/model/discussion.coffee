@@ -22,20 +22,20 @@ class @Discussion
     return argument
 
   bind_new_argument: () =>
-    PrivatePub.subscribe("/discussion/"+@id+"/arguments/new", (data) =>
+    PrivatePub.subscribe("/discussion/#{@id}/arguments/new", (data) =>
       argument = @new_argument(data)
       @view.draw_argument(argument)
     )
 
     if @current_user.is_moderator() or @current_user.role == 'observer'
-      PrivatePub.subscribe("/discussion/"+@id+"/observer/arguments/new", (data) =>
+      PrivatePub.subscribe("/discussion/#{@id}/observer/arguments/new", (data) =>
         argument = @new_argument(data)
         @view.draw_argument(argument)
       )
 
 
   bind_new_question: () =>
-    PrivatePub.subscribe("/discussion/"+@id+"/questions/new", (data) ->
+    PrivatePub.subscribe("/discussion/#{@id}/questions/new", (data) ->
       $("#question").text(data.topic)
     )
 
@@ -106,11 +106,11 @@ class @Discussion
     @bind_open_visual_aid()
     @bind_close_visual_aid()
     @bind_visual_aid_command()
-    window.onbeforeunload = () => ""#@current_user.leave()
+    window.onbeforeunload = -> "Wollen Sie die Diskussion wirklich verlassen?"
 
 
   bind_user_leaved: () =>
-    PrivatePub.subscribe("/discussion/"+@id+"/users/leave", (data) =>
+    PrivatePub.subscribe("/discussion/#{@id}/users/leave", (data) =>
       $.each(@users, (index, user) =>
         if data.user_id == user.id
           user.leaved()
@@ -118,7 +118,7 @@ class @Discussion
     )
 
   bind_open_visual_aid: () =>
-    PrivatePub.subscribe("/discussion/"+@id+"/visualAid/open", (data) =>
+    PrivatePub.subscribe("/discussion/#{@id}/visualAid/open", (data) =>
       $.each(@visual_aids, (index, visual_aid) =>
         if visual_aid.id == data.id
           visual_aid.run_command('open')
@@ -126,13 +126,13 @@ class @Discussion
     )
 
   bind_new_user: () =>
-    PrivatePub.subscribe("/discussion/"+@id+"/users/new", (data) =>
+    PrivatePub.subscribe("/discussion/#{@id}/users/new", (data) =>
       user = @new_user(data)
       @view.draw_proband(user)
     )
 
   bind_close_visual_aid: () =>
-    PrivatePub.subscribe("/discussion/"+@id+"/visualAid/close", (data) =>
+    PrivatePub.subscribe("/discussion/#{@id}/visualAid/close", (data) =>
       $.each(@visual_aids, (index, visual_aid) =>
         if visual_aid.id == data.id
           visual_aid.run_command('close')
@@ -140,7 +140,7 @@ class @Discussion
     )
 
   bind_visual_aid_command: () =>
-    PrivatePub.subscribe("/discussion/"+@id+"/visualAid/command", (data) =>
+    PrivatePub.subscribe("/discussion/#{@id}/visualAid/command", (data) =>
       $.each(@visual_aids, (index, visual_aid) =>
         if visual_aid.id == data.id
           visual_aid.run_command(data.command, data.params)
@@ -148,16 +148,26 @@ class @Discussion
     )
 
   bind_user_entered: () =>
-    PrivatePub.subscribe("/discussion/"+@id+"/users/enter", (data) =>
+    PrivatePub.subscribe("/discussion/#{@id}/users/enter", (data) =>
       $.each(@users, (index, user) =>
         if data.user_id == user.id
           user.enter()
       )
     )
 
+  # bind_state_opened: () =>
+  #   PrivatePub.subscribe("/discussion/#{@id}/state/open", (_) => # TODO use data
+  #     @view.stateOpened()
+  #   )
+
+  # bind_state_closed: () =>
+  #   PrivatePub.subscribe("/discussion/#{@id}/state/close", (_) => # TODO use data
+  #     @view.stateClosed()
+  #   )
+
   bind_new_vote: () =>
     if @ and @current_user.is_moderator()
-      PrivatePub.subscribe("/discussion/"+@id+"/votes/new", (vote) =>
+      PrivatePub.subscribe("/discussion/#{@id}/votes/new", (vote) =>
         argument = @arguments.filter((argument) => vote.argument_id == argument.id)[0]
         argument.add_vote(vote)
       )

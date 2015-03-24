@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         # :lockable, :timeoutable and :omniauthable
 
   after_initialize :set_default_role
   has_many :votes
@@ -43,8 +42,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def username(discussion)
-    discussion.discussions_users.where(user_id: self.id).first.name
+  def username_in(discussion)
+    discussions_users.find_by(discussion: discussion).name
   end
 
   def age_category
@@ -67,20 +66,24 @@ class User < ActiveRecord::Base
     is_moderator? ? discussions.select{ |d| d.moderator == self } : []
   end
 
+  def discussion_user_for(discussion)
+    discussions_users.find_by(discussion_id: discussion.id)
+  end
+
   def enter_discussion(discussion)
-    DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.enter_discussion
+    discussion_user_for(discussion).enter_discussion
   end
 
   def leave_discussion(discussion)
-    DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).first.leave_discussion
+    discussion_user_for(discussion).leave_discussion
   end
 
   def is_present_in(discussion)
-    DiscussionsUser.where(discussion_id: discussion.id, user_id: self.id).last.is_present?
+    discussion_user_for(discussion).is_present?
   end
 
   def is_part_of_discussion?(discussion)
-    !discussion.users.find_by_id(self.id).nil?
+    !!discussion.users.find_by_id(self.id)
   end
 
   def has_survey?
@@ -91,19 +94,20 @@ class User < ActiveRecord::Base
     is_proband?
   end
 
-  def is_admin?
-    self.role == Role.where(name: 'admin').first
+  # TODO use cancan for this
+  def can_manage_discussion?(discussion)
+    self.id == discussion.moderator.id
   end
 
-	def is_staff?()
-		self.role == Role.where(name: 'deputy').first || self.role == Role.where(name: 'moderator').first
+  # # #
+  # Assocs
+
+  def in_discussions
+    discussions_users.includes(:discussion)
   end
 
-  def is_deputy?
-    for research_institute in self.research_institutes
-      return true if deputy_institute
-    end
-    return false
+  def preferred_research_institute
+    research_institutes.first # FIXME why
   end
 
   def deputy_institute
@@ -113,23 +117,45 @@ class User < ActiveRecord::Base
     return false
   end
 
+
+  # # #
+  # Roles
+
   def is_moderator?
-    self.role == Role.where(name: 'moderator').first
+    self.role == Role.find_by_name('moderator')
   end
 
   def is_proband?
-    self.role == Role.where(name: 'proband').first
+    self.role == Role.find_by_name('proband')
   end
 
   def is_guest?
     self.role == nil
   end
 
+  def is_admin?
+    self.role == Role.find_by_name('admin')
+  end
+
+  def is_staff?
+    self.role == Role.find_by_name('deputy') || self.role == Role.find_by_name('moderator')
+  end
+
+  def is_deputy?
+    for research_institute in self.research_institutes
+      return true if deputy_institute # FIXME that does not work as it should
+    end
+    return false
+  end
+
   def set_default_role
-    self.role ||= Role.where(name: 'proband').first
+    self.role ||= Role.find_by_name('proband')
     #save
   end
 
+
+  # # #
+  # Chart
 
   def has_chart_image?
     UserChartImage.exists?(self, Rails.env.test? && 'test')

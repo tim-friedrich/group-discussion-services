@@ -1,11 +1,3 @@
-#    t.text     "content"
-#    t.integer  "user_id"
-#    t.datetime "created_at"
-#    t.datetime "updated_at"
-#    t.integer  "question_id"
-#    t.integer  "argument_type_id"
-#    t.integer  "discussion_id"
-
 FactoryGirl.define do
   factory :argument do
     content "das sehe ich ganz anders"

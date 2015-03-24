@@ -35,10 +35,6 @@ describe 'User' do
     end
 
     describe "invitations" do
-      before do
-
-      end
-
       it "should be possible to signup as invited user" do
         user = User.invite!(email: 'test@example.com') do |u|
           u.skip_invitation = true
@@ -98,27 +94,30 @@ describe 'User' do
         it "should not have new discussion link" do
           expect( page ).not_to have_link "Neue Diskussion erstellen"
         end
+
         it "should not have new company link" do
           expect( page ).not_to have_link "Neuen Kunden anlegen"
         end
+
         describe "new Discussion" do
           before do
             @discussion = create(:discussion)
             @discussion.users << user
             visit "/profile"
           end
+
           it "should have confirm discussion link" do
             expect( page ).to have_link("Zusagen")
           end
 
           it "should have join discussion link after accept discussion" do
-            click_link "Zusage"
-            expect( page ).to have_link( "Diskussion beitreten" )
+            click_link "Zusagen"
+            expect( page ).to have_link( "Beitreten" )
           end
 
           it "should redirect to the discussion if link is clicked" do
             click_link "Zusagen"
-            click_link "Diskussion beitreten"
+            click_link "Beitreten"
             expect( current_path ).to eq discussion_path(@discussion)
           end
         end

@@ -5,7 +5,7 @@ ruby '2.2.1'
 # # #
 # GENERAL
 
-gem 'rails', '4.2.1.rc4'
+gem 'rails', '4.2.1'
 gem 'dotenv-rails'
 gem 'rake'
 gem 'thin'
@@ -73,7 +73,7 @@ gem 'mediaelement_rails' # js music and video player
 # # #
 # DEPLOYMENT / PRODUCTION
 
-gem 'whiskey_disk', github: 'johnae/whiskey_disk', branch: 'develop'
+gem 'whiskey_disk', git: 'https://github.com/johnae/whiskey_disk', branch: 'develop'
 gem 'exception_notification'
 
 group :production do
@@ -88,7 +88,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'byebug'
   # gem 'web-console', '~> 2.0'
-  gem 'irbtools', require: 'binding.repl'
+  gem 'irbtools', '~> 1.7', require: 'binding.repl'
 
   gem 'rspec-rails', '~> 3.2'
   gem 'capybara', '~> 2.4'
