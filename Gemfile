@@ -88,7 +88,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'byebug'
   # gem 'web-console', '~> 2.0'
-  gem 'irbtools', '~> 1.7', require: 'binding.repl'
+  gem 'irbtools', '~> 2.0', require: 'irbtools/binding'
 
   gem 'rspec-rails', '~> 3.2'
   gem 'capybara', '~> 2.4'
