@@ -63,11 +63,10 @@ class DiscussionsController < ApplicationController
   end
 
   def edit
-    @proband_role =  Role.where(name: 'proband').first()
-    @observer_role =  Role.where(name: 'observer').first()
-    @probands = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
-    @observers = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
-    @visual_aids = @discussion.visual_aids.paginate(:page => params[:visual_aids_page], :per_page => 10)
+    @probands    = @discussion.probands.paginate(page: params[:probands_page], per_page: 10)
+    @observers   = @discussion.observers.paginate(page: params[:observers_page], per_page: 10)
+    @visual_aids = @discussion.visual_aids.paginate(page: params[:visual_aids_page], per_page: 10)
+
     respond_to do |format|
       format.html do
         if current_user.research_institutes.first()
@@ -121,7 +120,7 @@ class DiscussionsController < ApplicationController
   end
 
   def destroy
-    DiscussionsUser.where(discussion_id: @discussion.id).delete_all
+    DiscussionsUser.where(discussion_id: @discussion.id).destroy_all
     @discussion.destroy
     respond_to do |format|
       format.html { redirect_to '/profile' }

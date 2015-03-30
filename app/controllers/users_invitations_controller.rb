@@ -25,10 +25,9 @@ class UsersInvitationsController < Devise::InvitationsController
           @discussion.users << user
           @discussions_user = @discussion.discussions_users.last
           @discussions_user.role = Role.find_by_name(invite_params[:discussions_user_role])
-          @proband_role =  Role.find_by_name('proband')
-          @observer_role =  Role.find_by_name('observer')
-          @probands = DiscussionsUser.where(discussion: @discussions_user.discussion, role: @proband_role).paginate(:page => params[:probands_page], :per_page => 10)
-          @observers = DiscussionsUser.where(discussion: @discussions_user.discussion, role: @observer_role).paginate(:page => params[:observers_page], :per_page => 10)
+
+          @probands  = @discussions_user.discussion.probands.paginate(page: params[:probands_page], per_page: 10)
+          @observers = @discussions_user.discussion.observers.paginate(page: params[:observers_page], per_page: 10)
 
           render 'discussions_users/update_lists'
         else

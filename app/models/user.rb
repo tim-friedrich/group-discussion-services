@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include HasRole
+
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
          # :lockable, :timeoutable and :omniauthable
@@ -99,6 +101,13 @@ class User < ActiveRecord::Base
     self.id == discussion.moderator.id
   end
 
+  def is_deputy?
+    for research_institute in self.research_institutes
+      return true if deputy_institute # FIXME that does not work as it should
+    end
+    return false
+  end
+
   # # #
   # Assocs
 
@@ -115,42 +124,6 @@ class User < ActiveRecord::Base
       return research_institute if research_institute.deputy.id == self.id
     end
     return false
-  end
-
-
-  # # #
-  # Roles
-
-  def is_moderator?
-    self.role == Role.find_by_name('moderator')
-  end
-
-  def is_proband?
-    self.role == Role.find_by_name('proband')
-  end
-
-  def is_guest?
-    self.role == nil
-  end
-
-  def is_admin?
-    self.role == Role.find_by_name('admin')
-  end
-
-  def is_staff?
-    self.role == Role.find_by_name('deputy') || self.role == Role.find_by_name('moderator')
-  end
-
-  def is_deputy?
-    for research_institute in self.research_institutes
-      return true if deputy_institute # FIXME that does not work as it should
-    end
-    return false
-  end
-
-  def set_default_role
-    self.role ||= Role.find_by_name('proband')
-    #save
   end
 
 

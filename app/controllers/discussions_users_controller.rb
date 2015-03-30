@@ -1,13 +1,12 @@
 class DiscussionsUsersController < ApplicationController
   before_filter :authenticate_user!
-  before_action :new_discussions_user, only: [ :create ]
   before_action :set_discussions_user, only: [:destroy, :confirm]
   load_and_authorize_resource
 
 
   def index_by_discussion
     @discussions_users = DiscussionsUser.where(discussion_id: params[:id]).paginate(:page => params[:page], :per_page => 10)
-    respond_to do | format |
+    respond_to do |format|
       format.json { render json: JSON.parse(render_to_string( template: 'discussions_users/_user.json.jbuilder', locals: { discussions_user: @discussions_users })) }
     end
   end
@@ -28,9 +27,8 @@ class DiscussionsUsersController < ApplicationController
   end
 
    def create
-     if @discussions_user.role == Role.find_by_name('moderator') || @discussions_user.role == Role.find_by_name('observer')
-       @discussions_user.confirmed = true
-     end
+    @discussions_user = DiscussionsUser.new(discussion_user_params)
+    @discussions_user.confirmed = true if @discussions_user.is_staff?
 
     if @discussions_user.save
       set_update_list_params
@@ -55,17 +53,11 @@ class DiscussionsUsersController < ApplicationController
   end
 
   def set_update_list_params
-    @proband_role  = Role.find_by(name: 'proband')
-    @observer_role = Role.find_by(name: 'observer')
-    @probands  = DiscussionsUser.where(discussion: @discussions_user.discussion, role: @proband_role).paginate(:page => params[:probands_page], :per_page => 10)
-    @observers = DiscussionsUser.where(discussion: @discussions_user.discussion, role: @observer_role).paginate(:page => params[:observers_page], :per_page => 10)
+    @probands  = @discussions_user.discussion.probands.paginate(page: params[:probands_page], per_page: 10)
+    @observers = @discussions_user.discussion.observers.paginate(page: params[:observers_page], per_page: 10)
   end
 
   def discussion_user_params
     params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user, :role_id)
-  end
-
-  def new_discussions_user
-    @discussions_user = DiscussionsUser.new(discussion_user_params)
   end
 end

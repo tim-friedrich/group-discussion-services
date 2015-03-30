@@ -14,7 +14,7 @@ describe 'Discussion', js: true do
     @observer = create(:user_with_survey)
     discussion.users << @observer
     observer_discussion = discussion.discussions_users.where(user_id: @observer.id).first
-    observer_discussion.role = Role.where(name: 'observer').first
+    observer_discussion.role = Role.observer
     observer_discussion.confirmed = true
     observer_discussion.save
   end

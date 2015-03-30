@@ -13,14 +13,14 @@ FactoryGirl.define do
     pseudonym_policy true
     confirmed_at Date.yesterday
 
-    role { Role.where(name:"proband").first }
+    role { Role.proband }
 
     factory :user_with_survey do
       survey
     end
 
     factory :moderator do
-      role { Role.where(name:'moderator').first }
+      role { Role.moderator }
     end
   end
 end

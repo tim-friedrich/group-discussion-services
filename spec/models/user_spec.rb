@@ -293,12 +293,12 @@ describe User do
 
   describe "should respond the right role" do
     it "moderator should respond that it is staff" do
-      user.role = Role.where(name: 'moderator').first
+      user.role = Role.moderator
       user.is_staff?.should be_truthy
     end
 
     it "user should not respond that it is staff" do
-      user.role = Role.where(name: 'user').first
+      user.role = Role.user
       user.is_staff?.should be_falsey
     end
   end
