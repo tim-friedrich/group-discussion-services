@@ -119,6 +119,14 @@ class User < ActiveRecord::Base
     research_institutes.first # FIXME why
   end
 
+  def research_companies
+    if preferred_research_institute
+      preferred_research_institute.companies
+    else
+      Company.none
+    end
+  end
+
   def deputy_institute
     for research_institute in self.research_institutes
       return research_institute if research_institute.deputy.id == self.id

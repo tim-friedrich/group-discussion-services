@@ -69,15 +69,9 @@ class DiscussionsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if current_user.research_institutes.first()
-          @companies = current_user.research_institutes.first.companies
-          @survey_texts = JSON.load(Rails.root.join 'db/survey_analysis_texts.json')
-          puts "A"*20
-          puts @survey_texts
-        else
-          @companies = []
-        end
-        @proband = DiscussionsUser.new
+        @survey_texts = JSON.load(Rails.root.join 'db/survey_analysis_texts.json')
+        @companies = current_user.research_companies
+        @proband = DiscussionsUser.new role: Role.proband
         @visual_aid = VisualAid.new
         @users = User.all
         @user = User.new
