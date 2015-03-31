@@ -12,7 +12,7 @@ Persönlichkeitswerte...
 <% unless @discussion.arguments.empty? %>
 ## Transkript
 <% @discussion.questions.each do |question| %>### <%= question.topic %>
-<%= question.arguments.includes(:user).each do |argument| %>* <%= argument.user.username_in(@discussion) + ": " + argument.content %>
+<% question.arguments.includes(:user).each do |argument| %>* <%= argument.user.username_in(@discussion) + ": " + argument.content %>
 <% end %>
 <% end %>
 <% end %>

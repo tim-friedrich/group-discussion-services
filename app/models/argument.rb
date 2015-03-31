@@ -5,10 +5,10 @@ class Argument < ActiveRecord::Base
   belongs_to :discussion
   has_many :votes
 
-  validates :content, presence:true
-  validates :user_id, presence:true
-  validates :question_id, presence:true
-  validates :argument_type, presence:true
+  validates :content, presence: true
+  validates :user_id, presence: true
+  validates :question_id, presence: true
+  validates :argument_type, presence: true
 
 
   def is_voted_from?(user)
