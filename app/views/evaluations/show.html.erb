@@ -1,7 +1,8 @@
 
 
 <!-- Nav tabs -->
-<%= link_to 'Auswertung herunterladen', discussion_url(@discussion)+"/evaluate.pdf", class: "btn btn-success pull-right" , :target => "_blank" %>
+<%= link_to 'Download Text', evaluation_path(@discussion, format: 'text'), class: "btn btn-success pull-right" %>
+<%= link_to 'Download PDF', evaluation_path(@discussion, format: 'pdf'), class: "btn btn-success pull-right", style: "margin-right: 5px" %>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#overview" data-toggle="tab">Übersicht</a></li>
   <li><a href="#summary" data-toggle="tab">Zusammenfassung</a></li>

@@ -122,15 +122,6 @@ class DiscussionsController < ApplicationController
     end
   end
 
-  def evaluate
-    respond_to do |format|
-      format.html{}
-      format.pdf{
-        ensure_user_chart_images!
-      }
-    end
-  end
-
   def arguments
     respond_to do | format |
       format.json{ render json: @discussion.arguments }
@@ -147,11 +138,5 @@ class DiscussionsController < ApplicationController
 
   def discussion_params
     params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id, :company, :visual_aids, :summary)
-  end
-
-  def ensure_user_chart_images!
-    @discussion.users.includes(:survey).each{ |user|
-      user.ensure_chart_image!
-    }
   end
 end

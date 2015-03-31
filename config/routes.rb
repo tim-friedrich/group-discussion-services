@@ -12,6 +12,7 @@ GDS::Application.routes.draw do
   resources :discussions_users
   resource :visual_aids, only: [:create]
   resources :discussion_state, only: [:update]
+  resources :evaluations, only: [:show]
 
   devise_for :users, :controllers => { :invitations => 'users_invitations', :registrations => "registrations" }
 
@@ -41,6 +42,4 @@ GDS::Application.routes.draw do
 
   get '/user_leaved/:id' => 'discussions#user_leaved'
   get '/user_entered/:id' => 'discussions#user_entered'
-
-  get '/discussions/:id/evaluate' => 'discussions#evaluate'
 end
