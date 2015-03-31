@@ -1,0 +1,18 @@
+# Auswertung der Diskussion "<%= @discussion.topic %>" für <%= @discussion.company_name %> am <%= l @discussion.due_date.to_date %>
+## Zusammenfassung
+
+<%= @discussion.summary %>
+
+## Probanden
+<% @discussion.discussions_users.each do |discussion_user| %>* <%= discussion_user.name %>: <%= discussion_user.user.age %> / <%= I18n.t(discussion_user.user.gender) %>
+<% end %>
+
+Persönlichkeitswerte...
+
+<% unless @discussion.arguments.empty? %>
+## Transkript
+<% @discussion.questions.each do |question| %>### <%= question.topic %>
+<%= question.arguments.includes(:user).each do |argument| %>* <%= argument.user.username_in(@discussion) + ": " + argument.content %>
+<% end %>
+<% end %>
+<% end %>

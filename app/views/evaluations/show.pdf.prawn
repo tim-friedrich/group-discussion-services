@@ -6,8 +6,7 @@ prawn_document do |pdf|
   h3 = 15
 
   pdf.bounding_box([pdf.bounds.left, pdf.bounds.top - 45], :width  => pdf.bounds.width, :height => pdf.bounds.height - 50) do
-    pdf.font_size(h1){ pdf.text "Auswertung der Diskussion: "+@discussion.topic }
-    pdf.font_size(h1){ pdf.text "Vom "+(l @discussion.due_date)  }
+    pdf.font_size(h1){ pdf.text "Auswertung der Diskussion \"#{@discussion.topic}\" für #{@discussion.company_name} am #{l @discussion.due_date.to_date}" }
     pdf.move_down(h2)
     pdf.font_size(h2){ pdf.text "Zusammenfassung" }
     pdf.move_down 30
@@ -43,13 +42,13 @@ prawn_document do |pdf|
 
     pdf.start_new_page
 
-    if !@discussion.arguments.empty?
+    unless @discussion.arguments.empty?
       pdf.font_size(h2){ pdf.text "Transkript" }
       pdf.move_down 10
 
       @discussion.questions.each do |question|
         pdf.move_down 10
-        pdf.font_size(h3){ pdf.text "Frage: " + question.topic }
+        pdf.font_size(h3){ pdf.text "Frage: #{question.topic}" }
         pdf.move_down 10
         pdf.stroke_horizontal_rule
         question.arguments.includes(:user).each do |argument|

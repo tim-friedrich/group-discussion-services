@@ -6,17 +6,9 @@ class EvaluationsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.pdf do
-        ensure_user_chart_images!
-      end
-
-      format.text do
-        render text: "bla"
-      end
-
-      format.html do
-        render 'show'
-      end
+      format.html
+      format.text
+      format.pdf{ ensure_user_chart_images! }
     end
   end
 

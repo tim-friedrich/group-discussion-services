@@ -21,6 +21,10 @@ class Discussion < ActiveRecord::Base
     DiscussionsUser.where(discussion: self, role: Role.observer)
   end
 
+  def company_name
+    company.name
+  end
+
   def discussions_user_for(user)
     discussions_users.find_by(user: user)
   end
