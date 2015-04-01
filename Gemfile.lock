@@ -35,6 +35,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active_decorator (0.5.1)
     activejob (4.2.1)
       activesupport (= 4.2.1)
       globalid (>= 0.3.0)
@@ -403,6 +404,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_decorator
   active_model_serializers!
   bcrypt (~> 3.1.10)
   bootstrap-sass (~> 3.3.3)

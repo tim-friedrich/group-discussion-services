@@ -14,6 +14,7 @@ gem 'rails-i18n'
 gem 'bcrypt', '~> 3.1.10'
 gem 'devise-i18n'
 gem "paperclip"
+gem "active_decorator"
 gem 'will_paginate-bootstrap'
 gem 'will-paginate-i18n'
 gem 'prawn-rails'

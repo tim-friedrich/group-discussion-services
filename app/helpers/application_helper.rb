@@ -7,6 +7,12 @@ module ApplicationHelper
     string.gsub('\&quot;', '"').html_safe
   end
 
+  # When you manually want to
+  # Happens automatically when: https://github.com/amatsuda/active_decorator#features
+  def decorate(model)
+    ActiveDecorator::Decorator.instance.decorate(model)
+  end
+
   def generate_interactive_chart(options = {})
     type   = options.delete(:type)  or raise ArgumentError, "no type given"
     domid  = options.delete(:domid) or raise ArgumentError, "no domid given"

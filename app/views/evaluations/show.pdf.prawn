@@ -51,8 +51,9 @@ prawn_document do |pdf|
         pdf.font_size(h3){ pdf.text "Frage: #{question.topic}" }
         pdf.move_down 10
         pdf.stroke_horizontal_rule
-        question.arguments.includes(:user).each do |argument|
-          pdf.pad(5){ pdf.text argument.user.username_in(@discussion) + ": " + argument.content }
+        question.arguments.includes(:user, :votes).each do |argument|
+          argument = decorate(argument)
+          pdf.pad(5){ pdf.text argument.user.username_in(@discussion) + ": " + argument.content + argument.votes_in_text }
           pdf.stroke_horizontal_rule
         end
       end

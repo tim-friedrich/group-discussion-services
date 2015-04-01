@@ -14,4 +14,24 @@ class Argument < ActiveRecord::Base
   def is_voted_from?(user)
     !!self.votes.find_by(user_id: user.id)
   end
+
+  def votes?
+    votes.present?
+  end
+
+  def likes?
+    votes.likes.present?
+  end
+
+  def likes_count
+    votes.likes.count
+  end
+
+  def dislikes?
+    votes.dislikes.present?
+  end
+
+  def dislikes_count
+    votes.dislikes.count
+  end
 end

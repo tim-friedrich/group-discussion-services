@@ -1,8 +1,7 @@
 <div class="list-group-item argument-panel clearfix">
+    <div class="right-argument pull-right"><%= argument.votes_in_text %></div>
     <div class="left_argument">
         <div class="color"></div>
-        <div class="name"><%= argument.user.firstname %>: </div>
-        <div class="argument"><%= argument.content %></div>
+        <div class="argument"><span class="name"><%= argument.user.username_in(@discussion) %>: </span><%= argument.content %></div>
     </div>
-    <div class="right-argument pull-right"></div>
 </div>
