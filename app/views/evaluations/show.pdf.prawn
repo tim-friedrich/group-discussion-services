@@ -22,7 +22,7 @@ prawn_document do |pdf|
         pdf.move_down 10
 
         pdf.font_size(h3){ pdf.text "#{discussion_user.name}: #{discussion_user.user.age} / #{I18n.t(discussion_user.user.gender || 'other')}" }
-        pdf.text "Postleitzahl: #{discussion_user.user.zipcode}"
+        pdf.text "Postleitzahl: #{discussion_user.user.zipcode}" if discussion_user.user.zipcode
 
         if discussion_user.user.has_survey?
           pdf.text "Persönlichkeit:"
