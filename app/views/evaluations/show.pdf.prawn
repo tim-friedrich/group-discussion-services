@@ -6,7 +6,7 @@ prawn_document do |pdf|
   h3 = 15
 
   pdf.bounding_box([pdf.bounds.left, pdf.bounds.top - 45], :width  => pdf.bounds.width, :height => pdf.bounds.height - 50) do
-    pdf.font_size(h1){ pdf.text "Auswertung der Diskussion \"#{@discussion.topic}\" für #{@discussion.company_name} am #{l @discussion.due_date.to_date}" }
+    pdf.font_size(h1){ pdf.text @discussion.description }
     pdf.move_down(h2)
     pdf.font_size(h2){ pdf.text "Zusammenfassung" }
     pdf.move_down 30
