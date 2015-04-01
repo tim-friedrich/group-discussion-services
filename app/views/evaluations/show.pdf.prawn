@@ -48,7 +48,7 @@ prawn_document do |pdf|
 
       @discussion.questions.each do |question|
         pdf.move_down 10
-        pdf.font_size(h3){ pdf.text "Frage: #{question.topic}" }
+        pdf.font_size(h3){ pdf.text question.topic.to_s }
         pdf.move_down 10
         pdf.stroke_horizontal_rule
         question.arguments.includes(:user, :votes).each do |argument|

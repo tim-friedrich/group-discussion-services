@@ -1,6 +1,3 @@
-
-
-<!-- Nav tabs -->
 <%= link_to 'Download Text', evaluation_path(@discussion, format: 'txt'), class: "btn btn-success pull-right" %>
 <%= link_to 'Download PDF', evaluation_path(@discussion, format: 'pdf'), class: "btn btn-success pull-right", style: "margin-right: 5px" %>
 <ul class="nav nav-tabs">
@@ -10,16 +7,12 @@
   <li><a href="#script" data-toggle="tab">Transkript</a></li>
 </ul>
 
-<!-- Tab panes -->
 <div class="tab-content">
-
-  <div class="tab-pane fade active" id="overview">
-
+  <div class="tab-pane active" id="overview">
   </div>
 
   <div class="tab-pane fade" id="summary">
-    <%= form_for(@discussion, html: { multipart: true, role: "form"  }) do |f| %>
-
+    <%= form_for(@discussion, html: { role: "form"  }) do |f| %>
       <div class="form-group">
         <%= f.label "Zusammenfassung", class: "control-label" %>
           <%= f.text_area(:summary, class: "form-control", rows: 20) %>
@@ -28,7 +21,6 @@
       <div class="form-group">
         <%= f.submit "Zusammenfassung speichern", class: "btn btn-large btn-primary"%>
       </div>
-
     <% end %>
   </div>
 
@@ -70,7 +62,5 @@
         <%= render partial: 'proband', collection: @discussion.probands %>
       </tbody>
     </table>
-
   </div>
-
 </div>
