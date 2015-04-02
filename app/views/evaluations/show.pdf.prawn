@@ -8,9 +8,11 @@ prawn_document do |pdf|
   pdf.bounding_box([pdf.bounds.left, pdf.bounds.top - 45], :width  => pdf.bounds.width, :height => pdf.bounds.height - 50) do
     pdf.font_size(h1){ pdf.text @discussion.description }
     pdf.move_down(h2)
-    pdf.font_size(h2){ pdf.text "Zusammenfassung" }
-    pdf.move_down 30
-    pdf.text @discussion.summary
+    if @discussion.summary.present?
+      pdf.font_size(h2){ pdf.text "Zusammenfassung" }
+      pdf.move_down 30
+      pdf.text @discussion.summary
+    end
     pdf.start_new_page
 
     unless @discussion.probands.empty?

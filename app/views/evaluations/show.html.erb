@@ -10,8 +10,10 @@
 <div class="tab-content">
   <div class="tab-pane active" id="overview">
     <h2><%= @discussion.description %></h2>
-    <h3>Zusammenfassung</h3>
-    <p><%= @discussion.summary %></p>
+    <% if @discussion.summary.present? %>
+      <h3>Zusammenfassung</h3>
+      <p><%= @discussion.summary %></p>
+    <% end %>
     <h3>Probanden</h3>
     <a href="#probands"><%= pluralize @discussion.probands.size, "Proband", "Probanden" %></a>
     <h3>Transkript</h3>
@@ -21,7 +23,7 @@
   <div class="tab-pane fade" id="summary">
     <%= form_for(@discussion, html: { role: "form"  }) do |f| %>
       <div class="form-group">
-        <%#= f.label "Zusammenfassung", class: "control-label" %>
+        <%= f.label "Zusammenfassung", class: "control-label" %>
         <%= f.text_area(:summary, class: "form-control", rows: 20) %>
       </div>
 

@@ -1,9 +1,9 @@
 # <%= @discussion.description %>
-## Zusammenfassung
+<% if @discussion.summary.present? %>## Zusammenfassung
 
 <%= @discussion.summary %>
 
-<% unless @discussion.probands.empty? %>## Probanden
+<% end %><% unless @discussion.probands.empty? %>## Probanden
 <% @discussion.probands.each do |discussion_user| %>### <%= discussion_user.name %>: <%= discussion_user.user.age %> / <%= I18n.t(discussion_user.user.gender || 'other') %>
 <% if discussion_user.user.zipcode %>Postleitzahl: <%= discussion_user.user.zipcode %>
 <% if discussion_user.user.has_survey? %>
