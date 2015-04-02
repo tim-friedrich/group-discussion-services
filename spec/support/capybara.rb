@@ -1,7 +1,7 @@
 RSpec.configure do |config|
   require 'capybara/rails'
   require 'capybara-screenshot/rspec'
-  Capybara.javascript_driver = :webkit
+  Capybara.javascript_driver = ENV.has_key?("DRIVER") ? ENV["DRIVER"].to_sym : :webkit
 
   config.include Capybara::DSL
   Capybara.default_wait_time = 5
