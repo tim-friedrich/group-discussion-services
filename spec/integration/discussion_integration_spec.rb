@@ -116,7 +116,7 @@ describe 'Discussion', js: true do
       expect( page ).to have_link("Medien")
     end
     it "should be possible to see observer arguments" do
-      argument = F.create(:observer_argument, discussion: discussion, user: @observer )
+      argument = F.create(:observer_argument, discussion: discussion, user: @observer)
       visit discussion_path(discussion)
       expect( page.find("#arguments") ).to have_content(argument.content)
     end
