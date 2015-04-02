@@ -87,6 +87,7 @@ end
 
 group :development, :test do
   gem 'database_cleaner'
+  gem 'lol_dba'
   gem 'byebug'
   # gem 'web-console', '~> 2.0'
   gem 'irbtools', '~> 2.0', require: 'irbtools/binding'

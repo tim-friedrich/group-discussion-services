@@ -223,6 +223,10 @@ GEM
       addressable (~> 2.3)
     libnotify (0.9.1)
       ffi (>= 1.0.11)
+    lol_dba (1.6.7)
+      actionpack (>= 3.0, < 5.0)
+      activerecord (>= 3.0, < 5.0)
+      railties (>= 3.0, < 5.0)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -430,6 +434,7 @@ DEPENDENCIES
   jquery-ui-rails
   jquery.fileupload-rails
   libnotify
+  lol_dba
   mediaelement_rails
   nested_form
   paperclip
