@@ -18,7 +18,7 @@ gem "active_decorator"
 gem 'will_paginate-bootstrap'
 gem 'will-paginate-i18n'
 gem 'prawn-rails'
-gem 'prawn', '~> 1.0' # TODO remove when 2.0 works
+gem 'prawn', '~> 2.0', '>= 2.0.1'
 gem 'phantomjs'
 gem 'country_select'
 
