@@ -31,7 +31,7 @@ RSpec.describe DiscussionsController, :type => :controller do
           discussion = Discussion.create! valid_attributes
           discussion.moderator = @user
           discussion.save
-          @proband = build(:user)
+          @proband = F.build(:user)
           discussion.users << @proband
           sign_in @proband
           get :show, {:id => discussion.to_param}, valid_session
