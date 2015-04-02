@@ -69,6 +69,7 @@ class DiscussionsController < ApplicationController
 
     respond_to do |format|
       format.html do
+        session[:return_to] = profile_path
         @survey_texts = JSON.load(Rails.root.join 'db/survey_analysis_texts.json')
         @companies = current_user.research_companies
         @proband = DiscussionsUser.new role: Role.proband
@@ -104,7 +105,7 @@ class DiscussionsController < ApplicationController
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
-        format.html { redirect_to '/profile', notice: 'Die Diskussion wurde erfolgreich aktualisiert.' }
+        format.html { redirect_to(session.delete(:return_to) || profile_path, notice: 'Die Diskussion wurde erfolgreich aktualisiert.') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

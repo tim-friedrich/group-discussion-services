@@ -6,7 +6,7 @@ class EvaluationsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html
+      format.html{ session[:return_to] = evaluation_path(@discussion) }
       format.text
       format.pdf{ ensure_user_chart_images! }
     end
