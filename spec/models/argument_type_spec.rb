@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe ArgumentType do
-  let(:argument_type) { ArgumentType.where(name:'proband').first }
+RSpec.describe ArgumentType, :type => :model do
+  let(:argument_type) { ArgumentType.find_by(name:'proband') }
 
   it { argument_type.should respond_to(:name) }
 end

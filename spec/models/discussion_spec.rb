@@ -1,16 +1,15 @@
 require 'spec_helper'
 
-describe Discussion do
-  let(:discussion){ FactoryGirl.build(:discussion) }
+RSpec.describe Discussion, :type => :model do
+  let(:discussion){ F.create(:discussion) }
 
   subject { discussion }
-  it { should respond_to(:topic) }
-  it { should respond_to(:moderator) }
-  it { should respond_to(:due_date) }
-  it { should respond_to(:current_question) }
-  it { should respond_to(:company) }
-  it { should respond_to(:questions) }
-  it { should be_valid }
+  it { expect( F.build_stubbed(:discussion) ).to respond_to(:topic) }
+  it { expect( F.build_stubbed(:discussion) ).to respond_to(:moderator) }
+  it { expect( F.build_stubbed(:discussion) ).to respond_to(:due_date) }
+  it { expect( F.build_stubbed(:discussion) ).to respond_to(:current_question) }
+  it { expect( F.build_stubbed(:discussion) ).to respond_to(:company) }
+  it { expect( F.build_stubbed(:discussion) ).to respond_to(:questions) }
 
   describe "when due_date is not present" do
     before { discussion.due_date = nil }
@@ -18,12 +17,11 @@ describe Discussion do
   end
 
   it "should return the new current question if a new question is created" do
-    question = FactoryGirl.create(:question, discussion: discussion)
+    question = F.create(:question, discussion: discussion)
     expect( discussion.current_question ).to eq question
   end
 
   it "should return the research institute that the discussion belongs to" do
     expect( discussion.research_institute ).to eq discussion.moderator.research_institutes.first
   end
-
 end

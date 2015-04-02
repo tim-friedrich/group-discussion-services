@@ -2,8 +2,8 @@ require 'spec_helper'
 
 
 describe 'Survey App', js: true do
-  let(:user){ create(:user) }
-  let(:user_with_survey){ create(:user_with_survey) }
+  let(:user){ F.create(:user) }
+  let(:user_with_survey){ F.create(:user_with_survey) }
 
   def send_enter_key
     page.execute_script('e = jQuery.Event("keypress"); e.which = 13; $("body").trigger(e);')

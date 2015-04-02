@@ -1,15 +1,20 @@
 require 'spec_helper'
 
 RSpec.describe ResearchInstitutesController, :type => :controller do
-  let(:user){ FactoryGirl.create(:moderator) }
+  let(:user){ F.create(:moderator) }
 
   before do
     sign_in user
   end
 
-  let(:valid_attributes) { FactoryGirl.attributes_for(:research_institute).merge(contact_attributes: FactoryGirl.attributes_for(:contact)).merge(
-    deputy_attributes: FactoryGirl.attributes_for(:user)) }
-  let(:invalid_attributes) {  }
+  let(:valid_attributes) {
+    F.attributes_for(:research_institute).merge(
+      contact_attributes: F.attributes_for(:contact)
+    ).merge(
+      deputy_attributes: F.attributes_for(:user)
+    )
+  }
+  let(:invalid_attributes) {}
   let(:valid_session) { {} }
 
   describe "GET new" do

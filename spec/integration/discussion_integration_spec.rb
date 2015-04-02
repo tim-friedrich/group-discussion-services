@@ -2,16 +2,16 @@ require 'spec_helper'
 
 
 describe 'Discussion', js: true do
-  let(:discussion){ create(:discussion) }
+  let(:discussion){ F.create(:discussion) }
   use_before_unload_hack
 
   before do
     @confirmed_users = discussion.discussions_users.all.select{ | obj | (obj.confirmed && obj.role.name == "proband") }
-    @unconfirmed_user = create(:user_with_survey)
+    @unconfirmed_user = F.create(:user_with_survey)
     discussion.users << @unconfirmed_user
     @unconfirmed_user_discussion = discussion.discussions_users.where(user_id: @unconfirmed_user.id).first
 
-    @observer = create(:user_with_survey)
+    @observer = F.create(:user_with_survey)
     discussion.users << @observer
     observer_discussion = discussion.discussions_users.where(user_id: @observer.id).first
     observer_discussion.role = Role.observer
@@ -77,7 +77,7 @@ describe 'Discussion', js: true do
       end
 
       it "should not possible to see observer arguments" do
-        argument = create(:observer_argument, discussion: discussion)
+        argument = F.create(:observer_argument, discussion: discussion)
         visit discussion_path(discussion)
         expect( page.find("#arguments") ).not_to have_content(argument.content)
       end
@@ -116,7 +116,7 @@ describe 'Discussion', js: true do
       expect( page ).to have_link("Medien")
     end
     it "should be possible to see observer arguments" do
-      argument = create(:observer_argument, discussion: discussion, user: @observer )
+      argument = F.create(:observer_argument, discussion: discussion, user: @observer )
       visit discussion_path(discussion)
       expect( page.find("#arguments") ).to have_content(argument.content)
     end

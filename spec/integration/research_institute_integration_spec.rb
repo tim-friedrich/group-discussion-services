@@ -47,8 +47,7 @@ describe 'research institute' do
     end
 
     describe 'research institutes page' do
-
-
+      pending
     end
   end
 end

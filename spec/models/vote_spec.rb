@@ -1,19 +1,15 @@
 require 'spec_helper'
 
-describe Vote do
-  before do
-    @vote = FactoryGirl.build(:vote)
-  end
+RSpec.describe Vote, :type => :model do
+  let(:vote){ F.build_stubbed(:vote) }
 
-  subject { @vote }
+  subject { vote }
   it { should respond_to(:argument) }
   it { should respond_to(:user) }
   it { should respond_to(:is_like) }
 
-  it { should be_valid }
-
   describe "when argument is not present" do
-    before { @vote.argument = nil }
+    before { vote.argument = nil }
     it { should_not be_valid }
   end
 end

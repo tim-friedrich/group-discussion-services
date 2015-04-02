@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe User do
-  let(:user){ build(:user) }
-  let(:user_with_survey){ build(:user_with_survey) }
+RSpec.describe User, :type => :model do
+  let(:user){ F.build(:user) }
+  let(:user_with_survey){ F.build(:user_with_survey) }
 
   subject { user }
 
@@ -10,28 +10,25 @@ describe User do
   # # #
   # Fields
 
-  it { should respond_to(:lastname) }
-  it { should respond_to(:firstname) }
-  it { should respond_to(:email) }
-  it { should respond_to(:password) }
-  it { should respond_to(:password_confirmation) }
-  it { should respond_to(:role) }
-  it { should respond_to(:gender) }
-  it { should respond_to(:birthday) }
-  it { should respond_to(:zipcode) }
-  it { should respond_to(:country) }
-  it { should respond_to(:city) }
-  it { should respond_to(:phone) }
-  it { should respond_to(:industry) }
-  it { should respond_to(:pseudonym_policy) }
-  it { should respond_to(:can_be_called) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:lastname) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:firstname) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:email) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:password) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:password_confirmation) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:role) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:gender) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:birthday) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:zipcode) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:country) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:city) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:phone) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:industry) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:pseudonym_policy) }
+  it { expect( F.build_stubbed(:user) ).to respond_to(:can_be_called) }
 
 
   # # #
   # Validations
-
-  it { should be_valid }
-
 
   # Optional fields
 
@@ -196,7 +193,7 @@ describe User do
 
   it "should respond the username from the referenced discussion" do
     user_with_survey.save
-    discussion = create(:discussion)
+    discussion = F.build(:discussion)
     discussion.users << user_with_survey
     discussions_user = discussion.discussions_users.where(user_id: user_with_survey.id).first
     discussions_user.save
@@ -246,7 +243,7 @@ describe User do
   # Discussion functionality
 
   describe "user was added to discussion" do
-    let(:discussion){ FactoryGirl.create(:discussion) }
+    let(:discussion){ F.build(:discussion) }
 
     before do
       discussion.users << user

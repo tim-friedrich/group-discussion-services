@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe DiscussionPresence do
+RSpec.describe DiscussionPresence, :type => :model do
   pending
 end
