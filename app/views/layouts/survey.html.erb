@@ -10,6 +10,7 @@
 
   <%= render 'shared/footer' %>
   <%= render 'layouts/late_assets' %>
+  <%= javascript_tag do %><%= yield :javascript %><% end %>
 </body>
 </html>
 

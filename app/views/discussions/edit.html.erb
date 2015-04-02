@@ -41,6 +41,6 @@
   </div>
 
 </div>
-<%= javascript_tag do %>
+<% content_for :javascript do %>
   $(document).ready(function(){ init_edit_discussion(<%= @discussion.id %>) });
 <% end %>

@@ -1,8 +1,6 @@
 <% title 'Diskussion' %>
-<%= javascript_include_tag "private_pub" %>
 
 <div id="discussion">
-
   <div class="toolbox"></div>
 
   <div id="moderator">
@@ -45,23 +43,23 @@
       </div>
     <% end %>
   </div>
-
-  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/arguments/new" %>
-
-
-  <% if current_user == @discussion.moderator || @discussion_user.role.name == 'observer' %>
-  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/observer/arguments/new" %>
-  <% end %>
-  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/questions/new" %>
-  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/open" %>
-  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/close" %>
-  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/votes/new" %>
-  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/users/new" %>
-  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/users/enter" %>
-  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/users/leave" %>
-  <%= subscribe_to "/discussion/"+@discussion.id.to_s+"/visualAid/command" %>
-
-  <script>
-    $(document).ready(function(){ new Discussion(); });
-  </script>
 </div>
+
+<% content_for :late_assets do %>
+  <%= subscribe_to "/discussion/#{@discussion.id}/arguments/new" %>
+  <% if current_user == @discussion.moderator || @discussion_user.role.name == 'observer' %>
+    <%= subscribe_to "/discussion/#{@discussion.id}/observer/arguments/new" %>
+  <% end %>
+  <%= subscribe_to "/discussion/#{@discussion.id}/questions/new" %>
+  <%= subscribe_to "/discussion/#{@discussion.id}/visualAid/open" %>
+  <%= subscribe_to "/discussion/#{@discussion.id}/visualAid/close" %>
+  <%= subscribe_to "/discussion/#{@discussion.id}/votes/new" %>
+  <%= subscribe_to "/discussion/#{@discussion.id}/users/new" %>
+  <%= subscribe_to "/discussion/#{@discussion.id}/users/enter" %>
+  <%= subscribe_to "/discussion/#{@discussion.id}/users/leave" %>
+  <%= subscribe_to "/discussion/#{@discussion.id}/visualAid/command" %>
+<% end %>
+
+<% content_for :javascript do %>
+  $(document).ready(function(){ new Discussion(); });
+<% end %>

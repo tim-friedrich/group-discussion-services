@@ -11,6 +11,7 @@
 //= require date/de-DE
 //= require date/extras
 //= require mediaelement_rails
+//= require private_pub
 
 // BOWER
 //= require jquery.cookie/jquery.cookie
