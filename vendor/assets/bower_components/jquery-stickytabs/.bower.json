@@ -1,5 +1,6 @@
 {
   "name": "jquery-stickytabs",
+  "version": "1.2.0",
   "homepage": "https://github.com/aidanlister/jquery-stickytabs",
   "authors": [
     "Aidan Lister <aidan@aidanlister.com>"
@@ -22,14 +23,13 @@
     "bootstrap": ">= 3.0.0",
     "jquery": ">= 1.9.0"
   },
-  "_release": "002df3f83c",
+  "_release": "1.2.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "002df3f83c9a098d01e243e75eeee343d318d096"
+    "type": "version",
+    "tag": "v1.2.0",
+    "commit": "98e6e3b42616305311d2a65dd74b269e733a357d"
   },
   "_source": "git://github.com/aidanlister/jquery-stickytabs.git",
   "_target": "*",
-  "_originalSource": "jquery-stickytabs",
-  "_direct": true
+  "_originalSource": "jquery-stickytabs"
 }
