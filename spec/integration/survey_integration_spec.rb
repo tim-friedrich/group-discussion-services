@@ -154,7 +154,7 @@ describe 'Survey App', js: true do
 
     describe 'when finished' do
       it 'shows analysis page' do
-        expect( page ).not_to have_content 'Herzlichen Dank'
+        expect( page ).to have_no_content 'Herzlichen Dank'
         fill_out_completely
         expect( page ).to have_content 'Herzlichen Dank'
       end
