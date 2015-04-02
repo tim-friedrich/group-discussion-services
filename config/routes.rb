@@ -14,9 +14,10 @@ GDS::Application.routes.draw do
   resources :discussion_state, only: [:update]
   resources :evaluations, only: [:show]
 
+  get '/users/new' => redirect('/users/sign_up')
   devise_for :users, :controllers => { :invitations => 'users_invitations', :registrations => "registrations" }
-
   resources :users, only: [:create, :show, :update, :destroy]
+
   get '/profile' => 'dashboard#show'
   get '/discussions' => redirect('/profile')
   root 'static_pages#home'
