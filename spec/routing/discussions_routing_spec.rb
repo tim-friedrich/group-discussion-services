@@ -35,9 +35,5 @@ RSpec.describe DiscussionsController, :type => :routing do
     it "routes to #user_entered" do
       get("/user_entered/1").should route_to("discussions#user_entered", id: "1")
     end
-
-    it "routes to #evaluate" do
-      get("/discussions/1/evaluate").should route_to("discussions#evaluate", id: "1")
-    end
   end
 end
