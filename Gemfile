@@ -93,7 +93,7 @@ group :development, :test do
   gem 'irbtools', '~> 2.0', require: 'irbtools/binding'
 
   gem 'rspec-rails', '~> 3.2'
-  gem 'capybara', '~> 2.4'
+  gem 'capybara-puma'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
   gem 'capybara-screenshot'

@@ -72,6 +72,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-puma (1.0.1)
+      capybara
+      puma
     capybara-screenshot (1.0.7)
       capybara (>= 1.0, < 3)
       launchy
@@ -266,6 +269,8 @@ GEM
     prawn-table (0.2.1)
     private_pub (1.0.3)
       faye
+    puma (2.11.1)
+      rack (>= 1.1, < 2.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.0)
@@ -414,7 +419,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.3)
   byebug
   cancancan
-  capybara (~> 2.4)
+  capybara-puma
   capybara-screenshot
   capybara-webkit
   coffee-rails (~> 4.1)
