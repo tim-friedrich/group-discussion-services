@@ -43,4 +43,6 @@ GDS::Application.routes.draw do
 
   get '/user_leaved/:id' => 'discussions#user_leaved'
   get '/user_entered/:id' => 'discussions#user_entered'
+
+  get '/assets/faye-browser-min.js.map' => ->(*){ [200, {}, [""]] }
 end
