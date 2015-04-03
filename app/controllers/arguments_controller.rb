@@ -6,7 +6,7 @@ class ArgumentsController < ApplicationController
 
 
   def create
-    discussion = current_user.discussions.find(argument_params['discussion_id'))
+    discussion = current_user.discussions.find(argument_params['discussion_id'])
 
     @argument = Argument.new(
       content: CGI::escapeHTML(argument_params['content'].to_s),
