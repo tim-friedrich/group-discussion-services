@@ -55,7 +55,7 @@ gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_
 # ASSETS
 
 gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap-sass', '~> 3.3.4'
 gem 'coffee-rails', '~> 4.1'
 gem 'uglifier', '~> 2.7'
 
