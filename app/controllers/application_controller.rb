@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
 
   def not_found
     respond_to do |format|
-      format.html{ redirect_to '/404.html' } # TODO use Rails4 error app
+      format.html{ render file: Rails.root.join("public/404.html"), layout: false, status: 404 }
       format.js{ render text: 'not found', status: 404 }
     end
   end
