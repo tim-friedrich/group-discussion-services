@@ -28,11 +28,11 @@ class SurveysController < ApplicationController
     elsif survey = create_survey_result(survey_params[:results], current_user)
       current_user.generate_chart_image!
       render json: survey, status: 201, serializer: SurveyForUserSerializer, root: "survey"
-    else # TODO applicaton wide error handling/format
-      render text: 'bad request', status: 400
+    else
+      bad_request
     end
   rescue
-    render text: 'bad request', status: 400
+    bad_request
   end
 
 
@@ -40,7 +40,13 @@ class SurveysController < ApplicationController
 
   def create_survey_result(results, user)
     survey = current_user.build_survey
-    analyzed_results = SurveyAnalyzer.new(results, current_user.gender, current_user.age_category).parse!
+    if gender_to_use_answer = results.values.find{ |r| r["id"] == "gender_to_use"}
+      gender_to_use = gender_to_use_answer["value"] == "0" ? "male" : "female"
+    else
+      gender_to_user = current_user.gender
+    end
+
+    analyzed_results = SurveyAnalyzer.new(results, gender_to_use, current_user.age_category).parse!
     if analyzed_results
       survey.update_attributes!(analyzed_results.survey_data)
       survey

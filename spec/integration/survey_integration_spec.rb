@@ -161,6 +161,18 @@ describe 'Survey App', js: true do
     end
   end
 
+  context '[user without gender]' do
+    before do
+      user_without_gender = F.create(:user_without_gender)
+      login_as user_without_gender, scope: :user
+    end
+
+    it 'can be finished' do
+      fill_out_completely
+      expect( page ).to have_content 'Herzlichen Dank'
+    end
+  end
+
   context '[already done]' do
     before do
       login_as(user_with_survey, scope: :user)

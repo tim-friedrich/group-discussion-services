@@ -122,6 +122,10 @@ $ ->
         updateProgress(status.questionNumber - 1)
 
       if question
+        # The condition key might be used in a different way (with a value) if necessary
+        if question.condition && window.pmSurveyGender
+          return nextStep();
+
         $('#pm-survey').addClass "pm-survey-type-#{question.type}"
         question_text = question.text
 

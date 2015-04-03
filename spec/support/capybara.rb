@@ -3,6 +3,7 @@ RSpec.configure do |config|
   require 'capybara/poltergeist'
   require 'capybara-screenshot/rspec'
   Capybara.javascript_driver = ENV.has_key?("DRIVER") ? ENV["DRIVER"].to_sym : :webkit
+  # other options: selenium, poltergeist
 
   config.include Capybara::DSL
   Capybara.default_wait_time = 5
