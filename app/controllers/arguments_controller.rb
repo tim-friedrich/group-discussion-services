@@ -2,7 +2,7 @@ require 'cgi'
 
 class ArgumentsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
+  load_and_authorize_resource :discussion
 
 
   def create
@@ -13,11 +13,11 @@ class ArgumentsController < ApplicationController
       discussion: discussion,
       argument_type: ArgumentType.find_by_name(argument_params['type']),
       user: current_user,
-      question: @argument.discussion.current_question,
+      question: discussion.current_question,
     )
 
     if @argument.save
-      argument_json = render_to_string(template: 'arguments/_argument.json.jbuilder', object: @argument)
+      argument_json = render_to_string(partial: 'arguments/argument.json.jbuilder', object: @argument)
       if @argument.argument_type.name == 'observer'
         PrivatePub.publish_to "/discussion/#{discussion.id}/observer/arguments/new", JSON.parse(argument_json)
       else
