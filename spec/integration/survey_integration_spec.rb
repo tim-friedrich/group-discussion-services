@@ -153,17 +153,21 @@ describe 'Survey App', js: true do
     end
 
     describe 'when finished' do
-      it 'shows analysis page' do
-        expect( page ).to have_no_content 'Herzlichen Dank'
-        fill_out_completely
-        expect( page ).to have_content 'Herzlichen Dank'
-      end
+      # it 'shows analysis page' do
+      #   expect( page ).to have_no_content 'Herzlichen Dank'
+      #   fill_out_completely
+      #   expect( page ).to have_content 'Herzlichen Dank'
+      # end
 
       it 'sends the survey per email to user' do
         ActionMailer::Base.deliveries.clear
+
+        expect( page ).to have_no_content 'Herzlichen Dank'
         fill_out_completely
+        expect( page ).to have_content 'Herzlichen Dank'
+
         last_email = ActionMailer::Base.deliveries.last
-        expect( last_email ).not_to be nil
+        expect( last_email ).not_to be_nil
         expect( last_email.to ).to include user.email
         expect( last_email.body ).to include "Persönlichkeitstest"
       end
