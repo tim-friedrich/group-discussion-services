@@ -10,7 +10,7 @@ class DiscussionsController < ApplicationController
         format.html{ redirect_to '/profile', notice: "Du bist nicht für diese Diskussion eingetragen" }
         format.json{ render status: :forbidden }
       elsif @discussion.closed?
-        format.html{ redirect_to '/profile', notice: "Diese Diskussion ist geschlossen" }
+        format.html{ render action: 'discussion_closed' }
         format.json{ render status: :forbidden }
       else
         @discussion_user = @discussion.discussions_user_for(current_user)

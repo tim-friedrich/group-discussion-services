@@ -37,5 +37,6 @@
 //= require_tree ./charts
 //= require_tree ./discussion_client
 //= require init
+//= require discussion_state
 //= require discussion_edit/app
 //= require_tree ./discussion_edit
