@@ -1,4 +1,4 @@
-<%= nested_form_for(@research_institute, html: { class: 'form-horizontal' }) do |f| %>
+<%= nested_form_for(@research_institute, html: { multipart: true , class: 'form-horizontal' }) do |f| %>
   <%= render partial: "shared/error_messages", locals: { resource: @research_institute } %>
 
   <div class="form-group">

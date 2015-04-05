@@ -4,6 +4,7 @@ json.discussion do
   json.topic @discussion.topic
   byebug unless @discussion.moderator
   json.moderator_id @discussion.moderator.id
+  json.moderator_avatar @discussion.moderator_avatar
   json.due_date @discussion.due_date
   json.arguments @arguments, partial: 'arguments/argument', as: :argument
   json.questions @discussion.questions

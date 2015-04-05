@@ -50,6 +50,7 @@ class @Discussion
         )
         @current_user = @users.filter((user) => user.id == json.current_user_id)[0]
         @moderator = @users.filter((user) => user.id == json.discussion.moderator_id)[0]
+        @moderator_avatar = json.discussion.moderator_avatar
 
         $.each(json.discussion.arguments, (index, argument) =>
           @new_argument(argument)

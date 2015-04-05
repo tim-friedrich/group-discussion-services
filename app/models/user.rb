@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :discussions
 
+  has_attached_file :avatar, styles: { discussion: ["60x60#", :png] }
+  validates_attachment_content_type :avatar, content_type: /\Aimage/
+  validates_attachment_file_name :avatar, matches: [/png\Z/, /jpe?g\Z/]
+
 
   def age
     if birthday

@@ -9,9 +9,8 @@ class ResearchInstitutesController < ApplicationController
   end
 
   def new
-    @research_institute = ResearchInstitute.new contact: Contact.new, deputy: User.new
-    # @deputy = User.new
-    # @research_institute.deputy = @deputy
+    deputy = User.new role: Role.moderator
+    @research_institute = ResearchInstitute.new contact: Contact.new, deputy: deputy
   end
 
   def edit

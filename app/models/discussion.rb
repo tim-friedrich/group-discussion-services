@@ -56,6 +56,10 @@ class Discussion < ActiveRecord::Base
     discussions_user.set_name
   end
 
+  def moderator_avatar
+    moderator.avatar.present? ? moderator.avatar.url(:discussion) : 'Unknown-person.gif'
+  end
+
   def open?
     state == 'open'
   end
