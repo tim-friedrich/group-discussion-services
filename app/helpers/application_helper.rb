@@ -13,6 +13,19 @@ module ApplicationHelper
     ActiveDecorator::Decorator.instance.decorate(model)
   end
 
+  def anrede(user)
+    rede = case user.gender
+    when "male"
+      "Sehr geehrter Herr"
+    when "female"
+      "Sehr geehrte Frau"
+    else
+      "Sehr geehrte(r) #{user.firstname}"
+    end
+
+    "#{rede} #{user.lastname}"
+  end
+
   def generate_interactive_chart(options = {})
     type   = options.delete(:type)  or raise ArgumentError, "no type given"
     domid  = options.delete(:domid) or raise ArgumentError, "no domid given"
