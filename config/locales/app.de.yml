@@ -2,3 +2,8 @@ de:
   male: männlich
   female: webliche
   other: anderes
+
+  survey:
+    low: "unterdurchschnittlichen"
+    medium: "durchschnittlichen"
+    high: "überdurchschnittlichen"

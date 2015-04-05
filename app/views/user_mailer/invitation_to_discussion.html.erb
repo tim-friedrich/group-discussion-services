@@ -5,11 +5,4 @@
   Die Diskussion findet am <%= l @discussions_user.discussion.due_date %> statt. Bitte melden sie sich unter:
   <%= link_to("Group Discussion Services", user_url(@discussions_user.user)) %> an, um Ihre Teilnahme an der Diskussion zu bestätigen.
 </p>
-<br>
-<p>Mit freundlichen Grüßen, <br>
-  Group Discussion Services<br><br>
-  Psychomatix UG<br>
-  Rudolf­-Breitscheid-­Straße 187<br>
-  14482 Potsdam<br>
-  c/o Hasso Plattner Ventures Management GmbH.
-</p>
+<%= render partial: 'footer' %>

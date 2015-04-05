@@ -24,8 +24,9 @@ class SurveysController < ApplicationController
 
   def create
     if current_user.has_survey?
-      render text: 'forbidden', status: 403
+      forbidden
     elsif survey = create_survey_result(survey_params[:results], current_user)
+      UserMailer.survey(current_user).deliver_now
       current_user.generate_chart_image!
       render json: survey, status: 201, serializer: SurveyForUserSerializer, root: "survey"
     else
