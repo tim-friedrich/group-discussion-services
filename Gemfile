@@ -92,6 +92,7 @@ group :development, :test do
   gem 'irbtools', '~> 2.0', require: 'irbtools/binding'
   # gem 'web-console', '~> 2.0'
   gem 'rspec-rails', '~> 3.2'
+  gem 'clipboard_formatter'
   gem 'capybara'
   # gem 'capybara-puma'
   gem 'selenium-webdriver'
