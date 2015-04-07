@@ -16,7 +16,7 @@ class UsersInvitationsController < Devise::InvitationsController
     user = User.invite!({ email: invite_params[:email] }, current_inviter)
 
     respond_to do |format|
-      format.js do
+      format.js{
         if invite_params['discussion_id']
           if current_user.is_deputy?
             user.research_institutes << current_user.deputy_institute
@@ -35,8 +35,16 @@ class UsersInvitationsController < Devise::InvitationsController
           bad_request
         end
 
-      end
-      bad_request
+      }
+      format.html{
+        bad_request
+      }
     end
+  end
+
+  private
+
+  def after_accept_path_for(resource)
+    survey_path
   end
 end
