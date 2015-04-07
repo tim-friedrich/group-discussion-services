@@ -15,10 +15,6 @@
     window.onbeforeunload = null
     document.location.href = "/evaluations/#{discussionId}#summary"
 
-@discussionStateClosed = ->
-  window.onbeforeunload = null
-  document.location.reload()
-
 
 # # # init
 

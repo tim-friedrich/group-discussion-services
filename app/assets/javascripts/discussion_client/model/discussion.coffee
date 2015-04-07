@@ -107,6 +107,7 @@ class @Discussion
     @bind_open_visual_aid()
     @bind_close_visual_aid()
     @bind_visual_aid_command()
+    @bind_state_closed()
     window.onbeforeunload = -> "Wollen Sie die Diskussion wirklich verlassen?"
 
 
@@ -156,15 +157,11 @@ class @Discussion
       )
     )
 
-  # bind_state_opened: () =>
-  #   PrivatePub.subscribe("/discussion/#{@id}/state/open", (_) => # TODO use data
-  #     @view.stateOpened()
-  #   )
-
-  # bind_state_closed: () =>
-  #   PrivatePub.subscribe("/discussion/#{@id}/state/close", (_) => # TODO use data
-  #     @view.stateClosed()
-  #   )
+  bind_state_closed: ->
+    PrivatePub.subscribe("/discussion/#{@id}/state/close", (__) ->
+      window.onbeforeunload = null
+      document.location.reload()
+    )
 
   bind_new_vote: () =>
     if @ and @current_user.is_moderator()

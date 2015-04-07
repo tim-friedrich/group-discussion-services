@@ -58,6 +58,9 @@
   <%= subscribe_to "/discussion/#{@discussion.id}/users/enter" %>
   <%= subscribe_to "/discussion/#{@discussion.id}/users/leave" %>
   <%= subscribe_to "/discussion/#{@discussion.id}/visualAid/command" %>
+  <% unless current_user == @discussion.moderator %>
+    <%= subscribe_to "/discussion/#{@discussion.id}/state/close" %>
+  <% end %>
 <% end %>
 
 <% content_for :javascript do %>

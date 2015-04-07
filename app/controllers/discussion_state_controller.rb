@@ -6,6 +6,9 @@ class DiscussionStateController < ApplicationController
 
   def update
     @discussion.update_attributes(discussion_params)
+    if @discussion.closed?
+      PrivatePub.publish_to "/discussion/#{@discussion.id}/state/close", true
+    end
 
     # TODO: why is explicitness necessary?
     response.headers['Content-Type'] = 'application/x-javascript'
