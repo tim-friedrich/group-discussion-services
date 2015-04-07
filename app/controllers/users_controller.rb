@@ -4,7 +4,16 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @users = User.all
+    respond_to do |format|
+      format.html{ forbidden }
+      format.json{
+        if current_user.is_deputy?
+          @users = current_user.deputy_institute.users
+        else
+          forbidden
+        end
+      }
+    end
   end
 
   def show
@@ -29,18 +38,6 @@ class UsersController < ApplicationController
       format.html { redirect_to '/' }
       format.json { head :no_content }
     end
-  end
-
-  def index
-    respond_to do |format|
-      format.json do
-        if current_user.is_deputy?
-          @users = current_user.deputy_institute.users
-          puts current_user.deputy_institute.users.to_yaml
-        end
-      end
-    end
-
   end
 
 
