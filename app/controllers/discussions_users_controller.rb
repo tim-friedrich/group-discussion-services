@@ -11,29 +11,12 @@ class DiscussionsUsersController < ApplicationController
     end
   end
 
-   def new
-     @discussion_user = DiscussionsUser.new
-  end
-
   def confirm
     @discussions_user.confirmed = true
     if @discussions_user.save
       @json = render_to_string( template: 'discussions_users/_user.json.jbuilder', locals: { discussions_user: @discussions_user })
       PrivatePub.publish_to "/discussion/#{@discussions_user.discussion.id}/users/new", JSON.parse(@json)
       redirect_to '/profile'
-    else
-      render nothing: true
-    end
-  end
-
-   def create
-    @discussions_user = DiscussionsUser.new(discussion_user_params)
-    @discussions_user.confirmed = true if @discussions_user.is_staff?
-
-    if @discussions_user.save
-      set_update_list_params
-      UserMailer.invitation_to_discussion(@discussions_user).deliver
-      render 'discussions_users/update_lists'
     else
       render nothing: true
     end
@@ -55,9 +38,5 @@ class DiscussionsUsersController < ApplicationController
   def set_update_list_params
     @probands  = @discussions_user.discussion.probands.paginate(page: params[:probands_page], per_page: 10)
     @observers = @discussions_user.discussion.observers.paginate(page: params[:observers_page], per_page: 10)
-  end
-
-  def discussion_user_params
-    params.require(:discussions_user).permit(:discussion_id, :user_id, :discussion, :user, :role_id)
   end
 end

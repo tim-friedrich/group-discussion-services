@@ -9,7 +9,7 @@ GDS::Application.routes.draw do
   resources :discussions, except: [:index]
   resources :questions, only: [:create]
   resources :arguments, only: [:create]
-  resources :discussions_users
+  resources :discussions_users, only: [:destroy]
   resource :visual_aids, only: [:create]
   resources :discussion_state, only: [:update]
   resources :evaluations, only: [:show]
