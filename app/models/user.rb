@@ -10,7 +10,9 @@ class User < ActiveRecord::Base
   has_many :discussions_users
   has_many :arguments
   has_many :discussions, through: :discussions_users
-  has_and_belongs_to_many :research_institutes
+  has_many :user_relations
+  has_many :institutes, through: :user_relations
+  has_many :research_institutes, as: :deputy_in_research_institutes
 
   has_one :survey
 
@@ -68,8 +70,7 @@ class User < ActiveRecord::Base
   end
 
   def moderated_discussions
-    # TODO do things like this on SQL level
-    is_moderator? ? discussions.select{ |d| d.moderator == self } : []
+    in_discussions.where(role: Role.moderator).map(&:discussion)
   end
 
   def discussion_user_for(discussion)
@@ -105,11 +106,9 @@ class User < ActiveRecord::Base
     self.id == discussion.moderator.id
   end
 
+  # TODO probably rewrite all checks for this
   def is_deputy?
-    for research_institute in self.research_institutes
-      return true if deputy_institute # FIXME that does not work as it should
-    end
-    return false
+    deputy_in_research_institutes.present?
   end
 
   # # #
@@ -131,12 +130,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def deputy_institute
-    for research_institute in self.research_institutes
-      return research_institute if research_institute.deputy.id == self.id
-    end
-    return false
-  end
 
 
   # # #

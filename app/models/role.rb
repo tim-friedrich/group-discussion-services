@@ -7,7 +7,6 @@ class Role < ActiveRecord::Base
     proband: 1,
     observer: 2,
     moderator: 2,
-    deputy: 3,
     admin: 4,
   }
 

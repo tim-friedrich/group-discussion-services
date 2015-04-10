@@ -40,6 +40,7 @@ class Discussion < ActiveRecord::Base
     self.questions.last
   end
 
+  # TODO user discussions_users role instead
   def moderator
     discussions_users_with_users.find{ |user|
       user.role == Role.moderator
