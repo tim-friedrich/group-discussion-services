@@ -21,13 +21,13 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
       data:
         discussions_user:
           user_id: id
-          discussion_id: 2 
+          discussion_id: 2
       )
 
   $http.get("/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
     $scope.users = data
     $scope.displayedUsers = [].concat($scope.users)
   ).error((data, status, headers, config) ->
-    prompt("Beim Laden der Seite ist ein fehler aufgetreten, bitte versuchen sie es später nocheinmal oder Kontaktieren Sie den technischen Support.")
+    console.log('error retrieving users')
   )
 ]

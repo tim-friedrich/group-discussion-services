@@ -13,6 +13,18 @@ class Discussion < ActiveRecord::Base
   validates :state, inclusion: { in: STATES }
 
 
+  def probands
+    DiscussionsUser.where(discussion: self, role: Role.proband)
+  end
+
+  def observers
+    DiscussionsUser.where(discussion: self, role: Role.observer)
+  end
+
+  def company_name
+    company.name
+  end
+
   def discussions_user_for(user)
     discussions_users.find_by(user: user)
   end
@@ -30,18 +42,22 @@ class Discussion < ActiveRecord::Base
 
   def moderator
     discussions_users_with_users.find{ |user|
-      user.role == Role.find_by_name('moderator')
+      user.role == Role.moderator
     }.try(:user)
   end
 
   def moderator=(user)
     discussions_user = discussions_users.build(
       user: user,
-      role: Role.find_by_name('moderator'),
+      role: Role.moderator,
       confirmed: true,
     )
     discussions_user.save!
     discussions_user.set_name
+  end
+
+  def moderator_avatar
+    moderator.avatar.present? ? moderator.avatar.url(:discussion) : 'Unknown-person.gif'
   end
 
   def open?

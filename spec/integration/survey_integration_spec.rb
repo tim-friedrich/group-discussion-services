@@ -2,8 +2,8 @@ require 'spec_helper'
 
 
 describe 'Survey App', js: true do
-  let(:user){ create(:user) }
-  let(:user_with_survey){ create(:user_with_survey) }
+  let(:user){ F.create(:user) }
+  let(:user_with_survey){ F.create(:user_with_survey) }
 
   def send_enter_key
     page.execute_script('e = jQuery.Event("keypress"); e.which = 13; $("body").trigger(e);')
@@ -153,11 +153,36 @@ describe 'Survey App', js: true do
     end
 
     describe 'when finished' do
-      it 'shows analysis page' do
-        expect( page ).not_to have_content 'Herzlichen Dank'
+      # it 'shows analysis page' do
+      #   expect( page ).to have_no_content 'Herzlichen Dank'
+      #   fill_out_completely
+      #   expect( page ).to have_content 'Herzlichen Dank'
+      # end
+
+      it 'sends the survey per email to user' do
+        ActionMailer::Base.deliveries.clear
+
+        expect( page ).to have_no_content 'Herzlichen Dank'
         fill_out_completely
         expect( page ).to have_content 'Herzlichen Dank'
+
+        last_email = ActionMailer::Base.deliveries.last
+        expect( last_email ).not_to be_nil
+        expect( last_email.to ).to include user.email
+        expect( last_email.body ).to include "Persönlichkeitstest"
       end
+    end
+  end
+
+  context '[user without gender]' do
+    before do
+      user_without_gender = F.create(:user_without_gender)
+      login_as user_without_gender, scope: :user
+    end
+
+    it 'can be finished' do
+      fill_out_completely
+      expect( page ).to have_content 'Herzlichen Dank'
     end
   end
 

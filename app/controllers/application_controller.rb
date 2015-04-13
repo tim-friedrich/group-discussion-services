@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from ActiveRecord::RecordNotFound do
-    redirect_to '/404.html' # TODO use Rails4 error app
+    not_found
   end
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -21,10 +21,6 @@ class ApplicationController < ActionController::Base
     else
       redirect_to main_app.root_path, :alert => exception.message
     end
-  end
-
-  rescue_from ActionController::InvalidAuthenticityToken do
-    redirect_to root_path, :alert => "Ihre Session ist abgelaufen, bitte probieren Sie es noch einmal!"
   end
 
   rescue_from ActionController::InvalidAuthenticityToken do
@@ -49,5 +45,24 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(resource)
     root_path
+  end
+
+  def bad_request
+    render text: "bad request", status: 400
+  end
+
+  def not_authorized
+    render text: "not authorized", status: 401
+  end
+
+  def forbidden
+    render text: "forbidden", status: 403
+  end
+
+  def not_found
+    respond_to do |format|
+      format.html{ render file: Rails.root.join("public/404.html"), layout: false, status: 404 }
+      format.js{ render text: 'not found', status: 404 }
+    end
   end
 end

@@ -2,3 +2,13 @@ de:
   male: männlich
   female: webliche
   other: anderes
+
+  survey:
+    low: "unterdurchschnittlichen"
+    medium: "durchschnittlichen"
+    high: "überdurchschnittlichen"
+
+  devise:
+    users_invitations:
+      user:
+        updated: "Vielen Dank. Bitte füllen Sie nun den Persönlichkeitstest aus!"

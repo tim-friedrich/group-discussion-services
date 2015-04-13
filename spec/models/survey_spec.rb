@@ -1,8 +1,9 @@
 require 'spec_helper'
 require 'survey_analyzer'
 
+
 RSpec.describe Survey, :type => :model do
-  let(:survey){ build(:survey) }
+  let(:survey){ F.build_stubbed(:survey) }
 
 
   describe 'attributes' do

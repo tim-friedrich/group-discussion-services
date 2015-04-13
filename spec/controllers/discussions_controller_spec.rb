@@ -2,25 +2,22 @@ require 'spec_helper'
 
 
 RSpec.describe DiscussionsController, :type => :controller do
-
-  let(:valid_session) {  }
-  let(:valid_attributes) { FactoryGirl.attributes_for(:discussion,
-                              company_id: FactoryGirl.create(:company).id)
-                          }
+  let(:valid_session){ nil }
+  let(:valid_attributes){
+    F.attributes_for(:discussion, company_id: F.create(:company).id)
+  }
 
   describe "signed in" do
     before do
-      @research_institute = FactoryGirl.create(:research_institute, deputy: FactoryGirl.create(:user), contact: FactoryGirl.create(:contact))
-      @user = @research_institute.deputy
-      @user.role = Role.where(name: 'moderator').first()
-      @company = FactoryGirl.create(:company, research_institute: @research_institute, contact: FactoryGirl.create(:contact))
-      @user.research_institutes << @research_institute
+      @user = F.build(:moderator)
+      @research_institute = F.create(:research_institute, deputy: @user, contact: F.build(:contact))
+      @company = F.create(:company, research_institute: @research_institute, contact: F.build(:contact))
+      # @user.research_institutes << @research_institute
       @user.save
       sign_in @user
     end
 
     describe "GET" do
-
       describe "show" do
         it "assigns the requested discussion as @discussion" do
           discussion = Discussion.create! valid_attributes
@@ -34,7 +31,7 @@ RSpec.describe DiscussionsController, :type => :controller do
           discussion = Discussion.create! valid_attributes
           discussion.moderator = @user
           discussion.save
-          @proband = FactoryGirl.create(:user)
+          @proband = F.build(:user)
           discussion.users << @proband
           sign_in @proband
           get :show, {:id => discussion.to_param}, valid_session
@@ -143,68 +140,5 @@ RSpec.describe DiscussionsController, :type => :controller do
         end
       end
     end
-=begin
-    describe "DELETE destroy" do
-      it "destroys the requested discussion" do
-        discussion = Discussion.create! valid_attributes
-        discussion.moderator = @user
-        expect {
-          delete :destroy, {:id => discussion.to_param}, valid_session
-        }.to change(Discussion, :count).by(-1)
-      end
-
-      it "redirects to the users page" do
-        discussion = Discussion.create! valid_attributes
-        discussion.moderator = @user
-        delete :destroy, {:id => discussion.to_param}, valid_session
-        response.should redirect_to(@user)
-      end
-    end
-  end
-
-
-
-  describe "not signed in" do
-    before do
-      #@research_institute = FactoryGirl.create(:research_institute, deputy: FactoryGirl.create(:user), contact: FactoryGirl.create(:contact))
-      #@user = @research_institute.deputy
-      #@company = FactoryGirl.create(:company, research_institute: @research_institute, contact: FactoryGirl.create(:contact))
-      #@user.research_institutes << @research_institute
-      @discussion = FactoryGirl.create(:discussion)
-      #@discussion.moderator = @user
-      #@request.env["devise.mapping"] = Devise.mappings[:user]
-      #sign_out @user
-      sign_in nil
-    end
-    context "should be redirected to the signin page" do
-      describe "get" do
-        it "show" do
-          get :show, {:id => @discussion.to_param}
-          response.should redirect_to(new_user_session_url)
-        end
-        it "new" do
-          get :new
-          response.should redirect_to(new_user_session_url)
-        end
-        it "edit" do
-          get :edit, {:id => @discussion.to_param}
-          response.should redirect_to(new_user_session_url)
-        end
-      end
-      describe "post" do
-        it "create" do
-          post :create, {discussion: valid_attributes}
-          response.should redirect_to(new_user_session_url)
-        end
-      end
-      describe "put" do
-        it "update" do
-          put :update, {:id => discussion.to_param, :discussion => { "topic" => "" }}
-          response.should redirect_to(new_user_session_url)
-        end
-      end
-    end
-  end
-=end
   end
 end

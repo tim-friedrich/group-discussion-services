@@ -1,15 +1,8 @@
-<p>Sehr geehrter Herr <%= @discussions_user.user.lastname %>,</p>
+<p><%= anrede @discussions_user.user %>,</p>
 <br>
 <p>
   Sie wurden eingeladen um an einer Gruppendiskussion zum Thema "<%= @discussions_user.discussion.topic %>" teilzunehmen.
   Die Diskussion findet am <%= l @discussions_user.discussion.due_date %> statt. Bitte melden sie sich unter:
   <%= link_to("Group Discussion Services", user_url(@discussions_user.user)) %> an, um Ihre Teilnahme an der Diskussion zu bestätigen.
 </p>
-<br>
-<p>Mit freundlichen Grüßen, <br>
-  Group Discussion Services<br><br>
-  Psychomatix UG<br>
-  Rudolf­-Breitscheid-­Straße 187<br>
-  14482 Potsdam<br>
-  c/o Hasso Plattner Ventures Management GmbH.
-</p>
+<%= render partial: 'footer' %>

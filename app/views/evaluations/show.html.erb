@@ -1,0 +1,75 @@
+<%= link_to 'Download Text', evaluation_path(@discussion, format: 'txt'), class: "btn btn-success pull-right" %>
+<%= link_to 'Download PDF', evaluation_path(@discussion, format: 'pdf'), class: "btn btn-success pull-right", style: "margin-right: 5px" %>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#overview" data-toggle="tab">Übersicht</a></li>
+  <li><a href="#probands" data-toggle="tab">Probanden</a></li>
+  <li><a href="#script" data-toggle="tab">Transkript</a></li>
+  <li><a href="#summary" data-toggle="tab">Zusammenfassung bearbeiten</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="overview">
+    <h2><%= @discussion.description %></h2>
+    <% if @discussion.summary.present? %>
+      <h3>Zusammenfassung</h3>
+      <p><%= @discussion.summary %></p>
+    <% end %>
+    <h3>Probanden</h3>
+    <a href="#probands"><%= pluralize @discussion.probands.size, "Proband", "Probanden" %></a>
+    <h3>Transkript</h3>
+    <a href="#script"><%= pluralize @discussion.questions.size, "Frage", "Fragen" %> mit <%= pluralize @discussion.arguments.size, "Beitrag", "Beiträgen" %></a>
+  </div>
+
+  <div class="tab-pane fade" id="summary">
+    <%= form_for(@discussion, html: { role: "form"  }) do |f| %>
+      <div class="form-group">
+        <%= f.label "Zusammenfassung", class: "control-label" %>
+        <%= f.text_area(:summary, class: "form-control", rows: 20) %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Zusammenfassung speichern", class: "btn btn-large btn-primary"%>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade in" id="script">
+    <% @discussion.questions.each do |question| %>
+      <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<%= question.id %>">
+                <%= question.topic %>
+              </a>
+            </h4>
+          </div>
+            <div id="collapse_<%= question.id %>" class="panel-collapse collapse in">
+                <ul class="list-group">
+                  <%= render question.arguments.includes(:user, :votes) %>
+                </ul>
+            </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="probands">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Alter</th>
+          <th>Geschlecht</th>
+          <th>Postleitzahl</th>
+          <th>Persönlichkeit</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody id="probands">
+        <%= render partial: 'proband', collection: @discussion.probands %>
+      </tbody>
+    </table>
+  </div>
+</div>

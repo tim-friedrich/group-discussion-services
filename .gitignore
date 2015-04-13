@@ -16,7 +16,7 @@ bundler_stubs/
 /coverage
 
 # app
-public/system/visual_aids/
+public/system/
 db/schema.rb
 /.idea
 /.env

@@ -38,7 +38,7 @@
         <td><%= link_to 'Löschen', discussions_user.discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
       <% end %>
       <% if can? :evaluate, discussions_user.discussion %>
-        <td><%= link_to 'Evaluation', "/discussions/#{discussions_user.discussion.id}/evaluate", class: "btn btn-xs btn-primary" %></td>
+        <td><%= link_to 'Evaluation', evaluation_path(discussions_user.discussion), class: "btn btn-xs btn-primary" %></td>
       <% end %>
     </tr>
   <% end %>

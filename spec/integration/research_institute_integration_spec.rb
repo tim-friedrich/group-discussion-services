@@ -32,23 +32,8 @@ describe 'research institute' do
     end
 
     it "redirects to the users page after sign up" do
-      pending 'confirmation page instead'
       register_research_institute
-      expect( current_path ).to eq user_path(User.last)
-    end
-  end
-
-  context '[signed in]' do
-    let!(:ri){ create(:research_institute) }
-    let!(:user){ ri.deputy.research_institutes << ri; ri.deputy } # FIXME nicer
-
-    before do
-      login_as(user, scope: :user)
-    end
-
-    describe 'research institutes page' do
-
-
+      expect( current_path ).to eq profile_path
     end
   end
 end

@@ -2,19 +2,19 @@ require 'spec_helper'
 
 
 describe 'Discussion', js: true do
-  let(:discussion){ create(:discussion) }
+  let(:discussion){ F.create(:discussion) }
   use_before_unload_hack
 
   before do
     @confirmed_users = discussion.discussions_users.all.select{ | obj | (obj.confirmed && obj.role.name == "proband") }
-    @unconfirmed_user = create(:user_with_survey)
+    @unconfirmed_user = F.create(:user_with_survey)
     discussion.users << @unconfirmed_user
     @unconfirmed_user_discussion = discussion.discussions_users.where(user_id: @unconfirmed_user.id).first
 
-    @observer = create(:user_with_survey)
+    @observer = F.create(:user_with_survey)
     discussion.users << @observer
     observer_discussion = discussion.discussions_users.where(user_id: @observer.id).first
-    observer_discussion.role = Role.where(name: 'observer').first
+    observer_discussion.role = Role.observer
     observer_discussion.confirmed = true
     observer_discussion.save
   end
@@ -48,7 +48,7 @@ describe 'Discussion', js: true do
               $('#argument_content').text('test')
             ")
           page.find('#new_argument_button').click
-          expect( find('#new_argument_content') ).not_to have_content "test"
+          expect( find('#new_argument_content') ).to have_no_content "test"
         end
       end
 
@@ -58,28 +58,26 @@ describe 'Discussion', js: true do
         end
 
         it "should be listed as online when one is in discussion" do
-          page.find_by_id(@user.id).should_not have_css(".offline")
-          expect( page.find_by_id(@user.id)[:class].include?("offline")).to eq false
+          expect( page.find_by_id(@user.id) ).to have_no_css(".offline")
         end
 
         it "should be listed as offline when one is in discussion" do
           expect( page.find_by_id(@confirmed_users[3].user.id)[:class].include?("offline")).to eq true
-          #page.find_by_id(@confirmed_users[3].user.id).should have_css(".offline")
         end
 
         it "should not list the unconfirmed user" do
-          expect( find('#probands-list') ).not_to have_content @unconfirmed_user.username_in(discussion)
+          expect( find('#probands-list') ).to have_no_content @unconfirmed_user.username_in(discussion)
         end
       end
 
       it "should not have a visual aids tab" do
-        expect( page ).not_to have_link("Medien")
+        expect( page ).to have_no_link("Medien")
       end
 
       it "should not possible to see observer arguments" do
-        argument = create(:observer_argument, discussion: discussion)
+        argument = F.create(:observer_argument, discussion: discussion)
         visit discussion_path(discussion)
-        expect( page.find("#arguments") ).not_to have_content(argument.content)
+        expect( page.find("#arguments") ).to have_no_content(argument.content)
       end
     end
 
@@ -87,6 +85,7 @@ describe 'Discussion', js: true do
       before do
         login_as @unconfirmed_user
       end
+
       it "should not possible to enter the discussion" do
         visit discussion_path(discussion)
         expect( current_path ).not_to eq discussion_path(discussion)
@@ -115,8 +114,9 @@ describe 'Discussion', js: true do
     it "should have a visual aids tab" do
       expect( page ).to have_link("Medien")
     end
+
     it "should be possible to see observer arguments" do
-      argument = create(:observer_argument, discussion: discussion, user: @observer )
+      argument = F.create(:observer_argument, discussion: discussion, user: @observer)
       visit discussion_path(discussion)
       expect( page.find("#arguments") ).to have_content(argument.content)
     end

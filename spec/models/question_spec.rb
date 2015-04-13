@@ -1,13 +1,12 @@
 require 'spec_helper'
 
-describe Question do
-  let(:question){ FactoryGirl.build(:question) }
+RSpec.describe Question, :type => :model do
+  let(:question){ F.build_stubbed(:question) }
 
   subject { question }
 
   it { should respond_to(:topic) }
   it { should respond_to(:discussion) }
-  it { should be_valid }
 
   it "should be invalid when topic is not present" do
     question.topic = nil

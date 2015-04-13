@@ -1,0 +1,20 @@
+<h2>Ergebnisse Ihres Persönlichkeitstests</h2>
+<br>
+<% @survey.scale_analysises.each do |scale| %>
+<% points = @survey.public_send scale["short"].to_sym %>
+<% category = %w[low medium high][(points - 1) / 3] %>
+
+
+<h3><%= scale["title"] %></h3>
+
+<p><%= scale["explanation"] %></p>
+
+<p>Ihr Ergebnis: <%= pluralize points, "Punkt", "Punkte" %></p>
+
+<p>
+  Ihr Testwert in dieser Kategorie entspricht einer <strong><%= t "survey.#{category}" %> Ausprägung.</strong>
+  <%= scale[category] %>
+</p>
+<% end %>
+
+<%= render partial: 'footer' %>

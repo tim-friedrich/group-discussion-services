@@ -9,9 +9,8 @@ class ResearchInstitutesController < ApplicationController
   end
 
   def new
-    @research_institute = ResearchInstitute.new contact: Contact.new, deputy: User.new
-    # @deputy = User.new
-    # @research_institute.deputy = @deputy
+    deputy = User.new role: Role.moderator
+    @research_institute = ResearchInstitute.new contact: Contact.new, deputy: deputy
   end
 
   def edit
@@ -66,6 +65,6 @@ class ResearchInstitutesController < ApplicationController
   def new_research_institute
     @research_institute = ResearchInstitute.new(research_institute_params)
     @research_institute.users << @research_institute.deputy
-    @research_institute.deputy.role = Role.find_by_name("moderator")
+    @research_institute.deputy.role = Role.moderator
   end
 end

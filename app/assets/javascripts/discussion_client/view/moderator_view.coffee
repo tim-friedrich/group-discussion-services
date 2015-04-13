@@ -118,9 +118,26 @@ class @ModeratorView extends View
     @draw_probands_list()
     @draw_participation()
 
-  draw_toolbox: () =>
-    template = 
+  draw_options_tab: ->
+    template =
+      """
+        <div class="tab-pane active" id="actions">
+          <div>
+            <h2>Aktionen</h2>
+            <hr>
+            <a id="close-discussion" href="#">Diskussion schließen</a>
+          </div>
+        </div>
+      """
 
+    $(".toolbox").find(".tab-content").append(template)
+    $(".toolbox").find(".nav-tabs").append(
+      """
+        <li><a href="#actions" role="tab" data-toggle="tab">Aktionen</a></li>
+      """)
+
+  draw_toolbox: () =>
+    template =
       """
         <ul class="nav nav-tabs" role="tablist"></ul>
         <div class="tab-content"></div>
@@ -129,4 +146,5 @@ class @ModeratorView extends View
 
     @draw_probands_toolbox()
     @draw_visual_aids_tab()
+    @draw_options_tab()
 

@@ -1,6 +1,5 @@
 // ASSET GEMS
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require jquery.fileupload
@@ -11,6 +10,7 @@
 //= require date/de-DE
 //= require date/extras
 //= require mediaelement_rails
+//= require private_pub
 
 // BOWER
 //= require jquery.cookie/jquery.cookie
@@ -37,5 +37,6 @@
 //= require_tree ./charts
 //= require_tree ./discussion_client
 //= require init
+//= require discussion_state
 //= require discussion_edit/app
 //= require_tree ./discussion_edit

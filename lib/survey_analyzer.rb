@@ -9,7 +9,7 @@ class SurveyAnalyzer
     "Bedürfnis nach Anerkennung und Leistung",
     "Bedürfnis nach Macht und Einfluss",
     "Bedürfnis nach Sicherheit und Ruhe",
-    "Ehrlichkeit",
+    "Ehrliche Beantwortung",
   ]
   STATISTICS = %w[school degree personal_status income]
   NORM_TABLES = JSON.load File.read Rails.root.join('db', 'survey_norm_tables.json')

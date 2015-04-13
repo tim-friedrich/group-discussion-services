@@ -6,8 +6,8 @@ RSpec.describe ArgumentsController, :type => :controller do
 
 
   before do
-    @argument = FactoryGirl.create(:argument)
-    @discussion = FactoryGirl.create(:discussion)
+    @argument = F.create(:argument)
+    @discussion = F.create(:discussion)
     @user = @discussion.users.last
     @valid_attributes = { content: "test", discussion_id: @discussion.id, type: "proband" }
     sign_in @user

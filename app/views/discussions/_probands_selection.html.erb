@@ -105,12 +105,12 @@
             <div class="col-sm-4">
               <select id="income-filter" class="form-control" st-search="'income'" >
                 <option value="" selected>Egal</option>
-                <option>< 1000 EURO</option>
+                <option>&lt; 1000 EURO</option>
                 <option>1000 - 3000 EURO</option>
                 <option>3000 - 5000 EURO</option>
                 <option>5000 - 7000 EURO</option>
                 <option>7000 - 9000 EURO</option>
-                <option>> 9000 EURO</option>
+                <option>&lt; 9000 EURO</option>
               </select>
             </div>
           </div>
@@ -119,11 +119,11 @@
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" 
-                  class="collapsed" 
-                  data-parent="#accordion" 
-                  href="#selectPersonality" 
-                  aria-expanded="true" 
+                  <a data-toggle="collapse"
+                  class="collapsed"
+                  data-parent="#accordion"
+                  href="#selectPersonality"
+                  aria-expanded="true"
                   aria-controls="selectPersonality">
                     Nach Persönlichkeitsmerkmalen filtern
                   </a>
@@ -132,12 +132,12 @@
               <div id="selectPersonality" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                   <div class="form-group">
-                    <label class="col-sm-2 control-label" 
-                    for="income-filter" 
-                    data-container="body" 
-                    data-toggle="popover" 
+                    <label class="col-sm-2 control-label"
+                    for="income-filter"
+                    data-container="body"
+                    data-toggle="popover"
                     title="Gewissenhaftigkeit"
-                    data-placement="right" 
+                    data-placement="right"
                     data-content="<%= survey_texts["c"]["explanation"] %>">
                     Gewissenhaftigkeit:</label>
                     <div class="col-sm-4 slider-wraper">
@@ -154,12 +154,12 @@
                       data-slider-value="5"
                       ></slider>
                     </div>
-                    <label class="col-sm-2 control-label" 
+                    <label class="col-sm-2 control-label"
                     for="income-filter"
-                    data-container="body" 
-                    data-toggle="popover" 
+                    data-container="body"
+                    data-toggle="popover"
                     title="Neurotizismus"
-                    data-placement="right" 
+                    data-placement="right"
                     data-content="<%= survey_texts["n"]["explanation"] %>">
                     Neurotizismus:</label>
                     <div class="col-sm-4 slider-wraper">
@@ -178,12 +178,12 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label" 
+                    <label class="col-sm-2 control-label"
                     for="income-filter"
-                    data-container="body" 
-                    data-toggle="popover" 
+                    data-container="body"
+                    data-toggle="popover"
                     title="Extraversion"
-                    data-placement="right" 
+                    data-placement="right"
                     data-content="<%= survey_texts["e"]["explanation"] %>">
                     Extraversion:</label>
                     <div class="col-sm-4 slider-wraper">
@@ -200,12 +200,12 @@
                       data-slider-value="5"
                       ></slider>
                     </div>
-                    <label class="col-sm-2 control-label" 
+                    <label class="col-sm-2 control-label"
                     for="income-filter"
-                    data-container="body" 
-                    data-toggle="popover" 
+                    data-container="body"
+                    data-toggle="popover"
                     title="Verträglichkeit"
-                    data-placement="right" 
+                    data-placement="right"
                     data-content="<%= survey_texts["a"]["explanation"] %>">
                     Verträglichkeit:</label>
                     <div class="col-sm-4 slider-wraper">
@@ -224,12 +224,12 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label" 
+                    <label class="col-sm-2 control-label"
                     for="income-filter"
-                    data-container="body" 
-                    data-toggle="popover" 
+                    data-container="body"
+                    data-toggle="popover"
                     title="Offenheit für neues"
-                    data-placement="right" 
+                    data-placement="right"
                     data-content="<%= survey_texts["o"]["explanation"] %>">
                     Offenheit:</label>
                     <div class="col-sm-4 slider-wraper">
@@ -246,14 +246,14 @@
                       data-slider-value="5"
                       ></slider>
                     </div>
-                    <label class="col-sm-2 control-label" 
+                    <label class="col-sm-2 control-label"
                     for="income-filter"
-                    data-container="body" 
-                    data-toggle="popover" 
+                    data-container="body"
+                    data-toggle="popover"
                     title="Ehrlichkeit bei der Beantwortung der Fragen"
-                    data-placement="right" 
+                    data-placement="right"
                     data-content="<%= survey_texts["h"]["explanation"] %>">
-                    Ehrlichkeit:</label>
+                    Ehrliche Beantwortung:</label>
                     <div class="col-sm-4 slider-wraper">
                       <input ng-model="hCheck" class="toogleSlider" type="checkbox"/>
                       <slider gds-slider
@@ -270,12 +270,12 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label" 
+                    <label class="col-sm-2 control-label"
                     for="income-filter"
-                    data-container="body" 
-                    data-toggle="popover" 
+                    data-container="body"
+                    data-toggle="popover"
                     title="Bedürfnis nach Macht und Einfluss"
-                    data-placement="right" 
+                    data-placement="right"
                     data-content="<%= survey_texts["sm"]["explanation"] %>">
                     Macht und Einfluss:</label>
                     <div class="col-sm-4 slider-wraper">
@@ -292,12 +292,12 @@
                       data-slider-value="5"
                       ></slider>
                     </div>
-                    <label class="col-sm-2 control-label" 
+                    <label class="col-sm-2 control-label"
                     for="income-filter"
-                    data-container="body" 
-                    data-toggle="popover" 
+                    data-container="body"
+                    data-toggle="popover"
                     title="Bedürfnis nach Sicherheit und Ruhe"
-                    data-placement="right" 
+                    data-placement="right"
                     data-content="<%= survey_texts["mm"]["explanation"] %>">
                     Sicherheit und Ruhe:</label>
                     <div class="col-sm-4 slider-wraper">
@@ -316,12 +316,12 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label" 
+                    <label class="col-sm-2 control-label"
                     for="income-filter"
-                    data-container="body" 
-                    data-toggle="popover" 
+                    data-container="body"
+                    data-toggle="popover"
                     title="Bedürfnis nach Anerkennung und Leistung"
-                    data-placement="right" 
+                    data-placement="right"
                     data-content="<%= survey_texts["lm"]["explanation"] %>">
                     Anerkennung und Leistung:</label>
                     <div class="col-sm-4 slider-wraper">
@@ -369,7 +369,6 @@
           <td>{{user.income}}</td>
           <td>{{user.personal_status}}</td>
           <td>{{user.zipcode}}</td>
-          <td><%= link_to "/discussions_users", class: "btn btn-xs btn-primary" %></td>
         </tr>
       </tbody>
       <tfoot>

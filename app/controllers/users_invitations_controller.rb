@@ -16,27 +16,35 @@ class UsersInvitationsController < Devise::InvitationsController
     user = User.invite!({ email: invite_params[:email] }, current_inviter)
 
     respond_to do |format|
-      format.js do
+      format.js{
         if invite_params['discussion_id']
           if current_user.is_deputy?
             user.research_institutes << current_user.deputy_institute
           end
           @discussion = Discussion.find(invite_params[:discussion_id])
-          @discussion.users << user
-          @discussions_user = @discussion.discussions_users.last
-          @discussions_user.role = Role.find_by_name(invite_params[:discussions_user_role])
-          @proband_role =  Role.find_by_name('proband')
-          @observer_role =  Role.find_by_name('observer')
-          @probands = DiscussionsUser.where(discussion: @discussions_user.discussion, role: @proband_role).paginate(:page => params[:probands_page], :per_page => 10)
-          @observers = DiscussionsUser.where(discussion: @discussions_user.discussion, role: @observer_role).paginate(:page => params[:observers_page], :per_page => 10)
+          @discussions_user = @discussion.discussions_users.create(
+            user: user,
+            role: Role.find_by_name(invite_params[:discussions_user_role]),
+          )
+
+          @probands  = @discussion.probands.paginate(page: params[:probands_page], per_page: 10)
+          @observers = @discussion.observers.paginate(page: params[:observers_page], per_page: 10)
 
           render 'discussions_users/update_lists'
         else
-          render nothing: true
+          bad_request
         end
 
-      end
-      format.html{ }
+      }
+      format.html{
+        bad_request
+      }
     end
+  end
+
+  private
+
+  def after_accept_path_for(resource)
+    survey_path
   end
 end

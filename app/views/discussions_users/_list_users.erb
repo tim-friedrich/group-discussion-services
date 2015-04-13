@@ -17,7 +17,7 @@
       <td><%= discussions_user.user.gender %></td>
       <td><%= discussions_user.user.age %></td>
       <td>tbd</td>
-      <td><%= link_to 'Löschen', discussions_users_path+'/'+discussions_user.id.to_s, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
+      <td><%= link_to 'Löschen', discussions_user, method: :delete, remote: true, class: "btn btn-xs btn-primary" %></td>
     </tr>
   <% end %>
   </tbody>

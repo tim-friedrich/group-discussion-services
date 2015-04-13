@@ -47,7 +47,7 @@ class @Argument
       """
       <div class="argument moderator_argument">
           <div class="user">
-            <img src="#{image_path('Unknown-person.gif')}" />
+            <img src="#{@discussion.moderator_avatar}" />
           </div>
           <div class="right-argument">
             <div class="argument_content">

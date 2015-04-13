@@ -9,19 +9,20 @@ GDS::Application.routes.draw do
   resources :discussions, except: [:index]
   resources :questions, only: [:create]
   resources :arguments, only: [:create]
-  resources :discussions_users
+  resources :discussions_users, only: [:destroy]
   resource :visual_aids, only: [:create]
   resources :discussion_state, only: [:update]
+  resources :evaluations, only: [:show]
 
+  get '/users/new' => redirect('/users/sign_up')
   devise_for :users, :controllers => { :invitations => 'users_invitations', :registrations => "registrations" }
+  resources :users, only: [:index, :create, :show, :edit, :update, :destroy]
 
-  resources :users, only: [:create, :show, :update, :destroy]
   get '/profile' => 'dashboard#show'
   get '/discussions' => redirect('/profile')
   root 'static_pages#home'
 
   get '/imprint' => 'static_pages#imprint'
-  get '/globalsign.html' => 'static_pages#globalsign'
   get '/contact_us' => 'static_pages#contact_us'
 
   get '/survey' => 'surveys#new'
@@ -43,5 +44,5 @@ GDS::Application.routes.draw do
   get '/user_leaved/:id' => 'discussions#user_leaved'
   get '/user_entered/:id' => 'discussions#user_entered'
 
-  get '/discussions/:id/evaluate' => 'discussions#evaluate'
+  get '/assets/faye-browser-min.js.map' => ->(*){ [200, {}, [""]] }
 end

@@ -434,5 +434,15 @@
     "type": "big5",
     "scale": "h",
     "text": "Ich habe schon mal über andere gelästert oder schlecht über sie gedacht."
+  },
+  {
+    "type": "statistic",
+    "id": "gender_to_use",
+    "text": "Welches Geschlecht soll für die Einordnung Ihrer Ergebnisse benutzt werden?",
+    "condition": true,
+    "options": [
+      "männlich",
+      "weiblich"
+    ]
   }
 ]

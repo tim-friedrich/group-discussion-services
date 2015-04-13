@@ -14,10 +14,11 @@ gem 'rails-i18n'
 gem 'bcrypt', '~> 3.1.10'
 gem 'devise-i18n'
 gem "paperclip"
+gem "active_decorator"
 gem 'will_paginate-bootstrap'
 gem 'will-paginate-i18n'
 gem 'prawn-rails'
-gem 'prawn', '~> 1.0' # TODO remove when 2.0 works
+gem 'prawn', '~> 2.0', '>= 2.0.1'
 gem 'phantomjs'
 gem 'country_select'
 
@@ -54,7 +55,7 @@ gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_
 # ASSETS
 
 gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap-sass', '~> 3.3.4'
 gem 'coffee-rails', '~> 4.1'
 gem 'uglifier', '~> 2.7'
 
@@ -86,15 +87,19 @@ end
 
 group :development, :test do
   gem 'database_cleaner'
+  gem 'lol_dba'
   gem 'byebug'
+  gem 'irbtools', '~> 2.0', require: 'irbtools/binding'
   # gem 'web-console', '~> 2.0'
-  gem 'irbtools', '~> 1.7', require: 'binding.repl'
-
   gem 'rspec-rails', '~> 3.2'
-  gem 'capybara', '~> 2.4'
+  gem 'clipboard_formatter'
+  gem 'capybara'
+  # gem 'capybara-puma'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'capybara-screenshot'
+  # gem 'capybara-slow_finder_errors'
   gem 'factory_girl_rails'
   gem 'spring'
   gem 'spring-commands-rspec'

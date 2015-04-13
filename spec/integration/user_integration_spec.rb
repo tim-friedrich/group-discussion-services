@@ -47,7 +47,7 @@ describe 'User' do
       end
 
       it "should have an other DiscussionsUser name than Unbekannt" do
-        discussion = create(:discussion)
+        discussion = F.create(:discussion)
         user = User.invite!(email: 'test@example.com') do |u|
           u.skip_invitation = true
         end
@@ -66,7 +66,7 @@ describe 'User' do
   end
 
   describe 'log in' do
-    let!(:user){ create(:user_with_survey) }
+    let!(:user){ F.create(:user_with_survey) }
 
     it 'shows the profile link' do
       visit '/users/sign_in'
@@ -78,7 +78,7 @@ describe 'User' do
   end
 
   context '[signed in]' do
-    let!(:user){ create(:user_with_survey) }
+    let!(:user){ F.create(:user_with_survey) }
 
     before do
       login_as(user, scope: :user)
@@ -101,7 +101,7 @@ describe 'User' do
 
         describe "new Discussion" do
           before do
-            @discussion = create(:discussion)
+            @discussion = F.create(:discussion)
             @discussion.users << user
             visit "/profile"
           end
@@ -126,7 +126,7 @@ describe 'User' do
 
     describe "user is moderator" do
       before do
-        @moderator = create(:moderator)
+        @moderator = F.create(:moderator)
         login_as(@moderator, scope: :user)
       end
       describe "profile page" do
@@ -144,7 +144,7 @@ describe 'User' do
         end
         describe "Discussion" do
           before do
-            @discussion = create(:discussion, moderator: @moderator)
+            @discussion = F.create(:discussion, moderator: @moderator)
             visit "/profile"
           end
           it "redirects to the edit discussion page when link was clicked" do
@@ -164,8 +164,8 @@ describe 'User' do
 
         describe "Company" do
           before do
-            @research_institute = create(:research_institute, deputy: @moderator)
-            @company = create(:company, research_institute: @research_institute)
+            @research_institute = F.create(:research_institute, deputy: @moderator)
+            @company = F.create(:company, research_institute: @research_institute)
             @moderator.research_institutes << @research_institute
             @moderator.save
             visit "/profile"

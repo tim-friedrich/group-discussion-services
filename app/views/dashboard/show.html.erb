@@ -52,6 +52,6 @@
   </div>
 </div>
 
-<%= javascript_tag do %>
+<% content_for :javascript do %>
   $(document).ready(register_paginations);
 <% end %>

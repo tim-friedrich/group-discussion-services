@@ -10,7 +10,7 @@ class DiscussionsController < ApplicationController
         format.html{ redirect_to '/profile', notice: "Du bist nicht für diese Diskussion eingetragen" }
         format.json{ render status: :forbidden }
       elsif @discussion.closed?
-        format.html{ redirect_to '/profile', notice: "Diese Diskussion ist geschlossen" }
+        format.html{ render action: 'discussion_closed' }
         format.json{ render status: :forbidden }
       else
         @discussion_user = @discussion.discussions_user_for(current_user)
@@ -63,22 +63,16 @@ class DiscussionsController < ApplicationController
   end
 
   def edit
-    @proband_role =  Role.where(name: 'proband').first()
-    @observer_role =  Role.where(name: 'observer').first()
-    @probands = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @proband_role.id).paginate(:page => params[:probands_page], :per_page => 10)
-    @observers = DiscussionsUser.where(discussion_id: @discussion.id, role_id: @observer_role.id).paginate(:page => params[:observers_page], :per_page => 10)
-    @visual_aids = @discussion.visual_aids.paginate(:page => params[:visual_aids_page], :per_page => 10)
+    @probands    = @discussion.probands.paginate(page: params[:probands_page], per_page: 10)
+    @observers   = @discussion.observers.paginate(page: params[:observers_page], per_page: 10)
+    @visual_aids = @discussion.visual_aids.paginate(page: params[:visual_aids_page], per_page: 10)
+
     respond_to do |format|
       format.html do
-        if current_user.research_institutes.first()
-          @companies = current_user.research_institutes.first.companies
-          @survey_texts = JSON.load(Rails.root.join 'db/survey_analysis_texts.json')
-          puts "A"*20
-          puts @survey_texts
-        else
-          @companies = []
-        end
-        @proband = DiscussionsUser.new
+        session[:return_to] = profile_path
+        @survey_texts = JSON.load(Rails.root.join 'db/survey_analysis_texts.json')
+        @companies = current_user.research_companies
+        @proband = DiscussionsUser.new role: Role.proband
         @visual_aid = VisualAid.new
         @users = User.all
         @user = User.new
@@ -111,7 +105,7 @@ class DiscussionsController < ApplicationController
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
-        format.html { redirect_to '/profile', notice: 'Die Diskussion wurde erfolgreich aktualisiert.' }
+        format.html { redirect_to(session.delete(:return_to) || profile_path, notice: 'Die Diskussion wurde erfolgreich aktualisiert.') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -121,20 +115,11 @@ class DiscussionsController < ApplicationController
   end
 
   def destroy
-    DiscussionsUser.where(discussion_id: @discussion.id).delete_all
+    DiscussionsUser.where(discussion_id: @discussion.id).destroy_all
     @discussion.destroy
     respond_to do |format|
       format.html { redirect_to '/profile' }
       format.json { head :no_content }
-    end
-  end
-
-  def evaluate
-    respond_to do |format|
-      format.html{}
-      format.pdf{
-        ensure_user_chart_images!
-      }
     end
   end
 
@@ -154,11 +139,5 @@ class DiscussionsController < ApplicationController
 
   def discussion_params
     params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id, :company, :visual_aids, :summary)
-  end
-
-  def ensure_user_chart_images!
-    @discussion.users.includes(:survey).each{ |user|
-      user.ensure_chart_image!
-    }
   end
 end

@@ -1,4 +1,6 @@
 class DiscussionsUser < ActiveRecord::Base
+  include HasRole
+
   COLORS       = ["#759399", "#cc6d6a", "#FFFCE8", "#ffb1ad", "#a6a6a6",
                   "#CCC1A3", "#C2CCA5", "#FFF29B", "#bbff99", "#c6bdd1"]
   MALE_NAMES   = ['Till', 'Ben', 'Paul', 'Karl', 'Leon', 'Felix', 'Max',
@@ -49,10 +51,6 @@ class DiscussionsUser < ActiveRecord::Base
     else
       return false
     end
-  end
-
-  def set_default_role
-    self.role ||= Role.find_by_name('proband')
   end
 
   def set_name

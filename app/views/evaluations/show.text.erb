@@ -1,0 +1,23 @@
+# <%= @discussion.description %>
+<% if @discussion.summary.present? %>## Zusammenfassung
+
+<%= @discussion.summary %>
+
+<% end %><% unless @discussion.probands.empty? %>## Probanden
+<% @discussion.probands.each do |discussion_user| %>### <%= discussion_user.name %>: <%= discussion_user.user.age %> / <%= I18n.t(discussion_user.user.gender || 'other') %>
+<% if discussion_user.user.zipcode %>Postleitzahl: <%= discussion_user.user.zipcode %>
+<% if discussion_user.user.has_survey? %>
+Persönlichkeit:
+<%= render partial: 'survey', object: discussion_user.user.survey %>
+<% end %>
+<% end %>
+
+<% end %>
+<% end %>
+
+<% unless @discussion.arguments.empty? %>
+## Transkript
+<% @discussion.questions.each do |question| %>### <%= question.topic %>
+<%= render partial: 'argument', collection: question.arguments.includes(:user, :votes) %>
+<% end %>
+<% end %>

@@ -2,15 +2,26 @@ class Role < ActiveRecord::Base
   has_many :users
   has_many :discussions_users
 
+  ROLES = {
+    user: 1,
+    proband: 1,
+    observer: 2,
+    moderator: 2,
+    deputy: 3,
+    admin: 4,
+  }
 
   def self.create_defaults!
-    Role.create!(name: 'user',      level: 1) unless Role.find_by_name('user')
-    Role.create!(name: 'proband',   level: 1) unless Role.find_by_name('proband')
-    Role.create!(name: 'observer',  level: 2) unless Role.find_by_name('observer')
-    Role.create!(name: 'moderator', level: 2) unless Role.find_by_name('moderator')
-    Role.create!(name: 'deputy',    level: 3) unless Role.find_by_name('deputy')
-    Role.create!(name: 'admin',     level: 4) unless Role.find_by_name('admin')
+    ROLES.each{ |role, level|
+      Role.create!(name: role.to_s, level: level) unless Role.public_send(role)
+    }
   end
+
+  ROLES.each{ |role,_|
+    self.define_singleton_method role do
+      Role.find_by_name(role.to_s)
+    end
+  }
 
 
   rails_admin do

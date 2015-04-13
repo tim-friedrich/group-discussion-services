@@ -17,7 +17,7 @@ var formatData = function(data){
         { "value": normalizedValues[5], "label": "LM", "desc": "Bedürfnis nach Anerkennung und Leistung" },
         { "value": normalizedValues[6], "label": "MM", "desc": "Bedürfnis nach Macht und Einfluss" },
         { "value": normalizedValues[7], "label": "SM", "desc": "Bedürfnis nach Sicherheit und Ruhe" },
-        { "value": normalizedValues[8], "label": "H",  "desc": "Ehrlichkeit" }
+        { "value": normalizedValues[8], "label": "H",  "desc": "Ehrliche Beantwortung" }
       ]
     }
   ]

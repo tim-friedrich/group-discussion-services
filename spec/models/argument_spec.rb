@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Argument do
-  let(:argument){ create(:argument) }
+RSpec.describe Argument, :type => :model do
+  let(:argument){ F.build_stubbed(:argument) }
 
   subject{ argument }
 
@@ -9,8 +9,6 @@ describe Argument do
   it { should respond_to(:user) }
   it { should respond_to(:question) }
   it { should respond_to(:argument_type) }
-
-  it { should be_valid }
 
 
   describe "when content not present" do

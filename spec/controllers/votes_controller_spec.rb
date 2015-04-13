@@ -2,17 +2,17 @@ require 'spec_helper'
 
 
 RSpec.describe VotesController, :type => :controller do
-  let(:user){ create(:user_with_survey) }
-  let(:discussion){ create(:discussion) }
-  let(:question) { create(:question) }
+  let(:user){ F.create(:user_with_survey) }
+  let(:discussion){ F.create(:discussion) }
+  let(:question) { F.create(:question) }
 
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:vote,
-      argument_id: create(:argument,
+    F.attributes_for(:vote,
+      argument_id: F.create(:argument,
         question: Question.create(topic: "ASDasd",
           discussion: discussion),
           discussion: discussion).id,
-      user_id: create(:user).id
+      user_id: F.create(:user).id
     )
   }
   let(:valid_session) { {} }

@@ -3,8 +3,8 @@ require 'spec_helper'
 
 
 RSpec.describe SurveysController, :type => :controller do
-  let(:user){ create(:user) }
-  let(:user_with_survey){ create(:user_with_survey) }
+  let(:user){ F.create(:user) }
+  let(:user_with_survey){ F.create(:user_with_survey) }
 
 
   describe '#create' do
