@@ -24,6 +24,7 @@ GDS::Application.routes.draw do
 
   get '/imprint' => 'static_pages#imprint'
   get '/contact_us' => 'static_pages#contact_us'
+  get 'eligibility_requirements' => 'static_pages#eligibility_requirements'
 
   get '/survey' => 'surveys#new'
   post '/survey' => 'surveys#create'

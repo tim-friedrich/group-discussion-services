@@ -19,6 +19,10 @@ class StaticPagesController < ApplicationController
   def imprint
   end
 
+  def eligibility_requirements
+
+  end
+
   def contact_us_params
     params.require(:contact_us).permit(:sender_name, :sender_email, :content)
   end
