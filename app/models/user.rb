@@ -112,6 +112,10 @@ class User < ActiveRecord::Base
     return false
   end
 
+  def self.probands
+    User.where(role: Role.find_by_name('proband'))
+  end
+
   # # #
   # Assocs
 
