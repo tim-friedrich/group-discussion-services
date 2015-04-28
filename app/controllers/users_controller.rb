@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html{ forbidden }
       format.json{
-        @users = User.where(role: Role.find_by_name('proband'))
+        @users = User.where(role: Role.proband)
       }
     end
   end

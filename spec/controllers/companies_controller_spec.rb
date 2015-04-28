@@ -4,7 +4,6 @@ require 'spec_helper'
 RSpec.describe CompaniesController, :type => :controller do
   before do
     deputy = F.create(:moderator)
-    @research_institute = F.create(:research_institute, deputy: deputy)
     sign_in deputy
   end
 

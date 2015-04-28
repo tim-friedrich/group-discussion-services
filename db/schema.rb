@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405183541) do
+ActiveRecord::Schema.define(version: 20150428124130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,25 +103,6 @@ ActiveRecord::Schema.define(version: 20150405183541) do
   end
 
   add_index "questions", ["discussion_id"], name: "index_questions_on_discussion_id", using: :btree
-
-  create_table "research_institutes", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.integer  "contact_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "deputy_id"
-  end
-
-  add_index "research_institutes", ["contact_id"], name: "index_research_institutes_on_contact_id", using: :btree
-  add_index "research_institutes", ["deputy_id"], name: "index_research_institutes_on_deputy_id", using: :btree
-
-  create_table "research_institutes_users", force: :cascade do |t|
-    t.integer "research_institute_id"
-    t.integer "user_id"
-  end
-
-  add_index "research_institutes_users", ["research_institute_id"], name: "index_research_institutes_users_on_research_institute_id", using: :btree
-  add_index "research_institutes_users", ["user_id"], name: "index_research_institutes_users_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",       limit: 255

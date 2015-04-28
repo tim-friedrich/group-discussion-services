@@ -2,7 +2,6 @@ GDS::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   resources :companies, only: [:new, :create, :edit, :update, :destroy]
-  resources :research_institutes, only: [:new, :create, :edit, :update, :destroy]
   resources :votes, only: [:create]
   resources :dislikes, only: [:create]
   resources :likes, only: [:create]

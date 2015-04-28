@@ -148,12 +148,16 @@ describe 'User' do
             visit "/profile"
           end
           it "redirects to the edit discussion page when link was clicked" do
-            click_link "Bearbeiten"
+            within(:css, ".discussions_list") do
+              click_link "Bearbeiten"
+            end
             expect( current_path ).to eq edit_discussion_path(@discussion)
           end
           it "should be possible to delete a discussion" do
             expect{
-              click_link "Löschen"
+              within(:css, ".discussions_list") do
+                click_link "Löschen"
+              end
             }.to change(Discussion, :count).by(-1)
           end
 
@@ -164,9 +168,7 @@ describe 'User' do
 
         describe "Company" do
           before do
-            @research_institute = F.create(:research_institute, deputy: @moderator)
-            @company = F.create(:company, research_institute: @research_institute)
-            @moderator.research_institutes << @research_institute
+            @company = F.create(:company)
             @moderator.save
             visit "/profile"
           end

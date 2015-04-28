@@ -55,8 +55,8 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.new
     @users = User.all
     @proband = DiscussionsUser.new
-    if current_user.research_institutes.first
-      @companies = current_user.research_institutes.first.companies
+    if Company.all.any?
+      @companies = Company.all
     else
       @companies = []
     end
@@ -71,7 +71,7 @@ class DiscussionsController < ApplicationController
       format.html do
         session[:return_to] = profile_path
         @survey_texts = JSON.load(Rails.root.join 'db/survey_analysis_texts.json')
-        @companies = current_user.research_companies
+        @companies = Company.all
         @proband = DiscussionsUser.new role: Role.proband
         @visual_aid = VisualAid.new
         @users = User.all

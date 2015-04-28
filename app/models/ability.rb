@@ -5,7 +5,6 @@ class Ability
     # # #
     # Anonymous
 
-    can [ :new, :create ], ResearchInstitute
     can [ :new, :create ], User
 
     return unless user
@@ -55,11 +54,6 @@ class Ability
     end
 
     can [ :create ], Vote
-
-    can [ :manage ], ResearchInstitute do |research_institute|
-      research_institute.deputy == user
-    end
-
 
     # # #
     # Moderator

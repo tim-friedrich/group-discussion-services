@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   has_many :discussions_users
   has_many :arguments
   has_many :discussions, through: :discussions_users
-  has_and_belongs_to_many :research_institutes
 
   has_one :survey
 
@@ -105,13 +104,6 @@ class User < ActiveRecord::Base
     self.id == discussion.moderator.id
   end
 
-  def is_deputy?
-    for research_institute in self.research_institutes
-      return true if deputy_institute # FIXME that does not work as it should
-    end
-    return false
-  end
-
   def self.probands
     User.where(role: Role.find_by_name('proband'))
   end
@@ -121,25 +113,6 @@ class User < ActiveRecord::Base
 
   def in_discussions
     discussions_users.includes(:discussion)
-  end
-
-  def preferred_research_institute
-    research_institutes.first # FIXME why
-  end
-
-  def research_companies
-    if preferred_research_institute
-      preferred_research_institute.companies
-    else
-      Company.none
-    end
-  end
-
-  def deputy_institute
-    for research_institute in self.research_institutes
-      return research_institute if research_institute.deputy.id == self.id
-    end
-    return false
   end
 
 

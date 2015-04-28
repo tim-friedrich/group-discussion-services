@@ -60,6 +60,5 @@ class CompaniesController < ApplicationController
 
   def new_company
     @company = Company.new(company_params)
-    @company.research_institute = current_user.preferred_research_institute
   end
 end

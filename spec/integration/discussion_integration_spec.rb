@@ -166,10 +166,6 @@ describe 'Discussion', js: true do
       it "should create a new user" do
         expect { invite_proband() }.to change(User, :count).by(1)
       end
-      it "should have the research_institute under the new users research_institutes" do
-        invite_proband
-        expect( User.where(email: @user[:email]).first.research_institutes.count ).to eq 1
-      end
 
       it "have the DiscussionsUser name Unbekannt for new users" do
         invite_proband

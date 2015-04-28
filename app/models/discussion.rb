@@ -33,9 +33,6 @@ class Discussion < ActiveRecord::Base
     discussions_users.includes(:role, user: [:role])
   end
 
-  def research_institute
-    self.moderator.preferred_research_institute
-  end
   def current_question
     self.questions.last
   end

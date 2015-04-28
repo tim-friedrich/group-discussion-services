@@ -16,7 +16,7 @@ module HasRole
   end
 
   def is_staff?
-    self.role == Role.deputy || self.role == Role.moderator
+    self.role == Role.moderator
   end
 
   def set_default_role

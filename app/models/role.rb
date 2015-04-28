@@ -5,10 +5,9 @@ class Role < ActiveRecord::Base
   ROLES = {
     user: 1,
     proband: 1,
-    customer: 1,
+    customer: 2,
     observer: 2,
-    moderator: 2,
-    deputy: 3,
+    moderator: 3,
     admin: 4,
   }
 

@@ -18,10 +18,6 @@ RSpec.describe Role, :type => :model do
     expect( Role.moderator ).to be_a Role
   end
 
-  it 'has deputy record' do
-    expect( Role.deputy ).to be_a Role
-  end
-
   it 'has admin record' do
     expect( Role.admin ).to be_a Role
   end

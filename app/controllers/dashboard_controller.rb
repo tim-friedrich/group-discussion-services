@@ -5,12 +5,7 @@ class DashboardController < ApplicationController
 
   def show
     @discussions_users = @user.in_discussions.paginate(page: params[:discussions_page], per_page: 10)
-
-    if @user.preferred_research_institute
-      @companies = @user.preferred_research_institute.companies.includes(:contact)
-    else
-      @companies = Company.none
-    end
+    @companies = Company.all
     @companies = @companies.paginate(page: params[:companies_page], per_page: 10)
   end
 

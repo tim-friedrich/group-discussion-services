@@ -10,9 +10,7 @@ RSpec.describe DiscussionsController, :type => :controller do
   describe "signed in" do
     before do
       @user = F.build(:moderator)
-      @research_institute = F.create(:research_institute, deputy: @user, contact: F.build(:contact))
-      @company = F.create(:company, research_institute: @research_institute, contact: F.build(:contact))
-      # @user.research_institutes << @research_institute
+      @company = F.create(:company, contact: F.build(:contact))
       @user.save
       sign_in @user
     end

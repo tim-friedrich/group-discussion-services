@@ -20,8 +20,4 @@ RSpec.describe Discussion, :type => :model do
     question = F.create(:question, discussion: discussion)
     expect( discussion.current_question ).to eq question
   end
-
-  it "should return the research institute that the discussion belongs to" do
-    expect( discussion.research_institute ).to eq discussion.moderator.research_institutes.first
-  end
 end
