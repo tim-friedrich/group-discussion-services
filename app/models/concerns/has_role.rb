@@ -21,6 +21,5 @@ module HasRole
 
   def set_default_role
     self.role ||= Role.proband
-    #save
   end
 end

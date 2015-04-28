@@ -121,7 +121,7 @@ class @ModeratorView extends View
   draw_options_tab: ->
     template =
       """
-        <div class="tab-pane active" id="actions">
+        <div class="tab-pane" id="actions">
           <div>
             <h2>Aktionen</h2>
             <hr>
