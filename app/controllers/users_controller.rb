@@ -7,11 +7,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html{ forbidden }
       format.json{
-        if current_user.is_deputy?
-          @users = current_user.deputy_institute.users
-        else
-          forbidden
-        end
+        @users = User.where(role: Role.find_by_name('proband'))
       }
     end
   end

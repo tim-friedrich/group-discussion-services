@@ -5,6 +5,7 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
   $scope.maxAge = 100
   $scope.itemsByPage = 15
   $scope.ageSlider = [0, 100]
+  $scope.discussion_id = $('#edit_discussion').data('discussion-id')
   $scope.genders = ['male', 'female', 'other']
   $('[data-toggle="popover"]').popover()
   $('[data-toggle="popover"]').mouseenter((event)->
@@ -13,6 +14,9 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
   $('[data-toggle="popover"]').mouseleave((event)->
     $(event.target).popover('hide')
   )
+  $('.invite').click((e)->
+    e.preventDefault()
+    )
 
   $scope.postNewProband = (id) ->
     $.ajax(
@@ -21,8 +25,10 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
       data:
         discussions_user:
           user_id: id
-          discussion_id: 2
+          discussion_id: $scope.discussion_id
+      dataType: 'json'
       )
+    console.log("invited User")
 
   $http.get("/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
     $scope.users = data

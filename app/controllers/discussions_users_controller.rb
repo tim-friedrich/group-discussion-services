@@ -28,11 +28,28 @@ class DiscussionsUsersController < ApplicationController
     render 'discussions_users/update_lists'
   end
 
+  def create 
+    @discussions_user = DiscussionsUser.new(discussions_user_params)
+    puts discussions_user_params
+    respond_to do |format|
+      if @discussions_user.save
+        format.html { redirect_to edit_discussion_path(@discussion) }
+        format.json { render nothing: true }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @discussions_user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   private
 
   def set_discussions_user
     @discussions_user = DiscussionsUser.find(params[:id])
+  end
+
+  def discussions_user_params
+    params.require(:discussions_user).permit(:user_id, :discussion_id)
   end
 
   def set_update_list_params
