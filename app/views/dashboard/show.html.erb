@@ -12,9 +12,6 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
   <li class="active"><a href="#discussions" data-toggle="tab">Diskussionen</a></li>
-  <% if can? :manage, Company %>
-    <li><a href="#companies" data-toggle="tab">Kunden</a></li>
-  <% end %>
   <li><a href="#settings" data-toggle="tab">Einstellungen</a></li>
 </ul>
 
@@ -27,20 +24,14 @@
         <%= render partial: 'discussions_users/list_discussions', locals: { discussions_users: @discussions_users } %>
       </div>
       <br>
-      <% if current_user.is_moderator? %>
-        <%= link_to 'Neue Diskussion erstellen', new_discussion_path, class: "btn btn-xs btn-primary" %>
-      <% end %>
+    <% end %>
+    <% if can? :create, Discussion %>
+      <%= link_to 'Neue Diskussion anfragen', new_discussion_path, class: "btn btn-xs btn-primary" %>
+    <% end %>
+    <% if can? :invite, User %>
+      <%= link_to 'Nutzer einladen', '/users/invitation/new', class: "btn btn-xs btn-primary" %>
     <% end %>
   </div>
-  <% if can? :manage, Company %>
-    <div class="tab-pane fade" id="companies">
-      <h2>Kunden</h2>
-      <div class="companies_list">
-        <%= render partial: 'companies/list', locals: { companies: @companies } %>
-      </div>
-      <%= link_to 'Neuen Kunden anlegen', new_company_path, class: "btn btn-xs btn-primary" %>
-    </div>
-  <% end %>
 
   <div class="tab-pane fade" id="settings">
     <%= form_for(current_user, :html => { :multipart => true, class: "form-horizontal", role: "form" }) do |f| %>

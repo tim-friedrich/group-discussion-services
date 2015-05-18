@@ -6,8 +6,6 @@ class Discussion < ActiveRecord::Base
   has_many :discussions_users
   has_many :users, through: :discussions_users
   has_many :visual_aids
-  belongs_to :company
-
 
   validates :due_date, presence: true
   validates :state, inclusion: { in: STATES }
@@ -21,8 +19,22 @@ class Discussion < ActiveRecord::Base
     DiscussionsUser.where(discussion: self, role: Role.observer)
   end
 
-  def company_name
-    company.name if company
+  def customer
+    DiscussionsUser.where(discussion: self, role: Role.customer).first.user if DiscussionsUser.where(discussion: self, role: Role.customer).first
+  end
+
+  def customer=(user)
+    if self.customer
+      DiscussionsUser.where(discussion: self, role: Role.customer).first.delete
+    end
+    discussions_user = discussions_users.build(
+      user: user,
+      discussion: self,
+      role: Role.customer,
+      confirmed: true,
+    )
+    discussions_user.save!
+    discussions_user.set_name
   end
 
   def discussions_user_for(user)
@@ -44,13 +56,17 @@ class Discussion < ActiveRecord::Base
   end
 
   def moderator=(user)
-    discussions_user = discussions_users.build(
-      user: user,
-      role: Role.moderator,
-      confirmed: true,
-    )
-    discussions_user.save!
-    discussions_user.set_name
+    moderator = discussions_user_for(moderator)
+    moderator.delete if moderator
+    if user
+      discussions_user = discussions_users.build(
+        user: user,
+        role: Role.moderator,
+        confirmed: true,
+      )
+      discussions_user.save!
+      discussions_user.set_name
+    end
   end
 
   def moderator_avatar

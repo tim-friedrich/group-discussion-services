@@ -1,4 +1,5 @@
-# <%= @discussion.description %>
+Auswertung der Diskussion \"<%=@discussion.topic%>\" für am <%= l @discussion.due_date.to_date %>
+
 <% if @discussion.summary.present? %>## Zusammenfassung
 
 <%= @discussion.summary %>

@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:accept_invitation).concat SETTINGS[:good_user_params]
-    devise_parameter_sanitizer.for(:invite).concat [:email, :discussion_id, :discussions_user_role]
+    devise_parameter_sanitizer.for(:invite).concat [:email, :discussion_id, :discussions_user_role, :role_id]
     devise_parameter_sanitizer.for(:sign_up).concat SETTINGS[:good_user_params]
   end
 

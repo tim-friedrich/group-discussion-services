@@ -15,10 +15,10 @@
   <% discussions_users.each do |discussions_user| %>
     <tr class="<% if discussions_user.confirmed %>bg-success<% else %>bg-danger<% end %>">
       <td><%= discussions_user.discussion.topic %></td>
-      <td><%= discussions_user.discussion.moderator.firstname %> <%= discussions_user.discussion.moderator.lastname %></td>
+      <td><% if discussions_user.discussion.moderator %><%= discussions_user.discussion.moderator.firstname %> <%= discussions_user.discussion.moderator.lastname %><% end %></td>
       <td><%= l discussions_user.discussion.due_date %></td>
 
-      <% if current_user.can_manage_discussion? discussions_user.discussion %>
+      <% if can? :manage, discussions_user.discussion %>
         <td id="discussion-toggle-button-<%= discussions_user.discussion.id %>">
           <%= render partial: 'discussion_state/toggle_state_button', locals: { discussion: discussions_user.discussion } %>
         </td>

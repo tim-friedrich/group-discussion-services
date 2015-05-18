@@ -1,4 +1,5 @@
 class UsersInvitationsController < Devise::InvitationsController
+
   def update
     super
     for discussions_user in User.find_by_email(invite_params[:email]).discussions_users do
@@ -7,20 +8,30 @@ class UsersInvitationsController < Devise::InvitationsController
   end
 
   def invite_resource
+    if cannot?( :invite, User )
+      raise CanCan::AccessDenied
+    else
+      super
+    end
+  end
+
+  def new
+    if cannot?( :invite, User )
+      raise CanCan::AccessDenied
+    else
+      super
+    end
   end
 
   def edit
   end
 
   def create
-    user = User.invite!({ email: invite_params[:email] }, current_inviter)
-
     respond_to do |format|
       format.js{
+        user = User.invite!({ email: invite_params[:email] }, current_inviter)
+ 
         if invite_params['discussion_id']
-          if current_user.is_deputy?
-            user.research_institutes << current_user.deputy_institute
-          end
           @discussion = Discussion.find(invite_params[:discussion_id])
           @discussions_user = @discussion.discussions_users.create(
             user: user,
@@ -31,13 +42,15 @@ class UsersInvitationsController < Devise::InvitationsController
           @observers = @discussion.observers.paginate(page: params[:observers_page], per_page: 10)
 
           render 'discussions_users/update_lists'
-        else
-          bad_request
         end
-
       }
       format.html{
-        bad_request
+        if cannot?( :invite, User )
+          raise CanCan::AccessDenied
+        else
+          user = User.invite!({ email: invite_params[:email], role: Role.find_by_id(invite_params[:role_id]) }, current_inviter)
+          redirect_to '/users/invitation/new'
+        end
       }
     end
   end

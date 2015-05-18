@@ -3,7 +3,7 @@ FactoryGirl.define do
     topic "Test Topic"
     due_date DateTime.new(2020,2,3)
     association :moderator
-    association :company
+    association :customer
     state 'open'
 
     after :create do |discussion, evaluator|

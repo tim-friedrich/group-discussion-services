@@ -23,6 +23,10 @@ FactoryGirl.define do
       role { Role.moderator }
     end
 
+    factory :customer do
+      role { Role.customer }      
+    end
+
     factory :user_without_gender do
       gender "other"
     end

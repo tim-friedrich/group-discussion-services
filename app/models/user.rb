@@ -104,8 +104,15 @@ class User < ActiveRecord::Base
     self.id == discussion.moderator.id
   end
 
+  # # #
+  # class Methods
+
   def self.probands
     User.where(role: Role.find_by_name('proband'))
+  end
+
+  def self.moderators
+    User.where(role: Role.find_by_name('moderator'))
   end
 
   # # #

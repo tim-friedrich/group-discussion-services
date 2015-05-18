@@ -66,6 +66,7 @@ class DiscussionsController < ApplicationController
     @probands    = @discussion.probands.paginate(page: params[:probands_page], per_page: 10)
     @observers   = @discussion.observers.paginate(page: params[:observers_page], per_page: 10)
     @visual_aids = @discussion.visual_aids.paginate(page: params[:visual_aids_page], per_page: 10)
+    @moderators = User.moderators   
 
     respond_to do |format|
       format.html do
@@ -91,9 +92,16 @@ class DiscussionsController < ApplicationController
 
     respond_to do |format|
       if @discussion.save
-        @discussion.moderator = current_user
+        @discussion.moderator = current_user if current_user.is_moderator? or current_user.is_admin?
+        @discussion.customer = current_user if current_user.is_customer?
         @question.save
-        format.html { redirect_to edit_discussion_path(@discussion) }
+        format.html do 
+          if current_user.is_moderator? || current_user.is_admin?
+            redirect_to edit_discussion_path(@discussion) 
+          else
+            redirect_to '/profile'
+          end 
+        end
         format.json { render action: 'show', status: :created, location: @discussion }
       else
         format.html { render action: 'new' }
@@ -104,7 +112,9 @@ class DiscussionsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @discussion.update(discussion_params)
+      modified_params = discussion_params
+      modified_params[:moderator] = User.find_by_id(discussion_params[:moderator])
+      if @discussion.update(modified_params)
         format.html { redirect_to(session.delete(:return_to) || profile_path, notice: 'Die Diskussion wurde erfolgreich aktualisiert.') }
         format.json { head :no_content }
       else
@@ -138,6 +148,6 @@ class DiscussionsController < ApplicationController
   end
 
   def discussion_params
-    params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id, :company, :visual_aids, :summary)
+    params.require(:discussion).permit(:topic, :moderator, :due_date, :moderator_id, :users, :company_id, :company, :visual_aids, :summary, :description)
   end
 end

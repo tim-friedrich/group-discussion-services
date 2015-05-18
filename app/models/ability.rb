@@ -6,7 +6,6 @@ class Ability
     # Anonymous
 
     can [ :new, :create ], User
-
     return unless user
 
 
@@ -19,7 +18,6 @@ class Ability
       return
     end
 
-
     # # #
     # User is admin
 
@@ -30,6 +28,7 @@ class Ability
       return
     end
 
+     
 
     # # #
     # Every user
@@ -42,7 +41,7 @@ class Ability
     can [ :create, :read ], Argument do |argument|
       user.discussions.to_a.include? argument.discussion
     end
-
+    cannot [ :invite ], User
     cannot :manage, Discussion
 
     can [ :leave, :show, ], Discussion do |discussion|
@@ -56,17 +55,24 @@ class Ability
     can [ :create ], Vote
 
     # # #
+    # User is customer
+
+    if user.is_customer?
+      can [ :new, :create ], Discussion
+    end
+    
+    # # #
     # Moderator
 
     if user.is_moderator?
       can :manage, Discussion do |discussion|
-        user.id == discussion.moderator.id
+        user.id == discussion.moderator.id if discussion.moderator
       end
 
       can [ :new, :create ], Discussion
 
-      can :manage, DiscussionsUser do |discussion_user|
-        discussion_user.discussion.moderator.id == user.id
+      can :manage, DiscussionsUser do |discussions_user|
+        discussions_user.discussion.moderator.id == user.id if discussions_user.discussion.moderator
       end
 
       can :create, Question
