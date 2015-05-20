@@ -5,6 +5,7 @@ de:
     attributes:
       discussion:
         topic: Thema
+        description: Beschreibung
         moderator: Moderator
         due_date: Datum
         current_question: aktuelle Frage

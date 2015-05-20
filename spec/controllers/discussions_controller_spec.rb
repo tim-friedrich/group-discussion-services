@@ -96,7 +96,7 @@ RSpec.describe DiscussionsController, :type => :controller do
           # specifies that the Discussion created on the previous line
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
-          Discussion.any_instance.should_receive(:update).with({ "topic" => "" })
+          Discussion.any_instance.should_receive(:update).with({ "topic" => "", "moderator" => nil })
           put :update, {:id => discussion.to_param, :discussion => { "topic" => "" }}, valid_session
         end
 

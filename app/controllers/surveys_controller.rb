@@ -10,6 +10,10 @@ class SurveysController < ApplicationController
     if current_user.has_survey?
       redirect_to survey_result_path
     end
+    if !current_user.survey_required?
+      flash.clear
+      redirect_to "/profile"
+    end
   end
 
   # /survey/result

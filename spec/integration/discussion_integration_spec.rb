@@ -101,6 +101,18 @@ describe 'Discussion', js: true do
       visit discussion_path(discussion)
     end
 
+    describe "when creating a new Discussion" do
+      
+      it "should be possible to post a new discussion" do
+        create_discussion()
+        expect( current_path ).to eq edit_discussion_path(Discussion.last)
+      end
+      it "should set the moderator to the current user" do 
+        create_discussion()
+        expect( discussion.moderator ).to eq Discussion.last.moderator
+      end
+    end
+
     it "should post a new question" do
       page.execute_script("
             $('#new_argument_content').text('important question')
@@ -135,6 +147,35 @@ describe 'Discussion', js: true do
         expect( page.find("#arguments") ).to have_content('test')
       end
     end
+  end
+
+  describe "as Customer" do
+    before do 
+      @customer = F.create(:customer)
+      login_as @customer
+    end
+    describe "create discussion"
+      it "should be possible to create a discussion" do
+
+        expect{ create_discussion }.to change{ Discussion.count }.by(1)
+        
+      end
+      it "should redirect to the dashboard" do
+        create_discussion()
+        expect( current_path ).to eq "/profile"
+      end
+      it "should not set the moderator" do
+        create_discussion()
+        expect( Discussion.last.moderator ).to be_empty
+      end
+  end
+  def create_discussion
+    visit new_discussion_path
+    within '#new_discussion' do
+      fill_in 'discussion_topic', with: 'test231'
+      fill_in 'discussion_description', with: 'test23'
+    end
+    click_button 'Diskussion erstellen'
   end
 =begin
   describe "discussion edit" do

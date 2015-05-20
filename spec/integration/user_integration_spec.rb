@@ -134,14 +134,10 @@ describe 'User' do
           visit "/profile"
         end
         it "redirects to the new discussion page when link is clicked" do
-          click_link 'Neue Diskussion erstellen'
+          click_link 'Neue Diskussion anfragen'
           expect( current_path ).to eq new_discussion_path
         end
 
-        it "redirects to the new company page when link was clicked" do
-          click_link 'Neuen Kunden anlegen'
-          expect( current_path ).to eq new_company_path
-        end
         describe "Discussion" do
           before do
             @discussion = F.create(:discussion, moderator: @moderator)
@@ -163,23 +159,6 @@ describe 'User' do
 
           it "should not nessary to accept a discussion" do
             expect( page ).to_not have_link("Zusagen")
-          end
-        end
-
-        describe "Company" do
-          before do
-            @company = F.create(:company)
-            @moderator.save
-            visit "/profile"
-          end
-          it "redirects to the edit company page when link was clicked" do
-            click_link "Bearbeiten"
-            expect( current_path ).to eq edit_company_path(@company)
-          end
-          it "should be possible to delete a company" do
-            expect{
-              click_link "Löschen"
-            }.to change(Company, :count).by(-1)
           end
         end
       end
