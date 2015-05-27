@@ -25,3 +25,6 @@ class @User
   is_moderator: () =>
     return @discussion.moderator.id == @id
 
+  is_observer: () =>
+    return @role == 'observer'
+

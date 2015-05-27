@@ -4,9 +4,12 @@ class DashboardController < ApplicationController
   load_and_authorize_resource :discussion
 
   def show
-    @discussions_users = @user.in_discussions.paginate(page: params[:discussions_page], per_page: 10)
+    if current_user.is_admin?
+      @discussions = Discussion.all.paginate(page: params[:discussions_page], per_page: 10)
+    else
+      @discussions_users = @user.in_discussions.paginate(page: params[:discussions_page], per_page: 10) 
+    end
   end
-
 
   private
 

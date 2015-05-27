@@ -55,6 +55,12 @@ class Discussion < ActiveRecord::Base
     }.try(:user)
   end
 
+  def customer
+    discussions_users_with_users.find{ |user|
+      user.role == Role.customer
+    }.try(:user)
+  end
+
   def moderator=(user)
     moderator = discussions_user_for(moderator)
     moderator.delete if moderator

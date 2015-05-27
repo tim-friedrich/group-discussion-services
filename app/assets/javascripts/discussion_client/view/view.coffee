@@ -24,6 +24,7 @@ class @View
             topic: @argument_input.text()
             discussion_id:  @discussion.id
       })
+      @submit_argument('moderator')
       $('#new_argument_content').text("")
     )
 

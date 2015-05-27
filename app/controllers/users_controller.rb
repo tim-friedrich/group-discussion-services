@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:index]
-  before_filter :authenticate_user!
+  before_action :set_user, except: [:index, :new_customer]
+  before_filter :authenticate_user!, except: [:new_customer]
   load_and_authorize_resource
 
   def index
@@ -19,13 +19,18 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user, :bypass=>true)
-        format.html { redirect_to '/profile', notice: 'User was successfully updated.' }
+        format.html { redirect_to '/profile', notice: 'Ihr Profil wurde erfolgreich aktualisiert.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def new_customer
+    @user = User.new
+    @user.role = Role.customer
   end
 
   def destroy

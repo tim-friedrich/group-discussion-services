@@ -47,7 +47,7 @@
 
 <% content_for :late_assets do %>
   <%= subscribe_to "/discussion/#{@discussion.id}/arguments/new" %>
-  <% if current_user == @discussion.moderator || @discussion_user.role.name == 'observer' %>
+  <% if current_user == @discussion.moderator || @discussion_user.role.name == 'observer' || @discussion_user.role.name == 'customer' %>
     <%= subscribe_to "/discussion/#{@discussion.id}/observer/arguments/new" %>
   <% end %>
   <%= subscribe_to "/discussion/#{@discussion.id}/questions/new" %>

@@ -19,9 +19,13 @@
 <div class="tab-content">
   <div class="tab-pane fade in active" id="discussions">
     <h2>Meine Diskussionen</h2>
-    <% if @discussions_users %>
+    <% if @discussions_users || @discussions %>
       <div class="discussions_list">
-        <%= render partial: 'discussions_users/list_discussions', locals: { discussions_users: @discussions_users } %>
+        <% if current_user.is_admin? %>
+          <%= render partial: 'discussions/list_discussions', locals: { discussions: @discussions } %>
+        <% else %>
+          <%= render partial: 'discussions_users/list_discussions', locals: { discussions_users: @discussions_users } %>
+        <% end %>
       </div>
       <br>
     <% end %>

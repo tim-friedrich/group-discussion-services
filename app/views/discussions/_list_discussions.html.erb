@@ -1,0 +1,33 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Thema</th>
+    <th>Moderator</th>
+    <th>Datum</th>
+    <% if can? :manage, Discussion %><th></th><% end %>
+    <th></th>
+    <% if can? :edit, Discussion %><th></th><% end %>
+    <% if can? :delete, Discussion %><th></th><% end %>
+    <% if can? :evaluate, Discussion %><th></th><% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <% discussions.each do |discussion| %>
+    <tr>
+      <td><%= discussion.topic %></td>
+      <td><% if discussion.moderator %><%= discussion.moderator.firstname %> <%= discussion.moderator.lastname %><% end %></td>
+      <td><%= l discussion.due_date %></td>
+      <td id="discussion-toggle-button-<%= discussion.id %>">
+        <%= render partial: 'discussion_state/toggle_state_button', locals: { discussion: discussion } %>
+      </td>
+      <td id="discussion-join-button-<%= discussion.id %>">
+        <%= link_to 'Beitreten', discussion, class: "btn btn-xs btn-primary", style: "display: #{discussion.closed? ? 'none' : 'inline-block'}" %>
+      </td>
+      <td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-xs btn-primary" %></td>
+      <td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+        <td><%= link_to 'Evaluation', evaluation_path(discussion), class: "btn btn-xs btn-primary" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate discussions, renderer: BootstrapPagination::Rails, param_name: 'discussions_page' %>

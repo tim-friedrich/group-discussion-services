@@ -95,6 +95,7 @@ class DiscussionsController < ApplicationController
         @discussion.moderator = current_user if current_user.is_moderator? or current_user.is_admin?
         @discussion.customer = current_user if current_user.is_customer?
         @question.save
+        DiscussionMailer.new_discussion(@discussion, current_user).deliver_now
         format.html do 
           if current_user.is_moderator? || current_user.is_admin?
             redirect_to edit_discussion_path(@discussion) 

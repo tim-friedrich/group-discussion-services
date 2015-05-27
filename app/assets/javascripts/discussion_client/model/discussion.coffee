@@ -94,7 +94,7 @@ class @Discussion
       @view = new ModeratorView(@)
     else if @current_user.role == 'proband'
       @view = new ProbandView(@)
-    else if @current_user.role == 'observer'
+    else if @current_user.role == 'observer' || @current_user.role == 'customer'
       @view = new ObserverView(@)
     @view.draw()
 
@@ -164,13 +164,14 @@ class @Discussion
     )
 
   bind_new_vote: () =>
-    if @ and @current_user.is_moderator()
+    if @ and @current_user.is_moderator() || @current_user.is_observer()
       PrivatePub.subscribe("/discussion/#{@id}/votes/new", (vote) =>
         argument = @arguments.filter((argument) => vote.argument_id == argument.id)[0]
         argument.add_vote(vote)
       )
 
   new_user: (user) =>
+    user.role = 'observer' if user.role == 'customer'
     user = new User(
       id = user.id,
       name = user.name,

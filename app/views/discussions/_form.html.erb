@@ -2,6 +2,14 @@
 
   <%= render partial: "shared/error_messages", locals: { resource: @discussion } %>
 
+  <% if @discussion.customer %>
+    <div class="form-group">
+      <%= f.label :Auftraggeber, class: "col-sm-2 control-label" %>
+      <div class="col-sm-10 customer-name">
+        <%= link_to @discussion.customer.full_name(), current_user %>
+      </div>
+    </div>
+  <% end %>
   <div class="form-group">
     <%= f.label :topic, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">

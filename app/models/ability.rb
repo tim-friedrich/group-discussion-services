@@ -5,7 +5,7 @@ class Ability
     # # #
     # Anonymous
 
-    can [ :new, :create ], User
+    can [ :new, :create, :new_customer ], User
     return unless user
 
 

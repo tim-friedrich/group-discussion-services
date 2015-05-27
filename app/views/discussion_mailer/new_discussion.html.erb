@@ -1,0 +1,4 @@
+<h1>Eine neue Diskussion wurde angefragt</h1>
+Der Nutzer <%= @current_user.full_name %> hat ein Diskussion zu dem Thema <%= @discussion.topic %> den <%= l @discussion.due_date %> angefragt.
+
+<%= link_to "Diskussion bearbeiten", @discussion %>
