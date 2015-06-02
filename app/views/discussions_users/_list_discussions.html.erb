@@ -6,6 +6,7 @@
     <th>Datum</th>
     <% if can? :manage, Discussion %><th></th><% end %>
     <th></th>
+    <th></th>
     <% if can? :edit, Discussion %><th></th><% end %>
     <% if can? :delete, Discussion %><th></th><% end %>
     <% if can? :evaluate, Discussion %><th></th><% end %>
@@ -25,20 +26,20 @@
       <% end %>
       <% if discussions_user.confirmed %>
         <td id="discussion-join-button-<%= discussions_user.discussion.id %>">
-          <%= link_to 'Beitreten', discussions_user.discussion, class: "btn btn-xs btn-primary", style: "display: #{discussions_user.discussion.closed? ? 'none' : 'inline-block'}" %>
+          <%= link_to 'Beitreten', "discussions/#{discussions_user.discussion.id}/execute", class: "btn btn-xs btn-default", style: "display: #{discussions_user.discussion.closed? ? 'none' : 'inline-block'}" %>
         </td>
       <% else %>
-        <td><%= link_to 'Zusagen', "discussions_users/#{discussions_user.id}/confirm", method: :post, class: "btn btn-xs btn-primary" %></td>
+        <td><%= link_to 'Zusagen', "discussions_users/#{discussions_user.id}/confirm", method: :post, class: "btn btn-xs btn-default" %></td>
       <% end %>
-
+      <td><%= link_to "Details", discussions_user.discussion, class: "btn btn-xs btn-default" %></td>
       <% if can? :edit, discussions_user.discussion %>
-        <td><%= link_to 'Bearbeiten', edit_discussion_path(discussions_user.discussion), class: "btn btn-xs btn-primary" %></td>
+        <td><%= link_to 'Bearbeiten', edit_discussion_path(discussions_user.discussion), class: "btn btn-xs btn-default" %></td>
       <% end %>
       <% if can? :delete, discussions_user.discussion %>
-        <td><%= link_to 'Löschen', discussions_user.discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+        <td><%= link_to 'Löschen', discussions_user.discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-default" %></td>
       <% end %>
       <% if can? :evaluate, discussions_user.discussion %>
-        <td><%= link_to 'Evaluation', evaluation_path(discussions_user.discussion), class: "btn btn-xs btn-primary" %></td>
+        <td><%= link_to 'Evaluation', evaluation_path(discussions_user.discussion), class: "btn btn-xs btn-default" %></td>
       <% end %>
     </tr>
   <% end %>

@@ -20,6 +20,8 @@ GDS::Application.routes.draw do
 
   get '/new_customer' => 'users#new_customer'
 
+  get 'discussions/:id/execute' => 'discussions#execute'
+
   get '/profile' => 'dashboard#show'
   get '/discussions' => redirect('/profile')
   root 'static_pages#home'

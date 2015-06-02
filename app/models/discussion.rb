@@ -61,6 +61,16 @@ class Discussion < ActiveRecord::Base
     }.try(:user)
   end
 
+  def confirmed_discussions_users
+    confirmed_users = []
+    discussions_users.each do |discussions_user|
+      if discussions_user.confirmed?
+        confirmed_users << discussions_user
+      end
+    end
+    return confirmed_users
+  end
+
   def moderator=(user)
     moderator = discussions_user_for(moderator)
     moderator.delete if moderator

@@ -21,7 +21,7 @@
         <%= render partial: 'discussion_state/toggle_state_button', locals: { discussion: discussion } %>
       </td>
       <td id="discussion-join-button-<%= discussion.id %>">
-        <%= link_to 'Beitreten', discussion, class: "btn btn-xs btn-primary", style: "display: #{discussion.closed? ? 'none' : 'inline-block'}" %>
+        <%= link_to 'Beitreten', "discussions/#{discussion.id}/execute", class: "btn btn-xs btn-primary", style: "display: #{discussion.closed? ? 'none' : 'inline-block'}" %>
       </td>
       <td><%= link_to 'Bearbeiten', edit_discussion_path(discussion), class: "btn btn-xs btn-primary" %></td>
       <td><%= link_to 'Löschen', discussion, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>

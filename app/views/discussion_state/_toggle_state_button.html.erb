@@ -1,5 +1,5 @@
 <% if discussion.closed? %>
-  <%= button_to 'Eröffnen', discussion_state_path(discussion, discussion: { state: 'open'}), class: "btn btn-xs btn-primary", method: :patch, remote: true %>
+  <%= button_to 'Eröffnen', discussion_state_path(discussion, discussion: { state: 'open'}), class: "btn btn-xs btn-default", method: :patch, remote: true %>
 <% else %>
-  <%= button_to 'Schließen', discussion_state_path(discussion, discussion: { state: 'closed', state_message: 'Die Diskussion wurde geschlossen'}), class: "btn btn-xs btn-primary", method: :patch, remote: true %>
+  <%= button_to 'Schließen', discussion_state_path(discussion, discussion: { state: 'closed', state_message: 'Die Diskussion wurde geschlossen'}), class: "btn btn-xs btn-default", method: :patch, remote: true %>
 <% end %>
