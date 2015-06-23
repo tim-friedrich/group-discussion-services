@@ -9,6 +9,17 @@
   </div>
 <% end %>
 
+<% unless AdditionalUserField.new_fields_for(current_user).empty? %>
+
+  <div class="panel panel-success">
+    <div class="panel-body">
+      <h2>Vervollständigen Sie Ihr Profil </h2>
+      <p>Um Sie so oft wie möglich zu Diskussionen einladen zu können stellen wir Ihnen regelmäßig fragen. Diese Frage entstehen zusammen mit unseren Auftraggebern. Durch die beantwortung können Sie Ihre Chance eingeladen zu werden signifikant erhöhen. </p>
+      <%= link_to 'Profil Vervollständigen', "/users/#{current_user.id}/additional_informations", class: "btn btn-default btn-sm" %>
+    </div>
+  </div>
+<% end %>
+
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
   <li class="active"><a href="#discussions" data-toggle="tab">Diskussionen</a></li>

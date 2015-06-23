@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506121110) do
+ActiveRecord::Schema.define(version: 20150605155730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "additional_user_fields", force: :cascade do |t|
+    t.string   "name"
+    t.string   "field_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "argument_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -139,6 +146,18 @@ ActiveRecord::Schema.define(version: 20150506121110) do
 
   add_index "surveys", ["user_id"], name: "index_surveys_on_user_id", using: :btree
 
+  create_table "user_field_options", force: :cascade do |t|
+    t.string   "value"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "additional_user_field_id"
+  end
+
+  create_table "user_field_options_users_additional_user_fields", force: :cascade do |t|
+    t.integer "user_field_option_id"
+    t.integer "users_additional_user_field_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "firstname",              limit: 255
     t.string   "lastname",               limit: 255
@@ -189,6 +208,13 @@ ActiveRecord::Schema.define(version: 20150506121110) do
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
+
+  create_table "users_additional_user_fields", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "additional_user_field_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "visual_aids", force: :cascade do |t|
     t.integer  "discussion_id"

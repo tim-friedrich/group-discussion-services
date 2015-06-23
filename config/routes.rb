@@ -12,6 +12,8 @@ GDS::Application.routes.draw do
   resource :visual_aids, only: [:create]
   resources :discussion_state, only: [:update]
   resources :evaluations, only: [:show]
+  resources :additional_user_fields, only: [:new, :create, :destroy, :edit, :index]
+  resources :user_field_options, only: [:new, :create, :destroy]
 
   get '/users/new' => redirect('/users/sign_up')
 
@@ -26,6 +28,8 @@ GDS::Application.routes.draw do
   get '/discussions' => redirect('/profile')
   root 'static_pages#home'
 
+  get '/users/:id/additional_informations' => 'users#additional_informations'
+  post '/users/:id/additional_informations' => 'users#create_additional_informations'
   get '/imprint' => 'static_pages#imprint'
   get '/contact_us' => 'static_pages#contact_us'
   get 'eligibility_requirements' => 'static_pages#eligibility_requirements'

@@ -1,0 +1,11 @@
+<h1>Neues Benutzerfeld Anlegen</h1>
+
+<%= form_for(@additional_user_field) do |f| %>
+  <%= render 'form' %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit value: 'Weiter', class: "btn btn-large btn-primary" %>
+    </div>
+  </div>
+<% end %>

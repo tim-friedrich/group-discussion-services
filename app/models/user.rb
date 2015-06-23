@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :discussions_users
   has_many :arguments
   has_many :discussions, through: :discussions_users
+  has_many :users_additional_user_fields
 
   has_one :survey
 
@@ -60,6 +61,18 @@ class User < ActiveRecord::Base
     else
       "old"
     end
+  end
+
+  def additional_informations
+    additional_fields = {}
+    users_additional_user_fields.each do |users_additional_user_field|
+      options = []
+      users_additional_user_field.user_field_options.each do | field_option |
+        options.append field_option.value
+      end
+      additional_fields[users_additional_user_field.additional_user_field.name] = options
+    end
+    return additional_fields
   end
 
   def full_name

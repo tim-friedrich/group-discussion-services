@@ -1,0 +1,23 @@
+<h1>Benutzerfelder verwalten</h1>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @additional_user_fields.each do |user_field| %>
+    <tr>
+      <td><%= user_field.name %></td>
+      <td><%= link_to 'Bearbeiten', edit_additional_user_field_path(user_field), class: "btn btn-xs btn-primary" %></td>
+      <td><%= link_to 'Löschen', user_field, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "btn btn-xs btn-primary" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate @additional_user_fields, renderer: BootstrapPagination::Rails, param_name: 'additional_user_fields_page' %>
+
+<%= link_to "Neues Benutzerfeld anlegen", new_additional_user_field_path, class: "btn btn-xs btn-primary" %>

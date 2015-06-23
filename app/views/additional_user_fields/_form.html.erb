@@ -1,0 +1,21 @@
+<%= form_for(@additional_user_field) do |f| %>
+  <%= render partial: "shared/error_messages", locals: { resource: @additional_user_field } %>
+  <div class="form-group">
+    <%= f.label :name, "Name", class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, class: "form-control", placeholder: "Name" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :field_type, "Typ", class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.select "field_type", [["Einfach Auswahl", 'single_select'], ["Mehrfach Auswahl", 'multiple_select'], ["Numerischer Wert", 'integer']], {}, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit value: 'Speichern', class: "btn btn-large btn-primary" %>
+    </div>
+  </div>
+<% end %>
+

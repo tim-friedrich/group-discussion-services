@@ -17,3 +17,13 @@
   <h3>Persönlichkeit</h3>
   <%= render partial: 'shared/charts/user', locals: { chart_id: "user-chart", data: @user.survey.scale_values } %>
 <% end %>
+
+<h3>Weitere Informationen</h3>
+<% @user.additional_informations.each do | key, values | %>
+  <p>
+    <strong><%= key %>:</strong>
+    <% values.each do | value | %>
+      <%= value %>
+    <% end %>
+  </p>
+<% end %>

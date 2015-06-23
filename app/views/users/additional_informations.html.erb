@@ -1,0 +1,25 @@
+
+<% if @additional_user_fields.empty? %>
+  <h2>Vielen Dank das Sie an der Umfrage teilgenommen haben.</h2>
+  <%= link_to "Zurück zum Profil", '/profile', class: "btn btn-large btn-default" %>
+<% else %>
+  <%= form_tag("/users/#{current_user.id}/additional_informations", html: { multipart: true, class: "form-horizontal", role: "form"  }) do %>
+    <% @additional_user_fields.each do | user_field | %>
+      <h3><%= user_field.name %></h3>
+      <% user_field.user_field_options.each do | option | %>
+         <div class="<%= user_field.type_class %>">
+          <label>
+            <input type="<%= user_field.type_class %>" name="user_fields[<%= user_field.id %>][]" id="<%= option.id %>" value="<%= option.id %>">
+            <%= option.value %>
+          </label>
+        </div>
+      <% end %>
+    <% end %>
+    
+    <div class="form-group">
+      <div class="col-sm-10">
+        <%= submit_tag "Weiter", class: "btn btn-large btn-default"%>
+      </div>
+    </div>
+  <% end %>
+<% end %>
