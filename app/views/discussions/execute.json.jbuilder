@@ -1,8 +1,7 @@
-#json.extract! @discussion, :topic, :moderator, :due_date, :arguments, :questions, :users
+
 json.discussion do
   json.id @discussion.id
   json.topic @discussion.topic
-  byebug unless @discussion.moderator
   json.moderator_id @discussion.moderator.id
   json.moderator_avatar @discussion.moderator_avatar
   json.due_date @discussion.due_date

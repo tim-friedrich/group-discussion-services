@@ -1,6 +1,7 @@
 angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope", "$http", "$filter", ($scope, $http, $filter) ->
   $scope.users = []
   $scope.displayedUsers = []
+  $scope.displayedInvitedUsers = []
   $scope.minAge = 0
   $scope.maxAge = 100
   $scope.itemsByPage = 15
@@ -18,22 +19,56 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
     e.preventDefault()
     )
 
-  $scope.postNewProband = (id) ->
+  $scope.postNewProband = (user) ->
     $.ajax(
       type: "POST",
       url: "/discussions_users",
       data:
         discussions_user:
-          user_id: id
+          user_id: user.id
           discussion_id: $scope.discussion_id
       dataType: 'json'
       )
     console.log("invited User")
+    $scope.users = (item for item in $scope.users when item.id != user.id)
+    $scope.displayedUsers = [].concat($scope.users) 
+    $scope.invited_users.push(user)
+  
+  $http.get("/discussions/#{$scope.discussion_id}/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
+    $scope.invited_users = data
 
-  $http.get("/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
-    $scope.users = data
-    $scope.displayedUsers = [].concat($scope.users)
+    $http.get("/users", headers:{ Accept:'application/json' }).success((data, status, headers, config) =>
+      @users = []
+      $.each(data, (index, user) =>
+        @invited = false
+        angular.forEach($scope.invited_users, (value, index) =>
+          if value.id == user.id
+            @invited = true
+            return
+        )
+        unless @invited
+          $scope.users.push(user)
+        
+      )
+      $scope.displayedUsers = [].concat($scope.users) 
+    ).error((data, status, headers, config) ->
+      console.log('error retrieving users')
+    )
   ).error((data, status, headers, config) ->
     console.log('error retrieving users')
   )
+
+  $scope.delete_invited_user = (user) =>
+    $.ajax(
+      url: '/discussions_users/'+user.discussions_user_id,
+      type: 'DELETE',
+      success: (result) =>
+        console.log(user)
+      error: (data, status, headers, config) =>
+        console.log("error while deleting invited User:"+ data.statusCode +": "+ data.statusText)
+    )
+    $scope.invited_users = (item for item in $scope.invited_users when item.id != user.id)
+    $scope.displayedInvitedUsers = [].concat($scope.invited_users) 
+    $scope.users.push(user)
+
 ]

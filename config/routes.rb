@@ -26,6 +26,7 @@ GDS::Application.routes.draw do
 
   get '/profile' => 'dashboard#show'
   get '/discussions' => redirect('/profile')
+  get '/discussions/:id/users' => 'discussions#users'
   root 'static_pages#home'
 
   get '/users/:id/additional_informations' => 'users#additional_informations'

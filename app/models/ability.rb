@@ -44,7 +44,7 @@ class Ability
     cannot [ :invite ], User
     cannot :manage, Discussion
 
-    can [ :leave, :show, ], Discussion do |discussion|
+    can [ :leave, :show, :execute ], Discussion do |discussion|
       user.discussions.to_a.include?(discussion) && discussion.discussions_user_for(user).confirmed
     end
 

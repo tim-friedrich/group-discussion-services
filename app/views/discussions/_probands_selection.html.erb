@@ -10,7 +10,41 @@
   <div class="message"></div>
 
   <div class="probands_list">
-    <%= render partial: "discussions_users/list_users", locals: { discussions_users: @probands, id: "probands", page_name: "probands_page" } %>
+    <div st-table="displayedInvitedUsers" st-safe-src="invited_users">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Geschlecht</th>
+            <th>Alter</th>
+            <th>Schulabschluss</th>
+            <th>Abschluss</th>
+            <th>Einkommen</th>
+            <th>Status</th>
+            <th>Postleitzahl</th>
+            <th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in displayedInvitedUsers">
+            <td>{{user.gender}}</td>
+            <td>{{user.age}}</td>
+            <td>{{user.school}}</td>
+            <td>{{user.degree}}</td>
+            <td>{{user.income}}</td>
+            <td>{{user.personal_status}}</td>
+            <td>{{user.zipcode}}</td>
+            <td><button ng-click="delete_invited_user(user)" class="btn btn-xs btn-primary">Löschen</button></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5" class="text-center">
+              <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
 
   <h2>Beobachter</h2>

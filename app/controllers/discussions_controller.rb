@@ -1,5 +1,5 @@
 class DiscussionsController < ApplicationController
-  before_action :set_discussion, except: [:new, :create]
+  before_action :set_discussion, except: [:new, :create, :users]
   before_filter :authenticate_user!
   load_and_authorize_resource
 
@@ -35,6 +35,17 @@ class DiscussionsController < ApplicationController
             @votes = Vote.where('argument_id in (:arguments) and user_id = :user', {arguments: @arguments.to_a.map(&:id), user: current_user})
           end
         end
+      end
+    end
+  end
+
+  def users
+    respond_to do |format|
+      format.html do
+        bad_request        
+      end
+      format.json do
+        
       end
     end
   end

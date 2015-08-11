@@ -128,6 +128,9 @@ class User < ActiveRecord::Base
     User.where(role: Role.find_by_name('moderator'))
   end
 
+  def self.invitable_users
+    
+  end
   # # #
   # Assocs
 

@@ -1,6 +1,6 @@
 @closeDiscussion = (e) ->
   e.preventDefault()
-  discussionId = parseInt(document.location.pathname.split("/").slice(-1)[0])
+  discussionId = parseInt(document.location.pathname.split("/").slice(-2)[0])
 
   $.ajax(
     method: "patch"
