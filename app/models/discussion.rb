@@ -15,6 +15,10 @@ class Discussion < ActiveRecord::Base
     DiscussionsUser.where(discussion: self, role: Role.proband)
   end
 
+  def confirmed_probands
+    confirmed_discussions_users.select { | discussions_user | discussions_user.role == Role.proband  }
+  end
+
   def observers
     DiscussionsUser.where(discussion: self, role: Role.observer)
   end

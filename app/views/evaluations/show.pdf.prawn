@@ -15,11 +15,11 @@ prawn_document do |pdf|
     end
     pdf.start_new_page
 
-    unless @discussion.probands.empty?
+    unless @discussion.confirmed_probands.empty?
       pdf.font_size(h2){ pdf.text "Probanden" }
       pdf.move_down 10
 
-      @discussion.probands.each{ |discussion_user|
+      @discussion.confirmed_probands.each{ |discussion_user|
         pdf.stroke_horizontal_rule
         pdf.move_down 10
 

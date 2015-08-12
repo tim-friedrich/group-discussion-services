@@ -82,7 +82,7 @@ class Ability
       end
       can [ :manage ], Company
 
-      can [ :execute ], User do |other_user|
+      can [ :execute, :show ], User do |other_user|
         user.moderated_discussions.map(&:users).flatten.include? other_user
       end
     end

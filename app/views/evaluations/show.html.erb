@@ -16,7 +16,7 @@
       <p><%= @discussion.summary %></p>
     <% end %>
     <h3>Probanden</h3>
-    <a href="#probands"><%= pluralize @discussion.probands.size, "Proband", "Probanden" %></a>
+    <a href="#probands"><%= pluralize @discussion.confirmed_probands.size, "Proband", "Probanden" %></a>
     <h3>Transkript</h3>
     <a href="#script"><%= pluralize @discussion.questions.size, "Frage", "Fragen" %> mit <%= pluralize @discussion.arguments.size, "Beitrag", "Beiträgen" %></a>
   </div>
@@ -69,7 +69,7 @@
       </thead>
 
       <tbody id="probands">
-        <%= render partial: 'proband', collection: @discussion.probands %>
+        <%= render partial: 'proband', collection: @discussion.confirmed_probands %>
       </tbody>
     </table>
   </div>
