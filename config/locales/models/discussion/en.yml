@@ -5,6 +5,7 @@ en:
     attributes:
       discussion:
         topic: topic
+        description: description
         moderator: moderator
         due_date: due_date
         current_question: current_question
