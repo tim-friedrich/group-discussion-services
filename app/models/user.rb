@@ -84,6 +84,15 @@ class User < ActiveRecord::Base
     is_moderator? ? discussions.select{ |d| d.moderator == self } : []
   end
 
+  def get_probands
+    if (role == Role.moderator) || (role == Role.admin)
+      return User.where("(shared_pool = true AND role_id = :proband_role)", proband_role: Role.proband)
+    elsif role == Role.extModerator   
+      return User.where(invited_by_id: id)
+    end
+    
+  end
+
   def discussion_user_for(discussion)
     discussions_users.find_by(discussion_id: discussion.id)
   end

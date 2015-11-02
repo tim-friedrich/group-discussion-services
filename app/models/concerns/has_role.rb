@@ -1,6 +1,6 @@
 module HasRole
   def is_moderator?
-    self.role == Role.moderator
+    ((self.role == Role.moderator) || (self.role == Role.extModerator))
   end
 
   def is_proband?

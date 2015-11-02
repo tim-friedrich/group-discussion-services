@@ -84,7 +84,11 @@ class DiscussionsController < ApplicationController
         @companies = Company.all
         @proband = DiscussionsUser.new role: Role.proband
         @visual_aid = VisualAid.new
-        @users = User.all
+        if current_user.role == Role.moderator || current_user.role == Role.admin
+          @users = User.all
+        elsif current_user.role == Role.extModerator   
+          @users = []
+        end
         @user = User.new
       end
       format.js do

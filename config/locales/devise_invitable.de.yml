@@ -15,9 +15,12 @@ de:
         header: "Anmeldung abschließen"
         submit_button: "Registrieren"
     mailer:
+      signature: 'Mit freundlichen Grüßen,<br>Lukas Waschat<br>CEO/Founder'
       invitation_instructions:
         subject: 'Sie wurden eingeladen!'
+        extModeratorSubject: 'Ihr Moderator Account'
         hello: 'Hallo %{email}'
         someone_invited_you: 'Sie wurden eingeladen um auf %{url} an Diskussionen teilzunehmen. Bitte folgen sie dem unten stehendem Link um die Einladung anzunehmen.'
+        extModerator: 'Herzlich Willkommen bei Group-Discussion-Services. Sie wurden eingeladen um als Moderator bei GDS Gruppendiskussionen zu leiten. Bitte folgen Sie dem unten stehenden Link um Ihren Account zu bestätigen. Bei Fragen können Sie sich gerne jeder Zeit an mich wenden.'
         accept: 'Einladung Annehmen'
         ignore: "Falls Sie die Einladung nicht annehmen wollen, ignorieren Sie bitte diese Mail.<br />"

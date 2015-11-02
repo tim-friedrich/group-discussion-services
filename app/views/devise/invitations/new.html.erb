@@ -14,7 +14,7 @@
 
 		<div class="form-group">
 	  	<div class="col-sm-4">
-	      <%= f.select "role_id", [["Proband", Role.proband.id], ["Moderator", Role.moderator.id], ["Kunde", Role.customer.id], ["Admin", Role.admin.id]], {}, class: "form-control" %>
+	      <%= f.select "role_id", [["Proband", Role.proband.id], ["Moderator", Role.moderator.id], ["Externer Moderator", Role.extModerator.id], ["Kunde", Role.customer.id], ["Admin", Role.admin.id]], {}, class: "form-control" %>
 	    </div>
 		</div>
 	    

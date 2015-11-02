@@ -7,8 +7,9 @@ class Role < ActiveRecord::Base
     proband: 1,
     customer: 2,
     observer: 2,
-    moderator: 3,
-    admin: 4,
+    extModerator: 3,
+    moderator: 4,
+    admin: 5
   }
 
   def self.create_defaults!

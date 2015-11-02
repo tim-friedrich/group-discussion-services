@@ -29,8 +29,11 @@ class UsersInvitationsController < Devise::InvitationsController
   def create
     respond_to do |format|
       format.js{
-        user = User.invite!({ email: invite_params[:email] }, current_inviter)
- 
+        if current_user.role == Role.extModerator
+          user = User.invite!({ email: invite_params[:email], shared_pool: false }, current_inviter)
+        else
+          user = User.invite!({ email: invite_params[:email] }, current_inviter)
+        end
         if invite_params['discussion_id']
           @discussion = Discussion.find(invite_params[:discussion_id])
           @discussions_user = @discussion.discussions_users.create(

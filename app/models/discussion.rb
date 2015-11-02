@@ -1,5 +1,6 @@
 class Discussion < ActiveRecord::Base
   STATES = %w[open closed]
+  default_scope {order('due_date DESC')}
 
   has_many :questions
   has_many :arguments

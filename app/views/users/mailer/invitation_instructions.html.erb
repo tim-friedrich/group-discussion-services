@@ -1,7 +1,11 @@
 <p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
-
-<p><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></p>
-
+<% if @resource.role == Role.extModerator %>
+  <p><%= t("devise.mailer.invitation_instructions.extModerator", url: root_url) %></p>
+<% else %>
+  <p><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></p>
+<% end %>
 <p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token) %></p>
 
 <p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>
+
+<p><%= t("devise.mailer.signature").html_safe %></p>

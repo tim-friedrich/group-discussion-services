@@ -43,7 +43,7 @@
       <br>
     <% end %>
     <% if can? :create, Discussion %>
-      <%= link_to 'Neue Diskussion anfragen', new_discussion_path, class: "btn btn-xs btn-primary" %>
+      <%= link_to 'Neue Diskussion anlegen', new_discussion_path, class: "btn btn-xs btn-primary" %>
     <% end %>
     <% if can? :invite, User %>
       <%= link_to 'Nutzer einladen', '/users/invitation/new', class: "btn btn-xs btn-primary" %>
