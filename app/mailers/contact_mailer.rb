@@ -1,5 +1,5 @@
 class ContactMailer < ActionMailer::Base
-  default to: "info@group-discussion-services.de"
+  default to: "waschat@psychomatix.de"
 
   def contact_us(sender_name, sender_mail, content)
     @sender_name = sender_name

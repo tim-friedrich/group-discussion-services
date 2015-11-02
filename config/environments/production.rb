@@ -87,8 +87,8 @@ GDS::Application.configure do
   config.action_mailer.smtp_settings = {
       :address              => 'smtp.1und1.de',
       :port                 => 25,
-      :user_name            => 'info@group-discussion-services.de',
-      :password             => 'ftp60h2r',
+      :user_name            => 'waschat@psychomatix.de',
+      :password             => 'P1h6i1803',
       :authentication       => 'plain'
   }
 

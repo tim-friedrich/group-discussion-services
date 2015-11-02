@@ -1,3 +1,6 @@
 en:
   activerecord:
     attributes:
+      question:
+        topic: topic
+        discussion: discussion

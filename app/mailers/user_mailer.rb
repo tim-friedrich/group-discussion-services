@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   add_template_helper ApplicationHelper
-  default from: "info@group-discussion-services.de"
+  default from: "waschat@psychomatix.de"
 
   def invitation_to_discussion(discussions_user)
     @discussions_user = discussions_user

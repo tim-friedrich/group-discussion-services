@@ -1,5 +1,5 @@
 class DiscussionMailer < ActionMailer::Base
-  default to: "info@group-discussion-services.de"
+  default to: "waschat@psychomatix.de"
 
   def new_discussion(discussion, user)
   	@discussion = discussion
