@@ -60,6 +60,8 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
     console.log('error retrieving users')
   )
 
+  
+
   $scope.delete_invited_user = (user) =>
     $.ajax(
       url: '/discussions_users/'+user.discussions_user_id,

@@ -25,7 +25,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in displayedInvitedUsers">
+          <tr ng-repeat="user in displayedInvitedUsers" class="{{{true:'success', false:'danger'}[user.confirmed_discussion]}}">
             <td>{{user.gender}}</td>
             <td>{{user.age}}</td>
             <td>{{user.school}}</td>
