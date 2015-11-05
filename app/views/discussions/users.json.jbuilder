@@ -3,6 +3,7 @@ json.array!(@discussion.users) do |user|
   json.discussions_user_id @discussion.discussions_user_for(user).id
   json.id user.id
   json.gender user.gender
+  json.role user.role.name
   json.age user.age
   json.zipcode user.zipcode
   if user.has_survey?

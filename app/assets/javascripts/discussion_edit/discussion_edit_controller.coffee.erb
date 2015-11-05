@@ -50,7 +50,9 @@ angular.module('discussionEdit').controller 'DiscussionEditController', ["$scope
           $scope.users.push(user)
         
       )
+      $scope.invited_users = (item for item in $scope.invited_users when item.role != 'moderator')  
       $scope.displayedUsers = [].concat($scope.users) 
+
     ).error((data, status, headers, config) ->
       console.log('error retrieving users')
     )

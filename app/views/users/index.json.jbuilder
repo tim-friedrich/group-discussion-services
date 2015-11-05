@@ -4,6 +4,7 @@
     json.gender user.gender
     json.age user.age
     json.zipcode user.zipcode
+    json.role user.role.name
     if user.has_survey?
       json.e user.survey.e
       json.n user.survey.n
