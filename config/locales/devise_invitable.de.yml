@@ -1,5 +1,8 @@
 de:
   devise:
+    users_invitations:
+      user:
+        invitation_token_invalid: 'Es gab ein Problem mit Ihrem Einladungslink. Bitte fordern Sie einen neuen an oder kontaktieren Sie uns.'
     failure:
       invited: 'You have a pending invitation, accept it to finish creating your account.'
     invitations:
