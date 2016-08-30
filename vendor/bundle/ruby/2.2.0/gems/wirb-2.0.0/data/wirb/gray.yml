@@ -1,0 +1,103 @@
+# container
+hash:
+- "#ccc"
+array:
+- "#ddd"
+set:
+- "#bbb"
+
+# delimiter
+comma:  "#fff"
+refers: "#fff"
+
+# class
+class:
+- "#999"
+class_separator:
+- "#777"
+object_class:
+- "#888"
+
+# object
+object:
+- "#666"
+object_description_prefix:
+- "#222"
+object_description:
+- "#555"
+object_address_prefix:
+- "#111"
+object_address:
+- "#555"
+object_line_prefix:
+- "#222"
+object_line:
+- "yellow"
+object_line_number:
+- "gold"
+object_variable_prefix:
+- "white"
+object_variable:
+- "silver"
+
+# symbol
+symbol_prefix:
+- "#9f9"
+- :bright
+symbol:
+- "#9f9"
+- :bright
+symbol_string:
+- "#9f9"
+- :bright
+symbol_string_delimetr:
+- "#9f9"
+
+# string
+string:
+- "#99f"
+string_delimiter:
+- "#99f"
+- :bright
+
+# regexp
+regexp:
+- :magenta
+regexp_delimiter:
+- :blue
+- :bright
+regexp_flags:
+- :red
+- :bright
+
+# number
+number:
+- "white"
+special_number:
+- "silver"
+range:
+- "#f0f0f0"
+rational:
+- "#ddd"
+rational_separator:
+- "#ddd"
+complex:
+- "#ccc"
+
+# misc
+#default:
+time:
+- :underline
+word:
+- :blue
+nil:
+- :red
+- :bright
+false:
+- :red
+true:
+- :green
+gem_requirement_condition:
+- "#eee"
+gem_requirement_version:
+- "#ddd"

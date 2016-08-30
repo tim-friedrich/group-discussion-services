@@ -1,0 +1,7 @@
+de:
+  activerecord:
+    attributes:
+      research_institute:
+        name: "Name"
+        contact: "Kontakt"
+        deputy: "Verantwortlicher Mitarbeiter"

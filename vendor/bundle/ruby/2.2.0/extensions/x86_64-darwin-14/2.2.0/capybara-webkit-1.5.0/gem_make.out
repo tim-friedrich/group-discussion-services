@@ -1,0 +1,193 @@
+/Users/Tim/.rvm/rubies/ruby-2.2.1/bin/ruby -r ./siteconf20160830-59787-d822lf.rb extconf.rb 
+cd src/ && /usr/local/bin/qmake /Users/Tim/Projekte/group-discussion-services/vendor/bundle/ruby/2.2.0/gems/capybara-webkit-1.5.0/src/webkit_server.pro LIBS\ +=\ -L/usr/local/opt/libyaml/lib\ -L/usr/local/opt/readline/lib\ -L/usr/local/opt/libksba/lib\ -L/usr/local/opt/openssl/lib -o Makefile.webkit_server
+cd src/ && /Applications/Xcode.app/Contents/Developer/usr/bin/make -f Makefile.webkit_server 
+clang++ -pipe -stdlib=libc++ -mmacosx-version-min=10.7 -O2 -arch x86_64 -Wall -W -DQT_NO_DEBUG -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/local/Cellar/qt/4.8.6/mkspecs/unsupported/macx-clang-libc++ -I. -I/usr/local/Cellar/qt/4.8.6/lib/QtCore.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtCore.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtNetwork.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtNetwork.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtWebKit.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtWebKit.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/include -Ibuild -F/usr/local/Cellar/qt/4.8.6/lib -x c++-header -c stable.h -o build/webkit_server/c++.pch
+clang -pipe -mmacosx-version-min=10.7 -O2 -arch x86_64 -Wall -W -DQT_NO_DEBUG -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/local/Cellar/qt/4.8.6/mkspecs/unsupported/macx-clang-libc++ -I. -I/usr/local/Cellar/qt/4.8.6/lib/QtCore.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtCore.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtNetwork.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtNetwork.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtWebKit.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtWebKit.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/include -Ibuild -F/usr/local/Cellar/qt/4.8.6/lib -x objective-c++-header -c stable.h -o build/webkit_server/objective-c++.pch
+In file included from stable.h:1:
+In file included from /usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers/QApplication:1:
+In file included from /usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers/qapplication.h:46:
+In file included from /usr/local/Cellar/qt/4.8.6/include/QtGui/qwindowdefs.h:99:
+In file included from /usr/local/Cellar/qt/4.8.6/include/QtGui/qmacdefines_mac.h:113:
+In file included from /System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:12:
+In file included from /System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:10:
+In file included from /System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:6:
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:7:15: error: expected ';' after @class
+@class NSArray<ObjectType>;
+              ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:7:16: error: cannot find protocol declaration for 'ObjectType'
+@class NSArray<ObjectType>;
+               ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:34:25: error: cannot find protocol declaration for 'ObjectType'
+@interface NSEnumerator<ObjectType> : NSObject <NSFastEnumeration>
+                        ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:34:37: error: expected unqualified-id
+@interface NSEnumerator<ObjectType> : NSObject <NSFastEnumeration>
+                                    ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:36:13: error: expected ')'
+- (nullable ObjectType)nextObject;
+            ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:36:3: note: to match this '('
+- (nullable ObjectType)nextObject;
+  ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:40:25: error: cannot find protocol declaration for 'ObjectType'
+@interface NSEnumerator<ObjectType> (NSExtendedEnumerator)
+                        ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:40:1: error: duplicate interface definition for class 'NSEnumerator'
+@interface NSEnumerator<ObjectType> (NSExtendedEnumerator)
+^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:34:12: note: previous definition is here
+@interface NSEnumerator<ObjectType> : NSObject <NSFastEnumeration>
+           ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:40:37: error: method type specifier must start with '-' or '+'
+@interface NSEnumerator<ObjectType> (NSExtendedEnumerator)
+                                    ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:40:38: error: expected a type
+@interface NSEnumerator<ObjectType> (NSExtendedEnumerator)
+                                     ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:42:1: error: expected selector for Objective-C method
+@property (readonly, copy) NSArray<ObjectType> *allObjects;
+^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:42:36: error: cannot find protocol declaration for 'ObjectType'
+@property (readonly, copy) NSArray<ObjectType> *allObjects;
+                                   ^
+In file included from stable.h:1:
+In file included from /usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers/QApplication:1:
+In file included from /usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers/qapplication.h:46:
+In file included from /usr/local/Cellar/qt/4.8.6/include/QtGui/qwindowdefs.h:99:
+In file included from /usr/local/Cellar/qt/4.8.6/include/QtGui/qmacdefines_mac.h:113:
+In file included from /System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:12:
+In file included from /System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:10:
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:16:32: error: cannot find protocol declaration for 'ObjectType'
+@interface NSArray<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
+                               ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:16:44: error: expected unqualified-id
+@interface NSArray<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
+                                           ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:19:4: error: expected a type
+- (ObjectType)objectAtIndex:(NSUInteger)index;
+   ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:21:40: error: C++ requires a type specifier for all declarations
+- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+                                 ~~~~~~^~~~~~~~~~
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:21:40: error: expected ')'
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:21:33: note: to match this '('
+- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+                                ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:26:20: error: cannot find protocol declaration for 'ObjectType'
+@interface NSArray<ObjectType> (NSExtendedArray)
+                   ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:26:1: error: duplicate interface definition for class 'NSArray'
+@interface NSArray<ObjectType> (NSExtendedArray)
+^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:16:12: note: previous definition is here
+@interface NSArray<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
+           ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:26:32: error: method type specifier must start with '-' or '+'
+@interface NSArray<ObjectType> (NSExtendedArray)
+                               ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+make[1]: *** [build/webkit_server/objective-c++.pch] Error 1
+make: *** [sub-src-webkit_server-pro-make_default-ordered] Error 2
+Command 'make' failed
+
+make "DESTDIR=" clean
+cd src/ && /Applications/Xcode.app/Contents/Developer/usr/bin/make -f Makefile.webkit_server clean
+rm -f build/moc_BlockUrl.cpp build/moc_AllowUrl.cpp build/moc_SetUnknownUrlMode.cpp build/moc_FindModal.cpp build/moc_AcceptAlert.cpp build/moc_GoForward.cpp build/moc_GoBack.cpp build/moc_WindowMaximize.cpp build/moc_WindowSize.cpp build/moc_WindowCommand.cpp build/moc_WindowOpen.cpp build/moc_WindowClose.cpp build/moc_Version.cpp build/moc_EnableLogging.cpp build/moc_Authenticate.cpp build/moc_SetConfirmAction.cpp build/moc_SetPromptAction.cpp build/moc_SetPromptText.cpp build/moc_ClearPromptText.cpp build/moc_JavascriptAlertMessages.cpp build/moc_JavascriptConfirmMessages.cpp build/moc_JavascriptPromptMessages.cpp build/moc_IgnoreSslErrors.cpp build/moc_WindowResize.cpp build/moc_CurrentUrl.cpp build/moc_ConsoleMessages.cpp build/moc_WebPage.cpp build/moc_Server.cpp build/moc_Connection.cpp build/moc_Command.cpp build/moc_SocketCommand.cpp build/moc_Visit.cpp build/moc_Reset.cpp build/moc_Node.cpp build/moc_JavascriptInvocation.cpp build/moc_Evaluate.cpp build/moc_Execute.cpp build/moc_FrameFocus.cpp build/moc_Response.cpp build/moc_NetworkAccessManager.cpp build/moc_NetworkCookieJar.cpp build/moc_Header.cpp build/moc_Render.cpp build/moc_Body.cpp build/moc_Status.cpp build/moc_Headers.cpp build/moc_UnsupportedContentHandler.cpp build/moc_SetCookie.cpp build/moc_ClearCookies.cpp build/moc_GetCookies.cpp build/moc_CommandParser.cpp build/moc_CommandFactory.cpp build/moc_SetProxy.cpp build/moc_NullCommand.cpp build/moc_PageLoadingCommand.cpp build/moc_SetSkipImageLoading.cpp build/moc_WebPageManager.cpp build/moc_WindowFocus.cpp build/moc_GetWindowHandles.cpp build/moc_GetWindowHandle.cpp build/moc_GetTimeout.cpp build/moc_SetTimeout.cpp build/moc_TimeoutCommand.cpp build/moc_SetUrlBlacklist.cpp build/moc_NoOpReply.cpp build/moc_JsonSerializer.cpp build/moc_ErrorMessage.cpp build/moc_Title.cpp build/moc_FindCss.cpp build/moc_JavascriptCommand.cpp build/moc_FindXpath.cpp build/moc_NetworkReplyProxy.cpp build/moc_StdinNotifier.cpp build/moc_RequestHandler.cpp
+rm -f qrc_webkit_server.cpp
+rm -f build/BlockUrl.o build/AllowUrl.o build/SetUnknownUrlMode.o build/FindModal.o build/AcceptAlert.o build/GoForward.o build/GoBack.o build/WindowMaximize.o build/WindowSize.o build/WindowCommand.o build/WindowOpen.o build/WindowClose.o build/Version.o build/EnableLogging.o build/Authenticate.o build/SetConfirmAction.o build/SetPromptAction.o build/SetPromptText.o build/ClearPromptText.o build/JavascriptAlertMessages.o build/JavascriptConfirmMessages.o build/JavascriptPromptMessages.o build/IgnoreSslErrors.o build/WindowResize.o build/CurrentUrl.o build/ConsoleMessages.o build/main.o build/WebPage.o build/Server.o build/Connection.o build/Command.o build/SocketCommand.o build/Visit.o build/Reset.o build/Node.o build/JavascriptInvocation.o build/Evaluate.o build/Execute.o build/FrameFocus.o build/Response.o build/NetworkAccessManager.o build/NetworkCookieJar.o build/Header.o build/Render.o build/body.o build/Status.o build/Headers.o build/UnsupportedContentHandler.o build/SetCookie.o build/ClearCookies.o build/GetCookies.o build/CommandParser.o build/CommandFactory.o build/SetProxy.o build/NullCommand.o build/PageLoadingCommand.o build/SetTimeout.o build/GetTimeout.o build/SetSkipImageLoading.o build/WebPageManager.o build/WindowFocus.o build/GetWindowHandles.o build/GetWindowHandle.o build/TimeoutCommand.o build/SetUrlBlacklist.o build/NoOpReply.o build/JsonSerializer.o build/InvocationResult.o build/ErrorMessage.o build/Title.o build/FindCss.o build/JavascriptCommand.o build/FindXpath.o build/NetworkReplyProxy.o build/IgnoreDebugOutput.o build/StdinNotifier.o build/RequestHandler.o build/BlacklistedRequestHandler.o build/MissingContentHeaderRequestHandler.o build/CustomHeadersRequestHandler.o build/NetworkRequestFactory.o build/UnknownUrlHandler.o build/moc_BlockUrl.o build/moc_AllowUrl.o build/moc_SetUnknownUrlMode.o build/moc_FindModal.o build/moc_AcceptAlert.o build/moc_GoForward.o build/moc_GoBack.o build/moc_WindowMaximize.o build/moc_WindowSize.o build/moc_WindowCommand.o build/moc_WindowOpen.o build/moc_WindowClose.o build/moc_Version.o build/moc_EnableLogging.o build/moc_Authenticate.o build/moc_SetConfirmAction.o build/moc_SetPromptAction.o build/moc_SetPromptText.o build/moc_ClearPromptText.o build/moc_JavascriptAlertMessages.o build/moc_JavascriptConfirmMessages.o build/moc_JavascriptPromptMessages.o build/moc_IgnoreSslErrors.o build/moc_WindowResize.o build/moc_CurrentUrl.o build/moc_ConsoleMessages.o build/moc_WebPage.o build/moc_Server.o build/moc_Connection.o build/moc_Command.o build/moc_SocketCommand.o build/moc_Visit.o build/moc_Reset.o build/moc_Node.o build/moc_JavascriptInvocation.o build/moc_Evaluate.o build/moc_Execute.o build/moc_FrameFocus.o build/moc_Response.o build/moc_NetworkAccessManager.o build/moc_NetworkCookieJar.o build/moc_Header.o build/moc_Render.o build/moc_Body.o build/moc_Status.o build/moc_Headers.o build/moc_UnsupportedContentHandler.o build/moc_SetCookie.o build/moc_ClearCookies.o build/moc_GetCookies.o build/moc_CommandParser.o build/moc_CommandFactory.o build/moc_SetProxy.o build/moc_NullCommand.o build/moc_PageLoadingCommand.o build/moc_SetSkipImageLoading.o build/moc_WebPageManager.o build/moc_WindowFocus.o build/moc_GetWindowHandles.o build/moc_GetWindowHandle.o build/moc_GetTimeout.o build/moc_SetTimeout.o build/moc_TimeoutCommand.o build/moc_SetUrlBlacklist.o build/moc_NoOpReply.o build/moc_JsonSerializer.o build/moc_ErrorMessage.o build/moc_Title.o build/moc_FindCss.o build/moc_JavascriptCommand.o build/moc_FindXpath.o build/moc_NetworkReplyProxy.o build/moc_StdinNotifier.o build/moc_RequestHandler.o build/qrc_webkit_server.o
+rm -f build/webkit_server/c.pch build/webkit_server/c++.pch build/webkit_server/objective-c.pch build/webkit_server/objective-c++.pch
+rm -f *~ core *.core
+
+make "DESTDIR="
+cd src/ && /Applications/Xcode.app/Contents/Developer/usr/bin/make -f Makefile.webkit_server 
+clang++ -pipe -stdlib=libc++ -mmacosx-version-min=10.7 -O2 -arch x86_64 -Wall -W -DQT_NO_DEBUG -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/local/Cellar/qt/4.8.6/mkspecs/unsupported/macx-clang-libc++ -I. -I/usr/local/Cellar/qt/4.8.6/lib/QtCore.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtCore.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtNetwork.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtNetwork.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtWebKit.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtWebKit.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/include -Ibuild -F/usr/local/Cellar/qt/4.8.6/lib -x c++-header -c stable.h -o build/webkit_server/c++.pch
+clang -pipe -mmacosx-version-min=10.7 -O2 -arch x86_64 -Wall -W -DQT_NO_DEBUG -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/local/Cellar/qt/4.8.6/mkspecs/unsupported/macx-clang-libc++ -I. -I/usr/local/Cellar/qt/4.8.6/lib/QtCore.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtCore.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtNetwork.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtNetwork.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtWebKit.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/lib/QtWebKit.framework/Versions/4/Headers -I/usr/local/Cellar/qt/4.8.6/include -Ibuild -F/usr/local/Cellar/qt/4.8.6/lib -x objective-c++-header -c stable.h -o build/webkit_server/objective-c++.pch
+In file included from stable.h:1:
+In file included from /usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers/QApplication:1:
+In file included from /usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers/qapplication.h:46:
+In file included from /usr/local/Cellar/qt/4.8.6/include/QtGui/qwindowdefs.h:99:
+In file included from /usr/local/Cellar/qt/4.8.6/include/QtGui/qmacdefines_mac.h:113:
+In file included from /System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:12:
+In file included from /System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:10:
+In file included from /System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:6:
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:7:15: error: expected ';' after @class
+@class NSArray<ObjectType>;
+              ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:7:16: error: cannot find protocol declaration for 'ObjectType'
+@class NSArray<ObjectType>;
+               ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:34:25: error: cannot find protocol declaration for 'ObjectType'
+@interface NSEnumerator<ObjectType> : NSObject <NSFastEnumeration>
+                        ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:34:37: error: expected unqualified-id
+@interface NSEnumerator<ObjectType> : NSObject <NSFastEnumeration>
+                                    ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:36:13: error: expected ')'
+- (nullable ObjectType)nextObject;
+            ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:36:3: note: to match this '('
+- (nullable ObjectType)nextObject;
+  ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:40:25: error: cannot find protocol declaration for 'ObjectType'
+@interface NSEnumerator<ObjectType> (NSExtendedEnumerator)
+                        ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:40:1: error: duplicate interface definition for class 'NSEnumerator'
+@interface NSEnumerator<ObjectType> (NSExtendedEnumerator)
+^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:34:12: note: previous definition is here
+@interface NSEnumerator<ObjectType> : NSObject <NSFastEnumeration>
+           ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:40:37: error: method type specifier must start with '-' or '+'
+@interface NSEnumerator<ObjectType> (NSExtendedEnumerator)
+                                    ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:40:38: error: expected a type
+@interface NSEnumerator<ObjectType> (NSExtendedEnumerator)
+                                     ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:42:1: error: expected selector for Objective-C method
+@property (readonly, copy) NSArray<ObjectType> *allObjects;
+^
+/System/Library/Frameworks/Foundation.framework/Headers/NSEnumerator.h:42:36: error: cannot find protocol declaration for 'ObjectType'
+@property (readonly, copy) NSArray<ObjectType> *allObjects;
+                                   ^
+In file included from stable.h:1:
+In file included from /usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers/QApplication:1:
+In file included from /usr/local/Cellar/qt/4.8.6/lib/QtGui.framework/Versions/4/Headers/qapplication.h:46:
+In file included from /usr/local/Cellar/qt/4.8.6/include/QtGui/qwindowdefs.h:99:
+In file included from /usr/local/Cellar/qt/4.8.6/include/QtGui/qmacdefines_mac.h:113:
+In file included from /System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:12:
+In file included from /System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:10:
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:16:32: error: cannot find protocol declaration for 'ObjectType'
+@interface NSArray<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
+                               ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:16:44: error: expected unqualified-id
+@interface NSArray<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
+                                           ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:19:4: error: expected a type
+- (ObjectType)objectAtIndex:(NSUInteger)index;
+   ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:21:40: error: C++ requires a type specifier for all declarations
+- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+                                 ~~~~~~^~~~~~~~~~
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:21:40: error: expected ')'
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:21:33: note: to match this '('
+- (instancetype)initWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
+                                ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:26:20: error: cannot find protocol declaration for 'ObjectType'
+@interface NSArray<ObjectType> (NSExtendedArray)
+                   ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:26:1: error: duplicate interface definition for class 'NSArray'
+@interface NSArray<ObjectType> (NSExtendedArray)
+^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:16:12: note: previous definition is here
+@interface NSArray<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
+           ^
+/System/Library/Frameworks/Foundation.framework/Headers/NSArray.h:26:32: error: method type specifier must start with '-' or '+'
+@interface NSArray<ObjectType> (NSExtendedArray)
+                               ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+make[1]: *** [build/webkit_server/objective-c++.pch] Error 1
+make: *** [sub-src-webkit_server-pro-make_default-ordered] Error 2
+
+make failed, exit code 2

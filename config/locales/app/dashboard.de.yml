@@ -1,0 +1,16 @@
+de:
+  dashboard:
+    discussion: Diskussion
+    settings: Einstellungen
+    title: Meine Diskussionen
+    table:
+      topic: Thema
+      moderator: Moderator
+      date: Datum
+      open_btn: Eröffnen
+      close_btn: Schließen
+      join: beitreten
+      delete: löschen
+      evaluate1: Auswertung
+    new_discussion: neue Diskussion
+    invite_user: Nutzer einladen

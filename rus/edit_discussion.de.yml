@@ -1,0 +1,24 @@
+de:
+  edit_discussion:
+    title: Discussion bearbeiten
+    general_info: Allgemeine Informationen
+    participants: 
+      title: Teilnehmer
+      overview: Übersicht
+      invite_probands: Probanden einladen
+      invite_observers: Beobachter einladen
+      observers: Beobachter
+      email_invitation: Ihre Nachricht an uns
+      email_probands_invitation_sub: Laden Sie Probanden über deren Email Adresse ein. Sie können auch Probanden die sich noch nicht registriert haben einladen.
+      email_observers_invitation_sub: Laden Sie Beobachter über deren Email Adresse ein. Sie können auch Beobachter die sich noch nicht registriert haben einladen.
+      send_email_invi: Einladung senden
+      search_panel: Probanden Datenbank durchsuchen
+      filter_personality: Nach Persönlichkeitsmerkmalen filtern
+      invite: einladen
+    visual_aids: 
+      title: Anschauungsmaterial
+      preview: Vorschau
+      name: Name
+      delete: löschen
+      select_files: Dateien auswählen
+      error: Die der von Ihnen ausgewählte Dateityp wird nicht unterstützt. Bitte wählen sie eine Bilddatei oder Videodatei. 

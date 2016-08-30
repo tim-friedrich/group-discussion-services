@@ -1,0 +1,12 @@
+de:
+  activerecord:
+    models:
+      discussion: Diskussion
+    attributes:
+      discussion:
+        topic: Thema
+        description: Beschreibung
+        moderator: Moderator
+        due_date: Datum
+        current_question: aktuelle Frage
+        company: Unternehmen

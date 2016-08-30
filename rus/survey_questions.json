@@ -1,0 +1,448 @@
+// when updating this file, you need to update surveys.coffee.erb as well to reload
+[
+  {
+    "type": "info",
+    "id": "intro",
+    "text": "Herzlichen Glükwunsch zur Registrierung als Proband! Schon bald profitieren Sie von attraktiven Prämien und können Einfluss auf die Marktforschung nehmen.<br/><br/>Bevor Sie an Diskussionen teilnehmen können, müssen Sie noch den Persönlichkeitstest ausfüllen. Durch ihre Antworten ermölichen Sie uns, Sie zu speziellen Themen einzuladen, welche für Sie interessant sind und zu denen Sie wertvolle Gesprächsbeiträge liefern können."
+  },
+  {
+    "type": "info",
+    "id": "welcome",
+    "text": "Der „Big-Five“ Persönlichkeitstest wird ca. 20 Minuten in Anspruch nehmen und wird lediglich einmalig ausgefüllt.<br/><br/>Die Ergebnisse bieten die Basis für die Auswahl von Probanden zu einzelnen Gesprächsthemen. Selbstverständlich geben wir ihre Daten nur in einer streng anonymisierten Form weiter — Datenschutz ist uns wichtig.<br/><br/>Sollten Sie noch weitere Fragen haben, zögern Sie bitte nicht, uns zu kontaktieren."
+  },
+  {
+    "type": "statistic",
+    "id": "school",
+    "text": "Welches ist Ihr höchster Schulabschluss?",
+    "options": [
+      "Hauptschule",
+      "Realschule",
+      "Fachabitur",
+      "Abitur",
+      "anderes"
+    ]
+  },
+  {
+    "type": "statistic",
+    "id": "degree",
+    "text": "Ihre Berufsausbildung / Studium?",
+    "options": [
+      "Lehre",
+      "Meister",
+      "Diplom",
+      "Bachelor",
+      "Master",
+      "Staatsexamen",
+      "Promotion",
+      "anderes"
+    ]
+  },
+  {
+    "type": "statistic",
+    "id": "personal_status",
+    "text": "Was trifft auf Sie zu?",
+    "options": [
+      "Ich bin Student.",
+      "Ich bin Arbeiter.",
+      "Ich bin Angestellter.",
+      "Ich bin Beamter.",
+      "Ich bin selbständig.",
+      "Ich bin arbeitslos",
+      "anderes"
+    ]
+  },
+  {
+    "type": "statistic",
+    "id": "income",
+    "text": "Ihr derzeitiges ungefähres Brutto-Monatseinkommen?",
+    "options": [
+      "< 1000 EURO",
+      "1000 - 3000 EURO",
+      "3000 - 5000 EURO",
+      "5000 - 7000 EURO",
+      "7000 - 9000 EURO",
+      "> 9000 EURO"
+    ]
+  },
+  {
+    "type": "info",
+    "id": "intro_big5",
+    "text": "Inwieweit treffen die folgenden Aussagen auf Sie zu? Antworten Sie möglichst spontan. Es gibt keine richtigen oder falschen Antworten.<br/><br/>Wir speichern nur die Auswertung und nicht die einzelnen Antworten auf die Persönlichkeitsfragen."
+  },
+  {
+    "type": "big5",
+    "scale": "n",
+    "text": "Ich bin ein ängstlicher Typ."
+  },
+  {
+    "type": "big5",
+    "scale": "h",
+    "text": "Im privaten Bereich habe ich schon mal Dinge gemacht, die besser nicht an die Öffentlichkeit kommen sollten."
+  },
+  {
+    "type": "big5",
+    "scale": "lm",
+    "text": "Am glücklichsten bin ich dann, wenn viele Menschen mich bewundern und das toll finden, was ich mache."
+  },
+  {
+    "type": "big5",
+    "scale": "n",
+    "text": "Ich grübele viel Über meine Zukunft nach."
+  },
+  {
+    "type": "big5",
+    "scale": "n",
+    "text": "Oft überwältigen mich meine Gefühle."
+  },
+  {
+    "type": "big5",
+    "scale": "n",
+    "text": "Ich bin mir in meinen Entscheidungen oft unsicher."
+  },
+  {
+    "type": "big5",
+    "scale": "e",
+    "text": "Ich bin gerne mit anderen Menschen zusammen."
+  },
+  {
+    "type": "big5",
+    "scale": "n",
+    "text": "Oft werde ich von meinen Gefühlen hin- und her gerissen."
+  },
+  {
+    "type": "big5",
+    "scale": "e",
+    "invert": true,
+    "text": "Ich bin ein Einzelgänger."
+  },
+  {
+    "type": "big5",
+    "scale": "o",
+    "text": "Ich will immer neue Dinge ausprobieren."
+  },
+  {
+    "type": "big5",
+    "scale": "e",
+    "text": "Ich bin in vielen Vereinen aktiv."
+  },
+  {
+    "type": "big5",
+    "scale": "e",
+    "text": "Ich bin ein gesprächiger und kommunikativer Mensch."
+  },
+  {
+    "type": "big5",
+    "scale": "mm",
+    "invert": true,
+    "text": "Ich kann Menschen verstehen, die sagen, dass andere Dinge wichtiger sind als Einfluss und Politik"
+  },
+  {
+    "type": "big5",
+    "scale": "sm",
+    "text": "Ich habe schon immer ein starkes Bedürfnis nach Sicherheit und Ruhe verspürt."
+  },
+  {
+    "type": "big5",
+    "scale": "c",
+    "text": "Auch kleine Bußgelder sind mir sehr unangenehm."
+  },
+  {
+    "type": "big5",
+    "scale": "n",
+    "text": "Ich fühle mich oft unsicher."
+  },
+  {
+    "type": "big5",
+    "scale": "n",
+    "text": "Ich verspüre oft eine große innere Unruhe."
+  },
+  {
+    "type": "big5",
+    "scale": "e",
+    "invert": true,
+    "text": "Im Grunde bin ich oft lieber für mich allein."
+  },
+  {
+    "type": "big5",
+    "scale": "c",
+    "text": "Ich bin sehr pflichtbewusst."
+  },
+  {
+    "type": "big5",
+    "scale": "a",
+    "text": "Ich bin ein höflicher Mensch."
+  },
+  {
+    "type": "big5",
+    "scale": "c",
+    "text": "Meine Aufgaben erledige ich immer sehr genau."
+  },
+  {
+    "type": "big5",
+    "scale": "a",
+    "text": "Ich helfe anderen, auch wenn man mir es nicht dankt."
+  },
+  {
+    "type": "big5",
+    "scale": "a",
+    "invert": true,
+    "text": "Ich habe immer wieder Streit mit anderen."
+  },
+  {
+    "type": "big5",
+    "scale": "sm",
+    "text": "Ich träume oft von einem ruhigen Leben ohne böse Überraschungen."
+  },
+  {
+    "type": "big5",
+    "scale": "sm",
+    "text": "Am glücklichsten bin ich dann, wenn ich mich geborgen fühle."
+  },
+  {
+    "type": "big5",
+    "scale": "mm",
+    "text": "Wenn ich die Wahl hätte, würde ich in meinem Leben gerne weltbewegende Entscheidungen treffen."
+  },
+  {
+    "type": "big5",
+    "scale": "mm",
+    "text": "Für mehr Einfluss würde ich auf vieles verzichten."
+  },
+  {
+    "type": "big5",
+    "scale": "n",
+    "text": "Ich mache mir oft unnütze Sorgen."
+  },
+  {
+    "type": "big5",
+    "scale": "h",
+    "text": "Ich habe schon mal Dinge weitererzählt, die ich besser für mich behalten hätte."
+  },
+  {
+    "type": "big5",
+    "scale": "lm",
+    "text": "Für mehr Anerkennung würde ich auf vieles verzichten."
+  },
+  {
+    "type": "big5",
+    "scale": "c",
+    "text": "Ich war schon als Kind sehr ordentlich."
+  },
+  {
+    "type": "big5",
+    "scale": "c",
+    "text": "Ich gehe immer planvoll vor."
+  },
+  {
+    "type": "big5",
+    "scale": "a",
+    "text": "Es fällt mir sehr leicht, meine Bedürfnisse für andere zurückzustellen."
+  },
+  {
+    "type": "big5",
+    "scale": "e",
+    "text": "Ich bin sehr kontaktfreudig."
+  },
+  {
+    "type": "big5",
+    "scale": "a",
+    "text": "Ich kann mich gut in andere Menschen hinein versetzen."
+  },
+  {
+    "type": "big5",
+    "scale": "a",
+    "text": "Ich komme immer gut mit anderen aus, auch wenn sie nicht meiner Meinung sind."
+  },
+  {
+    "type": "big5",
+    "scale": "lm",
+    "text": "Ich habe schon immer ein starkes Bedürfnis verspürt nach meinen eigenen Maßstäben der Beste zu sein."
+  },
+  {
+    "type": "big5",
+    "scale": "n",
+    "text": "Ich bin oft ohne Grund traurig."
+  },
+  {
+    "type": "big5",
+    "scale": "c",
+    "text": "Ich achte sehr darauf, dass Regeln eingehalten werden."
+  },
+  {
+    "type": "big5",
+    "scale": "o",
+    "text": "Ich bin ein neugieriger Mensch."
+  },
+  {
+    "type": "big5",
+    "scale": "o",
+    "text": "Ich diskutiere gerne."
+  },
+  {
+    "type": "big5",
+    "scale": "c",
+    "text": "Ich habe meine festen Prinzipien und halte daran auch fest."
+  },
+  {
+    "type": "big5",
+    "scale": "mm",
+    "text": "Tief in meinem Innersten gibt es eine Sehnsucht nach Einfluss und Macht."
+  },
+  {
+    "type": "big5",
+    "scale": "e",
+    "text": "Ich kann schnell gute Stimmung verbreiten."
+  },
+  {
+    "type": "big5",
+    "scale": "o",
+    "text": "Ich reise viel, um andere Kulturen kennenzulernen."
+  },
+  {
+    "type": "big5",
+    "scale": "e",
+    "text": "Ich gehe gerne auf Partys."
+  },
+  {
+    "type": "big5",
+    "scale": "c",
+    "text": "Wenn ich mich einmal entschieden habe, dann weiche ich davon auch nicht mehr ab."
+  },
+  {
+    "type": "big5",
+    "scale": "c",
+    "text": "Ich mache eigentlich nie Flüchtigkeitsfehler."
+  },
+  {
+    "type": "big5",
+    "scale": "n",
+    "text": "Ich bin oft nervös."
+  },
+  {
+    "type": "big5",
+    "scale": "o",
+    "invert": true,
+    "text": "Am liebsten ist es mir, wenn alles so bleibt, wie es ist."
+  },
+  {
+    "type": "big5",
+    "scale": "c",
+    "text": "Auch kleine Schlampereien stören mich."
+  },
+  {
+    "type": "big5",
+    "scale": "o",
+    "text": "Ich lerne immer wieder gerne neue Dinge."
+  },
+  {
+    "type": "big5",
+    "scale": "o",
+    "text": "Ich beschäftige mich viel mit Kunst, Musik und Literatur."
+  },
+  {
+    "type": "big5",
+    "scale": "a",
+    "text": "Ich achte darauf, immer freundlich zu sein."
+  },
+  {
+    "type": "big5",
+    "scale": "h",
+    "text": "Ich habe schon mal etwas unterschlagen oder nicht gleich zurückgegeben."
+  },
+  {
+    "type": "big5",
+    "scale": "a",
+    "invert": true,
+    "text": "Ich bin ein Egoist."
+  },
+  {
+    "type": "big5",
+    "scale": "a",
+    "text": "Ich würde meine schlechte Laune nie an anderen auslassen."
+  },
+  {
+    "type": "big5",
+    "scale": "o",
+    "text": "Ich interessiere mich sehr für philosophische Fragen."
+  },
+  {
+    "type": "big5",
+    "scale": "o",
+    "text": "Ich lese viel über wissenschaftliche Themen, neue Entdeckungen oder historische Begebenheiten."
+  },
+  {
+    "type": "big5",
+    "scale": "o",
+    "text": "Ich habe viele Ideen und viel Fantasie."
+  },
+  {
+    "type": "big5",
+    "scale": "lm",
+    "text": "Ich habe schon immer ein starkes Bedürfnis nach Anerkennung und Bewunderung verspürt."
+  },
+  {
+    "type": "big5",
+    "scale": "mm",
+    "text": "Am glücklichsten bin ich dann, wenn ich Verantwortung übernehmen kann und wichtige Entscheidungen treffen darf."
+  },
+  {
+    "type": "big5",
+    "scale": "sm",
+    "text": "Wenn ich die Wahl hätte, würde ich ein Leben in Sicherheit und Frieden wählen."
+  },
+  {
+    "type": "big5",
+    "scale": "e",
+    "text": "Ich bin unternehmungslustig."
+  },
+  {
+    "type": "big5",
+    "scale": "e",
+    "text": "Ich stehe gerne im Mittelpunkt."
+  },
+  {
+    "type": "big5",
+    "scale": "lm",
+    "text": "Tief in meinem Innersten gibt es eine Sehnsucht danach der Beste sein zu wollen"
+  },
+  {
+    "type": "big5",
+    "scale": "lm",
+    "text": "Ich träume oft davon, berühmt zu sein."
+  },
+  {
+    "type": "big5",
+    "scale": "mm",
+    "text": "Ich träume oft davon, wichtige Entscheidungen für Politiker oder andere mächtige Menschen zu treffen."
+  },
+  {
+    "type": "big5",
+    "scale": "sm",
+    "text": "Für ein sicheres Leben ohne böse Überraschungen würde ich auf vieles verzichten."
+  },
+  {
+    "type": "big5",
+    "scale": "a",
+    "text": "Wenn mir jemand hilft, erweise ich mich immer als dankbar."
+  },
+  {
+    "type": "big5",
+    "scale": "sm",
+    "text": "Tief in meinem Innersten gibt es eine Sehnsucht nach Ruhe und Geborgenheit."
+  },
+  {
+    "type": "big5",
+    "scale": "h",
+    "text": "Ich habe schon mal über andere gelästert oder schlecht über sie gedacht."
+  },
+  {
+    "type": "statistic",
+    "id": "gender_to_use",
+    "text": "Welches Geschlecht soll für die Einordnung Ihrer Ergebnisse benutzt werden?",
+    "condition": true,
+    "options": [
+      "männlich",
+      "weiblich"
+    ]
+  }
+]

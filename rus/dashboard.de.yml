@@ -1,0 +1,26 @@
+de:
+  dashboard:
+    welcome: |
+      <h2>Und Jetzt?</h2>
+      <p>Jetzt heißt es nur noch warten. Nachdem Sie die Registrierung nun erfolgreich abgeschlossen haben, 
+      werden wir Sie auf Basis der von Ihnen eingegebenen Daten zu ausgewählten Diskussionsrunden einladen. 
+      Damit Sie keine Diskussion verpassen werden wir sie über Einladungen per Email informiert. Für jede 
+      Diskussion an der Sie erfolgreich teilgenommen haben erhalten sie eine Aufwandsentschädigung in Höhe von 10 Euro.</p>
+    additional_info:
+      <h2>Vervollständigen Sie Ihr Profil </h2>
+      <p>Um Sie so oft wie möglich zu Diskussionen einladen zu können stellen wir Ihnen regelmäßig fragen. Diese Frage entstehen zusammen mit unseren Auftraggebern. Durch die beantwortung können Sie Ihre Chance eingeladen zu werden signifikant erhöhen. </p>
+      <%= link_to 'Profil Vervollständigen', "/users/#{current_user.id}/additional_informations", class: "btn btn-default btn-sm" %>
+    discussion: Diskussion
+    settings: Einstellungen
+    title: Meine Diskussionen
+    table:
+      topic: Thema
+      moderator: Moderator
+      date: Datum
+      open_btn: Eröffnen
+      close_btn: Schließen
+      join: beitreten
+      delete: löschen
+      evaluate1: Auswertung
+    new_discussion: neue Diskussion
+    invite_user: Nutzer einladen

@@ -1,0 +1,5 @@
+de:
+  unauthorized:
+    default: "Diese Aktion dürfen Sie nicht durchführen!"
+    manage:
+      all: "Diese Aktion dürfen Sie nicht durchführen!"

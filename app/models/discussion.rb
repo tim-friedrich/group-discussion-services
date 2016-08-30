@@ -91,7 +91,7 @@ class Discussion < ActiveRecord::Base
   end
 
   def moderator_avatar
-    moderator.avatar.present? ? moderator.avatar.url(:discussion) : 'Unknown-person.gif'
+    moderator.avatar.present? ? moderator.avatar.url(:discussion) : image_path('Unknown-person.gif')
   end
 
   def open?

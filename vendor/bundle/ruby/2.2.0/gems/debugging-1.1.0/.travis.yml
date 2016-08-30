@@ -1,0 +1,23 @@
+sudo: false
+language: ruby
+
+rvm:
+- ruby-head
+- 2.2
+- 2.1
+- 2.0
+- rbx-2
+- jruby-head
+- jruby-9000
+
+env:
+- JRUBY_OPTS="--2.1"
+
+cache:
+- bundler
+
+matrix:
+  allow_failures:
+    - rvm: rbx-2
+
+bundler_args: --without full_support

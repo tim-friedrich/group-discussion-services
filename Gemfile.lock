@@ -75,9 +75,6 @@ GEM
     capybara-screenshot (1.0.9)
       capybara (>= 1.0, < 3)
       launchy
-    capybara-webkit (1.5.0)
-      capybara (>= 2.3.0, < 2.5.0)
-      json
     cd (1.0.0)
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
@@ -225,6 +222,8 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     libnotify (0.9.1)
       ffi (>= 1.0.11)
     lol_dba (1.6.7)
@@ -429,7 +428,6 @@ DEPENDENCIES
   cancancan
   capybara
   capybara-screenshot
-  capybara-webkit
   clipboard_formatter
   coffee-rails (~> 4.1)
   country_select
@@ -447,6 +445,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   jquery.fileupload-rails
+  letter_opener
   libnotify
   lol_dba
   mediaelement_rails
